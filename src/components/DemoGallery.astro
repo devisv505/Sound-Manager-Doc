@@ -1,0 +1,13 @@
+---
+import demos from '../../content-data/demos.json';
+import { sitePath } from '../lib/links';
+---
+<div class="demo-grid">
+{demos.map(demo => <article class:list={['demo-card', { 'is-ready': demo.status === 'available' }]}>
+  <div class="demo-card-top"><span class="demo-number">{demo.number}</span><span class="feature-label">{demo.feature}</span></div>
+  <p class="demo-name">{demo.name}</p>
+  <h3>{demo.status === 'available' ? <a href={sitePath(`demos/${demo.slug}/`)}>{demo.title}<span aria-hidden="true"> ↗</span></a> : demo.title}</h3>
+  <p>{demo.description}</p>
+  <span class="guide-status">{demo.status === 'available' ? 'Explore the guide →' : 'Guide coming in the next chapters'}</span>
+</article>)}
+</div>

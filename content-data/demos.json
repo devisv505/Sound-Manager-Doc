@@ -1,0 +1,92 @@
+[
+  {
+    "number": "01",
+    "name": "Campfire",
+    "title": "A little warmth.",
+    "description": "Ignition, a continuous loop, and a graceful release.",
+    "feature": "Lifecycle",
+    "slug": "01-campfire",
+    "status": "available"
+  },
+  {
+    "number": "02",
+    "name": "Footstep",
+    "title": "Every step counts.",
+    "description": "One footfall. Three surfaces. Many trimmed variations.",
+    "feature": "Parameters",
+    "slug": "02-footstep",
+    "status": "planned"
+  },
+  {
+    "number": "03",
+    "name": "Bee",
+    "title": "A little buzz.",
+    "description": "Follow a tiny moving emitter through 3D space.",
+    "feature": "Spatial audio",
+    "slug": "03-bee",
+    "status": "planned"
+  },
+  {
+    "number": "04",
+    "name": "Engine",
+    "title": "A little drive.",
+    "description": "Shape layered loops with RPM, load, and signals.",
+    "feature": "Live control",
+    "slug": "04-engine",
+    "status": "planned"
+  },
+  {
+    "number": "05",
+    "name": "Weather",
+    "title": "A little rain.",
+    "description": "Blend a storm, then hear thunder from its strike.",
+    "feature": "Layers & delay",
+    "slug": "05-weather",
+    "status": "planned"
+  },
+  {
+    "number": "06",
+    "name": "Workshop",
+    "title": "A little work.",
+    "description": "Switch tools, order actions, and overlap hammer taps.",
+    "feature": "Signals & flow",
+    "slug": "06-workshop",
+    "status": "planned"
+  },
+  {
+    "number": "07",
+    "name": "Arcade",
+    "title": "A little chaos.",
+    "description": "See what happens when a crowd of sounds competes.",
+    "feature": "Concurrency",
+    "slug": "07-arcade",
+    "status": "planned"
+  },
+  {
+    "number": "08",
+    "name": "Jukebox",
+    "title": "A little groove.",
+    "description": "Crossfade two tracks and keep a little dancer moving.",
+    "feature": "Music",
+    "slug": "08-jukebox",
+    "status": "planned"
+  },
+  {
+    "number": "09",
+    "name": "Portals",
+    "title": "A little elsewhere.",
+    "description": "Let a world go. Choose which sounds stay behind.",
+    "feature": "Ownership",
+    "slug": "09-portals",
+    "status": "planned"
+  },
+  {
+    "number": "10",
+    "name": "Launch",
+    "title": "A little liftoff.",
+    "description": "Conditions, countdowns, aborts, and a flying finale.",
+    "feature": "Combined systems",
+    "slug": "10-launch",
+    "status": "planned"
+  }
+]

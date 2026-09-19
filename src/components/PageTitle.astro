@@ -1,0 +1,6 @@
+---
+const { entry } = Astro.locals.starlightRoute;
+const labels = { guide: 'START HERE', api: 'API REFERENCE', recipe: 'CODE RECIPE', demo: 'SOUND LAB', index: 'EXPLORE' };
+const kind = entry.data.kind;
+---
+{kind !== 'home' && <><p class="page-kicker">DEV505 / {labels[kind as keyof typeof labels] ?? 'DOCUMENTATION'}{entry.data.demo ? ` / ${String(entry.data.demo.number).padStart(2, '0')}` : ''}</p><h1 id="_top">{entry.data.title}</h1><p class="page-lead">{entry.data.description}</p></>}

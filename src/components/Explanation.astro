@@ -1,0 +1,5 @@
+---
+interface Props { title: string; label?: string; }
+const { title, label = 'WHAT THIS DEMO SHOWS' } = Astro.props;
+---
+<aside class="explanation"><p class="eyebrow">{label}</p><p class="explanation-title">{title}</p><div><slot /></div></aside>

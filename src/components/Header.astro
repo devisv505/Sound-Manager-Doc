@@ -1,0 +1,10 @@
+---
+import Search from '@astrojs/starlight/components/Search.astro';
+import Mark from './Mark.astro';
+import { sitePath } from '../lib/links';
+---
+<div class="lab-header">
+  <a href={sitePath()} class="brand" aria-label="DEV505 Sound Manager home"><Mark /><span><strong>DEV505<span class="brand-divider"> / </span></strong><span class="brand-name">Sound Manager</span><small>DOCUMENTATION</small></span></a>
+  <nav aria-label="Primary" class="top-links"><a href={sitePath('getting-started/')}>Get started</a><a href={sitePath('api/sound-bus/')}>API</a><a href={sitePath('demos/')}>Demos</a></nav>
+  <div class="lab-search"><Search /></div>
+</div>
