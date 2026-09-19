@@ -1,6 +1,6 @@
 # DEV505 Sound Manager — documentation roadmap
 
-Status: planning complete; implementation milestones remain open.  
+Status: M1 complete; M2–M7 remain open.  
 Prepared: 19 September 2026.  
 Specification: [SPEC.md](SPEC.md).  
 Target directory: `/Users/devisv/Projects/Web/Sound-Manager-Doc`.
@@ -9,7 +9,7 @@ Target directory: `/Users/devisv/Projects/Web/Sound-Manager-Doc`.
 
 Build one complete slice first: the shared theme, setup path, a useful API page, and the Campfire walkthrough with real Unity images. Use it to establish the visual and content pattern before expanding to all ten demos. Complete API and graph coverage alongside the remaining walkthroughs, then validate the actual GitHub Pages build.
 
-The milestones below describe work to perform after this planning step. Checked items reflect the planning audit only; they do not mean the site, examples, or screenshots have already been implemented or tested.
+Checked items reflect completed work. M0 and M1 are complete; the remaining milestones are open. M1 validation and capture evidence are recorded in the linked report.
 
 ## M0 — Source audit and planning
 
@@ -28,17 +28,19 @@ Exit condition: the intended website, content coverage, visual direction, captur
 
 Depends on: M0.
 
-- [ ] Recheck the Unity source revision and any newer API or demo changes; record the content baseline.
-- [ ] Scaffold Astro/Starlight in this directory with static output, compatible pinned dependencies, a lockfile, and a declared Node version.
-- [ ] Configure a repository-relative site base and local build/preview/check commands.
-- [ ] Establish content metadata, API-coverage records, and screenshot-manifest formats.
-- [ ] Implement the cream/forest theme, typography, responsive navigation, code blocks, explanation panel, demo card, and accessible screenshot enlargement.
-- [ ] Inspect font licensing and establish local font/media attribution.
-- [ ] Create the home-page structure, main navigation, and demo gallery data with all ten entries.
-- [ ] Capture the first real Unity Game View states and graph sections for Campfire; verify HUD inclusion, image resolution, framing, and readability.
-- [ ] Write the setup/first-sound path, a complete `SoundBus` reference page, and the Campfire walkthrough with an explained code recipe.
-- [ ] Compile and exercise the first complete example against the documented Unity API.
-- [ ] Review the result at phone and desktop sizes and test built-site search and base-path image loading.
+- [x] Recheck the Unity source revision and any newer API or demo changes; record the content baseline.
+- [x] Scaffold Astro/Starlight in this directory with static output, compatible pinned dependencies, a lockfile, and a declared Node version.
+- [x] Configure a repository-relative site base and local build/preview/check commands.
+- [x] Establish content metadata, API-coverage records, and screenshot-manifest formats.
+- [x] Implement the cream/forest theme, typography, responsive navigation, code blocks, explanation panel, demo card, and accessible screenshot enlargement.
+- [x] Inspect font licensing and establish local font/media attribution.
+- [x] Create the home-page structure, main navigation, and demo gallery data with all ten entries.
+- [x] Capture the first real Unity Game View states and graph sections for Campfire; verify HUD inclusion, image resolution, framing, and readability.
+- [x] Write the setup/first-sound path, a complete `SoundBus` reference page, and the Campfire walkthrough with an explained code recipe.
+- [x] Compile and exercise the first complete example against the documented Unity API.
+- [x] Review the result at phone and desktop sizes and test built-site search and base-path image loading.
+
+Completed: 19 September 2026. Evidence: [M1 validation report](validation/M1.md).
 
 Deliverable: a local preview demonstrating the final visual and editorial pattern with real content and images.
 
@@ -206,4 +208,4 @@ Future enhancements can include versioned documentation, localized content, opti
 
 The work is complete when all ten demos have detailed, accurate pages with actual Unity screenshots; the supported API and implemented graph features are documented; usage examples are verified; the shared visual style is recognizable; the static build and contributor workflow are reproducible; and the live GitHub Pages site passes the publication checks.
 
-For this planning step, the deliverables are the specification and this roadmap only. All implementation, capture, validation, and publishing tasks above remain explicitly open.
+M0 produced the specification and roadmap. M1 now delivers the first working documentation slice with actual Unity captures and a verified example. M2–M7 remain open; no remote repository or public deployment was created.

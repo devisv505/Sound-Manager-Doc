@@ -710,3 +710,10 @@ nav.sidebar a[aria-current='page'] {
 .source-note a {
   color: #31563d;
 }
+
+.doc-title {
+  font-size: var(--sl-text-h1);
+  line-height: 1.15;
+  font-weight: 750;
+  margin-block: 1rem 0;
+}

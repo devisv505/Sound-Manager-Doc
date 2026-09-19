@@ -1,6 +1,6 @@
 # DEV505 Sound Manager — documentation website specification
 
-Status: planning specification; website implementation has not started.  
+Status: specification baseline; M1 implemented on 19 September 2026. See the roadmap and `validation/M1.md` for current progress.  
 Prepared: 19 September 2026.  
 Companion: [Implementation roadmap](ROADMAP.md).
 
@@ -20,7 +20,7 @@ Version-one deliverables:
 - A standalone static build, local preview commands, and a GitHub Pages deployment workflow.
 - A contributor guide explaining how to update content, validate examples, recapture screenshots, and release a new documentation revision.
 
-This planning step creates only `SPEC.md` and `ROADMAP.md`. Package installation, website scaffolding, screenshot production, and deployment belong to the implementation milestones in the roadmap.
+The initial planning step created `SPEC.md` and `ROADMAP.md`. M1 now implements the foundation and Campfire slice; the remaining scope is tracked by the implementation milestones in the roadmap.
 
 ## 2. Source of truth and versioning
 
@@ -314,7 +314,7 @@ Create a capture manifest containing scene path, demo slug, source revision, cap
 
 Protect the user's working session: inspect the current scene, dirty state, and Play Mode before switching; preserve unsaved edits; record and restore temporary capture settings and the original scene/state where feasible. Do not change project-wide settings solely to make a screenshot. Bring the running Editor to the foreground if background Play Mode prevents capture commands from progressing.
 
-No new documentation screenshots have been captured in this planning step. Their production and visual review are explicit implementation work.
+M1 has captured and reviewed the Campfire pilot set. The remaining nine demos require captures in their implementation milestones.
 
 ## 10. Visual system and interaction
 
@@ -368,4 +368,4 @@ Completion requires all ten detailed pages, current Unity screenshots and graph 
 
 Out of scope for this release: changing Sound Manager itself, rebuilding its demo models, adding new demo scenes, WebGL ports, a browser graph editor, cloud accounts/backends, paid hosting, automatic API-doc publishing from an unreviewed source update, and translating the whole site. These can be separate follow-up projects.
 
-Implementation can proceed using the choices in this specification. The actual repository owner/name and Pages configuration must be verified when deployment is undertaken; no repository or live site is created by this planning step.
+Implementation can proceed using the choices in this specification. The actual repository owner/name and Pages configuration must be verified when deployment is undertaken; no remote repository or live site has been created as part of M1.
