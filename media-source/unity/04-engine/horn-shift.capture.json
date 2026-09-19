@@ -1,0 +1,45 @@
+{
+  "demo": "04-engine",
+  "name": "horn-shift",
+  "kind": "game-view",
+  "capturedAt": "2026-09-19T20:56:39.4754610Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/04-Engine/Demo.unity",
+  "width": 1920,
+  "height": 1080,
+  "hudIncluded": true,
+  "state": {
+    "IsRunning": true,
+    "Throttle": 0.0,
+    "Rpm": 4946,
+    "SpeedKmh": 9.364061,
+    "Gear": 2,
+    "voices": 4
+  },
+  "steps": [
+    "While driving, shift gear and sound the horn with the demo controls.",
+    "The signals add their cues to the retained Engine play."
+  ],
+  "hud": [
+    "DEV505  /  SOUND LAB",
+    "A little drive.",
+    "Feel the revs. Find your rhythm.",
+    "WHAT THIS DEMO SHOWS",
+    "Live parameters and layered loops",
+    "RPM and throttle smoothly blend idle and rev sounds and change their pitch. Horn and gear-change signals add sounds while the engine keeps running.",
+    "04 / ENGINE & PARAMETERS",
+    "One little car. A changing sound.",
+    "CHANGING GEAR",
+    "4,950 rpm",
+    "9 km/h  ·  Gear 2",
+    "Listen as the engine finds its voice.",
+    "THROTTLE",
+    "0%",
+    "Drag to cruise · hold W to accelerate",
+    "Brake",
+    "Gear 2  ›",
+    "Horn",
+    "SPACE / IGNITION   S / BRAKE   G / GEAR   H / HORN",
+    "Stop engine"
+  ],
+  "unityVersion": "6000.6.0f1"
+}

@@ -1,0 +1,43 @@
+{
+  "demo": "09-portals",
+  "name": "stop",
+  "kind": "game-view",
+  "capturedAt": "2026-09-19T20:57:41.8415490Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/09-Portals/Demo.unity",
+  "width": 1920,
+  "height": 1080,
+  "hudIncluded": true,
+  "state": {
+    "CurrentWorld": 0,
+    "Transitioning": true,
+    "Trips": 2,
+    "EchoLingers": false,
+    "EchoAlive": false,
+    "ActiveVoices": 4
+  },
+  "steps": [
+    "Turn Echo lingers off and travel back.",
+    "After the old owner is destroyed, the Stop-policy departure sound ends instead of lingering."
+  ],
+  "hud": [
+    "DEV505  /  SOUND LAB",
+    "A little elsewhere.",
+    "Leave a world. Hear what stays behind.",
+    "WHAT THIS DEMO SHOWS",
+    "Sound ownership, cleanup and lingering echoes",
+    "Each world owns its sounds. Leaving destroys that owner, so its ambience stops. Choose whether the portal echo stops too, or finishes at the place you left. Your ears travel with DEV505.",
+    "09 / WORLDS & OWNERS",
+    "Headphones recommended",
+    "A LITTLE ELSEWHERE…",
+    "Mint Meadow",
+    "Old world quiet. Listen for the echo behind you.",
+    "Passing through the portal…",
+    "2 crossings  ·  4 sounds playing",
+    "NEXT STOP / CRYSTAL COVE",
+    "E / Echoes: stop with world",
+    "X / Close this world",
+    "SPACE / TRAVEL OR WAKE",
+    "Somewhere between…"
+  ],
+  "unityVersion": "6000.6.0f1"
+}

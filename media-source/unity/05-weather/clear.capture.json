@@ -1,0 +1,44 @@
+{
+  "demo": "05-weather",
+  "name": "clear",
+  "kind": "game-view",
+  "capturedAt": "2026-09-19T20:56:48.5175600Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/05-Weather/Demo.unity",
+  "width": 1920,
+  "height": 1080,
+  "hudIncluded": true,
+  "state": {
+    "IsRunning": false,
+    "CurrentRain": 0.0,
+    "CurrentWind": 0.0,
+    "ThunderCount": 0
+  },
+  "steps": [
+    "Open 05-Weather and enter Play Mode.",
+    "Leave the skies clear."
+  ],
+  "hud": [
+    "DEV505  /  SOUND LAB",
+    "A little rain.",
+    "From a soft patter to a passing storm.",
+    "WHAT THIS DEMO SHOWS",
+    "Blended ambience and delayed sounds",
+    "Rain and wind smoothly mix three ambience loops. Lightning adds a delayed, varied 3D thunder sound; stopping the weather cancels pending thunder.",
+    "05 / LAYERED AMBIENCE",
+    "Headphones recommended",
+    "CLEAR SKIES",
+    "0% rainfall",
+    "Wind 0%  ·  Thunder 0",
+    "Listen to the weather settle in.",
+    "RAIN",
+    "35%",
+    "WIND",
+    "18%",
+    "Light rain",
+    "Storm",
+    "Thunder",
+    "SPACE / RAIN   1 / LIGHT   2 / STORM   T / THUNDER",
+    "Make it rain"
+  ],
+  "unityVersion": "6000.6.0f1"
+}

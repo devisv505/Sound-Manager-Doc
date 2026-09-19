@@ -1,0 +1,15 @@
+{
+  "demo": "06-workshop",
+  "name": "graph",
+  "kind": "graph-editor",
+  "asset": "Assets/DEV505/SoundManager/Samples/06-Workshop/Workshop.soundgraph",
+  "capturedAt": "2026-09-19T21:04:27.8868140Z",
+  "width": 3456,
+  "height": 1902,
+  "hudIncluded": false,
+  "steps": [
+    "Exit Play Mode and open Assets/DEV505/SoundManager/Samples/06-Workshop/Workshop.soundgraph in Unity.",
+    "Frame the saved graph or expand the relevant Inspector sections; capture the editor's own GUI surface."
+  ],
+  "unityVersion": "6000.6.0f1"
+}

@@ -1,0 +1,52 @@
+{
+  "demo": "08-jukebox",
+  "name": "playing",
+  "kind": "game-view",
+  "capturedAt": "2026-09-19T20:57:28.8704350Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/08-Jukebox/Demo.unity",
+  "width": 1920,
+  "height": 1080,
+  "hudIncluded": true,
+  "state": {
+    "CurrentTrack": 0,
+    "TrackTitle": "Mint Morning",
+    "Bpm": 96,
+    "IsPlaying": true,
+    "CurrentGain": 0.7268466,
+    "Volume": 0.65
+  },
+  "steps": [
+    "Open 08-Jukebox and press Play.",
+    "Let the first track play while DEV505 dances."
+  ],
+  "hud": [
+    "DEV505  /  SOUND LAB",
+    "A little groove.",
+    "Pick a record. Let the afternoon play.",
+    "WHAT THIS DEMO SHOWS",
+    "Track selection, crossfades and pause",
+    "One event plays different music assets. Two instances overlap for smooth track changes. Pause keeps your place, and volume changes without restarting the music.",
+    "08 / MUSIC & PLAYBACK",
+    "Three original stereo grooves",
+    "NOW PLAYING",
+    "Mint Morning",
+    "0:01 / 1:00  ·  96 BPM",
+    "The next track follows automatically.",
+    "Stereo music · 2.5 s crossfade",
+    "1 · Mint Morning",
+    "96 BPM",
+    "2 · Peach Sunset",
+    "108 BPM",
+    "3 · Midnight Pixels",
+    "120 BPM",
+    "MUSIC VOLUME",
+    "65%",
+    "Previous",
+    "Stop",
+    "Next",
+    "R / Auto next: on",
+    "SPACE / PLAY OR PAUSE   1–3 / TRACK   S / STOP",
+    "Pause the groove"
+  ],
+  "unityVersion": "6000.6.0f1"
+}

@@ -1,0 +1,119 @@
+{
+  "capturedAt": "2026-09-19T20:54:19.0442950Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/10-Launch/Demo.unity",
+  "dirty": false,
+  "playing": false,
+  "paused": false,
+  "background": false,
+  "sizeIndex": 1,
+  "customSizeCount": 1,
+  "gameMaximized": false,
+  "selection": "",
+  "windows": [
+    {
+      "id": "27040:256",
+      "type": "UnityEditor.MainToolbarWindow",
+      "title": "UnityEditor.MainToolbarWindow",
+      "maximized": false,
+      "position": "(x:0.00, y:33.00, width:1728.00, height:36.00)"
+    },
+    {
+      "id": "47744:1792",
+      "type": "UnityEditor.ConsoleWindow",
+      "title": "Console",
+      "maximized": false,
+      "position": "(x:0.00, y:875.00, width:1133.50, height:196.00)"
+    },
+    {
+      "id": "47755:1792",
+      "type": "UnityEditor.TestTools.TestRunner.TestRunnerWindow",
+      "title": "Test Runner",
+      "maximized": false,
+      "position": "(x:1550.50, y:69.00, width:176.50, height:1002.00)"
+    },
+    {
+      "id": "47735:2304",
+      "type": "UnityEditor.SceneView",
+      "title": "Scene",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    },
+    {
+      "id": "47736:2304",
+      "type": "Unity.GraphToolkit.Editor.Implementation.GraphViewEditorWindowImp",
+      "title": "LaunchClamp",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    },
+    {
+      "id": "47737:2304",
+      "type": "Unity.GraphToolkit.Editor.Implementation.GraphViewEditorWindowImp",
+      "title": "LaunchFlight",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    },
+    {
+      "id": "47738:2304",
+      "type": "Unity.GraphToolkit.Editor.Implementation.GraphViewEditorWindowImp",
+      "title": "LaunchPad",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    },
+    {
+      "id": "47739:2304",
+      "type": "Unity.GraphToolkit.Editor.Implementation.GraphViewEditorWindowImp",
+      "title": "LaunchSequence",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    },
+    {
+      "id": "47741:2304",
+      "type": "Unity.GraphToolkit.Editor.Implementation.GraphViewEditorWindowImp",
+      "title": "LaunchUI",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    },
+    {
+      "id": "47742:2304",
+      "type": "Unity.GraphToolkit.Editor.Implementation.GraphViewEditorWindowImp",
+      "title": "Jukebox",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    },
+    {
+      "id": "47750:2304",
+      "type": "Unity.Hierarchy.Editor.HierarchyWindow",
+      "title": "Hierarchy",
+      "maximized": false,
+      "position": "(x:1134.50, y:69.00, width:245.00, height:468.00)"
+    },
+    {
+      "id": "47752:2304",
+      "type": "UnityEditor.ProjectBrowser",
+      "title": "Project",
+      "maximized": false,
+      "position": "(x:1134.50, y:563.00, width:245.00, height:508.00)"
+    },
+    {
+      "id": "47754:2304",
+      "type": "UnityEditor.InspectorWindow",
+      "title": "Inspector",
+      "maximized": false,
+      "position": "(x:1381.50, y:69.00, width:345.50, height:1002.00)"
+    },
+    {
+      "id": "47740:4352",
+      "type": "Unity.GraphToolkit.Editor.Implementation.GraphViewEditorWindowImp",
+      "title": "LaunchVent",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    },
+    {
+      "id": "37920:12032",
+      "type": "UnityEditor.GameView",
+      "title": "Game",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    }
+  ]
+}

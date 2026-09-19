@@ -78,6 +78,7 @@ export default defineConfig({
           label: 'Explore the demos',
           items: [
             { label: 'The sound lab', slug: 'demos' },
+            { label: 'Unity screenshot library', slug: 'captures' },
             { label: '01 · Campfire', slug: 'demos/01-campfire' },
           ],
         },

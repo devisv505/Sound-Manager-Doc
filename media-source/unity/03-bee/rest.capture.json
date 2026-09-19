@@ -1,0 +1,34 @@
+{
+  "demo": "03-bee",
+  "name": "rest",
+  "kind": "game-view",
+  "capturedAt": "2026-09-19T20:56:22.4515290Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/03-Bee/Demo.unity",
+  "width": 1920,
+  "height": 1080,
+  "hudIncluded": true,
+  "state": {
+    "IsFlying": false,
+    "beePosition": "(2.70, 1.27, -0.80)"
+  },
+  "steps": [
+    "Open 03-Bee and enter Play Mode.",
+    "Leave the bee resting on its flower."
+  ],
+  "hud": [
+    "DEV505  /  SOUND LAB",
+    "A little buzz.",
+    "Follow the bee with your ears.",
+    "WHAT THIS DEMO SHOWS",
+    "A sound that follows a moving object",
+    "One looping buzz follows the bee in 3D. Hear it move left and right and grow quieter with distance, without restarting the sound.",
+    "03 / SPATIAL AUDIO",
+    "Headphones recommended",
+    "READY TO FLY",
+    "2.8 m from you",
+    "You are the listener at the center.",
+    "SPACE  /  START OR STOP",
+    "Release bee"
+  ],
+  "unityVersion": "6000.6.0f1"
+}

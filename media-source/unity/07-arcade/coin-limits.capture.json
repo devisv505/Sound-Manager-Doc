@@ -1,0 +1,15 @@
+{
+  "demo": "07-arcade",
+  "name": "coin-limits",
+  "kind": "event-settings",
+  "asset": "Assets/DEV505/SoundManager/Samples/07-Arcade/ArcadeCoin.soundgraph",
+  "capturedAt": "2026-09-19T21:11:14.5447070Z",
+  "width": 1360,
+  "height": 1748,
+  "hudIncluded": false,
+  "steps": [
+    "Exit Play Mode and open Assets/DEV505/SoundManager/Samples/07-Arcade/ArcadeCoin.soundgraph in Unity.",
+    "Frame the saved graph or expand the relevant Inspector sections; capture the editor's own GUI surface."
+  ],
+  "unityVersion": "6000.6.0f1"
+}

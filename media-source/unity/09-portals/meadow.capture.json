@@ -1,0 +1,42 @@
+{
+  "demo": "09-portals",
+  "name": "meadow",
+  "kind": "game-view",
+  "capturedAt": "2026-09-19T20:57:39.2895620Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/09-Portals/Demo.unity",
+  "width": 1920,
+  "height": 1080,
+  "hudIncluded": true,
+  "state": {
+    "CurrentWorld": 0,
+    "WorldName": "Mint Meadow",
+    "Trips": 0,
+    "EchoLingers": true,
+    "ActiveVoices": 2
+  },
+  "steps": [
+    "Open 09-Portals and enter Play Mode.",
+    "Begin in Mint Meadow with its world ambience and portal hum."
+  ],
+  "hud": [
+    "DEV505  /  SOUND LAB",
+    "A little elsewhere.",
+    "Leave a world. Hear what stays behind.",
+    "WHAT THIS DEMO SHOWS",
+    "Sound ownership, cleanup and lingering echoes",
+    "Each world owns its sounds. Leaving destroys that owner, so its ambience stops. Choose whether the portal echo stops too, or finishes at the place you left. Your ears travel with DEV505.",
+    "09 / WORLDS & OWNERS",
+    "Headphones recommended",
+    "YOU ARE HERE",
+    "Mint Meadow",
+    "Listen to this world. The next one sounds different.",
+    "Only this world's ambience and hum remain.",
+    "0 crossings  ·  2 sounds playing",
+    "NEXT STOP / CRYSTAL COVE",
+    "E / Echoes: let them linger",
+    "X / Close this world",
+    "SPACE / TRAVEL OR WAKE",
+    "Step through"
+  ],
+  "unityVersion": "6000.6.0f1"
+}

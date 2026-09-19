@@ -1,0 +1,49 @@
+{
+  "demo": "07-arcade",
+  "name": "calm",
+  "kind": "game-view",
+  "capturedAt": "2026-09-19T20:57:12.8351840Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/07-Arcade/Demo.unity",
+  "width": 1920,
+  "height": 1080,
+  "hudIncluded": true,
+  "state": {
+    "IsRunning": false,
+    "Accepted": 0,
+    "Replaced": 0,
+    "Limited": 0,
+    "CoolingDown": 0,
+    "ActiveVoices": 0,
+    "VoiceCapacity": 6
+  },
+  "steps": [
+    "Open 07-Arcade and enter Play Mode.",
+    "Leave the machines quiet and counters at zero."
+  ],
+  "hud": [
+    "DEV505  /  SOUND LAB",
+    "A little chaos.",
+    "Three machines. Six voices. Make some noise.",
+    "WHAT THIS DEMO SHOWS",
+    "Voice limits and cooldowns under pressure",
+    "Six voices handle a busy arcade: extra zaps replace old ones, extra coins are skipped, and the jackpot has a three-second cooldown. Watch the counters as you turn up the chaos.",
+    "07 / CONCURRENCY & COOLDOWNS",
+    "Headphones recommended",
+    "READY TO PLAY",
+    "0 points",
+    "0 / 6 VOICES",
+    "0 replaced  ·  0 limited  ·  0 cooling",
+    "Pick a machine. Make a little noise.",
+    "R / Reset score",
+    "1 · Zap",
+    "2 · Coin",
+    "3 · Jackpot",
+    "CHAOS LEVEL",
+    "50%",
+    "3 zaps · 2 coins · 1 jackpot at once",
+    "Jackpot ready · always room for a win",
+    "1–3 / PLAY     SPACE / START OR STOP",
+    "Start the chaos"
+  ],
+  "unityVersion": "6000.6.0f1"
+}

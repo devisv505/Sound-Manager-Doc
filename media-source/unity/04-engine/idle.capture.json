@@ -1,0 +1,44 @@
+{
+  "demo": "04-engine",
+  "name": "idle",
+  "kind": "game-view",
+  "capturedAt": "2026-09-19T20:56:35.0537870Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/04-Engine/Demo.unity",
+  "width": 1920,
+  "height": 1080,
+  "hudIncluded": true,
+  "state": {
+    "IsRunning": true,
+    "Throttle": 0.0,
+    "Rpm": 950,
+    "SpeedKmh": 0.0,
+    "Gear": 1
+  },
+  "steps": [
+    "Open 04-Engine; enter Play Mode and start the engine.",
+    "Leave throttle at zero until ignition finishes."
+  ],
+  "hud": [
+    "DEV505  /  SOUND LAB",
+    "A little drive.",
+    "Feel the revs. Find your rhythm.",
+    "WHAT THIS DEMO SHOWS",
+    "Live parameters and layered loops",
+    "RPM and throttle smoothly blend idle and rev sounds and change their pitch. Horn and gear-change signals add sounds while the engine keeps running.",
+    "04 / ENGINE & PARAMETERS",
+    "One little car. A changing sound.",
+    "IDLING",
+    "950 rpm",
+    "0 km/h  ·  Gear 1",
+    "Listen as the engine finds its voice.",
+    "THROTTLE",
+    "0%",
+    "Drag to cruise · hold W to accelerate",
+    "Brake",
+    "Gear 1  ›",
+    "Horn",
+    "SPACE / IGNITION   S / BRAKE   G / GEAR   H / HORN",
+    "Stop engine"
+  ],
+  "unityVersion": "6000.6.0f1"
+}

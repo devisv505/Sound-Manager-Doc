@@ -1,0 +1,38 @@
+{
+  "demo": "02-footstep",
+  "name": "grass",
+  "kind": "game-view",
+  "capturedAt": "2026-09-19T21:09:02.8457070Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/02-Footstep/Demo.unity",
+  "width": 1920,
+  "height": 1080,
+  "hudIncluded": true,
+  "state": {
+    "CurrentSurface": 1,
+    "LastStepSurface": 1,
+    "StepCount": 5,
+    "position": "(-5.06, 0.03, -1.40)"
+  },
+  "steps": [
+    "Walk left with A from the stone lane into grass.",
+    "Continue until a grass footstep is reported, then stop near the middle of that lane."
+  ],
+  "hud": [
+    "DEV505  /  SOUND LAB",
+    "Every step counts.",
+    "Three surfaces. A different sound underfoot.",
+    "WHAT THIS DEMO SHOWS",
+    "Surface selection and natural variation",
+    "A surface parameter chooses grass, stone or wood. Each step picks a trimmed hit from a longer recording, avoiding the same hit twice in a row.",
+    "02 / SURFACE FOOTSTEPS",
+    "Grass / Stone / Wood",
+    "UNDERFOOT",
+    "Grass",
+    "STEPS",
+    "005",
+    "Last step: Grass",
+    "WASD / ARROWS  ·  SHIFT TO RUN",
+    "WALKING"
+  ],
+  "unityVersion": "6000.6.0f1"
+}

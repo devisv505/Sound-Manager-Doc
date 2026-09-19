@@ -1,0 +1,52 @@
+{
+  "demo": "08-jukebox",
+  "name": "paused",
+  "kind": "game-view",
+  "capturedAt": "2026-09-19T20:57:32.1740410Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/08-Jukebox/Demo.unity",
+  "width": 1920,
+  "height": 1080,
+  "hudIncluded": true,
+  "state": {
+    "CurrentTrack": 1,
+    "TrackTitle": "Peach Sunset",
+    "IsPaused": true,
+    "IsPlaybackPaused": true,
+    "CurrentGain": 1.0,
+    "OutgoingGain": 0.0
+  },
+  "steps": [
+    "Wait for the transition to finish, then choose Pause.",
+    "The retained music play and the dancer pause together."
+  ],
+  "hud": [
+    "DEV505  /  SOUND LAB",
+    "A little groove.",
+    "Pick a record. Let the afternoon play.",
+    "WHAT THIS DEMO SHOWS",
+    "Track selection, crossfades and pause",
+    "One event plays different music assets. Two instances overlap for smooth track changes. Pause keeps your place, and volume changes without restarting the music.",
+    "08 / MUSIC & PLAYBACK",
+    "Three original stereo grooves",
+    "PAUSED, RIGHT HERE",
+    "Peach Sunset",
+    "0:03 / 1:00  ·  108 BPM",
+    "Resume from the same place.",
+    "Stereo music · 2.5 s crossfade",
+    "1 · Mint Morning",
+    "96 BPM",
+    "2 · Peach Sunset",
+    "108 BPM",
+    "3 · Midnight Pixels",
+    "120 BPM",
+    "MUSIC VOLUME",
+    "65%",
+    "Previous",
+    "Stop",
+    "Next",
+    "R / Auto next: on",
+    "SPACE / PLAY OR PAUSE   1–3 / TRACK   S / STOP",
+    "Resume the groove"
+  ],
+  "unityVersion": "6000.6.0f1"
+}

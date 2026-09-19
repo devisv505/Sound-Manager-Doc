@@ -1,0 +1,15 @@
+{
+  "demo": "03-bee",
+  "name": "spatial-settings",
+  "kind": "event-settings",
+  "asset": "Assets/DEV505/SoundManager/Samples/03-Bee/Bee.soundgraph",
+  "capturedAt": "2026-09-19T21:20:43.1444390Z",
+  "width": 1360,
+  "height": 1748,
+  "hudIncluded": false,
+  "steps": [
+    "Exit Play Mode and open Assets/DEV505/SoundManager/Samples/03-Bee/Bee.soundgraph in Unity.",
+    "Frame the saved graph or expand the relevant Inspector sections; capture the editor's own GUI surface."
+  ],
+  "unityVersion": "6000.6.0f1"
+}

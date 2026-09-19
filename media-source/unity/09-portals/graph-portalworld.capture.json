@@ -1,0 +1,15 @@
+{
+  "demo": "09-portals",
+  "name": "graph-portalworld",
+  "kind": "graph-editor",
+  "asset": "Assets/DEV505/SoundManager/Samples/09-Portals/PortalWorld.soundgraph",
+  "capturedAt": "2026-09-19T21:04:49.2006440Z",
+  "width": 3456,
+  "height": 1902,
+  "hudIncluded": false,
+  "steps": [
+    "Exit Play Mode and open Assets/DEV505/SoundManager/Samples/09-Portals/PortalWorld.soundgraph in Unity.",
+    "Frame the saved graph or expand the relevant Inspector sections; capture the editor's own GUI surface."
+  ],
+  "unityVersion": "6000.6.0f1"
+}

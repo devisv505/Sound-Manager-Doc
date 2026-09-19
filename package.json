@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
     "check": "astro check && node scripts/check-content.mjs",
-    "build": "astro build",
+    "build": "astro build && node scripts/prepare-capture-output.mjs",
     "preview": "astro preview --host 127.0.0.1",
     "validate": "npm run check && npm run build && node scripts/check-build.mjs",
     "test:browser": "playwright test"

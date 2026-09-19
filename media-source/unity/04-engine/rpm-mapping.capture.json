@@ -1,0 +1,15 @@
+{
+  "demo": "04-engine",
+  "name": "rpm-mapping",
+  "kind": "graph-editor",
+  "asset": "Assets/DEV505/SoundManager/Samples/04-Engine/Engine.soundgraph",
+  "capturedAt": "2026-09-19T21:10:28.0649660Z",
+  "width": 3456,
+  "height": 1902,
+  "hudIncluded": false,
+  "steps": [
+    "Exit Play Mode and open Assets/DEV505/SoundManager/Samples/04-Engine/Engine.soundgraph in Unity.",
+    "Frame the saved graph or expand the relevant Inspector sections; capture the editor's own GUI surface."
+  ],
+  "unityVersion": "6000.6.0f1"
+}

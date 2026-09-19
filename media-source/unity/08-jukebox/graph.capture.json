@@ -1,0 +1,15 @@
+{
+  "demo": "08-jukebox",
+  "name": "graph",
+  "kind": "graph-editor",
+  "asset": "Assets/DEV505/SoundManager/Samples/08-Jukebox/Jukebox.soundgraph",
+  "capturedAt": "2026-09-19T21:04:45.0755290Z",
+  "width": 3456,
+  "height": 1902,
+  "hudIncluded": false,
+  "steps": [
+    "Exit Play Mode and open Assets/DEV505/SoundManager/Samples/08-Jukebox/Jukebox.soundgraph in Unity.",
+    "Frame the saved graph or expand the relevant Inspector sections; capture the editor's own GUI surface."
+  ],
+  "unityVersion": "6000.6.0f1"
+}

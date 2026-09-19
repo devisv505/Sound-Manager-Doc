@@ -1,0 +1,52 @@
+{
+  "demo": "10-launch",
+  "name": "paused",
+  "kind": "game-view",
+  "capturedAt": "2026-09-19T20:54:54.6795020Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/10-Launch/Demo.unity",
+  "width": 1920,
+  "height": 1080,
+  "hudIncluded": true,
+  "state": {
+    "Phase": 4,
+    "IsPaused": true,
+    "Altitude": 0.562423468,
+    "ActiveVoices": 2
+  },
+  "steps": [
+    "During flight press P or choose Pause.",
+    "Capture the frozen rocket and LAUNCH PAUSED readout."
+  ],
+  "hud": [
+    "DEV505  /  SOUND LAB",
+    "A little liftoff.",
+    "A small rocket. A very big afternoon.",
+    "WHAT THIS DEMO SHOWS",
+    "A whole launch, driven by sound graphs",
+    "Power blends machinery layers. Pressure changes the warning rhythm. The graph waits for clearance, counts down and finishes ignition before liftoff. Abort cancels the sequence; exhaust follows the rocket in 3D.",
+    "10 / THE GRAND DEPARTURE",
+    "Headphones recommended",
+    "I / What you are hearing",
+    "LISTEN CLOSELY",
+    "World audio and animation are paused. Interface clicks still play.",
+    "LAUNCH PAUSED",
+    "0.6 m above the pad",
+    "The rocket carries its own sound. The pad stays behind.",
+    "Power 72%+ · pressure below 85% · clamps open",
+    "1 launches  ·  1 aborts  ·  2 sounds playing",
+    "M / Automatic launch",
+    "POWER",
+    "0%",
+    "PRESSURE",
+    "25%",
+    "Mission control handles power and clamps.",
+    "V / Vent",
+    "C / Close clamps",
+    "P / Resume",
+    "R / Reset",
+    "X / Abort",
+    "SPACE / START A LITTLE LAUNCH",
+    "Launch paused"
+  ],
+  "unityVersion": "6000.6.0f1"
+}

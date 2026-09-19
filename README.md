@@ -4,9 +4,11 @@ A static documentation site styled after the Sound Lab Unity demos. Built with A
 
 ## Current milestone
 
-M2 completes the beginner setup path, core sound concepts, and everyday API reference. The site now has 27 authored pages, four complete C# examples checked in Unity, and an inventory of 163 public types with 867 member declarations. It retains M1's branded home page, all ten demo summaries, and the detailed Campfire walkthrough with actual Unity captures. Detailed walkthroughs for demos 02–10, the full graph catalogue, and advanced integration reference remain in later milestones.
+M3 adds a screenshot library for all ten demos. It contains 84 authentic Unity images: 34 scene states with the real HUD, one home hero, 41 graph views, and eight Inspector views. Each gallery includes plain-language captions, steps to try in Unity, responsive images, and enlargement with an actual-size option for small graph labels.
 
-See [SPEC.md](SPEC.md), [ROADMAP.md](ROADMAP.md), and [the M2 validation report](validation/M2.md). The earlier [M1 report](validation/M1.md) records the original capture work. M2 is validated locally; the last recorded Pages publication is M1.
+The site now has 38 authored pages, four complete C# examples checked in Unity, and the existing API inventory of 163 public types with 867 member declarations. Detailed walkthroughs for demos 02–10, the full graph catalogue, and advanced integration reference remain in later milestones.
+
+See [SPEC.md](SPEC.md), [ROADMAP.md](ROADMAP.md), and the [M3 validation report](validation/M3.md). Earlier reports record [M1](validation/M1.md) and [M2](validation/M2.md). M3 is validated locally; this work does not publish a new Pages revision. Open the [local screenshot library](http://127.0.0.1:4321/Sound-Manager-Doc/captures/) after starting the preview.
 
 ## Run locally
 
@@ -40,7 +42,7 @@ npm run build
 npm run test:browser
 ```
 
-The eight browser checks exercise the production site: navigation, ten-card gallery, direct nested routes, images, keyboard dismissal/focus restoration, Pagefind search, exact copying of all four complete C# examples, source-derived API signatures, and 390/320 px layouts. Screenshots and the test report go to `validation/`; test failure artifacts are ignored. The configured preview starts automatically when no server already runs on port 4321. Stop an older preview first if its root belongs to another project.
+The eleven browser checks exercise the production site: navigation, ten-card gallery, direct nested routes, images, keyboard dismissal/focus restoration, Pagefind search, exact copying of all four complete C# examples, source-derived API signatures, and 390/320 px layouts. The M3 checks also load every gallery image, verify trim instructions and actual-size enlargement, and check all picture galleries at 320 px. Screenshots and the test report go to `validation/`; test failure artifacts are ignored. The configured preview starts automatically when no server already runs on port 4321. Stop an older preview first if its root belongs to another project.
 
 ## Content and source tracking
 
@@ -63,13 +65,17 @@ Do not use historical README statements as the sole source for current behavior.
 
 ## Unity images and example verification
 
-Original PNGs live in `media-source/unity/` and are excluded from the published output. Matching inputs in `src/assets/demos/` are processed by Astro into responsive WebP images. Keep the originals for recapture/comparison. There are no synthetic demo screenshots.
+Original PNGs live in `media-source/unity/` and are excluded from the published output. After Astro builds, `scripts/prepare-capture-output.mjs` removes only unreferenced generated PNG copies whose hashes match the capture manifest; it refuses to remove a referenced image. Responsive WebP images and full-resolution WebP enlargements remain in the output. Matching inputs in `src/assets/demos/` are processed by Astro into responsive WebP images. Keep the originals for recapture/comparison. There are no synthetic demo screenshots.
 
 M1 reads the composed Game View render surface at 1920 × 1080 so the HUD is included. The home hero is a second real capture with only the runtime HUD temporarily hidden. The graph uses its own Unity GUI render surface at 3456 × 2008; this avoids capturing unrelated desktop windows. Metal's texture-row orientation is normalized during capture.
 
-The capture and runtime-test `.cs.txt` files in `validation/` record the temporary Unity scripts used for this work. They stay outside `Assets`. Capture scripts currently retain the original workstation paths; adapt those explicit output paths to your machine before reuse. Do not run the setup/restoration scripts blindly against someone else's open scene. `InventoryPublicApi.cs.txt` is a separate .NET/Roslyn helper, not a Unity script.
+M3 uses the same Game View method for the other nine demos, and native graph/Inspector surfaces for editor details. The 80 new originals have adjacent `.capture.json` sidecars with the actual capture time, dimensions, and observed state. `content-data/captures.json` adds reader-facing labels, steps, captions, alt text, source hashes, and matching published inputs. M1’s four Campfire captures remain valid against the unchanged Unity revision. The content check verifies all required states, original/input byte equality, dimensions, metadata, and session restoration records.
+
+The capture and runtime-test `.cs.txt` files in `validation/` and `validation/m3/` record the temporary Unity scripts used for this work. They stay outside `Assets`. Capture scripts currently retain the original workstation paths; adapt those explicit output paths to your machine before reuse. Do not run the setup/restoration scripts blindly against someone else's open scene. `InventoryPublicApi.cs.txt` is a separate .NET/Roslyn helper, not a Unity script.
 
 To revalidate the complete C# example, combine `examples/CampfireSound.cs` with `validation/VerifyCampfireExample.cs.txt` in a temporary `.cs` file outside Unity `Assets`, then run its `VerifyCampfireExample.Main` entry with the connected Editor's `run_script` command. The active Campfire scene must be in Play Mode with its manager ready and the scene fire stopped. This creates and removes one temporary test GameObject. Record the returned checks, source revision, and SHA-256 of the example in the validation JSON. The website content check rejects a changed example until that proof is updated.
+
+For M3 recapture instructions and editor-session details, see [the capture notes](validation/m3/README.md). Reproduction steps on the site use the normal demo controls; the automated capture helpers call those same controllers and use actual keyboard input for Footstep.
 
 Preserve unsaved scene work, record temporary Game View/background settings, and restore them after capture. Never write `.unity`/`.asset` files by hand for this documentation process.
 

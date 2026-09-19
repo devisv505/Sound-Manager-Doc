@@ -23,6 +23,7 @@ const full = await getImage({ src, format: 'webp', quality: 94 });
     <Image
       src={src}
       alt={alt}
+      width={Math.min(1280, src.width)}
       widths={[640, 960, 1280, 1920].filter((w) => w <= src.width)}
       sizes="(min-width: 80rem) 850px, 100vw"
       format="webp"
@@ -35,9 +36,14 @@ const full = await getImage({ src, format: 'webp', quality: 94 });
   </button>
   <figcaption>{caption}</figcaption>
   <dialog id={id + '-dialog'} aria-label={alt} class="image-dialog">
-    <button type="button" class="image-close" autofocus>
-      Close <span aria-hidden="true">×</span>
-    </button>
+    <div class="image-toolbar">
+      <button type="button" class="image-size" aria-pressed="false">
+        View actual size
+      </button>
+      <button type="button" class="image-close" autofocus>
+        Close <span aria-hidden="true">×</span>
+      </button>
+    </div>
     <img src={full.src} width={src.width} height={src.height} alt={alt} loading="lazy" />
     <p>{caption}</p>
   </dialog>
@@ -49,7 +55,14 @@ const full = await getImage({ src, format: 'webp', quality: 94 });
       dialog.showModal();
       document.body.classList.add('image-modal-open');
     });
-    dialog.querySelector('button')!.addEventListener('click', () => dialog.close());
+    dialog.querySelector('.image-close')!.addEventListener('click', () => dialog.close());
+    const sizeButton = dialog.querySelector<HTMLButtonElement>('.image-size')!;
+    sizeButton.addEventListener('click', () => {
+      const actual = dialog.classList.toggle('is-actual-size');
+      sizeButton.setAttribute('aria-pressed', String(actual));
+      sizeButton.textContent = actual ? 'Fit to window' : 'View actual size';
+      dialog.scrollLeft = 0;
+    });
     dialog.addEventListener('click', (event) => {
       if (event.target === dialog) dialog.close();
     });

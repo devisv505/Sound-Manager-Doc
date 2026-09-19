@@ -1,0 +1,44 @@
+{
+  "demo": "09-portals",
+  "name": "detach",
+  "kind": "game-view",
+  "capturedAt": "2026-09-19T20:57:40.0597760Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/09-Portals/Demo.unity",
+  "width": 1920,
+  "height": 1080,
+  "hudIncluded": true,
+  "state": {
+    "Transitioning": true,
+    "CurrentWorld": 1,
+    "Trips": 1,
+    "EchoLingers": true,
+    "EchoAlive": true,
+    "departure": "(-2.90, 1.70, -1.30)",
+    "ActiveVoices": 4
+  },
+  "steps": [
+    "Continue the same trip past its halfway point.",
+    "The old world owner is destroyed; the detached departure echo is still alive at its old position."
+  ],
+  "hud": [
+    "DEV505  /  SOUND LAB",
+    "A little elsewhere.",
+    "Leave a world. Hear what stays behind.",
+    "WHAT THIS DEMO SHOWS",
+    "Sound ownership, cleanup and lingering echoes",
+    "Each world owns its sounds. Leaving destroys that owner, so its ambience stops. Choose whether the portal echo stops too, or finishes at the place you left. Your ears travel with DEV505.",
+    "09 / WORLDS & OWNERS",
+    "Headphones recommended",
+    "A LITTLE ELSEWHERE…",
+    "Crystal Cove",
+    "Old world quiet. Listen for the echo behind you.",
+    "Passing through the portal…",
+    "1 crossings  ·  4 sounds playing",
+    "NEXT STOP / MINT MEADOW",
+    "E / Echoes: let them linger",
+    "X / Close this world",
+    "SPACE / TRAVEL OR WAKE",
+    "Somewhere between…"
+  ],
+  "unityVersion": "6000.6.0f1"
+}

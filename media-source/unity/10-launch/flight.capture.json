@@ -1,0 +1,51 @@
+{
+  "demo": "10-launch",
+  "name": "flight",
+  "kind": "game-view",
+  "capturedAt": "2026-09-19T20:54:54.4492380Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/10-Launch/Demo.unity",
+  "width": 1920,
+  "height": 1080,
+  "hudIncluded": true,
+  "state": {
+    "Phase": 4,
+    "Altitude": 0.562423468,
+    "ActiveVoices": 2
+  },
+  "steps": [
+    "Allow the countdown and ignition to finish.",
+    "Capture shortly after liftoff with the rocket still visible."
+  ],
+  "hud": [
+    "DEV505  /  SOUND LAB",
+    "A little liftoff.",
+    "A small rocket. A very big afternoon.",
+    "WHAT THIS DEMO SHOWS",
+    "A whole launch, driven by sound graphs",
+    "Power blends machinery layers. Pressure changes the warning rhythm. The graph waits for clearance, counts down and finishes ignition before liftoff. Abort cancels the sequence; exhaust follows the rocket in 3D.",
+    "10 / THE GRAND DEPARTURE",
+    "Headphones recommended",
+    "I / What you are hearing",
+    "LISTEN CLOSELY",
+    "Exhaust follows the rocket in 3D. The launchpad winds down behind it.",
+    "A LITTLE LIFTOFF!",
+    "0.5 m above the pad",
+    "The rocket carries its own sound. The pad stays behind.",
+    "Power 72%+ · pressure below 85% · clamps open",
+    "1 launches  ·  1 aborts  ·  2 sounds playing",
+    "M / Automatic launch",
+    "POWER",
+    "4%",
+    "PRESSURE",
+    "27%",
+    "Mission control handles power and clamps.",
+    "V / Vent",
+    "C / Close clamps",
+    "P / Pause",
+    "R / Reset",
+    "X / Abort",
+    "SPACE / START A LITTLE LAUNCH",
+    "Bon voyage!"
+  ],
+  "unityVersion": "6000.6.0f1"
+}

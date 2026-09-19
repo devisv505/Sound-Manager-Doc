@@ -1,0 +1,15 @@
+{
+  "demo": "03-bee",
+  "name": "graph",
+  "kind": "graph-editor",
+  "asset": "Assets/DEV505/SoundManager/Samples/03-Bee/Bee.soundgraph",
+  "capturedAt": "2026-09-19T21:04:11.1025430Z",
+  "width": 3456,
+  "height": 1902,
+  "hudIncluded": false,
+  "steps": [
+    "Exit Play Mode and open Assets/DEV505/SoundManager/Samples/03-Bee/Bee.soundgraph in Unity.",
+    "Frame the saved graph or expand the relevant Inspector sections; capture the editor's own GUI surface."
+  ],
+  "unityVersion": "6000.6.0f1"
+}

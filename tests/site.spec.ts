@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { test, expect } from '@playwright/test';
 const base = '/Sound-Manager-Doc/';
+const captures = JSON.parse(readFileSync('content-data/captures.json', 'utf8')).captures;
 test('home, source images, gallery, and primary navigation', async ({ page }) => {
   const failures: string[] = [];
   page.on('pageerror', (e) => failures.push(e.message));
@@ -107,12 +108,17 @@ test('M2 guide navigation, exact signatures, and API coverage', async ({ page })
     'public readonly SoundPlayContext With(SoundParameterId parameter, AudioClip value)',
   );
   await page.goto(base + 'api/coverage/');
-  await expect(page.getByRole('heading', { name: 'Everyday integration', exact: true })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'Everyday integration', exact: true }),
+  ).toBeVisible();
   await expect(page.getByRole('link', { name: 'SoundRequest', exact: true })).toBeVisible();
   expect(errors).toEqual([]);
 });
 
-test('M2 complete components copy exactly and search finds beginner topics', async ({ page, context }) => {
+test('M2 complete components copy exactly and search finds beginner topics', async ({
+  page,
+  context,
+}) => {
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   for (const [route, name] of [
     ['getting-started/', 'FirstSound'],
@@ -120,7 +126,10 @@ test('M2 complete components copy exactly and search finds beginner topics', asy
     ['guides/signals-and-notifications/', 'EngineSoundControls'],
   ]) {
     await page.goto(base + route);
-    const block = page.locator('.expressive-code').filter({ hasText: `public sealed class ${name}` }).first();
+    const block = page
+      .locator('.expressive-code')
+      .filter({ hasText: `public sealed class ${name}` })
+      .first();
     await block.getByRole('button', { name: /copy/i }).click();
     const copied = await page.evaluate(() => navigator.clipboard.readText());
     expect(copied.trim()).toBe(readFileSync(`examples/${name}.cs`, 'utf8').trim());
@@ -136,9 +145,15 @@ test('M2 complete components copy exactly and search finds beginner topics', asy
 test('M2 long reference pages and guides fit a narrow phone', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 844 });
   for (const route of [
-    'getting-started/', 'guides/parameters/', 'guides/position-and-ownership/',
-    'guides/signals-and-notifications/', 'api/context/', 'api/services/',
-    'api/components/', 'api/settings/', 'api/coverage/',
+    'getting-started/',
+    'guides/parameters/',
+    'guides/position-and-ownership/',
+    'guides/signals-and-notifications/',
+    'api/context/',
+    'api/services/',
+    'api/components/',
+    'api/settings/',
+    'api/coverage/',
   ]) {
     await page.goto(base + route);
     const sizes = await page.evaluate(() => ({
@@ -152,4 +167,98 @@ test('M2 long reference pages and guides fit a narrow phone', async ({ page }) =
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(base + 'guides/position-and-ownership/');
   await page.screenshot({ path: 'validation/m2-moving-sound-desktop.png', fullPage: true });
+});
+
+test('M3 library reaches all ten galleries and every published capture loads', async ({ page }) => {
+  test.setTimeout(60000);
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto(base + 'captures/');
+  await expect(page.locator('.capture-gallery .demo-card')).toHaveCount(10);
+  await expect(page.locator('.capture-preview')).toHaveCount(10);
+  await page.screenshot({ path: 'validation/m3/library-desktop.png', fullPage: true });
+  for (const slug of [...new Set<string>(captures.map((c: { demo: string }) => c.demo))]) {
+    await page.goto(base + `captures/${slug}/`);
+    const expected = captures.filter(
+      (c: { demo: string; kind: string; hudIncluded: boolean }) =>
+        c.demo === slug && (c.hudIncluded || c.kind !== 'game-view'),
+    );
+    await expect(page.locator('.capture-entry')).toHaveCount(expected.length);
+    // Load each page image at the browser's chosen responsive size, including offscreen captures.
+    await page.locator('.capture-entry .image-open img').evaluateAll(async (elements) => {
+      await Promise.all(
+        elements.map(async (element) => {
+          const img = element as HTMLImageElement;
+          img.loading = 'eager';
+          await img.decode();
+          if (!img.currentSrc.includes('.webp') || !img.srcset || !img.naturalWidth)
+            throw new Error(`Invalid responsive image: ${img.alt}`);
+        }),
+      );
+    });
+  }
+  expect(errors).toEqual([]);
+});
+
+test('M3 trim detail, reproduction steps, and native-size enlargement', async ({ page }) => {
+  await page.goto(base + 'captures/02-footstep/');
+  await page.reload();
+  const entry = page
+    .locator('.capture-entry')
+    .filter({ has: page.locator('#footstep-trim-range') });
+  await expect(entry).toContainText('1.100 to 1.630 seconds');
+  await entry.getByText('Try this in Unity', { exact: true }).click();
+  await expect(entry.locator('details')).toHaveAttribute('open', '');
+  await expect(entry.locator('details')).toContainText('expand Range');
+  const trigger = entry.getByRole('button', { name: /Enlarge image/ });
+  await trigger.click();
+  const dialog = page.locator('#footstep-trim-range-dialog');
+  await expect(dialog).toBeVisible();
+  await expect
+    .poll(() => dialog.locator('img').evaluate((img: HTMLImageElement) => img.naturalWidth))
+    .toBe(3456);
+  await page.screenshot({ path: 'validation/m3/trim-enlarged.png' });
+  await dialog.getByRole('button', { name: 'View actual size', exact: true }).click();
+  await expect(dialog.getByRole('button', { name: 'Fit to window', exact: true })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await expect
+    .poll(() => dialog.locator('img').evaluate((img) => img.getBoundingClientRect().width))
+    .toBe(3456);
+  await dialog.getByRole('button', { name: 'Fit to window', exact: true }).click();
+  await page.keyboard.press('Escape');
+  await expect(trigger).toBeFocused();
+  await page.goto(base + 'captures/03-bee/');
+  await page.locator('#bee-spatial-settings .image-open').click();
+  await expect(page.locator('#bee-spatial-settings-dialog')).toBeVisible();
+  await expect
+    .poll(() =>
+      page
+        .locator('#bee-spatial-settings-dialog img')
+        .evaluate((img: HTMLImageElement) => img.naturalWidth),
+    )
+    .toBe(1360);
+  await page.getByRole('button', { name: 'Close', exact: true }).click();
+});
+
+test('M3 picture galleries fit phones and remain reachable from the menu', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 844 });
+  for (const slug of ['', ...new Set<string>(captures.map((c: { demo: string }) => c.demo))]) {
+    await page.goto(base + 'captures/' + (slug ? slug + '/' : ''));
+    const sizes = await page.evaluate(() => ({
+      scroll: document.documentElement.scrollWidth,
+      client: document.documentElement.clientWidth,
+    }));
+    expect(sizes.scroll, slug).toBeLessThanOrEqual(sizes.client + 1);
+  }
+  await page.goto(base + 'captures/05-weather/');
+  await page.locator('#weather-lightning').scrollIntoViewIfNeeded();
+  await page.screenshot({ path: 'validation/m3/weather-mobile.png' });
+  await page.getByRole('button', { name: 'Menu', exact: true }).click();
+  await page
+    .locator('#starlight__sidebar')
+    .getByRole('link', { name: 'Unity screenshot library', exact: true })
+    .click();
+  await expect(page.locator('h1')).toHaveText('See the sound lab in Unity.');
 });

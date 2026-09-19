@@ -1,0 +1,43 @@
+{
+  "demo": "06-workshop",
+  "name": "handsaw",
+  "kind": "game-view",
+  "capturedAt": "2026-09-19T20:58:53.8713750Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/06-Workshop/Demo.unity",
+  "width": 1920,
+  "height": 1080,
+  "hudIncluded": true,
+  "state": {
+    "SelectedTool": 1,
+    "IsWorking": true,
+    "CurrentPace": 0.5,
+    "Impacts": 2
+  },
+  "steps": [
+    "While working, choose Handsaw.",
+    "The graph stops the previous tool before starting the saw."
+  ],
+  "hud": [
+    "DEV505  /  SOUND LAB",
+    "A little work.",
+    "Find the rhythm. Make something small.",
+    "WHAT THIS DEMO SHOWS",
+    "Signals, sequences and overlapping tools",
+    "A sequence stops the old tool, starts the new one, then adds a latch click. Pace changes speed and volume; hammer taps can play over the saw or drill.",
+    "06 / SIGNALS & CONTROL",
+    "Headphones recommended",
+    "BACK AND FORTH",
+    "Handsaw",
+    "2 taps  ·  2 s at the bench",
+    "You are the listener beside the bench.",
+    "1 · Hammer",
+    "2 · Handsaw",
+    "3 · Drill",
+    "WORK PACE",
+    "50%",
+    "T / One hammer tap",
+    "1–3 / TOOL     SPACE / WORK OR BREAK",
+    "Take a break"
+  ],
+  "unityVersion": "6000.6.0f1"
+}

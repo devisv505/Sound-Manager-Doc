@@ -1,6 +1,6 @@
 # DEV505 Sound Manager — documentation roadmap
 
-Status: M1 and M2 complete; M3–M7 remain open, with the Pages workflow brought forward to fix M1 publication. M2 is validated locally and has not been published by this milestone.
+Status: M1–M3 complete; M4–M7 remain open, with the Pages workflow brought forward to fix M1 publication. M3 is validated locally and has not been published by this milestone.
 
 Prepared: 19 September 2026.  
 Specification: [SPEC.md](SPEC.md).  
@@ -10,7 +10,7 @@ Target directory: `/Users/devisv/Projects/Web/Sound-Manager-Doc`.
 
 Build one complete slice first: the shared theme, setup path, a useful API page, and the Campfire walkthrough with real Unity images. Use it to establish the visual and content pattern before expanding to all ten demos. Complete API and graph coverage alongside the remaining walkthroughs, then validate the actual GitHub Pages build.
 
-Checked items reflect completed work. M0, M1, and M2 are complete; the remaining milestones are open. Validation and capture evidence are recorded in each milestone's linked report.
+Checked items reflect completed work. M0–M3 are complete; the remaining milestones are open. Validation and capture evidence are recorded in each milestone's linked report.
 
 ## Writing requirement for every stage
 
@@ -87,14 +87,16 @@ Exit condition: every supported everyday API member has accounted-for coverage a
 
 Depends on: M1 capture pilot. Capture alongside M4 so screenshots support the explanation being written.
 
-- [ ] Record the current Editor scene, dirty state, Play Mode, Game View settings, and capture baseline before each session.
-- [ ] Reproduce the required states through real scene/controller interactions.
-- [ ] Capture original 1920 × 1080 PNG Game Views, including the actual HUD, using the existing cameras and visual effects.
-- [ ] Capture graph overviews, readable subgraph crops, event settings, and the Footstep trim editor details.
-- [ ] Record state, control steps, relevant values, revision, date, dimensions, file paths, captions, and alt text in the manifest.
-- [ ] Generate responsive web images and verify graph legibility after optimization.
-- [ ] Restore temporary capture settings/session state and preserve the user's unsaved work.
-- [ ] Review the full image set for consistency, correct current models, meaningful states, and accidental editor overlays.
+- [x] Record the current Editor scene, dirty state, Play Mode, Game View settings, and capture baseline before each session.
+- [x] Reproduce the required states through real scene/controller interactions.
+- [x] Capture original 1920 × 1080 PNG Game Views, including the actual HUD, using the existing cameras and visual effects.
+- [x] Capture graph overviews, readable subgraph crops, event settings, and the Footstep trim editor details.
+- [x] Record state, control steps, relevant values, revision, date, dimensions, file paths, captions, and alt text in the manifest.
+- [x] Generate responsive web images and verify graph legibility after optimization.
+- [x] Restore temporary capture settings/session state and preserve the user's unsaved work.
+- [x] Review the full image set for consistency, correct current models, meaningful states, and accidental editor overlays.
+
+Completed: 19 September 2026. Evidence: [M3 validation report](validation/M3.md). The screenshot library contains 84 authentic Unity images: 34 Game Views with the real HUD, one retained home hero, 41 graph views, and eight Inspector views. All ten demos have a picture gallery with captions and reproduction steps.
 
 Required state checklist:
 
@@ -129,20 +131,20 @@ Depends on: M1, the relevant M2 API contracts, and each demo's M3 captures.
 - [ ] Complete the recipe catalogue listed in `SPEC.md`, reusing checked code sources where possible.
 - [ ] Compile complete snippets and run focused Unity behavior checks for follow, owner loss, overlap, crossfade, pause, and graph completion.
 
-Demo completion tracker — all implementation columns begin empty:
+Demo completion tracker — Unity images are supplied by M3; full walkthrough review remains in M4:
 
 | Demo | Detailed page | Unity images | Graph explanation | Code verified | Final review |
 | --- | --- | --- | --- | --- | --- |
-| 01-Campfire — A little warmth. | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 02-Footstep — Every step counts. | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 03-Bee — A little buzz. | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 04-Engine — A little drive. | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 05-Weather — A little rain. | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 06-Workshop — A little work. | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 07-Arcade — A little chaos. | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 08-Jukebox — A little groove. | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 09-Portals — A little elsewhere. | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 10-Launch — A little liftoff. | [ ] | [ ] | [ ] | [ ] | [ ] |
+| 01-Campfire — A little warmth. | [ ] | [x] | [ ] | [ ] | [ ] |
+| 02-Footstep — Every step counts. | [ ] | [x] | [ ] | [ ] | [ ] |
+| 03-Bee — A little buzz. | [ ] | [x] | [ ] | [ ] | [ ] |
+| 04-Engine — A little drive. | [ ] | [x] | [ ] | [ ] | [ ] |
+| 05-Weather — A little rain. | [ ] | [x] | [ ] | [ ] | [ ] |
+| 06-Workshop — A little work. | [ ] | [x] | [ ] | [ ] | [ ] |
+| 07-Arcade — A little chaos. | [ ] | [x] | [ ] | [ ] | [ ] |
+| 08-Jukebox — A little groove. | [ ] | [x] | [ ] | [ ] | [ ] |
+| 09-Portals — A little elsewhere. | [ ] | [x] | [ ] | [ ] | [ ] |
+| 10-Launch — A little liftoff. | [ ] | [x] | [ ] | [ ] | [ ] |
 
 Deliverable: ten complete walkthroughs and a practical recipe library.
 
@@ -228,4 +230,4 @@ Future enhancements can include versioned documentation, localized content, opti
 
 The work is complete when all ten demos have detailed, accurate pages with actual Unity screenshots; the supported API and implemented graph features are documented; usage examples are verified; the shared visual style is recognizable; the static build and contributor workflow are reproducible; and the live GitHub Pages site passes the publication checks.
 
-M0 produced the specification and roadmap. M1 delivered the first working documentation slice with actual Unity captures and a verified example. The user subsequently established the public documentation repository and enabled Pages; its initial Jekyll build failed because the site uses Astro. The Pages workflow and deployment instructions were brought forward to support M1 publication. M2 adds the complete setup-to-integration path and everyday API reference, with source-derived signatures and checked Unity examples. M3–M7 remain open for the complete documentation release.
+M0 produced the specification and roadmap. M1 delivered the first working documentation slice with actual Unity captures and a verified example. The user subsequently established the public documentation repository and enabled Pages; its initial Jekyll build failed because the site uses Astro. The Pages workflow and deployment instructions were brought forward to support M1 publication. M2 adds the complete setup-to-integration path and everyday API reference, with source-derived signatures and checked Unity examples. M3 adds all ten screenshot galleries with actual Unity captures, readable graph details, event settings, and reproducible image records. M4–M7 remain open for the complete documentation release.

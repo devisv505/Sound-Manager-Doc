@@ -22,6 +22,9 @@ import { sitePath } from '../lib/links';
         )}
       </h3>
       <p>{demo.description}</p>
+      <a class="demo-captures-link" href={sitePath(`captures/${demo.slug}/`)}>
+        See Unity screenshots →
+      </a>
       <span class="guide-status">
         {demo.status === 'available' ? 'Explore the guide →' : 'Guide coming in the next chapters'}
       </span>

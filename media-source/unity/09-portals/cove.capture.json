@@ -1,0 +1,42 @@
+{
+  "demo": "09-portals",
+  "name": "cove",
+  "kind": "game-view",
+  "capturedAt": "2026-09-19T20:57:40.8175360Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/09-Portals/Demo.unity",
+  "width": 1920,
+  "height": 1080,
+  "hudIncluded": true,
+  "state": {
+    "CurrentWorld": 1,
+    "WorldName": "Crystal Cove",
+    "Trips": 1,
+    "EchoLingers": true,
+    "ActiveVoices": 4
+  },
+  "steps": [
+    "Finish the trip to Crystal Cove.",
+    "The new world has its own ambience and spatial portal hum."
+  ],
+  "hud": [
+    "DEV505  /  SOUND LAB",
+    "A little elsewhere.",
+    "Leave a world. Hear what stays behind.",
+    "WHAT THIS DEMO SHOWS",
+    "Sound ownership, cleanup and lingering echoes",
+    "Each world owns its sounds. Leaving destroys that owner, so its ambience stops. Choose whether the portal echo stops too, or finishes at the place you left. Your ears travel with DEV505.",
+    "09 / WORLDS & OWNERS",
+    "Headphones recommended",
+    "YOU ARE HERE",
+    "Crystal Cove",
+    "The old ambience stopped. A new world surrounds you.",
+    "An echo is still in the other world.",
+    "1 crossings  ·  4 sounds playing",
+    "NEXT STOP / MINT MEADOW",
+    "E / Echoes: let them linger",
+    "X / Close this world",
+    "SPACE / TRAVEL OR WAKE",
+    "Step through"
+  ],
+  "unityVersion": "6000.6.0f1"
+}

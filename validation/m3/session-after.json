@@ -1,0 +1,124 @@
+{
+  "capturedAt": "2026-09-19T21:19:31.1638870Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/10-Launch/Demo.unity",
+  "dirty": false,
+  "playing": false,
+  "paused": false,
+  "background": false,
+  "sizeIndex": 1,
+  "customSizeCount": 1,
+  "gameMaximized": false,
+  "selection": "",
+  "originalTabSetRestored": true,
+  "temporaryResolutionRemoved": true,
+  "inputBackground": "ResetAndDisableNonBackgroundDevices",
+  "inputEditor": "PointersAndKeyboardsRespectGameViewFocus",
+  "note": "Unity recreated EditorWindow instances while restoring maximized layouts. Original tabs were restored by title/type; instance IDs and per-tab framing are not guaranteed identical.",
+  "windows": [
+    {
+      "id": "27040:256",
+      "type": "UnityEditor.MainToolbarWindow",
+      "title": "UnityEditor.MainToolbarWindow",
+      "maximized": false,
+      "position": "(x:0.00, y:33.00, width:1728.00, height:36.00)"
+    },
+    {
+      "id": "51035:256",
+      "type": "Unity.GraphToolkit.Editor.Implementation.GraphViewEditorWindowImp",
+      "title": "LaunchPad",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    },
+    {
+      "id": "51044:256",
+      "type": "Unity.GraphToolkit.Editor.Implementation.GraphViewEditorWindowImp",
+      "title": "LaunchSequence",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    },
+    {
+      "id": "51034:768",
+      "type": "Unity.GraphToolkit.Editor.Implementation.GraphViewEditorWindowImp",
+      "title": "LaunchFlight",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    },
+    {
+      "id": "51036:768",
+      "type": "Unity.GraphToolkit.Editor.Implementation.GraphViewEditorWindowImp",
+      "title": "LaunchUI",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    },
+    {
+      "id": "51038:768",
+      "type": "Unity.GraphToolkit.Editor.Implementation.GraphViewEditorWindowImp",
+      "title": "LaunchVent",
+      "maximized": false,
+      "position": "(x:0.00, y:24.00, width:1133.50, height:780.00)"
+    },
+    {
+      "id": "51037:2304",
+      "type": "UnityEditor.InspectorWindow",
+      "title": "Inspector",
+      "maximized": false,
+      "position": "(x:1381.50, y:69.00, width:345.50, height:1002.00)"
+    },
+    {
+      "id": "50557:2816",
+      "type": "Unity.Hierarchy.Editor.HierarchyWindow",
+      "title": "Hierarchy",
+      "maximized": false,
+      "position": "(x:1134.50, y:69.00, width:245.00, height:468.00)"
+    },
+    {
+      "id": "50563:2816",
+      "type": "UnityEditor.TestTools.TestRunner.TestRunnerWindow",
+      "title": "Test Runner",
+      "maximized": false,
+      "position": "(x:1381.50, y:69.00, width:345.50, height:1002.00)"
+    },
+    {
+      "id": "50554:3328",
+      "type": "UnityEditor.ConsoleWindow",
+      "title": "Console",
+      "maximized": false,
+      "position": "(x:0.00, y:875.00, width:1133.50, height:196.00)"
+    },
+    {
+      "id": "50560:3328",
+      "type": "UnityEditor.ProjectBrowser",
+      "title": "Project",
+      "maximized": false,
+      "position": "(x:1134.50, y:563.00, width:245.00, height:508.00)"
+    },
+    {
+      "id": "51004:4352",
+      "type": "Unity.GraphToolkit.Editor.Implementation.GraphViewEditorWindowImp",
+      "title": "Jukebox",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    },
+    {
+      "id": "50163:5376",
+      "type": "UnityEditor.SceneView",
+      "title": "Scene",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    },
+    {
+      "id": "50148:6400",
+      "type": "UnityEditor.GameView",
+      "title": "Game",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    },
+    {
+      "id": "47748:7424",
+      "type": "Unity.GraphToolkit.Editor.Implementation.GraphViewEditorWindowImp",
+      "title": "LaunchClamp",
+      "maximized": false,
+      "position": "(x:0.00, y:69.00, width:1133.50, height:780.00)"
+    }
+  ]
+}

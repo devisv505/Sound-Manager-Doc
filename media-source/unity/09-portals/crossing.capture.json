@@ -1,0 +1,42 @@
+{
+  "demo": "09-portals",
+  "name": "crossing",
+  "kind": "game-view",
+  "capturedAt": "2026-09-19T20:57:39.5835110Z",
+  "scene": "Assets/DEV505/SoundManager/Samples/09-Portals/Demo.unity",
+  "width": 1920,
+  "height": 1080,
+  "hudIncluded": true,
+  "state": {
+    "Transitioning": true,
+    "CurrentWorld": 0,
+    "Trips": 0,
+    "EchoLingers": true,
+    "EchoAlive": true
+  },
+  "steps": [
+    "Leave Echo lingers enabled and choose Step through.",
+    "Capture the player shrinking into the gate during travel."
+  ],
+  "hud": [
+    "DEV505  /  SOUND LAB",
+    "A little elsewhere.",
+    "Leave a world. Hear what stays behind.",
+    "WHAT THIS DEMO SHOWS",
+    "Sound ownership, cleanup and lingering echoes",
+    "Each world owns its sounds. Leaving destroys that owner, so its ambience stops. Choose whether the portal echo stops too, or finishes at the place you left. Your ears travel with DEV505.",
+    "09 / WORLDS & OWNERS",
+    "Headphones recommended",
+    "A LITTLE ELSEWHERE…",
+    "Mint Meadow",
+    "The echo will stay behind and finish.",
+    "Passing through the portal…",
+    "0 crossings  ·  3 sounds playing",
+    "NEXT STOP / CRYSTAL COVE",
+    "E / Echoes: let them linger",
+    "X / Close this world",
+    "SPACE / TRAVEL OR WAKE",
+    "Somewhere between…"
+  ],
+  "unityVersion": "6000.6.0f1"
+}

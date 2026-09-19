@@ -10,7 +10,10 @@ tags: [sound, unity, campfire]
 ---
 
 import DemoGallery from '../../../components/DemoGallery.astro';
+import { sitePath } from '../../../lib/links';
 
 Start with Campfire's complete walkthrough, then use the gallery to find the feature you want to explore. The remaining scene summaries describe existing Unity demos; their detailed documentation is scheduled for later chapters.
+
+Every demo now has a <a href={sitePath('captures/')}>screenshot gallery</a> with real Unity scene states, graph views, and steps to try the same interactions yourself.
 
 <DemoGallery />

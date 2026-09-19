@@ -1,6 +1,6 @@
 # DEV505 Sound Manager — documentation website specification
 
-Status: specification baseline; M1 and M2 implemented on 19 September 2026. See the roadmap and [M2 validation report](validation/M2.md) for current progress.
+Status: specification baseline; M1–M3 implemented on 19 September 2026. See the roadmap and [M3 validation report](validation/M3.md) for current progress.
 
 Prepared: 19 September 2026.  
 Companion: [Implementation roadmap](ROADMAP.md).
@@ -21,7 +21,7 @@ Version-one deliverables:
 - A standalone static build, local preview commands, and a GitHub Pages deployment workflow.
 - A contributor guide explaining how to update content, validate examples, recapture screenshots, and release a new documentation revision.
 
-The initial planning step created `SPEC.md` and `ROADMAP.md`. M1 implements the foundation and Campfire slice. M2 adds the beginner setup path, core concepts, and consumer API; the remaining scope is tracked by the implementation milestones in the roadmap.
+The initial planning step created `SPEC.md` and `ROADMAP.md`. M1 implements the foundation and Campfire slice. M2 adds the beginner setup path, core concepts, and consumer API. M3 supplies all ten screenshot galleries with verified Unity captures; the remaining scope is tracked by the implementation milestones in the roadmap.
 
 ## 2. Source of truth and versioning
 
@@ -96,7 +96,7 @@ Select compatible stable framework versions and a supported Node LTS version whe
 
 GitHub Pages is the hosting target. A public documentation repository supports free Pages hosting; private-repository eligibility depends on the account plan. Keep this documentation project independent of the Unity source repository. See [GitHub Pages limits and availability](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits).
 
-Repository name: `Sound-Manager-Doc`. The configured URL is `https://devisv505.github.io/Sound-Manager-Doc/`. The M1 site was published through GitHub Actions after replacing the default Jekyll build. M2 is validated locally; publishing later changes remains a separate release step.
+Repository name: `Sound-Manager-Doc`. The configured URL is `https://devisv505.github.io/Sound-Manager-Doc/`. The M1 site was published through GitHub Actions after replacing the default Jekyll build. M3 is validated locally; publishing later changes remains a separate release step.
 
 Configure Astro `site` for the actual Pages origin and `base` for the repository subpath. Internal links, images, search assets, canonical URLs, and the sitemap must all work under that subpath. Direct navigation and refresh on nested pages must work without SPA rewrite rules. Follow the [official Astro GitHub Pages guide](https://docs.astro.build/en/guides/deploy/github/).
 

@@ -1,0 +1,15 @@
+{
+  "demo": "02-footstep",
+  "name": "graph",
+  "kind": "graph-editor",
+  "asset": "Assets/DEV505/SoundManager/Samples/02-Footstep/Footstep.soundgraph",
+  "capturedAt": "2026-09-19T21:04:06.8137230Z",
+  "width": 3456,
+  "height": 2008,
+  "hudIncluded": false,
+  "steps": [
+    "Exit Play Mode and open Assets/DEV505/SoundManager/Samples/02-Footstep/Footstep.soundgraph in Unity.",
+    "Frame the saved graph or expand the relevant Inspector sections; capture the editor's own GUI surface."
+  ],
+  "unityVersion": "6000.6.0f1"
+}

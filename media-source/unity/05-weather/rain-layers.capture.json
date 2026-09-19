@@ -1,0 +1,15 @@
+{
+  "demo": "05-weather",
+  "name": "rain-layers",
+  "kind": "graph-editor",
+  "asset": "Assets/DEV505/SoundManager/Samples/05-Weather/Weather.soundgraph",
+  "capturedAt": "2026-09-19T21:10:37.1037530Z",
+  "width": 3456,
+  "height": 1902,
+  "hudIncluded": false,
+  "steps": [
+    "Exit Play Mode and open Assets/DEV505/SoundManager/Samples/05-Weather/Weather.soundgraph in Unity.",
+    "Frame the saved graph or expand the relevant Inspector sections; capture the editor's own GUI surface."
+  ],
+  "unityVersion": "6000.6.0f1"
+}
