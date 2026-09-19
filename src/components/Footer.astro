@@ -3,7 +3,16 @@ import Pagination from '@astrojs/starlight/components/Pagination.astro';
 import { revision, sourceLink } from '../lib/links';
 const { entry } = Astro.locals.starlightRoute;
 ---
+
 <footer class="lab-footer" data-pagefind-ignore>
   <Pagination />
-  <div class="source-note"><span>DEV505 / SOUND LAB</span><span>Checked with Unity 6000.6.0f1 · <a href={sourceLink(entry.data.sourcePaths?.[0] ?? 'Assets/DEV505/SoundManager/README.md')}>Source {revision.slice(0, 7)}</a></span></div>
+  <div class="source-note">
+    <span>DEV505 / SOUND LAB</span>
+    <span>
+      Checked with Unity 6000.6.0f1 ·{' '}
+      <a href={sourceLink(entry.data.sourcePaths?.[0] ?? 'Assets/DEV505/SoundManager/README.md')}>
+        Source {revision.slice(0, 7)}
+      </a>
+    </span>
+  </div>
 </footer>

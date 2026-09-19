@@ -1,0 +1,57 @@
+
+public static class VerifyCampfireExample
+{
+    public static async System.Threading.Tasks.Task<string> Main()
+    {
+        var manager = UnityEngine.Object.FindFirstObjectByType<DEV505.SoundManager.SoundManager>();
+        if (!UnityEngine.Application.isPlaying || manager == null || !manager.Ready)
+            throw new System.InvalidOperationException("Run in the prepared Campfire scene.");
+        var checks = new System.Collections.Generic.List<string>();
+        var notes = new System.Collections.Generic.List<string>();
+        var origin = UnityEngine.Object.FindFirstObjectByType<DEV505.SoundManager.Samples.CampfireInteraction>().transform.position;
+        var go = new UnityEngine.GameObject("Documentation example validation (temporary)");
+        go.transform.position = origin;
+        System.IDisposable subscription = null;
+        try
+        {
+            await System.Threading.Tasks.Task.Delay(2600);
+            int baseline = manager.Service.LiveInstances;
+            var component = go.AddComponent<CampfireSound>();
+            subscription = DEV505.SoundManager.SoundBus.Notifications.Subscribe(n => notes.Add(n.Kind + ":" + n.Reason));
+            component.Ignite();
+            if (!component.IsPlaying) throw new System.Exception("Initial play was not alive.");
+            checks.Add("Ignite accepted and retained a live handle");
+            var field = typeof(CampfireSound).GetField("fire", System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);
+            var handle = (DEV505.SoundManager.SoundHandle)field.GetValue(component);
+            component.Ignite();
+            if (!handle.Equals((DEV505.SoundManager.SoundHandle)field.GetValue(component))) throw new System.Exception("Duplicate Ignite replaced handle.");
+            if (manager.Service.LiveInstances != baseline + 1) throw new System.Exception("Duplicate Ignite stacked an instance.");
+            checks.Add("Repeated Ignite did not create a second play");
+            await System.Threading.Tasks.Task.Delay(3500);
+            if (!component.IsPlaying || manager.Service.GetVoiceCount(handle) != 1) throw new System.Exception("Crackle did not loop after ignition.");
+            checks.Add("Ignition completed and one crackle voice remained looping");
+            if (!DEV505.SoundManager.SoundBus.SetFloat(handle, DEV505.SoundManager.SoundParameters.Campfire.Intensity, .35f)) throw new System.Exception("Intensity update rejected.");
+            checks.Add("Generated Intensity parameter accepted a live update");
+            if (!DEV505.SoundManager.SoundBus.SetPaused(handle,true) || !manager.Service.IsPaused(handle)) throw new System.Exception("Pause failed.");
+            if (!DEV505.SoundManager.SoundBus.SetPaused(handle,false) || manager.Service.IsPaused(handle)) throw new System.Exception("Resume failed.");
+            checks.Add("Per-play pause and resume succeeded");
+            component.Extinguish();
+            if (component.IsPlaying) throw new System.Exception("Component retained handle after stop.");
+            if (!DEV505.SoundManager.SoundBus.IsAlive(handle)) throw new System.Exception("Release voice was cut immediately.");
+            checks.Add("Extinguish cleared component handle while release remained alive");
+            await System.Threading.Tasks.Task.Delay(2800);
+            if (DEV505.SoundManager.SoundBus.IsAlive(handle)) throw new System.Exception("Release never completed.");
+            checks.Add("Release completed and old handle became stale");
+            component.Ignite();
+            var second=(DEV505.SoundManager.SoundHandle)field.GetValue(component);
+            if(!component.IsPlaying)throw new System.Exception("Restart failed.");
+            component.enabled=false;
+            if(component.IsPlaying)throw new System.Exception("Disable did not clean up.");
+            await System.Threading.Tasks.Task.Delay(2800);
+            if(DEV505.SoundManager.SoundBus.IsAlive(second))throw new System.Exception("Disable release never completed.");
+            checks.Add("Disable cleanup stopped the second play and completed its release");
+            return Newtonsoft.Json.JsonConvert.SerializeObject(new { success=true, checks, notifications=notes, unity=UnityEngine.Application.unityVersion, utc=System.DateTime.UtcNow.ToString("o") });
+        }
+        finally { subscription?.Dispose(); UnityEngine.Object.DestroyImmediate(go); }
+    }
+}

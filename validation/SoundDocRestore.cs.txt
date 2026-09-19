@@ -1,0 +1,16 @@
+using System;
+using System.Linq;
+using System.Reflection;
+using UnityEngine;
+using UnityEditor;
+public static class SoundDocRestore {
+ public static object Main() {
+  var w=Resources.FindObjectsOfTypeAll<EditorWindow>().First(w=>w.titleContent.text=="Campfire");w.maximized=false;w.Close();
+  var a=typeof(Editor).Assembly;var flags=BindingFlags.Instance|BindingFlags.Public|BindingFlags.NonPublic;var t=a.GetType("UnityEditor.GameView");var v=Resources.FindObjectsOfTypeAll(t).Cast<EditorWindow>().First();
+  t.GetProperty("selectedSizeIndex",flags).SetValue(v,SessionState.GetInt("SoundDocOriginalSize",1));
+  var st=a.GetType("UnityEditor.GameViewSizes");var sizes=typeof(ScriptableSingleton<>).MakeGenericType(st).GetProperty("instance").GetValue(null);var group=st.GetProperty("currentGroup",flags).GetValue(sizes);
+  group.GetType().GetMethod("RemoveCustomSize").Invoke(group,new object[]{SessionState.GetInt("SoundDocCustomIndex",-1)});
+  v.maximized=SessionState.GetBool("SoundDocOriginalMaximized",false);v.Focus();
+  return new {scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,dirty=UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty,play=EditorApplication.isPlaying,background=Application.runInBackground};
+ }
+}

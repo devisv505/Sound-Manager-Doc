@@ -1,0 +1,280 @@
+---
+title: 'SoundBus'
+description: 'The entry point for playing and controlling sound through the active Sound Manager.'
+kind: api
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Samples/Campfire/CampfireInteraction.cs
+tags: [sound, unity, campfire]
+---
+
+import { sitePath, sourceLink } from '../../../lib/links';
+import Explanation from '../../../components/Explanation.astro';
+
+```csharp title="Declaration"
+namespace DEV505.SoundManager
+{
+    public static class SoundBus
+}
+```
+
+<Explanation label="AT A GLANCE" title="One active manager. An answer to every command.">
+  The bus routes commands synchronously to the active service. You get a play result, a success
+  flag, or a count of affected plays. Notifications are the separate broadcast channel.
+</Explanation>
+
+## Before calling
+
+Register the event or its library on an active `SoundManager`. Use Unity's owning/main thread for gameplay calls; the concrete service refuses off-thread dispatched commands as `InvalidContext`. Do not treat query helpers as a thread-safe API.
+
+A missing manager returns `NoManager` from dispatch/play and logs a warning once per play session. It does not buffer requests until a manager appears. An existing manager may admit a play as `Queued` while clips prepare or while a request waits for the current tick to finish.
+
+## Play
+
+```csharp title="Overloads"
+public static SoundPlayResult Play(
+    SoundKey key, in SoundPlayContext context = default);
+public static SoundPlayResult Play(SoundKey key, Vector3 position);
+public static SoundPlayResult Play(SoundKey key, Transform follow);
+public static SoundPlayResult Play(
+    SoundEvent sound, in SoundPlayContext context = default);
+```
+
+| Argument   | Meaning                                                                                                                                                          |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `key`      | Registered event identity. Prefer generated `Sounds.*` values. An unresolved key gives `NotRegistered`.                                                          |
+| `context`  | Optional per-play position/follow target, owner, initial overrides, seed, and delay. A default context has no follow target or owner and uses its zero position. |
+| `position` | Fixed world point. The sound remains there if the object that caused it moves away.                                                                              |
+| `follow`   | Transform tracked while the play runs. This convenience overload also owns the play by `follow.gameObject`.                                                      |
+| `sound`    | Event asset supplied directly rather than resolved by key. Normal service validation and preparation still apply.                                                |
+
+Returns `SoundPlayResult`: `Status` describes admission and `Handle` identifies an accepted play. `Accepted` is true for both `Accepted` and `Queued`. An accepted request is not a guarantee that a voice is already audible or that the play can never subsequently fail.
+
+```csharp title="Fixed position and an initial parameter · excerpt"
+var context = SoundPlayContext.At(footPosition)
+    .With(SoundParameters.Footstep.Surface, 1); // Stone in this graph
+var result = SoundBus.Play(Sounds.Footstep, context);
+```
+
+This excerpt requires a registered Footstep event and a `Vector3 footPosition`. Initial overrides are applied **before `On Start`**, so the first branch sees the intended surface. The scene's surface enum has a different numbering; map it to the graph value rather than casting directly.
+
+```csharp title="Follow with explicit ownership and initial intensity · excerpt"
+var service = SoundServices.Current;
+if (service == null)
+    return;
+
+var owner = service.OwnerOf(gameObject);
+var context = SoundPlayContext.Following(transform, owner)
+    .With(SoundParameters.Campfire.Intensity, 0.35f);
+var result = SoundBus.Play(Sounds.Campfire, context);
+```
+
+This belongs inside a `MonoBehaviour` method. Keep the accepted handle if you need later control. `.Following(transform)` by itself does **not** acquire the same automatic GameObject owner as `Play(key, transform)`; pass an owner when constructing the context if you need owner-wide commands. A destroyed follow target is also handled by the event's loss policy.
+
+`.With(...)` returns a new struct value. Keep the returned context; calling it without assigning/chaining discards the override. Up to four inline overrides are supported. More require `TypedParameters` or an appropriate service API. Float-array overrides apply first, then typed-array overrides, then inline values.
+
+The complete <a href={sitePath('recipes/campfire-loop/')}>Campfire component</a> shows accepted-result handling and cleanup.
+
+## Stop
+
+```csharp title="Stop one play"
+public static bool Stop(SoundHandle handle, float fade = 0.1f);
+```
+
+`handle` identifies the play; `fade` is seconds and must be finite and non-negative. Returns true when the service accepts the stop, false for a missing manager, invalid/stale target, or invalid request.
+
+For a started play, stopping runs `On Stop`, then fades remaining pre-existing voices. Voices created by the stop branch can continue as release audio. A node explicitly stopped through its graph Stop port uses that node's authored fade-out. A queued play that never started is cancelled without a normal started-play release. The return value does not mean all audio is now silent.
+
+```csharp title="Request a graceful ending · excerpt"
+SoundBus.Stop(fire, fade: 0.15f);
+```
+
+Here `fire` is a handle retained from a previous accepted play. Do not assume changing this fallback fade changes the duration of every authored release cue.
+
+## StopAll
+
+```csharp title="Stop plays owned by an object"
+public static int StopAll(UnityEngine.Object source, float fade = 0.1f);
+```
+
+Returns the number of plays reached through that object's existing owner token. Zero means no eligible plays were reached, including when no manager or owner exists. The method does not create an owner record merely to perform a no-op. It uses the same stop/fade semantics as per-handle stop.
+
+```csharp title="Use the same owner identity · excerpt"
+// Play(key, transform) uses the transform's GameObject as owner.
+SoundBus.Play(Sounds.Campfire, transform);
+
+// Later:
+int stopped = SoundBus.StopAll(gameObject);
+```
+
+Pass `gameObject` for that convenience play, not an unrelated component. A context with an explicit different owner must be addressed through that owner's identity/service methods.
+
+## SetFloat
+
+```csharp title="Overloads"
+public static bool SetFloat(
+    SoundHandle handle, SoundParameterId parameter, float value);
+public static bool SetFloat(
+    SoundHandle handle, string name, float value);
+public static int SetFloat(
+    UnityEngine.Object source, string name, float value);
+```
+
+Sets a live float parameter's target. Prefer the generated parameter ID for repeated writes; string overloads match by name. Declared numeric ranges clamp accepted values, and the graph parameter's rise/fall rates determine smoothing. A wrong type, missing parameter, non-finite value, or dead target is refused.
+
+Per-handle overloads return whether the update was accepted. The source overload returns how many owned plays accepted it. A false/zero result does not reveal a detailed rejection reason through this shortcut.
+
+```csharp title="Change crackle volume · excerpt"
+SoundBus.SetFloat(fire, SoundParameters.Campfire.Intensity, 0.35f);
+```
+
+Campfire's initial branch and ignition may already have run by this point. Use the play context for values required during `On Start`.
+
+## SetParameter
+
+```csharp title="Typed live update"
+public static bool SetParameter(
+    SoundHandle handle, SoundParameterId parameter, SoundValue value);
+```
+
+Sets a declared parameter with an explicit type. Returns whether the service accepted the update. The type must match; audio-asset values must be among the event's allowed assets. Numeric values are subject to the declared range. This method does not add a new parameter to a graph.
+
+```csharp title="Select an integer tool · excerpt"
+SoundBus.SetParameter(workshop, SoundParameters.Workshop.Tool,
+    SoundValue.Int(2)); // Drill
+```
+
+This excerpt assumes `workshop` is the retained handle of a running Workshop event. Use `SoundValue.Float`, `.Int`, `.Bool`, or `.Asset` for the declared type. Initial typed values can also be passed through `SoundPlayContext.With` before playback begins.
+
+## SendSignal
+
+```csharp title="Overloads"
+public static bool SendSignal(SoundHandle handle, SoundSignalId signal);
+public static bool SendSignal(SoundHandle handle, string signal);
+public static int SendSignal(UnityEngine.Object source, string signal);
+```
+
+Delivers an authored signal to existing plays; it does not create a new event instance. The per-handle forms return acceptance; the source form counts reached owned plays. A missing signal or unavailable target gives false/zero. Signal execution follows the service's current tick/dispatch rules; acceptance is not proof a downstream voice already started.
+
+```csharp title="Engine horn · excerpt"
+SoundBus.SendSignal(engine, "Horn");
+```
+
+`engine` must identify a running Engine event. For repeated calls, resolve the ID once from its event with `SoundEvent.GetSignalId("Horn")`, check `IsValid`, then use the ID overload. Campfire has no signal entry points in its current graph.
+
+## IsAlive
+
+```csharp title="Query liveness"
+public static bool IsAlive(SoundHandle handle);
+```
+
+Returns whether the active service still owns this play. Returns false for a default, finished, stale-session, or stale-generation handle, or without a manager. A queued or stopping play can remain alive while it still exists. Liveness is not the same as audibility, and `SoundHandle.IsValid` alone is not a liveness test.
+
+```csharp title="Prevent another active loop · excerpt"
+if (SoundBus.IsAlive(fire))
+    return;
+```
+
+## SetPaused
+
+```csharp title="Pause or resume one play"
+public static bool SetPaused(SoundHandle handle, bool paused);
+```
+
+Returns whether the request was accepted. `true` pauses that play; `false` resumes it. Per-play pause is separate from service/listener pause. Resuming a play does not override an applicable global pause. Missing or dead targets return false. If your interaction retains two plays—for example, a crossfade—address both handles.
+
+```csharp title="Pause a retained play · excerpt"
+SoundBus.SetPaused(fire, true);
+// Later:
+SoundBus.SetPaused(fire, false);
+```
+
+## TryResolve
+
+```csharp title="Look up registered content"
+public static bool TryResolve(SoundKey key, out SoundEvent sound);
+```
+
+Returns true and the registered event when the current manager resolves the key. Otherwise returns false with `sound` set to null. Useful for content validation or resolving a signal ID; `Play(key, ...)` already performs the lookup itself. Successful resolution is not a play request and does not imply a voice is running.
+
+```csharp title="Resolve a signal once · excerpt"
+if (SoundBus.TryResolve(Sounds.Engine, out var eventAsset))
+{
+    var horn = eventAsset.GetSignalId("Horn");
+    if (horn.IsValid)
+        SoundBus.SendSignal(engine, horn);
+}
+```
+
+## Dispatch
+
+```csharp title="Send a request explicitly"
+public static SoundPlayResult Dispatch(in SoundRequest request);
+```
+
+All the command shortcuts above route through dispatch. Use it when code already works with `SoundRequest` values, or when you want a status instead of a shortcut's bool/count. It supports play, stop, owner-wide stop, parameter, signal, pause, and resume requests.
+
+```csharp title="Inspect a stop result · excerpt"
+var request = SoundRequest.Stop(fire, 0.15f);
+var result = SoundBus.Dispatch(request);
+Debug.Log(result.Status);
+```
+
+For control requests, `Accepted` means at least one target was reached; otherwise the bus commonly reports `NoTarget`. Individual service validation failures may be collapsed into `NoTarget` by these control shortcuts. Do not assume every false parameter/stop result gives the exact underlying cause through dispatch. An off-thread dispatched request against the concrete service reports `InvalidContext`.
+
+## Notifications
+
+```csharp title="Shared notification channel"
+public static SoundNotifications Notifications { get; }
+```
+
+Use `Subscribe(Action<SoundNotification>)` and dispose its returned token when the listener is disabled/destroyed. Subscribing through the bus follows replacement of the active service. It reports admission/start/termination from all plays, so filter by the relevant handle/event instead of treating every notification as yours.
+
+```csharp title="Lifecycle subscription · excerpt from a component"
+private System.IDisposable subscription;
+
+private void OnEnable()
+{
+    subscription = SoundBus.Notifications.Subscribe(notification =>
+    {
+        if (notification.IsTerminal)
+            Debug.Log($"{notification.Kind}: {notification.Reason}");
+    });
+}
+
+private void OnDisable()
+{
+    subscription?.Dispose();
+    subscription = null;
+}
+```
+
+This excerpt observes all terminal notifications. `Subscribe(null)` throws `ArgumentNullException`; duplicate delegates are not added twice. Do not add a second `OnDisable` method to the complete Campfire recipe—combine cleanup into the existing lifecycle method. Notifications that happen during `Play` can arrive before the caller assigns its returned handle.
+
+## Results and rejections
+
+| Status             | Meaning                                                                        |
+| ------------------ | ------------------------------------------------------------------------------ |
+| `Accepted`         | Started/admitted immediately, or a control command reached a target.           |
+| `Queued`           | Admitted for a later tick or clip readiness. `result.Accepted` is still true.  |
+| `NoManager`        | No active playback service; nothing is buffered.                               |
+| `NotRegistered`    | No matching registered key/event.                                              |
+| `InvalidEvent`     | Invalid graph or runtime graph failure.                                        |
+| `NotReady`         | Service shut down, or startup wait expired.                                    |
+| `MissingClip`      | Required clip is absent or failed to load.                                     |
+| `ConcurrencyLimit` | Event instance limit refused/replaced a play.                                  |
+| `CapacityExceeded` | No available slot, start-queue room, or voice.                                 |
+| `InvalidContext`   | Invalid position/delay/owner/parameter or dispatched call from another thread. |
+| `Cooldown`         | The event was requested again too soon.                                        |
+| `NoTarget`         | The control request did not reach a live eligible play.                        |
+
+A playback result reports admission; later failures and cancellations are reported through notifications. Every status above comes from the current enum, not a planned API.
+
+## Source and next steps
+
+<a href={sourceLink('Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs')}>
+  Read SoundBus at the documented revision ↗
+</a>
+
+Try the <a href={sitePath('recipes/campfire-loop/')}>complete lifecycle recipe</a> or follow the <a href={sitePath('demos/01-campfire/')}>Campfire graph walkthrough</a>.

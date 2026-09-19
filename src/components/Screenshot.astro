@@ -1,28 +1,61 @@
 ---
 import { Image, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-interface Props { src: ImageMetadata; alt: string; caption: string; id: string; eager?: boolean; }
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  caption: string;
+  id: string;
+  eager?: boolean;
+}
 const { src, alt, caption, id, eager = false } = Astro.props;
 const full = await getImage({ src, format: 'webp', quality: 94 });
 ---
+
 <figure class="screenshot" id={id}>
-  <button class="image-open" type="button" aria-label={`Enlarge image: ${alt}`} aria-haspopup="dialog" data-image-open={id + '-dialog'}>
-    <Image src={src} alt={alt} widths={[640, 960, 1280, 1920].filter(w => w <= src.width)} sizes="(min-width: 80rem) 850px, 100vw" format="webp" quality={88} loading={eager ? 'eager' : 'lazy'} />
-    <span class="zoom-label" aria-hidden="true">↗ Enlarge</span>
+  <button
+    class="image-open"
+    type="button"
+    aria-label={`Enlarge image: ${alt}`}
+    aria-haspopup="dialog"
+    data-image-open={id + '-dialog'}
+  >
+    <Image
+      src={src}
+      alt={alt}
+      widths={[640, 960, 1280, 1920].filter((w) => w <= src.width)}
+      sizes="(min-width: 80rem) 850px, 100vw"
+      format="webp"
+      quality={88}
+      loading={eager ? 'eager' : 'lazy'}
+    />
+    <span class="zoom-label" aria-hidden="true">
+      ↗ Enlarge
+    </span>
   </button>
   <figcaption>{caption}</figcaption>
   <dialog id={id + '-dialog'} aria-label={alt} class="image-dialog">
-    <button type="button" class="image-close" autofocus>Close <span aria-hidden="true">×</span></button>
+    <button type="button" class="image-close" autofocus>
+      Close <span aria-hidden="true">×</span>
+    </button>
     <img src={full.src} width={src.width} height={src.height} alt={alt} loading="lazy" />
     <p>{caption}</p>
   </dialog>
 </figure>
 <script>
-  document.querySelectorAll<HTMLButtonElement>('[data-image-open]').forEach(button => {
+  document.querySelectorAll<HTMLButtonElement>('[data-image-open]').forEach((button) => {
     const dialog = document.getElementById(button.dataset.imageOpen!) as HTMLDialogElement;
-    button.addEventListener('click', () => { dialog.showModal(); document.body.classList.add('image-modal-open'); });
+    button.addEventListener('click', () => {
+      dialog.showModal();
+      document.body.classList.add('image-modal-open');
+    });
     dialog.querySelector('button')!.addEventListener('click', () => dialog.close());
-    dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
-    dialog.addEventListener('close', () => { document.body.classList.remove('image-modal-open'); button.focus(); });
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => {
+      document.body.classList.remove('image-modal-open');
+      button.focus();
+    });
   });
 </script>

@@ -3,7 +3,46 @@ import { Image } from 'astro:assets';
 import lit from '../assets/demos/01-campfire/hero.png';
 import { sitePath } from '../lib/links';
 ---
+
 <section class="home-hero">
-  <div class="hero-copy"><p class="page-kicker">DEV505 / SOUND LAB</p><h1 id="_top">A little sound.<br /><span>A lot of life.</span></h1><p class="hero-description">Give your world a voice. Build sounds in graphs, bring them to life in code, and learn by playing.</p><div class="hero-actions"><a class="button-primary" href={sitePath('getting-started/')}>Make your first sound <span aria-hidden="true">→</span></a><a class="button-text" href={sitePath('api/sound-bus/')}>Explore the API ↗</a></div><p class="hero-footnote">Made for Unity. Explained one small scene at a time.</p></div>
-  <div class="hero-scene"><Image src={lit} alt="A glowing voxel campfire on a small grassy island, captured in Unity." widths={[640, 960, 1280]} sizes="(min-width: 60rem) 60vw, 100vw" format="webp" quality={90} loading="eager" fetchpriority="high" /><a class="scene-caption" href={sitePath('demos/01-campfire/')}><span><small>01 / FIRE & AMBIENCE</small><strong>A little warmth.</strong></span><span aria-hidden="true">↗</span></a></div>
+  <div class="hero-copy">
+    <p class="page-kicker">DEV505 / SOUND LAB</p>
+    <h1 id="_top">
+      A little sound.
+      <br />
+      <span>A lot of life.</span>
+    </h1>
+    <p class="hero-description">
+      Give your world a voice. Build sounds in graphs, bring them to life in code, and learn by
+      playing.
+    </p>
+    <div class="hero-actions">
+      <a class="button-primary" href={sitePath('getting-started/')}>
+        Make your first sound <span aria-hidden="true">→</span>
+      </a>
+      <a class="button-text" href={sitePath('api/sound-bus/')}>
+        Explore the API ↗
+      </a>
+    </div>
+    <p class="hero-footnote">Made for Unity. Explained one small scene at a time.</p>
+  </div>
+  <div class="hero-scene">
+    <Image
+      src={lit}
+      alt="A glowing voxel campfire on a small grassy island, captured in Unity."
+      widths={[640, 960, 1280]}
+      sizes="(min-width: 60rem) 60vw, 100vw"
+      format="webp"
+      quality={90}
+      loading="eager"
+      fetchpriority="high"
+    />
+    <a class="scene-caption" href={sitePath('demos/01-campfire/')}>
+      <span>
+        <small>01 / FIRE & AMBIENCE</small>
+        <strong>A little warmth.</strong>
+      </span>
+      <span aria-hidden="true">↗</span>
+    </a>
+  </div>
 </section>

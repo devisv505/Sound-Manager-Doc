@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
+  "scope": "M1: complete SoundBus consumer surface; broader type inventory is M2.",
+  "types": [
+    {
+      "name": "SoundBus",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs",
+      "sourceSha256": "db8ba2da341aa5d0e21577ef53d1fd8bc346a7c873ea1da4436588998203cfd0",
+      "page": "api/sound-bus/",
+      "status": "documented",
+      "members": [
+        {
+          "signature": "SoundPlayResult Dispatch(in SoundRequest request)",
+          "status": "documented"
+        },
+        {
+          "signature": "SoundPlayResult Play(SoundKey key, in SoundPlayContext context = default)",
+          "status": "documented"
+        },
+        {
+          "signature": "SoundPlayResult Play(SoundKey key, Vector3 position)",
+          "status": "documented"
+        },
+        {
+          "signature": "SoundPlayResult Play(SoundKey key, Transform follow)",
+          "status": "documented"
+        },
+        {
+          "signature": "SoundPlayResult Play(SoundEvent sound, in SoundPlayContext context = default)",
+          "status": "documented"
+        },
+        {
+          "signature": "bool Stop(SoundHandle handle, float fade = .1f)",
+          "status": "documented"
+        },
+        {
+          "signature": "int StopAll(Object source, float fade = .1f)",
+          "status": "documented"
+        },
+        {
+          "signature": "bool SetFloat(SoundHandle handle, SoundParameterId parameter, float value)",
+          "status": "documented"
+        },
+        {
+          "signature": "bool SetFloat(SoundHandle handle, string name, float value)",
+          "status": "documented"
+        },
+        {
+          "signature": "int SetFloat(Object source, string name, float value)",
+          "status": "documented"
+        },
+        {
+          "signature": "bool SetParameter(SoundHandle handle, SoundParameterId parameter, SoundValue value)",
+          "status": "documented"
+        },
+        {
+          "signature": "bool SendSignal(SoundHandle handle, SoundSignalId signal)",
+          "status": "documented"
+        },
+        {
+          "signature": "bool SendSignal(SoundHandle handle, string signal)",
+          "status": "documented"
+        },
+        {
+          "signature": "int SendSignal(Object source, string signal)",
+          "status": "documented"
+        },
+        {
+          "signature": "bool IsAlive(SoundHandle handle)",
+          "status": "documented"
+        },
+        {
+          "signature": "bool SetPaused(SoundHandle handle, bool paused)",
+          "status": "documented"
+        },
+        {
+          "signature": "bool TryResolve(SoundKey key, out SoundEvent sound)",
+          "status": "documented"
+        },
+        {
+          "signature": "SoundNotifications Notifications { get; }",
+          "status": "documented"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+using System;
+using System.Linq;
+using System.Reflection;
+using System.IO;
+using UnityEngine;
+using UnityEditor;
+public static class SoundDocGraphCapture {
+ public static object Main() {
+  var w=Resources.FindObjectsOfTypeAll<EditorWindow>().First(w=>w.titleContent.text=="Campfire");var flags=BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance;
+  var host=typeof(EditorWindow).GetField("m_Parent",flags).GetValue(w);var scale=EditorGUIUtility.pixelsPerPoint;var width=(int)(w.position.width*scale);var height=(int)(w.position.height*scale);
+  var rt=new RenderTexture(width,height,0,RenderTextureFormat.ARGB32);rt.Create();var old=RenderTexture.active;Texture2D tex=null;
+  try {
+   host.GetType().GetMethod("GrabPixels",flags).Invoke(host,new object[]{rt,new Rect(0,0,width,height)});
+   RenderTexture.active=rt;tex=new Texture2D(width,height,TextureFormat.RGB24,false);tex.ReadPixels(new Rect(0,0,width,height),0,0);tex.Apply();
+   if(SystemInfo.graphicsUVStartsAtTop){var pixels=tex.GetPixels32();var row=new Color32[width];for(int y=0;y<height/2;y++){int top=y*width,bottom=(height-1-y)*width;Array.Copy(pixels,top,row,0,width);Array.Copy(pixels,bottom,pixels,top,width);Array.Copy(row,0,pixels,bottom,width);}tex.SetPixels32(pixels);tex.Apply();}
+   File.WriteAllBytes("/Users/devisv/Projects/Web/Sound-Manager-Doc/media-source/unity/01-campfire/graph.png",tex.EncodeToPNG());
+  }finally{RenderTexture.active=old;if(tex)UnityEngine.Object.DestroyImmediate(tex);rt.Release();UnityEngine.Object.DestroyImmediate(rt);}
+  return $"Captured Unity graph's own GUI render surface {width}x{height}";
+ }
+}

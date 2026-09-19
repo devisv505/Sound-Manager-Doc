@@ -1,0 +1,30 @@
+---
+title: 'A small API. A lot of control.'
+description: 'Start with SoundBus, then describe where a play happens and keep its handle when you need control.'
+kind: index
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Samples/Campfire/CampfireInteraction.cs
+tags: [sound, unity, campfire]
+---
+
+import { sitePath } from '../../../lib/links';
+
+## The everyday path
+
+| Type                         | Role                                                                                   |
+| ---------------------------- | -------------------------------------------------------------------------------------- |
+| `SoundBus`                   | Routes play, parameter, signal, pause, and stop commands to the active manager.        |
+| `SoundPlayContext`           | Describes position/following, owner, initial parameters, seed, and delay for one play. |
+| `SoundPlayResult`            | Reports whether a request was admitted and returns its handle.                         |
+| `SoundHandle`                | Identifies one play so you can address it later.                                       |
+| `Sounds` / `SoundParameters` | Generated identifiers for this project's authored events and parameters.               |
+
+The complete <a href={sitePath('api/sound-bus/')}>SoundBus reference</a> is the first reference chapter. It covers every public method and overload in the current source, with the defaults and return behavior that affect gameplay code.
+
+## A concrete example
+
+Read <a href={sitePath('recipes/campfire-loop/')}>Start, loop, and stop</a> for a complete component, or begin with <a href={sitePath('getting-started/')}>Your first sound</a> if you have not configured a manager yet.
+
+This first edition focuses on the setup path and Campfire. Dedicated reference chapters for contexts, ownership, graph nodes, and advanced service integration will expand this API overview in the next documentation milestones.

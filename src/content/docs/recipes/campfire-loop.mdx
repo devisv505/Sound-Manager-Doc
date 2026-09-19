@@ -1,0 +1,60 @@
+---
+title: 'Start, loop, and stop.'
+description: 'A complete Campfire component with key-based playback, one retained handle, and lifecycle cleanup.'
+kind: recipe
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Samples/Campfire/CampfireInteraction.cs
+tags: [sound, unity, campfire]
+---
+
+import { Code } from '@astrojs/starlight/components';
+import example from '../../../../examples/CampfireSound.cs?raw';
+import Explanation from '../../../components/Explanation.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation label="RECIPE / LIFECYCLE" title="Let the graph own the sound's shape.">
+  Your component asks the fire to start and stop. The graph decides how ignition leads into crackle
+  and how the ending sounds.
+</Explanation>
+
+## Prerequisites
+
+Use an active `SoundManager` with the included Campfire event registered and the generated `Sounds.Campfire` key available to your script. This is the setup in <a href={sitePath('getting-started/')}>Your first sound</a>. Place the object within hearing distance of the listener.
+
+Save this as **CampfireSound.cs**, attach it to your sound-origin GameObject, and connect your input or buttons to `Ignite()` and `Extinguish()`. In the included demo, use its existing controller instead of attaching a second one to the same fire. This example controls audio only; the demo's particles and HUD are explained separately.
+
+## Complete component
+
+<Code code={example} lang="csharp" title="CampfireSound.cs" />
+
+## Why these calls belong here
+
+`Ignite()` checks liveness before asking for another play, so repeated input does not stack loops. A handle's `IsValid` property alone would not answer whether playback has ended. The active/enabled check prevents an inactive component from starting a new loop.
+
+`Play(Sounds.Campfire, transform)` follows this transform and assigns its GameObject as owner. The success path retains the returned handle; a rejected request reports its actual status.
+
+`Extinguish()` requests a stop, then clears the component's handle. The graph can still play its release tail after the component has cleared that field. This means the component's `IsPlaying` reports its retained active play, not whether the last extinguish tail is still audible.
+
+`OnDisable()` runs the same cleanup when the component is disabled. Keep the manager alive if you want to hear the release: shutting the manager down ends its playback service.
+
+## The fade has two sources
+
+The call passes a fallback fade of `0.15f` seconds. In the supplied graph, `On Stop` explicitly reaches the ignition and crackle nodes' **Stop** ports, so those voices use their node fade-outs: **0.3 s** and **0.6 s**. Remaining pre-existing voices would use the requested fallback. The extinguish cue is a new release voice and is allowed to finish.
+
+This distinction comes from the current graph/runtime, even though the older sample comments describe the stop fade more broadly. Read the <a href={sitePath('demos/01-campfire/#read-the-graph')}>graph walkthrough</a> alongside this example.
+
+## Change the fire's intensity
+
+This optional excerpt goes in a method of the component above. It changes the target volume parameter of the running crackle; it does not change the particles.
+
+```csharp title="Live parameter · excerpt"
+SoundBus.SetFloat(fire, SoundParameters.Campfire.Intensity, 0.35f);
+```
+
+The graph declares `Intensity` from 0 to 1, defaults to 0.65, and smooths rises and falls at 0.5 units per second. To choose an initial intensity, put the value in a `SoundPlayContext` before the play starts. The <a href={sitePath('api/sound-bus/#play')}>Play reference</a> shows how to keep the same explicit owner when constructing a context.
+
+## Validation
+
+The checked example is stored once and imported directly into this page, so copied code and the validated source cannot drift apart. M1 validation compiles this component against the live Unity project and exercises acceptance, duplicate-start protection, stop/release completion, and disable cleanup. See the repository's validation report for the exact revision and results.

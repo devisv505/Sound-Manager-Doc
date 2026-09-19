@@ -1,0 +1,73 @@
+---
+title: 'Sound Manager'
+description: 'Graph-authored sound. Clear code. A whole little world to listen to.'
+kind: home
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Samples/Campfire/CampfireInteraction.cs
+tags: [sound, unity, campfire]
+template: splash
+tableOfContents: false
+---
+
+import HomeHero from '../../components/HomeHero.astro';
+import DemoGallery from '../../components/DemoGallery.astro';
+import { sitePath } from '../../lib/links';
+
+<HomeHero />
+
+<div class="intro-grid">
+  <div>
+    <span class="section-kicker">01 / AUTHOR</span>
+    <h2>Think in sounds.</h2>
+    <p>
+      Connect clips, parameters, and actions in a graph. Give each sound a beginning, a rhythm, and
+      an ending.
+    </p>
+  </div>
+  <div>
+    <span class="section-kicker">02 / PLAY</span>
+    <h2>A few lines of code.</h2>
+    <p>
+      Play by key. Follow a transform. Keep a handle when you need to change, pause, or stop that
+      sound.
+    </p>
+  </div>
+  <div>
+    <span class="section-kicker">03 / EXPLORE</span>
+    <h2>Hear the difference.</h2>
+    <p>
+      Ten small scenes make the ideas tangible, from a single crackle to an entire rocket launch.
+    </p>
+  </div>
+</div>
+
+<div class="home-code">
+
+## From a spark to a sound.
+
+The graph handles ignition, the crackling loop, and the extinguish cue. Your code asks it to begin—and tells it when to end.
+
+```csharp title="Play by key · excerpt"
+var result = SoundBus.Play(Sounds.Campfire, transform);
+if (result.Accepted)
+    fire = result.Handle;
+
+// Later, when the player puts the fire out:
+SoundBus.Stop(fire, fade: 0.15f);
+```
+
+<a href={sitePath('recipes/campfire-loop/')}>See the complete, verified example →</a>
+
+</div>
+
+<div class="home-section-heading">
+  <div>
+    <span class="section-kicker">THE SOUND LAB</span>
+    <h2>Small worlds. Big ideas.</h2>
+  </div>
+  <p>Start with Campfire. The gallery maps out the next nine walkthroughs.</p>
+</div>
+
+<DemoGallery />

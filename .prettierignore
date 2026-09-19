@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+media-source/
+validation/
+package-lock.json
+SPEC.md
+ROADMAP.md

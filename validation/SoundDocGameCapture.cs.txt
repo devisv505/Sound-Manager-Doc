@@ -1,0 +1,16 @@
+using System;
+using System.Linq;
+using System.Reflection;
+using System.IO;
+using UnityEngine;
+using UnityEditor;
+public static class SoundDocGameCapture {
+ public static object Main(string name) {
+  var t=typeof(Editor).Assembly.GetType("UnityEditor.GameView");var view=Resources.FindObjectsOfTypeAll(t).Cast<EditorWindow>().First();
+  var rt=(RenderTexture)t.GetField("m_RenderTexture",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(view);
+  if(rt==null)throw new Exception("Game View has not rendered");
+  var prev=RenderTexture.active;var tex=new Texture2D(rt.width,rt.height,TextureFormat.RGB24,false);
+  try{RenderTexture.active=rt;tex.ReadPixels(new Rect(0,0,rt.width,rt.height),0,0);tex.Apply(); if(SystemInfo.graphicsUVStartsAtTop){var pixels=tex.GetPixels32();var row=new Color32[rt.width];for(int y=0;y<rt.height/2;y++){int top=y*rt.width,bottom=(rt.height-1-y)*rt.width;Array.Copy(pixels,top,row,0,rt.width);Array.Copy(pixels,bottom,pixels,top,rt.width);Array.Copy(row,0,pixels,bottom,rt.width);}tex.SetPixels32(pixels);tex.Apply();} File.WriteAllBytes("/Users/devisv/Projects/Web/Sound-Manager-Doc/media-source/unity/01-campfire/"+name+".png",tex.EncodeToPNG());}finally{RenderTexture.active=prev;UnityEngine.Object.DestroyImmediate(tex);}
+  return $"Captured composed Game View {rt.width}x{rt.height}: {name}";
+ }
+}

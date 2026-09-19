@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "captureMethod": "Read actual Unity Game View / graph GUI render surfaces; normalize vertical pixel origin for Metal. No fabricated scene or HUD content.",
+  "sessionRestored": {
+    "scene": "01-Campfire/Demo.unity",
+    "dirty": false,
+    "playMode": false,
+    "runInBackground": false,
+    "originalGameViewSizeIndex": 1,
+    "temporaryResolutionRemoved": true
+  },
+  "captures": [
+    {
+      "id": "campfire-unlit",
+      "demo": "01-campfire",
+      "kind": "game-view",
+      "state": "Ready for a spark",
+      "scene": "Assets/DEV505/SoundManager/Samples/01-Campfire/Demo.unity",
+      "event": "Sounds.Campfire",
+      "parameters": {
+        "Intensity": 0.65
+      },
+      "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
+      "unityVersion": "6000.6.0f1",
+      "capturedAt": "2026-09-19T19:36:32.316773+00:00",
+      "width": 1920,
+      "height": 1080,
+      "hudIncluded": true,
+      "original": "media-source/unity/01-campfire/unlit.png",
+      "publishedSource": "src/assets/demos/01-campfire/unlit.png",
+      "sha256": "0fec67d4513d61853749c474b393e9d96f99dc2a98b08d0263b0d3c0eaf4f8c6",
+      "steps": [
+        "Open Campfire/Demo.unity without saving changes.",
+        "Set temporary Game View fixed resolution to 1920x1080.",
+        "Enter Play Mode and wait for the manager to be ready.",
+        "Keep the fire unlit."
+      ],
+      "alt": "Campfire before ignition, with the Ready for a spark readout and Ignite fire button.",
+      "caption": "Before ignition, no Campfire play is active."
+    },
+    {
+      "id": "campfire-lit",
+      "demo": "01-campfire",
+      "kind": "game-view",
+      "state": "Burning bright",
+      "scene": "Assets/DEV505/SoundManager/Samples/01-Campfire/Demo.unity",
+      "event": "Sounds.Campfire",
+      "parameters": {
+        "Intensity": 0.65
+      },
+      "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
+      "unityVersion": "6000.6.0f1",
+      "capturedAt": "2026-09-19T19:38:37.303969+00:00",
+      "width": 1920,
+      "height": 1080,
+      "hudIncluded": true,
+      "original": "media-source/unity/01-campfire/lit.png",
+      "publishedSource": "src/assets/demos/01-campfire/lit.png",
+      "sha256": "d7f6eeee350b53b9f7289336f16c9eb83821b3ab375a77dc2e1bf9572f2a5dbc",
+      "steps": [
+        "Invoke CampfireInteraction.ToggleFire, equivalent to the F/button control.",
+        "Wait until ignition completes and the crackling loop fades in."
+      ],
+      "alt": "Voxel flames rise from the Campfire island with Burning bright and Extinguish fire in the HUD.",
+      "caption": "The ignition has completed and the selected crackle recording loops."
+    },
+    {
+      "id": "campfire-hero",
+      "demo": "01-campfire",
+      "kind": "game-view",
+      "state": "Burning bright, HUD hidden",
+      "scene": "Assets/DEV505/SoundManager/Samples/01-Campfire/Demo.unity",
+      "event": "Sounds.Campfire",
+      "parameters": {
+        "Intensity": 0.65
+      },
+      "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
+      "unityVersion": "6000.6.0f1",
+      "capturedAt": "2026-09-19T19:38:57.477708+00:00",
+      "width": 1920,
+      "height": 1080,
+      "hudIncluded": false,
+      "original": "media-source/unity/01-campfire/hero.png",
+      "publishedSource": "src/assets/demos/01-campfire/hero.png",
+      "sha256": "8c7f53bc77d0d6b1aba279ed36bbd9cbe3f3bc3f024956a9e5c9511760e22a0a",
+      "steps": [
+        "Start with the lit state.",
+        "Temporarily hide runtime UIDocument roots.",
+        "Read the composed Game View render texture.",
+        "Restore UIDocument visibility."
+      ],
+      "alt": "A lit voxel campfire on its grassy island, captured in Unity with the HUD temporarily hidden.",
+      "caption": "A clean Unity Game View image for the home-page hero."
+    },
+    {
+      "id": "campfire-graph",
+      "demo": "01-campfire",
+      "kind": "graph-editor",
+      "state": "Saved graph, no active preview",
+      "scene": "Assets/DEV505/SoundManager/Samples/01-Campfire/Demo.unity",
+      "event": "Sounds.Campfire",
+      "parameters": {
+        "Intensity": 0.65
+      },
+      "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
+      "unityVersion": "6000.6.0f1",
+      "capturedAt": "2026-09-19T19:44:56.396376+00:00",
+      "width": 3456,
+      "height": 2008,
+      "hudIncluded": false,
+      "original": "media-source/unity/01-campfire/graph.png",
+      "publishedSource": "src/assets/demos/01-campfire/graph.png",
+      "sha256": "aec66bb6130206a218a7e17e990583c881494f7adf6500c37b14a5ee16056956",
+      "steps": [
+        "Exit Play Mode.",
+        "Open Campfire.soundgraph in Unity.",
+        "Maximize its editor tab, hide the audition overlay, and frame all nodes.",
+        "Capture the GUI view render surface with GrabPixels.",
+        "Close the temporary graph tab and restore the previous Game View settings."
+      ],
+      "alt": "Unity Campfire graph showing ignition, crackle selection, Intensity, and release connections.",
+      "caption": "The authored Campfire graph, captured from its own Unity editor GUI render surface."
+    }
+  ]
+}

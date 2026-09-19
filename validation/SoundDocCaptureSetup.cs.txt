@@ -1,0 +1,17 @@
+using System;
+using System.Linq;
+using System.Reflection;
+using UnityEngine;
+using UnityEditor;
+public static class SoundDocCaptureSetup {
+ public static object Main() {
+  var a=typeof(Editor).Assembly;var flags=BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance;
+  var t=a.GetType("UnityEditor.GameViewSizes");var singleton=typeof(ScriptableSingleton<>).MakeGenericType(t);var sizes=singleton.GetProperty("instance").GetValue(null);var group=t.GetProperty("currentGroup",flags).GetValue(sizes);var gt=group.GetType();
+  var viewType=a.GetType("UnityEditor.GameView");var view=Resources.FindObjectsOfTypeAll(viewType).Cast<EditorWindow>().First();var sizeIndex=viewType.GetProperty("selectedSizeIndex",flags);
+  SessionState.SetInt("SoundDocOriginalSize",(int)sizeIndex.GetValue(view));SessionState.SetBool("SoundDocOriginalMaximized",view.maximized);
+  int built=(int)gt.GetMethod("GetBuiltinCount").Invoke(group,null), custom=(int)gt.GetMethod("GetCustomCount").Invoke(group,null);
+  var kind=Enum.Parse(a.GetType("UnityEditor.GameViewSizeType"),"FixedResolution");var size=Activator.CreateInstance(a.GetType("UnityEditor.GameViewSize"),flags,null,new object[]{kind,1920,1080,"Sound docs capture"},null);
+  gt.GetMethod("AddCustomSize").Invoke(group,new[]{size});SessionState.SetInt("SoundDocCustomIndex",custom);sizeIndex.SetValue(view,built+custom);view.Focus();
+  return "Prepared 1920x1080 Game View; original index and custom size stored for cleanup.";
+ }
+}

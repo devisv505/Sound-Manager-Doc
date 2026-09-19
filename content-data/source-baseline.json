@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "repository": "https://github.com/devisv505/Sound-Manager",
+  "revision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
+  "unityVersion": "6000.6.0f1",
+  "auditedAt": "2026-09-19",
+  "scope": "M1",
+  "knownPreexistingWorktreeChanges": [
+    "Staged/deleted GraphWorkflow New Sound Event graph and meta",
+    "Untracked .DS_Store files"
+  ],
+  "sourceAuthority": "Current runtime/editor code and imported Campfire event; historical README is secondary."
+}

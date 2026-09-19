@@ -1,0 +1,47 @@
+{
+  "success": true,
+  "checks": [
+    "Ignite accepted and retained a live handle",
+    "Repeated Ignite did not create a second play",
+    "Ignition completed and one crackle voice remained looping",
+    "Generated Intensity parameter accepted a live update",
+    "Per-play pause and resume succeeded",
+    "Extinguish cleared component handle while release remained alive",
+    "Release completed and old handle became stale",
+    "Disable cleanup stopped the second play and completed its release"
+  ],
+  "notifications": [
+    "Accepted:Accepted",
+    "Started:Accepted",
+    "Cancelled:Accepted",
+    "Accepted:Accepted",
+    "Started:Accepted",
+    "Cancelled:Accepted"
+  ],
+  "unity": "6000.6.0f1",
+  "utc": "2026-09-19T19:39:57.4110750Z",
+  "example": "examples/CampfireSound.cs",
+  "exampleSha256": "7f3df98790bb90fd0173151d70cfcf3903db5b232af254a49f660c509f9b9c22",
+  "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
+  "compilerDiagnostics": [
+    {
+      "severity": "warning",
+      "message": "'Object.FindFirstObjectByType<T>()' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'",
+      "line": 40,
+      "column": 22,
+      "id": "CS0618",
+      "source": "var manager = UnityEngine.Object.FindFirstObjectByType<DEV505.SoundManager.SoundManager>();"
+    },
+    {
+      "severity": "warning",
+      "message": "'Object.FindFirstObjectByType<T>()' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'",
+      "line": 45,
+      "column": 21,
+      "id": "CS0618",
+      "source": "var origin = UnityEngine.Object.FindFirstObjectByType<DEV505.SoundManager.Samples.CampfireInteraction>().transform.position;"
+    }
+  ],
+  "compileMs": 175,
+  "executeMs": 11777,
+  "harness": "validation/VerifyCampfireExample.cs.txt"
+}
