@@ -1,0 +1,228 @@
+{
+  "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
+  "success": true,
+  "basis": "Recorded actual controller/Unity state in PNG sidecars; these are capture-state checks, not subjective listening tests.",
+  "counts": {
+    "01-campfire": {
+      "game-view": 3,
+      "graph-editor": 1
+    },
+    "02-footstep": {
+      "game-view": 3,
+      "graph-editor": 6
+    },
+    "03-bee": {
+      "game-view": 3,
+      "graph-editor": 1,
+      "event-settings": 1
+    },
+    "04-engine": {
+      "game-view": 3,
+      "graph-editor": 4
+    },
+    "05-weather": {
+      "game-view": 3,
+      "graph-editor": 4
+    },
+    "06-workshop": {
+      "game-view": 4,
+      "graph-editor": 3
+    },
+    "07-arcade": {
+      "game-view": 2,
+      "graph-editor": 3,
+      "event-settings": 4
+    },
+    "08-jukebox": {
+      "game-view": 3,
+      "graph-editor": 3,
+      "event-settings": 1
+    },
+    "09-portals": {
+      "game-view": 5,
+      "graph-editor": 5,
+      "event-settings": 2
+    },
+    "10-launch": {
+      "game-view": 6,
+      "graph-editor": 11
+    }
+  },
+  "checks": [
+    {
+      "check": "Footstep: actual grass step",
+      "passed": true,
+      "details": {
+        "graphSurface": 0,
+        "CurrentSurface": 1,
+        "LastStepSurface": 1,
+        "StepCount": 5,
+        "position": "(-5.06, 0.03, -1.40)"
+      }
+    },
+    {
+      "check": "Footstep: actual stone step",
+      "passed": true,
+      "details": {
+        "graphSurface": 1,
+        "CurrentSurface": 2,
+        "LastStepSurface": 2,
+        "StepCount": 1,
+        "position": "(1.76, 0.03, -1.40)"
+      }
+    },
+    {
+      "check": "Footstep: actual wood step",
+      "passed": true,
+      "details": {
+        "graphSurface": 2,
+        "CurrentSurface": 3,
+        "LastStepSurface": 3,
+        "StepCount": 11,
+        "position": "(5.08, 0.03, -1.40)"
+      }
+    },
+    {
+      "check": "Bee: different sides during a retained flight",
+      "passed": true,
+      "details": {
+        "right": {
+          "IsFlying": true,
+          "beePosition": "(3.03, 1.55, -0.23)",
+          "listenerPosition": "(0.00, 1.34, 0.00)"
+        },
+        "left": {
+          "IsFlying": true,
+          "beePosition": "(-2.57, 2.06, -0.08)",
+          "listenerPosition": "(0.00, 1.34, 0.00)"
+        }
+      }
+    },
+    {
+      "check": "Engine: idle and higher RPM",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Weather: real lightning frame",
+      "passed": true,
+      "details": {
+        "ThunderCount": 1,
+        "flashIntensity": 1.95899975,
+        "boltActive": true,
+        "flashAge": 0.08041,
+        "CurrentRain": 1.0,
+        "CurrentWind": 0.85
+      }
+    },
+    {
+      "check": "Workshop: hammer tap overlaps working saw",
+      "passed": true,
+      "details": {
+        "SelectedTool": 1,
+        "IsWorking": true,
+        "IsTapping": true,
+        "CanTap": false,
+        "Impacts": 3,
+        "voices": 2
+      }
+    },
+    {
+      "check": "Arcade: busy run demonstrates replacements and limits",
+      "passed": true,
+      "details": {
+        "IsRunning": true,
+        "Chaos": 1.0,
+        "Accepted": 112,
+        "Replaced": 94,
+        "Limited": 36,
+        "CoolingDown": 0,
+        "ActiveVoices": 5,
+        "VoiceCapacity": 6,
+        "LastDecision": "Zap / playing"
+      }
+    },
+    {
+      "check": "Jukebox: both track gains are nonzero",
+      "passed": true,
+      "details": {
+        "CurrentTrack": 1,
+        "TrackTitle": "Peach Sunset",
+        "IsCrossfading": true,
+        "CurrentGain": 0.4028332,
+        "OutgoingGain": 0.324013382,
+        "Volume": 0.65
+      }
+    },
+    {
+      "check": "Jukebox: playback pause reported",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Portals: detached echo survives owner loss",
+      "passed": true,
+      "details": {
+        "Transitioning": true,
+        "CurrentWorld": 1,
+        "Trips": 1,
+        "EchoLingers": true,
+        "EchoAlive": true,
+        "departure": "(-2.90, 1.70, -1.30)",
+        "ActiveVoices": 4
+      }
+    },
+    {
+      "check": "Portals: stop-policy echo ends on owner loss",
+      "passed": true,
+      "details": {
+        "CurrentWorld": 0,
+        "Transitioning": true,
+        "Trips": 2,
+        "EchoLingers": false,
+        "EchoAlive": false,
+        "ActiveVoices": 4
+      }
+    },
+    {
+      "check": "Launch: warning before clamp release",
+      "passed": true,
+      "details": {
+        "Phase": 1,
+        "Automatic": false,
+        "Warning": true,
+        "Power": 1.0,
+        "Pressure": 0.735181153,
+        "ClampsReleased": false,
+        "ActiveVoices": 3
+      }
+    },
+    {
+      "check": "Launch: real three-count and liftoff",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Launch: flight pause preserves altitude",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Launch: abort recorded",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "Recorded source files still match captured revision",
+      "passed": true,
+      "details": {
+        "filesChecked": 60
+      }
+    },
+    {
+      "check": "Unity revision unchanged",
+      "passed": true,
+      "details": "746a1cc7d2602bc59df6096eac50508ded6ef49e"
+    }
+  ]
+}

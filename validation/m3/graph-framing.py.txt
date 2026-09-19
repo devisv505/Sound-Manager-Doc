@@ -1,0 +1,36 @@
+import sys,json
+sys.path.insert(0,'/tmp');from m3_graphs import graph
+base='Assets/DEV505/SoundManager/Samples/'
+def detail(folder,event,name,rect):
+ graph('Detail',base+folder+'/'+event+'.soundgraph',folder.lower(),name,*rect)
+ print(folder,name,flush=True)
+for name,label in [('grass-group','Grass'),('stone-group','Stone'),('wood-group','Wood')]:
+ graph('Open',base+'02-Footstep/Footstep.soundgraph');graph('Group','Footstep',label,'02-footstep',name,base+'02-Footstep/Footstep.soundgraph');print(name,flush=True)
+detail('02-Footstep','Footstep','surface-selection',[850,-230,1650,940])
+graph('Trim');print('trim-range',flush=True)
+for args in [
+ ('04-Engine','Engine','rpm-mapping',[10,600,1400,1100]),
+ ('04-Engine','Engine','load-mapping',[10,1650,1400,1050]),
+ ('04-Engine','Engine','horn-shift-graph',[1580,-180,800,1420]),
+ ('05-Weather','Weather','rain-layers',[-30,340,1680,1070]),
+ ('05-Weather','Thunder','thunder-delay',[730,20,760,520]),
+ ('06-Workshop','Workshop','work-sequence',[-30,-70,1800,980]),
+ ('06-Workshop','Workshop','hammer-signal',[-30,2300,1780,1160]),
+ ('08-Jukebox','Jukebox','track-parameter',[-30,170,820,550]),
+ ('08-Jukebox','Jukebox','gain-volume',[375,190,1730,780]),
+ ('10-Launch','LaunchPad','pressure-condition',[1600,-30,1460,950]),
+ ('10-Launch','LaunchPad','release-flow',[1600,1000,1470,1560]),
+ ('10-Launch','LaunchSequence','launch-conditions',[-25,-30,1720,1340]),
+ ('10-Launch','LaunchSequence','countdown-flow',[1710,-30,1940,990]),
+ ('10-Launch','LaunchSequence','ignition-finish',[3170,380,1410,700]),
+]:detail(*args)
+for folder,event,name,section in [
+ ('03-Bee','Bee','spatial-settings','Spatial audio'),
+ ('07-Arcade','ArcadeZap','zap-limits','Concurrency & priority'),
+ ('07-Arcade','ArcadeCoin','coin-limits','Concurrency & priority'),
+ ('07-Arcade','ArcadeJackpot','jackpot-cooldown','Playback & lifetime'),
+ ('07-Arcade','ArcadeJackpot','jackpot-limit','Concurrency & priority'),
+ ('09-Portals','PortalEcho','detach-settings','Playback & lifetime'),
+ ('09-Portals','PortalCut','stop-settings','Playback & lifetime'),
+]:
+ graph('Settings',base+folder+'/'+event+'.soundgraph',folder.lower(),name,section);print(folder,name,flush=True)

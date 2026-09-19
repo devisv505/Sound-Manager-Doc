@@ -1,0 +1,109 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+using UnityEngine;
+using UnityEditor;
+using UnityEngine.UIElements;
+using DEV505.SoundManager;
+using DEV505.SoundManager.Samples;
+public static class M3Capture
+{
+ const string Root = "/Users/devisv/Projects/Web/Sound-Manager-Doc";
+ const BindingFlags Flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+ static Type GameType => typeof(Editor).Assembly.GetType("UnityEditor.GameView");
+ static EditorWindow Game => Resources.FindObjectsOfTypeAll(GameType).Cast<EditorWindow>().First();
+ static object SizeGroup() {var t=typeof(Editor).Assembly.GetType("UnityEditor.GameViewSizes");return t.GetProperty("currentGroup",Flags).GetValue(typeof(ScriptableSingleton<>).MakeGenericType(t).GetProperty("instance").GetValue(null));}
+ static void Write(string path, object value) => File.WriteAllText(path, Newtonsoft.Json.JsonConvert.SerializeObject(value,Newtonsoft.Json.Formatting.Indented));
+ public static T Find<T>() where T:UnityEngine.Object => UnityEngine.Object.FindObjectsByType<T>(FindObjectsInactive.Exclude).First();
+ public static T Field<T>(object o,string name) => (T)o.GetType().GetField(name,Flags).GetValue(o);
+ public static async Task Until(Func<bool> test,int seconds=20) {var end=DateTime.UtcNow.AddSeconds(seconds);while(!test()){if(DateTime.UtcNow>end)throw new Exception("State wait timed out");await Task.Delay(25);}}
+ public static async Task Ready(){Game.Focus();await Until(()=>SoundServices.Current!=null && SoundServices.Current.Ready);await Task.Delay(600);}
+ public static object Begin()
+ {
+  if(EditorApplication.isPlaying)throw new Exception("Expected edit mode before capture setup");
+  if(Enumerable.Range(0,UnityEngine.SceneManagement.SceneManager.sceneCount).Any(i=>UnityEngine.SceneManagement.SceneManager.GetSceneAt(i).isDirty))throw new Exception("Unsaved scene work");
+  if(SessionState.GetBool("M3.Active",false))throw new Exception("Capture setup already active");
+  var w=Game;var group=SizeGroup();var gt=group.GetType();var size=(int)GameType.GetProperty("selectedSizeIndex",Flags).GetValue(w);
+  SessionState.SetString("M3.Scene",UnityEngine.SceneManagement.SceneManager.GetActiveScene().path);
+  SessionState.SetInt("M3.Size",size);SessionState.SetBool("M3.Max",w.maximized);SessionState.SetBool("M3.Background",Application.runInBackground);
+  SessionState.SetString("M3.Selection",Selection.activeObject ? GlobalObjectId.GetGlobalObjectIdSlow(Selection.activeObject).ToString() : "");SessionState.SetString("M3.Focus",EditorWindow.focusedWindow ? EditorWindow.focusedWindow.GetEntityId().ToString():"");
+  SessionState.SetString("M3.Windows",string.Join(",",Resources.FindObjectsOfTypeAll<EditorWindow>().Select(x=>x.GetEntityId().ToString())));
+  var baseline=new {capturedAt=DateTime.UtcNow.ToString("o"),scene=SessionState.GetString("M3.Scene",""),dirty=false,playing=false,paused=EditorApplication.isPaused,background=Application.runInBackground,sizeIndex=size,customSizeCount=gt.GetMethod("GetCustomCount").Invoke(group,null),gameMaximized=w.maximized,selection=SessionState.GetString("M3.Selection",""),windows=Resources.FindObjectsOfTypeAll<EditorWindow>().Select(x=>new {id=x.GetEntityId().ToString(),type=x.GetType().FullName,title=x.titleContent.text,maximized=x.maximized,position=x.position.ToString()}).ToArray()};
+  Directory.CreateDirectory(Root+"/validation/m3");Write(Root+"/validation/m3/session-before.json",baseline);
+  int built=(int)gt.GetMethod("GetBuiltinCount").Invoke(group,null),custom=(int)gt.GetMethod("GetCustomCount").Invoke(group,null);
+  var a=typeof(Editor).Assembly;var kind=Enum.Parse(a.GetType("UnityEditor.GameViewSizeType"),"FixedResolution");
+  var captureSize=Activator.CreateInstance(a.GetType("UnityEditor.GameViewSize"),Flags,null,new object[]{kind,1920,1080,"M3 documentation capture"},null);
+  gt.GetMethod("AddCustomSize").Invoke(group,new[]{captureSize});SessionState.SetInt("M3.Custom",custom);GameType.GetProperty("selectedSizeIndex",Flags).SetValue(w,built+custom);
+  SessionState.SetBool("M3.Active",true);Application.runInBackground=true;w.Focus();return baseline;
+ }
+ static void SavePixels(RenderTexture rt,string file){var old=RenderTexture.active;var tex=new Texture2D(rt.width,rt.height,TextureFormat.RGB24,false);try{RenderTexture.active=rt;tex.ReadPixels(new Rect(0,0,rt.width,rt.height),0,0);tex.Apply();if(SystemInfo.graphicsUVStartsAtTop){var p=tex.GetPixels32();var row=new Color32[rt.width];for(int y=0;y<rt.height/2;y++){int top=y*rt.width,bottom=(rt.height-1-y)*rt.width;Array.Copy(p,top,row,0,rt.width);Array.Copy(p,bottom,p,top,rt.width);Array.Copy(row,0,p,bottom,rt.width);}tex.SetPixels32(p);tex.Apply();}File.WriteAllBytes(file,tex.EncodeToPNG());}finally{RenderTexture.active=old;UnityEngine.Object.DestroyImmediate(tex);}}
+ public static object GameShot(string demo,string name,object state,string[] steps)
+ {
+  var rt=(RenderTexture)GameType.GetField("m_RenderTexture",Flags).GetValue(Game);
+  if(!rt || rt.width!=1920 || rt.height!=1080)throw new Exception("Need rendered 1920x1080 Game View");
+  var dir=Root+"/media-source/unity/"+demo;Directory.CreateDirectory(dir);var file=dir+"/"+name+".png";SavePixels(rt,file);
+  var hud=UnityEngine.Object.FindObjectsByType<UnityEngine.UIElements.UIDocument>(FindObjectsInactive.Exclude).SelectMany(x=>x.rootVisualElement.Query<TextElement>().ToList()).Where(x=>x.resolvedStyle.display!=DisplayStyle.None).Select(x=>x.text).Where(x=>!string.IsNullOrEmpty(x)).ToArray();
+  var meta=new {demo,name,kind="game-view",capturedAt=DateTime.UtcNow.ToString("o"),scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,width=rt.width,height=rt.height,hudIncluded=true,state,steps,hud,unityVersion=Application.unityVersion};Write(dir+"/"+name+".capture.json",meta);return meta;
+ }
+ public static async Task<object> Launch()
+ {
+  await Ready();var d=Find<LaunchDemo>();
+  GameShot("10-launch","ready",new {d.Phase,d.Automatic,d.Power,d.Pressure,d.ActiveVoices},new[]{"Open 10-Launch/Demo.unity and enter Play Mode.","Wait for Mission Control; leave the pad stopped."});
+  d.ToggleMode();d.StartLaunch();d.SetPower(1);await Until(()=>d.Warning,30);await Task.Delay(100);
+  GameShot("10-launch","warning",new{d.Phase,d.Automatic,d.Warning,d.Power,d.Pressure,d.ClampsReleased,d.ActiveVoices},new[]{"Choose Manual, then Launch.","Set power to 100%, leave clamps closed, and wait for PRESSURE WARNING."});
+  d.Abort();await Task.Delay(200);
+  GameShot("10-launch","aborted",new{d.Phase,d.Aborts,d.ActiveVoices},new[]{"From the manual warning state, choose Abort.","Capture SAFELY SHUT DOWN while the ending audio finishes."});
+  d.ResetPad();if(!d.Automatic)d.ToggleMode();d.StartLaunch();await Until(()=>d.Phase==LaunchPhase.Countdown,30);await Task.Delay(450);
+  GameShot("10-launch","countdown",new{d.Phase,d.CountdownNumber,d.Power,d.Pressure,d.ClampsReleased,d.ActiveVoices},new[]{"Reset, switch to Auto and choose Launch.","Let the controller power the pad, vent, and open the clamps; capture the live countdown."});
+  await Until(()=>d.Phase==LaunchPhase.Flying,15);await Until(()=>d.Altitude>.55f,10);
+  GameShot("10-launch","flight",new{d.Phase,d.Altitude,d.ActiveVoices},new[]{"Allow the countdown and ignition to finish.","Capture shortly after liftoff with the rocket still visible."});
+  d.TogglePause();await Task.Delay(180);
+  GameShot("10-launch","paused",new{d.Phase,d.IsPaused,d.Altitude,d.ActiveVoices},new[]{"During flight press P or choose Pause.","Capture the frozen rocket and LAUNCH PAUSED readout."});
+  d.TogglePause();return "Captured six actual Launch states";
+ }
+ public static async Task<object> Bee(){await Ready();var d=Find<BeeFlightDemo>();var bee=Field<Transform>(d,"bee");var player=Field<Transform>(d,"player");
+ GameShot("03-bee","rest",new{d.IsFlying,beePosition=bee.position.ToString()},new[]{"Open 03-Bee and enter Play Mode.","Leave the bee resting on its flower."});d.ToggleFlight();
+ await Until(()=>Vector3.Dot(bee.position-player.position,Camera.main.transform.right)>2,15);await Task.Delay(50);
+ GameShot("03-bee","flight-right",new{d.IsFlying,beePosition=bee.position.ToString(),listenerPosition=Find<AudioListener>().transform.position.ToString()},new[]{"Release the bee with Space or the HUD button.","Wait until it flies to the right side of the player."});
+ await Until(()=>Vector3.Dot(bee.position-player.position,Camera.main.transform.right)<-2,15);await Task.Delay(50);
+ GameShot("03-bee","flight-left",new{d.IsFlying,beePosition=bee.position.ToString(),listenerPosition=Find<AudioListener>().transform.position.ToString()},new[]{"Continue the same flight until the bee circles to the left side.","The one looping buzz remains attached to the moving bee."});return "Bee: rest and both sides";}
+ public static async Task<object> Engine(){await Ready();var d=Find<EngineDriveDemo>();d.ToggleEngine();await Task.Delay(1500);
+ GameShot("04-engine","idle",new{d.IsRunning,d.Throttle,d.Rpm,d.SpeedKmh,d.Gear},new[]{"Open 04-Engine; enter Play Mode and start the engine.","Leave throttle at zero until ignition finishes."});d.SetThrottle(.92f);await Task.Delay(4200);
+ GameShot("04-engine","driving",new{d.IsRunning,d.Throttle,d.Rpm,d.SpeedKmh,d.Gear},new[]{"Raise the throttle slider to 92%.","Let the car accelerate for several seconds."});d.ChangeGear();d.Honk();await Task.Delay(120);
+ GameShot("04-engine","horn-shift",new{d.IsRunning,d.Throttle,d.Rpm,d.SpeedKmh,d.Gear,voices=Find<SoundManager>().Service.ActiveVoices},new[]{"While driving, shift gear and sound the horn with the demo controls.","The signals add their cues to the retained Engine play."});return "Engine: idle, driving, signal response";}
+ public static async Task<object> Weather(){await Ready();var d=Find<WeatherDemo>();
+ GameShot("05-weather","clear",new{d.IsRunning,d.CurrentRain,d.CurrentWind,d.ThunderCount},new[]{"Open 05-Weather and enter Play Mode.","Leave the skies clear."});d.Storm();await Task.Delay(4200);
+ GameShot("05-weather","rain",new{d.IsRunning,d.CurrentRain,d.CurrentWind,d.RainTarget,d.WindTarget},new[]{"Choose the Storm preset.","Wait for rain and wind to reach their target levels."});
+ await Until(()=>d.CanThunder);d.Thunder();await Task.Delay(35);
+ GameShot("05-weather","lightning",new{d.ThunderCount,flashIntensity=Field<Light>(d,"lightningLight").intensity,boltActive=Field<GameObject>(d,"lightningBolt").activeSelf,flashAge=Time.time-Field<float>(d,"_flashStart"),d.CurrentRain,d.CurrentWind},new[]{"With the storm running and the thunder control ready, trigger Thunder.","Capture the first lightning flash, before the delayed rumble."});return "Weather: clear, rain and real lightning";}
+ public static async Task<object> Workshop(){await Ready();var d=Find<WorkshopDemo>();d.SelectTool(0);d.ToggleWork();await Task.Delay(1400);
+ GameShot("06-workshop","hammer",new{d.SelectedTool,d.IsWorking,d.CurrentPace,d.Impacts},new[]{"Open 06-Workshop; choose Hammer and Start working.","Wait for a few automatic strikes."});d.SelectTool(1);await Task.Delay(1000);
+ GameShot("06-workshop","handsaw",new{d.SelectedTool,d.IsWorking,d.CurrentPace,d.Impacts},new[]{"While working, choose Handsaw.","The graph stops the previous tool before starting the saw."});int tapsBefore=d.Impacts;d.Tap();await Until(()=>d.Impacts>tapsBefore);await Task.Delay(35);
+ GameShot("06-workshop","hammer-over-saw",new{d.SelectedTool,d.IsWorking,d.IsTapping,d.CanTap,d.Impacts,voices=Find<SoundManager>().Service.ActiveVoices},new[]{"Keep the Handsaw working, then press T for one hammer tap.","Capture the hammer impact while the saw session remains active."});await Task.Delay(600);d.SelectTool(2);await Task.Delay(1000);
+ GameShot("06-workshop","drill",new{d.SelectedTool,d.IsWorking,d.CurrentPace,d.Impacts},new[]{"Choose Drill while the work session continues.","Observe the selected tool and its ongoing loop."});return "Workshop: all tools and overlapping tap";}
+ public static async Task<object> Arcade(){await Ready();var d=Find<ArcadeDemo>();
+ GameShot("07-arcade","calm",new{d.IsRunning,d.Accepted,d.Replaced,d.Limited,d.CoolingDown,d.ActiveVoices,d.VoiceCapacity},new[]{"Open 07-Arcade and enter Play Mode.","Leave the machines quiet and counters at zero."});d.SetChaos(1);d.ToggleChaos();await Task.Delay(6500);
+ GameShot("07-arcade","chaos",new{d.IsRunning,d.Chaos,d.Accepted,d.Replaced,d.Limited,d.CoolingDown,d.ActiveVoices,d.VoiceCapacity,d.LastDecision},new[]{"Set Chaos to 100% and start automatic play.","Let the machines run until accepted, replaced, limited and cooldown counters are visible."});return "Arcade: calm and busy limits";}
+ public static async Task<object> Jukebox(){await Ready();var d=Find<JukeboxDemo>();if(!d.HasPlayback)d.TogglePlayback();await Task.Delay(1800);
+ GameShot("08-jukebox","playing",new{d.CurrentTrack,d.TrackTitle,d.Bpm,d.IsPlaying,d.CurrentGain,d.Volume},new[]{"Open 08-Jukebox and press Play.","Let the first track play while DEV505 dances."});d.Next();await Task.Delay(950);
+ GameShot("08-jukebox","crossfade",new{d.CurrentTrack,d.TrackTitle,d.IsCrossfading,d.CurrentGain,d.OutgoingGain,d.Volume},new[]{"Choose the next track during playback.","Capture about one second into the 2.5-second crossfade, with both gain meters visible."});await Task.Delay(2100);d.TogglePlayback();await Task.Delay(160);
+ GameShot("08-jukebox","paused",new{d.CurrentTrack,d.TrackTitle,d.IsPaused,d.IsPlaybackPaused,d.CurrentGain,d.OutgoingGain},new[]{"Wait for the transition to finish, then choose Pause.","The retained music play and the dancer pause together."});return "Jukebox: playback, crossfade and pause";}
+ public static async Task<object> Portals(){await Ready();var d=Find<PortalsDemo>();await Until(()=>d.WorldAwake);
+ GameShot("09-portals","meadow",new{d.CurrentWorld,d.WorldName,d.Trips,d.EchoLingers,d.ActiveVoices},new[]{"Open 09-Portals and enter Play Mode.","Begin in Mint Meadow with its world ambience and portal hum."});if(!d.EchoLingers)d.ToggleEcho();d.StepThrough();await Task.Delay(240);
+ GameShot("09-portals","crossing",new{d.Transitioning,d.CurrentWorld,d.Trips,d.EchoLingers,d.EchoAlive},new[]{"Leave Echo lingers enabled and choose Step through.","Capture the player shrinking into the gate during travel."});await Until(()=>d.CurrentWorld==1);await Task.Delay(160);
+ GameShot("09-portals","detach",new{d.Transitioning,d.CurrentWorld,d.Trips,d.EchoLingers,d.EchoAlive,departure=d.LastDeparturePosition.ToString(),d.ActiveVoices},new[]{"Continue the same trip past its halfway point.","The old world owner is destroyed; the detached departure echo is still alive at its old position."});await Until(()=>!d.Transitioning);await Task.Delay(350);
+ GameShot("09-portals","cove",new{d.CurrentWorld,d.WorldName,d.Trips,d.EchoLingers,d.ActiveVoices},new[]{"Finish the trip to Crystal Cove.","The new world has its own ambience and spatial portal hum."});d.ToggleEcho();d.StepThrough();await Until(()=>d.CurrentWorld==0);await Task.Delay(400);
+ GameShot("09-portals","stop",new{d.CurrentWorld,d.Transitioning,d.Trips,d.EchoLingers,d.EchoAlive,d.ActiveVoices},new[]{"Turn Echo lingers off and travel back.","After the old owner is destroyed, the Stop-policy departure sound ends instead of lingering."});return "Portals: destinations, crossing and Stop/Detach";}
+
+ public static async Task<object> Footstep(){await Ready();var d=Find<FootstepPlayer>();var oldInput=UnityEngine.InputSystem.InputSystem.settings.backgroundBehavior;var editorBehavior=UnityEngine.InputSystem.InputSystem.settings.editorInputBehaviorInPlayMode;UnityEngine.InputSystem.InputSystem.settings.editorInputBehaviorInPlayMode=UnityEngine.InputSystem.InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView; UnityEngine.InputSystem.InputSystem.settings.backgroundBehavior=UnityEngine.InputSystem.InputSettings.BackgroundBehavior.IgnoreFocus;var keyboard=UnityEngine.InputSystem.InputSystem.AddDevice<UnityEngine.InputSystem.Keyboard>();
+ try{UnityEngine.InputSystem.InputSystem.QueueStateEvent(keyboard,new UnityEngine.InputSystem.LowLevel.KeyboardState(UnityEngine.InputSystem.Key.D));await Until(()=>d.transform.position.x>1.7f);UnityEngine.InputSystem.InputSystem.QueueStateEvent(keyboard,new UnityEngine.InputSystem.LowLevel.KeyboardState());await Task.Delay(150);
+ GameShot("02-footstep","stone",new{d.CurrentSurface,d.LastStepSurface,d.StepCount,position=d.transform.position.ToString()},new[]{"Open 02-Footstep and enter Play Mode.","From the center spawn, walk right a short distance on stone (D), then stop."});
+ UnityEngine.InputSystem.InputSystem.QueueStateEvent(keyboard,new UnityEngine.InputSystem.LowLevel.KeyboardState(UnityEngine.InputSystem.Key.A));await Until(()=>d.transform.position.x< -5f);UnityEngine.InputSystem.InputSystem.QueueStateEvent(keyboard,new UnityEngine.InputSystem.LowLevel.KeyboardState());await Task.Delay(150);
+ GameShot("02-footstep","grass",new{d.CurrentSurface,d.LastStepSurface,d.StepCount,position=d.transform.position.ToString()},new[]{"Walk left with A from the stone lane into grass.","Continue until a grass footstep is reported, then stop near the middle of that lane."});
+ UnityEngine.InputSystem.InputSystem.QueueStateEvent(keyboard,new UnityEngine.InputSystem.LowLevel.KeyboardState(UnityEngine.InputSystem.Key.D));await Until(()=>d.transform.position.x>5f);UnityEngine.InputSystem.InputSystem.QueueStateEvent(keyboard,new UnityEngine.InputSystem.LowLevel.KeyboardState());await Task.Delay(150);
+ GameShot("02-footstep","wood",new{d.CurrentSurface,d.LastStepSurface,d.StepCount,position=d.transform.position.ToString()},new[]{"Walk right across the stone lane and into wood with D.","Continue until a wood footstep is reported, then stop."});return "Footstep: actual keyboard-driven steps on all three surfaces";
+ }finally{UnityEngine.InputSystem.InputSystem.RemoveDevice(keyboard);UnityEngine.InputSystem.InputSystem.settings.backgroundBehavior=oldInput;UnityEngine.InputSystem.InputSystem.settings.editorInputBehaviorInPlayMode=editorBehavior;}}
+
+}

@@ -1,0 +1,29 @@
+---
+title: 'Bee in pictures.'
+description: 'Unity screenshots of Bee, with scene states, sound graphs, and steps to try.'
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Samples/03-Bee/Demo.unity
+  - Assets/DEV505/SoundManager/Scripts/Samples/Bee/BeeFlightDemo.cs
+tags: [screenshots, demos, bee]
+---
+
+import CaptureSet from '../../../components/CaptureSet.astro';
+import { sitePath } from '../../../lib/links';
+
+**03 / A little buzz.** Release the bee and watch it circle the player. The sound follows the bee, while the player at the center acts as the listener. Use headphones to hear its direction as well as its distance.
+
+These are real Unity captures with the scene’s own models, camera, and controls. Select a picture to enlarge it, or open **Try this in Unity** below it for the steps. The graph close views explain individual parts of the full graph.
+
+<a href={sitePath('captures/')}>All screenshot galleries</a> · <a href={sitePath('guides/position-and-ownership/')}>Read how sound follows a moving object</a>
+
+## In the scene
+
+<CaptureSet demo="03-bee" group="game" />
+
+## In the graph and Inspector
+
+A graph connects blocks called **nodes** to control a sound. The Inspector holds the event’s playback settings. The pictures below show the saved graph and settings; a full graph is an overview, so use the close views to read smaller fields.
+
+<CaptureSet demo="03-bee" group="editor" />

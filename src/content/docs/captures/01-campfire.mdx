@@ -1,0 +1,29 @@
+---
+title: 'Campfire in pictures.'
+description: 'Unity screenshots of Campfire, with scene states, sound graphs, and steps to try.'
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Samples/01-Campfire/Demo.unity
+  - Assets/DEV505/SoundManager/Scripts/Samples/Campfire/CampfireInteraction.cs
+tags: [screenshots, demos, campfire]
+---
+
+import CaptureSet from '../../../components/CaptureSet.astro';
+import { sitePath } from '../../../lib/links';
+
+**01 / A little warmth.** Follow a fire from a quiet pile of logs to a steady flame. Its sound graph starts an ignition sound, keeps a crackle running, and provides an ending when you put the fire out.
+
+These are real Unity captures with the scene’s own models, camera, and controls. Select a picture to enlarge it, or open **Try this in Unity** below it for the steps. The graph close views explain individual parts of the full graph.
+
+<a href={sitePath('captures/')}>All screenshot galleries</a> · <a href={sitePath('demos/01-campfire/')}>Read Campfire walkthrough</a>
+
+## In the scene
+
+<CaptureSet demo="01-campfire" group="game" />
+
+## In the graph and Inspector
+
+A graph connects blocks called **nodes** to control a sound. The Inspector holds the event’s playback settings. The pictures below show the saved graph and settings; a full graph is an overview, so use the close views to read smaller fields.
+
+<CaptureSet demo="01-campfire" group="editor" />

@@ -1,0 +1,15 @@
+import sys,json
+from pathlib import Path
+sys.path.insert(0,'/tmp');from m3_run import call
+samples='/Users/devisv/projects/unity/Sound-Manager/Assets/DEV505/SoundManager/Samples'
+def graph(entry,*args):
+ r=call('run_script','--file','/tmp/M3Graph.cs','--entry','M3Graph.'+entry,'--args',json.dumps(args),'--timeout_ms','25000','--timeout','30')
+ return r['result']
+if __name__=='__main__':
+ for folder,events in [('02-Footstep',['Footstep']),('03-Bee',['Bee']),('04-Engine',['Engine']),('05-Weather',['Weather','Thunder']),('06-Workshop',['Workshop']),('07-Arcade',['ArcadeZap','ArcadeCoin','ArcadeJackpot']),('08-Jukebox',['Jukebox']),('09-Portals',['PortalWorld','PortalHum','PortalEcho','PortalCut','PortalArrival']),('10-Launch',['LaunchPad','LaunchSequence','LaunchFlight','LaunchClamp','LaunchVent','LaunchUI'])]:
+  for event in events:
+   path='Assets/DEV505/SoundManager/Samples/'+folder+'/'+event+'.soundgraph'
+   result=graph('Overview',path,folder.lower(),'graph' if len(events)==1 else 'graph-'+event.lower())
+   nodes=graph('Nodes',event)
+   Path('/tmp/m3-nodes-'+event+'.json').write_text(json.dumps(nodes,indent=2))
+   print(folder,event,len(nodes),flush=True)

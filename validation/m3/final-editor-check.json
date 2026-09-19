@@ -1,0 +1,26 @@
+{
+  "scene": "Assets/DEV505/SoundManager/Samples/10-Launch/Demo.unity",
+  "dirty": false,
+  "playing": false,
+  "paused": false,
+  "background": false,
+  "gameSize": 1,
+  "windows": [
+    "Console",
+    "Game",
+    "Hierarchy",
+    "Inspector",
+    "Jukebox",
+    "LaunchClamp",
+    "LaunchFlight",
+    "LaunchPad",
+    "LaunchSequence",
+    "LaunchUI",
+    "LaunchVent",
+    "Project",
+    "Scene",
+    "Test Runner",
+    "UnityEditor.MainToolbarWindow"
+  ],
+  "selection": ""
+}

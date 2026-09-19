@@ -1,0 +1,29 @@
+---
+title: 'Portals in pictures.'
+description: 'Unity screenshots of Portals, with scene states, sound graphs, and steps to try.'
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Samples/09-Portals/Demo.unity
+  - Assets/DEV505/SoundManager/Scripts/Samples/Portals/PortalsDemo.cs
+tags: [screenshots, demos, portals]
+---
+
+import CaptureSet from '../../../components/CaptureSet.astro';
+import { sitePath } from '../../../lib/links';
+
+**09 / A little elsewhere.** Travel between two tiny worlds. Their sounds have owners, so leaving a world can stop its sounds together. Compare a departure echo that stops with its owner with one allowed to finish.
+
+These are real Unity captures with the scene’s own models, camera, and controls. Select a picture to enlarge it, or open **Try this in Unity** below it for the steps. The graph close views explain individual parts of the full graph.
+
+<a href={sitePath('captures/')}>All screenshot galleries</a> · <a href={sitePath('guides/position-and-ownership/')}>Read how owners control sound lifetimes</a>
+
+## In the scene
+
+<CaptureSet demo="09-portals" group="game" />
+
+## In the graph and Inspector
+
+A graph connects blocks called **nodes** to control a sound. The Inspector holds the event’s playback settings. The pictures below show the saved graph and settings; a full graph is an overview, so use the close views to read smaller fields.
+
+<CaptureSet demo="09-portals" group="editor" />

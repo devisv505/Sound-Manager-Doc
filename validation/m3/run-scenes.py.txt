@@ -1,0 +1,32 @@
+import subprocess,json,time,sys
+from pathlib import Path
+UNITY='/Users/devisv/.unity/bin/unity'
+PROJECT='/Users/devisv/projects/unity/Sound-Manager'
+def call(*args):
+ p=subprocess.run([UNITY,'command',*args,'--format','json'],cwd=PROJECT,capture_output=True,text=True)
+ j=json.loads(p.stdout)
+ if not j.get('success'):raise RuntimeError(p.stdout)
+ r=j.get('data',{}).get('result')
+ if isinstance(r,dict) and r.get('success') is False:raise RuntimeError(json.dumps(r))
+ return r
+def eval(code):
+ r=call('eval',code)
+ return r.get('result') if isinstance(r,dict) else r
+def stop():
+ call('editor_stop')
+ for i in range(40):
+  if not eval('return UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode;'):return
+  time.sleep(.25)
+ raise RuntimeError('Play mode did not exit')
+def run(folder,entry):
+ stop()
+ state=eval('return new {dirty=UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty};')
+ if state['dirty']:raise RuntimeError('Scene is dirty; preserve it')
+ eval('UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/DEV505/SoundManager/Samples/'+folder+'/Demo.unity"); return true;')
+ call('editor_play');time.sleep(1)
+ r=call('run_script','--file','/tmp/M3Capture.cs','--entry','M3Capture.'+entry,'--timeout_ms','55000','--timeout','60')
+ Path('/tmp/m3-'+entry.lower()+'-result.json').write_text(json.dumps(r,indent=2))
+ print(folder+': '+str(r.get('result')),flush=True)
+if __name__=='__main__':
+ for folder,entry in [('03-Bee','Bee'),('04-Engine','Engine'),('05-Weather','Weather'),('06-Workshop','Workshop'),('07-Arcade','Arcade'),('08-Jukebox','Jukebox'),('09-Portals','Portals')]:run(folder,entry)
+ stop()

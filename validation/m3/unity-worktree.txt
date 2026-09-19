@@ -1,0 +1,11 @@
+AD "Assets/DEV505/SoundManager/Samples/GraphWorkflow/New Sound Event.soundgraph"
+AD "Assets/DEV505/SoundManager/Samples/GraphWorkflow/New Sound Event.soundgraph.meta"
+?? .DS_Store
+?? Assets/.DS_Store
+?? Assets/DEV505/.DS_Store
+?? Assets/DEV505/SoundManager/.DS_Store
+?? Assets/DEV505/SoundManager/Samples/.DS_Store
+?? Assets/DEV505/SoundManager/Samples/02-Footstep/.DS_Store
+?? Assets/DEV505/SoundManager/Samples/03-Bee/.DS_Store
+?? Assets/DEV505/SoundManager/Samples/04-Engine/.DS_Store
+?? Assets/DEV505/SoundManager/Scripts/.DS_Store
