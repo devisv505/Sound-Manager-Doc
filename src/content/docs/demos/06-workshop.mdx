@@ -1,0 +1,133 @@
+---
+title: 'A little work.'
+description: 'Switch tools, order actions, and overlap hammer taps.'
+kind: demo
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Samples/Workshop/WorkshopDemo.cs
+  - Assets/DEV505/SoundManager/Samples/06-Workshop/Workshop.soundgraph
+tags: [unity, sound, workshop]
+demo:
+  number: 6
+  scene: Assets/DEV505/SoundManager/Samples/06-Workshop/Demo.unity
+  keys: ['Sounds.Workshop']
+  screenshots:
+    [
+      'workshop-hammer-over-saw',
+      'workshop-hammer',
+      'workshop-handsaw',
+      'workshop-drill',
+      'workshop-graph',
+      'workshop-work-sequence',
+      'workshop-hammer-signal',
+    ]
+---
+
+import Capture from '../../../components/Capture.astro';
+import Explanation from '../../../components/Explanation.astro';
+import DemoContract from '../../../components/DemoContract.astro';
+import DemoNavigation from '../../../components/DemoNavigation.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation title="Order the actions. Let sounds overlap where they should.">
+  An integer selects the tool, signals tell it when to work or strike, and a Sequence sends commands
+  in order. A second Workshop play lets a manual hammer tap ring over the handsaw or drill.
+</Explanation>
+
+<Capture id="workshop-hammer-over-saw" eager />
+
+## Try it in Unity
+
+In Unity's **Project** window, open `Assets/DEV505/SoundManager/Samples/06-Workshop/Demo.unity`. The supplied scene already has its Sound Manager, event registrations, generated keys, camera, and Audio Listener. Press **Play**, wait for the demo to be ready, and click the **Game** view before using the keyboard. If you are setting up a separate scene, follow <a href={sitePath('getting-started/')}>Your first sound</a> first.
+
+| Control                 | Action                                  |
+| ----------------------- | --------------------------------------- |
+| **1 / 2 / 3**           | Select Hammer / Handsaw / Drill.        |
+| **Space** / work button | Work or take a break.                   |
+| **T** / One hammer tap  | Add a manual hammer tap when available. |
+| Work pace slider        | Change the working pace.                |
+
+Choose Handsaw and start working. Listen to the loop, then press T: a short hammer impact sounds over it. Switch to Drill while working; the previous tool stops before the new one starts. Take a break to stop the tool voices. Select Hammer and work again to hear the automatic strikes at the animation's contact frames.
+
+The listener is fixed in the scene. The main tool sound follows the workstation's sound position; manual taps during another tool use a separate hammer sound origin so the impact tail remains in the right place.
+
+<Capture id="workshop-hammer" />
+<Capture id="workshop-handsaw" />
+<Capture id="workshop-drill" />
+
+## Read the graph
+
+<Capture id="workshop-graph" />
+
+`Sounds.Workshop` starts as a silent, waiting play. **Keep Alive** lets it remain available even with no voice playing. Tool is an Int: **0 = Hammer, 1 = Handsaw, 2 = Drill**. Pace is a smoothed Float between 0 and 1.
+
+| Signal   | What the graph does                                                                                             |
+| -------- | --------------------------------------------------------------------------------------------------------------- |
+| `Work`   | Stops the main play's old tool voices, chooses Tool, starts the chosen loop if needed, and plays a latch click. |
+| `Pause`  | Stops its tool voices but leaves the Keep Alive play waiting.                                                   |
+| `Strike` | Plays a short hammer impact.                                                                                    |
+
+### Sequence means command order
+
+<Capture id="workshop-work-sequence" />
+
+The Work signal enters a Sequence. Its outputs execute in numbered order during the same graph execution:
+
+1. **Out 0:** send Stop to the saw, drill, and hammer playback nodes in this play.
+2. **Out 1:** branch on Tool. Handsaw or Drill starts its loop; Hammer waits for Strike.
+3. **Out 2:** play the latch click.
+
+A Sequence does **not** wait for each recording or fade to finish. It makes the commands happen in order. Use a recording's Finished output or an explicit Delay when elapsed time matters. This is why the latch can overlap the selected tool even though it is the last command.
+
+### Why a second play is needed
+
+<Capture id="workshop-hammer-signal" />
+
+The demo retains a main Workshop handle. When a manual hammer tap is requested over the saw or drill, it also creates or reuses a second Workshop handle with Tool set to Hammer. Strike goes to that second handle. Both share the demo's owner for cleanup, but each has its own graph state and sound origin. The event allows two overlapping plays for this reason.
+
+While Hammer is the active working tool, animation contact already sends automatic Strike signals. The manual tap button is disabled during that automatic hammer work or while a tap animation is already happening. It is available while the handsaw or drill works; the extra tap should not stop that loop.
+
+## Select, work, and strike in code
+
+Set the selection before sending Work:
+
+```csharp title="Choose the main tool · excerpt"
+SoundBus.SetParameter(session, SoundParameters.Workshop.Tool, SoundValue.Int(1));
+SoundBus.SendSignal(session, "Work");
+```
+
+Here `session` is the accepted main Workshop handle. For a hammer tap over that handsaw, send `"Strike"` to the separate tap handle. The complete recipe creates both handles, supplies initial parameters, and stops both through their owner on disable.
+
+```csharp title="Take a break · excerpt"
+SoundBus.SendSignal(session, "Pause");
+SoundBus.SendSignal(taps, "Pause");
+```
+
+This graph signal named Pause is different from `SoundBus.SetPaused`: it stops the tool voices and keeps the graph ready for another command. API pause would suspend playback and graph time for later continuation.
+
+## What belongs to the demo?
+
+The graph chooses voices and orders their commands. The sample controller chooses tools, animates them, computes the working rhythm, sends Strike at contact, and enables/disables the buttons. Pace affects both graph sound controls and the controller's animation timing. The complete recipe has no automatic hammer animation; you call Strike at your own contact frame.
+
+## Common surprises
+
+- **Selecting Hammer produces no repeated hits.** Work selects it; Strike produces an impact. The full demo's animation supplies repeated contact signals.
+- **A tool switch cuts a hammer tail.** Work stops the main play's existing hammer node. Use the separate tap play when overlap is required.
+- **Sequence seems instantaneous.** It orders commands, not clip durations.
+- **The break leaves a live handle.** Keep Alive is intentional; cleanup must still stop that handle when the interaction is disabled.
+
+## Event settings, parameters, and signals
+
+<DemoContract demo="06-workshop" />
+
+## Take it into your own game
+
+<a href={sitePath('recipes/workshop-tools/')}>Open the complete integration recipe</a> for the
+script, Inspector setup, a short test, and cleanup. Use
+<a href={sitePath('api/context/')}>Play context</a> for initial values and placement, and
+<a href={sitePath('api/sound-bus/')}>SoundBus</a> for playback controls.
+
+<a href={sitePath('captures/06-workshop/')}>All Workshop Unity captures</a> includes further states
+and readable graph details, with steps to reproduce each view.
+
+<DemoNavigation number={6} />

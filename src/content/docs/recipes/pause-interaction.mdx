@@ -1,0 +1,76 @@
+---
+title: 'Pause every play in an interaction.'
+description: 'Pause current and outgoing music together, and distinguish that local pause from the service-wide pause used by Launch.'
+kind: recipe
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayContext.cs
+tags: [unity, recipes, pause-interaction]
+---
+
+import Explanation from '../../../components/Explanation.astro';
+import ExampleCode from '../../../components/ExampleCode.astro';
+import RecipeSetup from '../../../components/RecipeSetup.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation label="CODE RECIPE" title="Pause every play in an interaction.">
+  Pause current and outgoing music together, and distinguish that local pause from the service-wide
+  pause used by Launch.
+</Explanation>
+
+## Set up the scene
+
+<RecipeSetup file="TwoTrackMusic.cs" events="Jukebox from 08-Jukebox">
+  <p>
+    Assign the allowed Mint Morning and Peach Sunset clips to First Track and Second Track, as in
+    the music crossfade recipe. No other references are needed.
+  </p>
+</RecipeSetup>
+
+## Try the component
+
+Start the first track, wait until it fades up, then start the second. Choose **Pause both tracks** partway through the crossfade. Wait longer than the usual 2.5-second transition, then choose **Resume both tracks**. You should hear the transition continue from where it paused, with the outgoing play still present until it reaches silence.
+
+## Local pause belongs to all related handles
+
+```csharp title="Inside TwoTrackMusic.SetPaused · excerpt"
+SoundBus.SetPaused(current, value);
+SoundBus.SetPaused(outgoing, value);
+```
+
+`value` is true to pause and false to resume. Pausing only the current play would leave the outgoing song audible or advancing. Pausing is not stopping: it keeps the play, voices, and graph progression available for continuation. The component also avoids discarding the outgoing handle during pause.
+
+The complete component below can be used directly. Stop music now ends both plays and clears the local pause flag; disabling the component performs the same cleanup.
+
+## Global pause, as used by Launch
+
+Launch pauses the service as a whole so its pad, countdown, and rocket audio stay together. It also pauses its own animations and particles. Those visual effects are outside Sound Manager.
+
+The following excerpt belongs in a controller that owns the pause interaction and restores the previous state when it leaves. Keep `wasPaused` and `service` as fields if pause and restoration happen in separate methods:
+
+```csharp title="Service-wide pause and restoration · excerpt"
+var service = SoundServices.Current;
+if (service != null)
+{
+    bool wasPaused = service.Paused;
+    service.Paused = true;
+    // Keep it paused while your interaction needs it.
+    // On exit, restore the state you found:
+    service.Paused = wasPaused;
+}
+```
+
+This block demonstrates the state ownership; running it as-is restores immediately. Do not blindly set Paused to false on exit if another system had already paused it. A per-play resume does not override a paused service. LaunchUI is explicitly configured to ignore game pause, allowing UI clicks to remain audible.
+
+Read <a href={sitePath('demos/10-launch/')}>Launch's full walkthrough</a> for its combined pause behavior. Workshop's signal named Pause is a third, different concept: that graph stops tools and stays alive waiting for Work.
+
+## Complete component
+
+<ExampleCode file="TwoTrackMusic.cs" />
+
+## Keep exploring
+
+Read the <a href={sitePath('demos/08-jukebox/')}>demo walkthrough</a> for the graph, parameters, controls, and Unity screenshots. The <a href={sitePath('api/services/')}>related API reference</a> explains the calls used here. Return to <a href={sitePath('recipes/')}>all twelve recipes</a> to choose another interaction.
+
+This page imports the checked C# file directly. It was compiled against the documented Unity revision; its runtime checks and source hash are recorded in the documentation repository's validation files.

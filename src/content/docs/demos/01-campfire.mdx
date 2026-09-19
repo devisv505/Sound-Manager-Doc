@@ -15,11 +15,12 @@ demo:
 ---
 
 import Screenshot from '../../../components/Screenshot.astro';
+import DemoNavigation from '../../../components/DemoNavigation.astro';
 import Explanation from '../../../components/Explanation.astro';
 import lit from '../../../assets/demos/01-campfire/lit.png';
 import unlit from '../../../assets/demos/01-campfire/unlit.png';
 import graph from '../../../assets/demos/01-campfire/graph.png';
-import { sitePath, sourceLink } from '../../../lib/links';
+import { sitePath } from '../../../lib/links';
 
 <Explanation title="A complete sound, from start to finish">
   One event plays the ignition, keeps the fire crackling, and adds an extinguish sound. Learn how a
@@ -98,10 +99,10 @@ Calling stop is therefore the beginning of the ending, not necessarily an immedi
 | ------------------ | ------------------------ | ------------------------------------------------------------------------------ |
 | Event key          | `Sounds.Campfire`        | Resolves the registered Campfire event.                                        |
 | Spatial blend      | 1                        | Fully 3D playback.                                                             |
-| Min / max distance | 2 / 20                   | Distances that shape how volume falls as the listener moves away. |
+| Min / max distance | 2 / 20                   | Distances that shape how volume falls as the listener moves away.              |
 | Owner loss         | Stop                     | Losing the owner/follow target stops the play according to the event's policy. |
 | Max instances      | 8                        | Event-level ceiling; the demo controller itself retains just one active fire.  |
-| Concurrency        | ReplaceOldest            | At the event's overlap limit, replace its oldest play. |
+| Concurrency        | ReplaceOldest            | At the event's overlap limit, replace its oldest play.                         |
 | `Intensity`        | Float, 0–1; default 0.65 | Crackle volume, smoothed up/down at 0.5 units per second.                      |
 
 There are no authored signals in this graph and no intensity slider in the current Campfire HUD. Code can still set the exposed parameter.
@@ -133,18 +134,4 @@ Read <a href={sitePath('recipes/campfire-loop/')}>Start, loop, and stop</a> for 
 - **Moving away makes it quieter.** This is a spatial event. Check the listener and distance before changing volumes.
 - **Intensity does not make the flames bigger.** Here it controls audio only. Particle/light behavior belongs to the demo controller.
 
-## Explore the source
-
-- <a
-    href={sourceLink('Assets/DEV505/SoundManager/Scripts/Samples/Campfire/CampfireInteraction.cs')}
-  >
-    Campfire interaction and visual lifecycle
-  </a>
-- <a href={sourceLink('Assets/DEV505/SoundManager/Samples/01-Campfire/Campfire.soundgraph')}>
-    Authored Campfire sound graph
-  </a>
-- <a href={sourceLink('Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.cs')}>
-    Runtime stop and release behavior
-  </a>
-
-Next in the Unity collection: **02 / Footstep — Every step counts.** Explore its feature summary in the <a href={sitePath('demos/')}>sound lab gallery</a>; its detailed guide is planned for the next documentation chapters.
+<DemoNavigation number={1} />

@@ -1,0 +1,56 @@
+---
+title: 'Play one step on the right surface.'
+description: 'Choose a surface before playback starts, then let the graph choose and trim one variation.'
+kind: recipe
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayContext.cs
+tags: [unity, recipes, surface-footsteps]
+---
+
+import Explanation from '../../../components/Explanation.astro';
+import ExampleCode from '../../../components/ExampleCode.astro';
+import RecipeSetup from '../../../components/RecipeSetup.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation label="CODE RECIPE" title="Play one step on the right surface.">
+  Choose a surface before playback starts, then let the graph choose and trim one variation.
+</Explanation>
+
+## Set up the scene
+
+<RecipeSetup file="SurfaceFootsteps.cs" events="Footstep from 02-Footstep">
+  <p>
+    No Inspector references are needed. This example has no character controller: its test actions
+    stand in for real footfalls.
+  </p>
+</RecipeSetup>
+
+## Try the component
+
+Choose **Preview grass step**, **Preview stone step**, and **Preview wood step** from the component menu. Each should produce one short step with the appropriate texture. Repeat a surface several times to hear its variations. Stopping Play Mode ends the test.
+
+Your character controller can call `PlayStep(groundType, contactPosition)` at a footfall. Here groundType follows the sample's scene enum: Unknown 0, Grass 1, Stone 2, Wood 3. The script maps that to the graph's Int: Grass 0, Stone 1, Wood 2. Adapt this one mapping if your game's ground identifiers differ.
+
+## Why the parameter is initial
+
+`With(SoundParameters.Footstep.Surface, surface)` supplies an Int before the graph begins. Its selector reads that value when choosing the clip. Playing first and setting Surface afterward can leave the already selected step unchanged. Unknown ground is skipped.
+
+The example reports refused requests and lets accepted steps end naturally. It does not keep a loop handle or detect your character's contact with the ground. Use your movement logic or an animation event to decide when to call it; do not call it every frame.
+
+The current graph is 2D even though the context carries a contact position. To make footsteps spatial in your own project, configure the event for 3D and check its distance settings. The graph's trim selection remains the same.
+
+## Prepare the variations
+
+Open Footstep's surface groups. Each surface uses four independently trimmed Wave Assets. Select an asset, expand **Range** in the editing area, preview the recording, and choose a section containing one impact and its tail. Start is the beginning in seconds; Length is the duration. The source file does not need to be split into separate audio files. See the <a href={sitePath('demos/02-footstep/#trim-one-footfall-from-a-long-recording')}>trim walkthrough and Unity close-up</a>.
+
+## Complete component
+
+<ExampleCode file="SurfaceFootsteps.cs" />
+
+## Keep exploring
+
+Read the <a href={sitePath('demos/02-footstep/')}>demo walkthrough</a> for the graph, parameters, controls, and Unity screenshots. The <a href={sitePath('api/context/')}>related API reference</a> explains the calls used here. Return to <a href={sitePath('recipes/')}>all twelve recipes</a> to choose another interaction.
+
+This page imports the checked C# file directly. It was compiled against the documented Unity revision; its runtime checks and source hash are recorded in the documentation repository's validation files.

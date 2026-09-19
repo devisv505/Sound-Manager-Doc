@@ -1,0 +1,126 @@
+---
+title: 'A little groove.'
+description: 'Crossfade two tracks and keep a little dancer moving.'
+kind: demo
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Samples/Jukebox/JukeboxDemo.cs
+  - Assets/DEV505/SoundManager/Samples/08-Jukebox/Jukebox.soundgraph
+tags: [unity, sound, jukebox]
+demo:
+  number: 8
+  scene: Assets/DEV505/SoundManager/Samples/08-Jukebox/Demo.unity
+  keys: ['Sounds.Jukebox']
+  screenshots:
+    [
+      'jukebox-crossfade',
+      'jukebox-playing',
+      'jukebox-paused',
+      'jukebox-graph',
+      'jukebox-allowed-tracks',
+      'jukebox-gain-volume',
+    ]
+---
+
+import Capture from '../../../components/Capture.astro';
+import Explanation from '../../../components/Explanation.astro';
+import DemoContract from '../../../components/DemoContract.astro';
+import DemoNavigation from '../../../components/DemoNavigation.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation title="Fade one track out while the next fades in.">
+  An allowed audio-clip parameter chooses the music. Two plays overlap during a transition, each
+  with its own smoothed gain. Shared volume and pause controls keep both sides of that transition
+  together.
+</Explanation>
+
+<Capture id="jukebox-crossfade" eager />
+
+## Try it in Unity
+
+In Unity's **Project** window, open `Assets/DEV505/SoundManager/Samples/08-Jukebox/Demo.unity`. The supplied scene already has its Sound Manager, event registrations, generated keys, camera, and Audio Listener. Press **Play**, wait for the demo to be ready, and click the **Game** view before using the keyboard. If you are setting up a separate scene, follow <a href={sitePath('getting-started/')}>Your first sound</a> first.
+
+| Control                       | Action                                     |
+| ----------------------------- | ------------------------------------------ |
+| **Space**                     | Play or pause.                             |
+| **1 / 2 / 3**                 | Select one of the three tracks.            |
+| **Left / Right**              | Previous or next track.                    |
+| **S**                         | Stop music.                                |
+| **R**                         | Toggle automatic next-track behavior.      |
+| Track cards and volume slider | Choose music and adjust its shared volume. |
+
+Start Mint Morning and let it reach full level. Choose Peach Sunset. For roughly 2.5 seconds, both tracks are alive: the first recedes as the next arrives. Pause during a transition, then resume. Both recordings and their fade progression should continue together.
+
+The event is **2D stereo music**. The scene still needs its configured Audio Listener, but the jukebox's distance from that listener does not attenuate these tracks.
+
+<Capture id="jukebox-playing" />
+<Capture id="jukebox-paused" />
+
+## Read the graph
+
+<Capture id="jukebox-graph" />
+<Capture id="jukebox-allowed-tracks" />
+
+`Track` is an Asset parameter. Its allowed list contains Mint Morning, Peach Sunset, and Midnight Pixels. Supplying the chosen clip in the initial context tells the playback node what to start. A clip that is outside the allowed list is not a substitute track; handle the refused context instead.
+
+`Gain` is each play's transition amount. `Volume` is the listener's volume preference, applied to both plays. Keeping them separate means moving the volume slider does not overwrite the fade.
+
+<Capture id="jukebox-gain-volume" />
+
+Gain rises and falls at **0.4 units per second**, so a full 0-to-1 change takes **2.5 seconds**. The graph shapes it with `sin(Gain × π / 2)` and multiplies by Volume. With opposing full fades, this gives an equal-power curve: the middle of the transition avoids the level dip of a simple linear blend. The perceived result still depends on the loudness and content of both recordings.
+
+## The two-play handoff
+
+The controller follows this order:
+
+1. Start the selected Track with **Gain 0**, so it cannot begin at full level before the fade is set up.
+2. If accepted, keep the old handle as the outgoing play and the new one as current.
+3. Set outgoing Gain to 0 and incoming Gain to 1. Let graph smoothing do the fade.
+4. Read the outgoing parameter's **current** value. Stop that play only once it has reached silence.
+
+```csharp title="Start the next track quietly · excerpt"
+var context = SoundPlayContext.At(transform.position, owner)
+    .With(SoundParameters.Jukebox.Track, selectedClip)
+    .With(SoundParameters.Jukebox.Gain, 0f)
+    .With(SoundParameters.Jukebox.Volume, volume);
+var result = SoundBus.Play(Sounds.Jukebox, context);
+```
+
+The recipe supplies the ready service and owner, and retains handles only after acceptance. Once both handles exist:
+
+```csharp title="Ask the graph to crossfade · excerpt"
+SoundBus.SetFloat(outgoing, SoundParameters.Jukebox.Gain, 0f);
+SoundBus.SetFloat(current, SoundParameters.Jukebox.Gain, 1f);
+```
+
+Setting a target of zero is not proof that the old track is silent yet. Stopping immediately would cut off its fade. The demo permits two Jukebox instances; it keeps the **latest requested selection** while a transition is underway and starts it when room is available. That selection queue is controller behavior, not built into the graph.
+
+## Pause, stop, and dance
+
+Pause applies to both handles and freezes their graph progression. Do not retire the outgoing track while paused just because its target is zero. Normal Stop in the full demo fades the music toward silence; stopping while paused cleans it up directly. Disable cleanup also ends all music owned by the controller.
+
+DEV505's dance and record movement use **authored BPM metadata** for each track. The demo is not detecting tempo or analyzing an audio spectrum. The crossfade is not beat matched, and the elapsed-time display is an estimate rather than an exact DSP playback position. Those are deliberate boundaries of this sample.
+
+## Common surprises
+
+- **The new track jumps in loudly.** Give it initial Gain 0 in the context, before playback begins.
+- **The old track cuts off.** Wait for Current gain to reach zero; Target becomes zero immediately.
+- **One song keeps playing during pause.** Pause current and outgoing handles together.
+- **Rapid choices are refused.** The graph allows two plays. The demo queues the latest choice; the smaller recipe asks you to wait for the current transition.
+- **The dancer is out of step with an edited track.** Update its authored BPM metadata; it is not doing automatic beat detection.
+
+## Event settings, parameters, and signals
+
+<DemoContract demo="08-jukebox" />
+
+## Take it into your own game
+
+<a href={sitePath('recipes/music-crossfade/')}>Open the complete integration recipe</a> for the
+script, Inspector setup, a short test, and cleanup. Use
+<a href={sitePath('api/context/')}>Play context</a> for initial values and placement, and
+<a href={sitePath('api/sound-bus/')}>SoundBus</a> for playback controls.
+
+<a href={sitePath('captures/08-jukebox/')}>All Jukebox Unity captures</a> includes further states
+and readable graph details, with steps to reproduce each view.
+
+<DemoNavigation number={8} />

@@ -1,0 +1,139 @@
+---
+title: 'A little elsewhere.'
+description: 'Let a world go. Choose which sounds stay behind.'
+kind: demo
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Samples/Portals/PortalsDemo.cs
+  - Assets/DEV505/SoundManager/Samples/09-Portals/PortalArrival.soundgraph
+  - Assets/DEV505/SoundManager/Samples/09-Portals/PortalCut.soundgraph
+  - Assets/DEV505/SoundManager/Samples/09-Portals/PortalEcho.soundgraph
+  - Assets/DEV505/SoundManager/Samples/09-Portals/PortalHum.soundgraph
+  - Assets/DEV505/SoundManager/Samples/09-Portals/PortalWorld.soundgraph
+tags: [unity, sound, portals]
+demo:
+  number: 9
+  scene: Assets/DEV505/SoundManager/Samples/09-Portals/Demo.unity
+  keys:
+    [
+      'Sounds.PortalArrival',
+      'Sounds.PortalCut',
+      'Sounds.PortalEcho',
+      'Sounds.PortalHum',
+      'Sounds.PortalWorld',
+    ]
+  screenshots:
+    [
+      'portals-detach',
+      'portals-meadow',
+      'portals-crossing',
+      'portals-cove',
+      'portals-stop',
+      'portals-graph-portalworld',
+      'portals-graph-portalhum',
+      'portals-detach-settings',
+      'portals-stop-settings',
+      'portals-graph-portalecho',
+      'portals-graph-portalarrival',
+    ]
+---
+
+import Capture from '../../../components/Capture.astro';
+import Explanation from '../../../components/Explanation.astro';
+import DemoContract from '../../../components/DemoContract.astro';
+import DemoNavigation from '../../../components/DemoNavigation.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation title="Remove the owner. Choose what is allowed to linger.">
+  A portal world owns its ambience, hum, and departure sound. When its temporary sound object is
+  destroyed, Stop ends some plays while Detach lets an echo finish at its last position.
+</Explanation>
+
+<Capture id="portals-detach" eager />
+
+## Try it in Unity
+
+In Unity's **Project** window, open `Assets/DEV505/SoundManager/Samples/09-Portals/Demo.unity`. The supplied scene already has its Sound Manager, event registrations, generated keys, camera, and Audio Listener. Press **Play**, wait for the demo to be ready, and click the **Game** view before using the keyboard. If you are setting up a separate scene, follow <a href={sitePath('getting-started/')}>Your first sound</a> first.
+
+| Control                       | Action                                                      |
+| ----------------------------- | ----------------------------------------------------------- |
+| **Space** / Step through      | Cross to the other world, or wake the portals when closed.  |
+| **E** / Echo lingers          | Toggle the departure's owner-loss policy between crossings. |
+| **X** / close-or-wake control | Close or wake the portals.                                  |
+
+Begin in Mint Meadow with Echo lingers enabled. Step through, and listen behind you as the departure echo continues while the destination ambience arrives. Turn Echo lingers off and cross again. This time the same departure recording stops when the outgoing sound object is removed.
+
+The player and listener travel together. The change you hear comes from both source placement and listener movement. These are two destinations **inside one Unity scene**; the demo does not load or unload scene files.
+
+<Capture id="portals-meadow" />
+<Capture id="portals-crossing" />
+<Capture id="portals-cove" />
+<Capture id="portals-stop" />
+
+## Five events, one clear ownership story
+
+| Event                  | Role                                                      |
+| ---------------------- | --------------------------------------------------------- |
+| `Sounds.PortalWorld`   | Loop the selected world's ambience.                       |
+| `Sounds.PortalHum`     | Loop the portal's nearby hum.                             |
+| `Sounds.PortalEcho`    | Departure recording with owner loss set to Detach.        |
+| `Sounds.PortalCut`     | The same departure recording with owner loss set to Stop. |
+| `Sounds.PortalArrival` | Short cue on arrival.                                     |
+
+The controller creates a temporary audio-rig GameObject at the gate and obtains `service.OwnerOf(rig)`. World and Hum follow that object's Transform and share its owner. `PortalWorld.Ambience` initially selects Meadow or Crystals from its allowed clip list.
+
+<Capture id="portals-graph-portalworld" />
+<Capture id="portals-graph-portalhum" />
+
+The ambience and hum graphs start loops and respond to stopping. During departure, Echo or Cut starts on the outgoing rig. Midway through travel, the controller destroys that rig. Its owner and follow target are now gone.
+
+<Capture id="portals-detach-settings" />
+<Capture id="portals-stop-settings" />
+
+Owner-loss Stop retires the world ambience and hum. With Echo lingers enabled, the departure uses **Detach**: the runtime drops the missing target and lets playback finish at the last known position. It does not attach the old echo to the arriving player. With Echo lingers disabled, PortalCut uses **Stop**, so that departure ends with its owner.
+
+<Capture id="portals-graph-portalecho" />
+<Capture id="portals-graph-portalarrival" />
+
+The destination creates its own audio rig, starts its ambience and hum, and adds Arrival. The old echo and new world can therefore overlap without belonging to the same lifetime.
+
+## Follow and own are separate choices
+
+```csharp title="Start on a temporary rig · excerpt"
+var owner = service.OwnerOf(rig);
+var context = SoundPlayContext.Following(rig.transform, owner);
+var result = SoundBus.Play(Sounds.PortalEcho, context);
+```
+
+`rig` is a GameObject and `service` is ready. Following supplies the position; the owner token groups the interaction's lifetime. Destroying the rig later lets each event apply its authored owner-loss policy.
+
+Do **not** call StopOwned as part of the Detach comparison. That explicitly asks all owned plays to stop, removing the behavior you are trying to hear. Owner loss and an explicit stop request are different operations.
+
+The full controller keeps its handles, including detached departures. On disable it explicitly stops those handles and destroys remaining rigs, so leaving the demo does not leave echoes behind. The smaller recipe demonstrates the two policies using one temporary object and a short delay before destruction.
+
+## What belongs to the demo?
+
+The crossing animation, islands, world selection, listener travel, portal glow, and rig creation/destruction belong to `PortalsDemo`. Sound Manager supplies ownership, following, event-specific loss policies, and sound playback. Detach preserves sound position and lifetime; it does not preserve the destroyed visual object.
+
+## Common surprises
+
+- **The echo vanishes even with Detach.** Check for an explicit StopOwned or StopAll call before destroying the owner.
+- **The echo moves with the destination.** Keep the outgoing sound on its own rig; do not reuse the player as its follow target.
+- **The echo survives after leaving the demo.** Retain detached handles and stop them during controller cleanup.
+- **A scene-loading system is expected.** This sample uses GameObject destruction within one visible scene. Adapt ownership to your own scene-loading lifecycle separately.
+
+## Event settings, parameters, and signals
+
+<DemoContract demo="09-portals" />
+
+## Take it into your own game
+
+<a href={sitePath('recipes/owner-loss/')}>Open the complete integration recipe</a> for the script,
+Inspector setup, a short test, and cleanup. Use <a href={sitePath('api/context/')}>Play context</a>
+for initial values and placement, and <a href={sitePath('api/sound-bus/')}>SoundBus</a> for playback
+controls.
+
+<a href={sitePath('captures/09-portals/')}>All Portals Unity captures</a> includes further states
+and readable graph details, with steps to reproduce each view.
+
+<DemoNavigation number={9} />

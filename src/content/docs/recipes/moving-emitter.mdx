@@ -1,0 +1,57 @@
+---
+title: 'Follow a moving sound source.'
+description: 'Start a looping buzz once, move its Transform, and adjust its pitch without replacing the play.'
+kind: recipe
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayContext.cs
+tags: [unity, recipes, moving-emitter]
+---
+
+import Explanation from '../../../components/Explanation.astro';
+import ExampleCode from '../../../components/ExampleCode.astro';
+import RecipeSetup from '../../../components/RecipeSetup.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation label="CODE RECIPE" title="Follow a moving sound source.">
+  Start a looping buzz once, move its Transform, and adjust its pitch without replacing the play.
+</Explanation>
+
+## Set up the scene
+
+<RecipeSetup file="MovingBeeSound.cs" events="Bee from 03-Bee">
+  <p>
+    Optionally create a second GameObject named Bee and drag its Transform into the{' '}
+    <strong>Bee</strong> field. If left empty, the script follows its own GameObject. Place it about
+    one or two units from the listener.
+  </p>
+</RecipeSetup>
+
+## Try the component
+
+The script starts buzzing when Play Mode begins. Move the Bee object from left to right in the Scene view and listen to the change. Change **Wing Speed** in the Inspector, then choose **Stop buzzing**. Choose **Begin buzzing** to start again. Disable the component to check that it cleans up.
+
+This small script does not animate a bee. Move the Transform yourself or attach your own movement script. Keep it within the event's 0.8–4 unit distance range for an easy listening test.
+
+## Position and lifetime
+
+`Following(target, owner)` keeps the sound at a moving Transform. The runtime updates the voice positions as that Transform moves. `At(target.position)` would instead copy one position.
+
+The owner is the hosting GameObject, which can differ from the Bee target. This lets owner-wide cleanup reach the interaction, while the sound follows the right emitter. The supplied Bee event uses owner-loss Stop: losing its required owner or follow target stops the play. See <a href={sitePath('recipes/owner-loss/')}>Stop versus Detach</a> for a different policy.
+
+## Start once, update the value
+
+`BeginBuzzing` ignores repeat starts while the retained handle is alive. Update changes WingSpeed on that play. OnDisable stops it and clears the field. `IsAlive` asks the service whether a play still exists; a nonempty handle alone is not evidence that it is still running.
+
+WingSpeed uses zero smoothing in this graph, so its speed/pitch change is immediate. The <a href={sitePath('recipes/live-parameters/')}>live parameter recipe</a> demonstrates gradual changes instead.
+
+## Complete component
+
+<ExampleCode file="MovingBeeSound.cs" />
+
+## Keep exploring
+
+Read the <a href={sitePath('demos/03-bee/')}>demo walkthrough</a> for the graph, parameters, controls, and Unity screenshots. The <a href={sitePath('api/ownership/')}>related API reference</a> explains the calls used here. Return to <a href={sitePath('recipes/')}>all twelve recipes</a> to choose another interaction.
+
+This page imports the checked C# file directly. It was compiled against the documented Unity revision; its runtime checks and source hash are recorded in the documentation repository's validation files.

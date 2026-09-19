@@ -1,0 +1,68 @@
+---
+title: 'Handle busy sounds without a retry storm.'
+description: 'Read request results, count replaced plays through notifications, and keep event limits separate from voice capacity.'
+kind: recipe
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayContext.cs
+tags: [unity, recipes, playback-limits]
+---
+
+import Explanation from '../../../components/Explanation.astro';
+import ExampleCode from '../../../components/ExampleCode.astro';
+import RecipeSetup from '../../../components/RecipeSetup.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation label="CODE RECIPE" title="Handle busy sounds without a retry storm.">
+  Read request results, count replaced plays through notifications, and keep event limits separate
+  from voice capacity.
+</Explanation>
+
+## Set up the scene
+
+<RecipeSetup
+  file="ArcadeRequests.cs"
+  events="ArcadeZap, ArcadeCoin, and ArcadeJackpot from 07-Arcade"
+>
+  <p>
+    For the same budget as the demo, assign a copy of <strong>ArcadeSoundSettings</strong> to your
+    test manager; its voice capacity is six. Keep the original sample settings intact if
+    experimenting with a smaller capacity.
+  </p>
+</RecipeSetup>
+
+## Try the component
+
+Use Zap repeatedly, then Coin repeatedly. Zap permits three overlapping plays and replaces its oldest. Coin permits two and refuses an extra request while those are alive. Choose Jackpot twice quickly; the second request should report Cooldown. Inspector menu clicking may be slower than these short clips, so use the Arcade demo's automatic chaos control for an easy sustained test.
+
+Your own input code can call `Request(Sounds.ArcadeCoin)` and inspect its returned result. Replacements and LastStatus are public properties for your own UI. The component logs refused decisions in the Console and cleans up subscriptions and owned plays on disable.
+
+## Which limit did you hit?
+
+| Result or notification                          | Meaning                                                       | Reasonable response                                         |
+| ----------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------- |
+| Accepted result                                 | The new request was admitted, including a queued request.     | Retain a handle if you need later control.                  |
+| ConcurrencyLimit result                         | This event refuses another overlapping play.                  | Skip a nonessential sound.                                  |
+| Cooldown result                                 | The event was requested again too soon.                       | Wait for another real action after the gap.                 |
+| CapacityExceeded result                         | The service cannot admit required playback within its limits. | Review total capacity and competing plays.                  |
+| Cancelled notification, reason ConcurrencyLimit | An older play was replaced by a new one.                      | Update UI for the old handle, not the new accepted request. |
+| Failed notification                             | An accepted play failed later.                                | Record the actual reason for diagnosis.                     |
+
+With six slots and the supplied simple graphs, 3 Zap + 2 Coin + 1 Jackpot fits the budget. This setup is not a cross-event priority-stealing demonstration. A voice budget is global to the service; an event's instance limit is specific to that event. More complex events can consume several voices per play, so those numbers are not interchangeable.
+
+## Two reporting paths
+
+Request returns the immediate result. The notification callback filters by owner and counts replacement cancellations for this component's older plays. Subscribing without that filter could count unrelated sounds elsewhere in the scene.
+
+The example does not retry a refusal every Update. That would generate more pressure and less useful sound. Let the next player action make a new request. Use debug counters or graph inspection to investigate, then turn those editor diagnostics off when measuring normal performance.
+
+## Complete component
+
+<ExampleCode file="ArcadeRequests.cs" />
+
+## Keep exploring
+
+Read the <a href={sitePath('demos/07-arcade/')}>demo walkthrough</a> for the graph, parameters, controls, and Unity screenshots. The <a href={sitePath('api/results-and-handles/')}>related API reference</a> explains the calls used here. Return to <a href={sitePath('recipes/')}>all twelve recipes</a> to choose another interaction.
+
+This page imports the checked C# file directly. It was compiled against the documented Unity revision; its runtime checks and source hash are recorded in the documentation repository's validation files.

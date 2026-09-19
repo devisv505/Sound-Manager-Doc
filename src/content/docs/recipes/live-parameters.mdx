@@ -1,0 +1,70 @@
+---
+title: 'Shape a running sound with parameters.'
+description: 'Send a new target to an existing play and let the graph smooth the change in pitch or layer volume.'
+kind: recipe
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayContext.cs
+tags: [unity, recipes, live-parameters]
+---
+
+import Explanation from '../../../components/Explanation.astro';
+import ExampleCode from '../../../components/ExampleCode.astro';
+import RecipeSetup from '../../../components/RecipeSetup.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation label="CODE RECIPE" title="Shape a running sound with parameters.">
+  Send a new target to an existing play and let the graph smooth the change in pitch or layer
+  volume.
+</Explanation>
+
+## Set up the scene
+
+<RecipeSetup file="EngineSoundControls.cs" events="Engine from 04-Engine">
+  <p>
+    No object references are needed. Keep the object within a few units of the listener.{' '}
+    <strong>Rpm</strong> is a normalized 0–1 value, not the car HUD’s displayed revolutions per
+    minute.
+  </p>
+</RecipeSetup>
+
+## Try the component
+
+The engine starts when Play Mode begins. Slowly move **Rpm** from 0 to 1, then drop it to 0. Listen as it climbs and settles. Use **Sound horn** to add a response without replacing the engine. Use **Stop engine** to hear its ending, then **Start engine** to repeat. Disable the component to test cleanup.
+
+This recipe sets Load to 0.2 at start and changes only Rpm live. The full Engine demo computes both from its vehicle controls.
+
+## Target and current value
+
+The graph declares Rpm from 0 to 1, with rise rate 0.8 and fall rate 1.5 **units per second**. An initial context override becomes the starting value. Later `SetFloat` calls change the target, and the graph's current value moves toward it. Repeatedly setting the same target does not restart the play or reset the smoothing.
+
+The graph maps that current value into playback speeds and layer volumes. To display what the audio is currently using, read the parameter state:
+
+```csharp title="Inside a component with a retained engine handle · excerpt"
+var service = SoundServices.Current;
+if (service != null &&
+    service.TryGetParameter(engine, SoundParameters.Engine.Rpm, out var rpmState))
+{
+    float audibleRpm = rpmState.Current.number;
+    float requestedRpm = rpmState.Target.number;
+}
+```
+
+The variables above are normalized values. Apply your own display conversion if you want an RPM dial.
+
+## The same idea for weather
+
+Rain and Wind use the same target/current pattern to blend ambience. Rain rises at 0.35 and falls at 0.5; Wind uses 0.25 and 0.4. The <a href={sitePath('recipes/delayed-thunder/')}>StormSounds component</a> starts them at zero, updates targets, and cleans up the entire storm by owner.
+
+Float smoothing is part of the parameter definition. A rate of 0 means immediate change, not a zero-second fade command. Int, Bool, and Asset parameters choose values directly instead of smoothly moving through them.
+
+## Complete component
+
+<ExampleCode file="EngineSoundControls.cs" />
+
+## Keep exploring
+
+Read the <a href={sitePath('demos/04-engine/')}>demo walkthrough</a> for the graph, parameters, controls, and Unity screenshots. The <a href={sitePath('api/parameters/')}>related API reference</a> explains the calls used here. Return to <a href={sitePath('recipes/')}>all twelve recipes</a> to choose another interaction.
+
+This page imports the checked C# file directly. It was compiled against the documented Unity revision; its runtime checks and source hash are recorded in the documentation repository's validation files.

@@ -1,0 +1,586 @@
+{
+  "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
+  "events": [
+    {
+      "demo": "01-campfire",
+      "name": "Campfire",
+      "key": "Sounds.Campfire",
+      "path": "Assets/DEV505/SoundManager/Samples/01-Campfire/Campfire.soundgraph",
+      "parameters": [
+        {
+          "name": "Intensity",
+          "type": "Float",
+          "default": 0.65,
+          "range": "0–1",
+          "rise": 0.5,
+          "fall": 0.5,
+          "allowed": []
+        }
+      ],
+      "signals": [],
+      "spatial": "3D · 2–20 units",
+      "maxInstances": 8,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 128
+    },
+    {
+      "demo": "02-footstep",
+      "name": "Footstep",
+      "key": "Sounds.Footstep",
+      "path": "Assets/DEV505/SoundManager/Samples/02-Footstep/Footstep.soundgraph",
+      "parameters": [
+        {
+          "name": "Surface",
+          "type": "Int",
+          "default": 0,
+          "range": "0–2",
+          "rise": 0,
+          "fall": 0,
+          "allowed": []
+        }
+      ],
+      "signals": [],
+      "spatial": "2D",
+      "maxInstances": 8,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 128
+    },
+    {
+      "demo": "03-bee",
+      "name": "Bee",
+      "key": "Sounds.Bee",
+      "path": "Assets/DEV505/SoundManager/Samples/03-Bee/Bee.soundgraph",
+      "parameters": [
+        {
+          "name": "WingSpeed",
+          "type": "Float",
+          "default": 1,
+          "range": "0.7–1.5",
+          "rise": 0,
+          "fall": 0,
+          "allowed": []
+        }
+      ],
+      "signals": [],
+      "spatial": "3D · 0.8–4 units",
+      "maxInstances": 1,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 128
+    },
+    {
+      "demo": "04-engine",
+      "name": "Engine",
+      "key": "Sounds.Engine",
+      "path": "Assets/DEV505/SoundManager/Samples/04-Engine/Engine.soundgraph",
+      "parameters": [
+        {
+          "name": "Rpm",
+          "type": "Float",
+          "default": 0,
+          "range": "0–1",
+          "rise": 0.8,
+          "fall": 1.5,
+          "allowed": []
+        },
+        {
+          "name": "Load",
+          "type": "Float",
+          "default": 0,
+          "range": "0–1",
+          "rise": 2,
+          "fall": 3,
+          "allowed": []
+        }
+      ],
+      "signals": ["Horn", "Shift"],
+      "spatial": "3D · 3.2–14 units",
+      "maxInstances": 2,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 128
+    },
+    {
+      "demo": "05-weather",
+      "name": "Thunder",
+      "key": "Sounds.Thunder",
+      "path": "Assets/DEV505/SoundManager/Samples/05-Weather/Thunder.soundgraph",
+      "parameters": [],
+      "signals": [],
+      "spatial": "3D · 4–20 units",
+      "maxInstances": 2,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 4,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 128
+    },
+    {
+      "demo": "05-weather",
+      "name": "Weather",
+      "key": "Sounds.Weather",
+      "path": "Assets/DEV505/SoundManager/Samples/05-Weather/Weather.soundgraph",
+      "parameters": [
+        {
+          "name": "Rain",
+          "type": "Float",
+          "default": 0,
+          "range": "0–1",
+          "rise": 0.35,
+          "fall": 0.5,
+          "allowed": []
+        },
+        {
+          "name": "Wind",
+          "type": "Float",
+          "default": 0,
+          "range": "0–1",
+          "rise": 0.25,
+          "fall": 0.4,
+          "allowed": []
+        }
+      ],
+      "signals": [],
+      "spatial": "2D",
+      "maxInstances": 1,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 128
+    },
+    {
+      "demo": "06-workshop",
+      "name": "Workshop",
+      "key": "Sounds.Workshop",
+      "path": "Assets/DEV505/SoundManager/Samples/06-Workshop/Workshop.soundgraph",
+      "parameters": [
+        {
+          "name": "Tool",
+          "type": "Int",
+          "default": 0,
+          "range": "0–2",
+          "rise": 0,
+          "fall": 0,
+          "allowed": []
+        },
+        {
+          "name": "Pace",
+          "type": "Float",
+          "default": 0.5,
+          "range": "0–1",
+          "rise": 1.5,
+          "fall": 2,
+          "allowed": []
+        }
+      ],
+      "signals": ["Work", "Pause", "Strike"],
+      "spatial": "3D · 3–16 units",
+      "maxInstances": 2,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": true,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 128
+    },
+    {
+      "demo": "07-arcade",
+      "name": "ArcadeCoin",
+      "key": "Sounds.ArcadeCoin",
+      "path": "Assets/DEV505/SoundManager/Samples/07-Arcade/ArcadeCoin.soundgraph",
+      "parameters": [],
+      "signals": [],
+      "spatial": "3D · 4–16 units",
+      "maxInstances": 2,
+      "concurrency": "RejectNew",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 128
+    },
+    {
+      "demo": "07-arcade",
+      "name": "ArcadeJackpot",
+      "key": "Sounds.ArcadeJackpot",
+      "path": "Assets/DEV505/SoundManager/Samples/07-Arcade/ArcadeJackpot.soundgraph",
+      "parameters": [],
+      "signals": [],
+      "spatial": "3D · 4–16 units",
+      "maxInstances": 1,
+      "concurrency": "RejectNew",
+      "cooldown": 3,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": true,
+      "priority": 32
+    },
+    {
+      "demo": "07-arcade",
+      "name": "ArcadeZap",
+      "key": "Sounds.ArcadeZap",
+      "path": "Assets/DEV505/SoundManager/Samples/07-Arcade/ArcadeZap.soundgraph",
+      "parameters": [],
+      "signals": [],
+      "spatial": "3D · 4–16 units",
+      "maxInstances": 3,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 160
+    },
+    {
+      "demo": "08-jukebox",
+      "name": "Jukebox",
+      "key": "Sounds.Jukebox",
+      "path": "Assets/DEV505/SoundManager/Samples/08-Jukebox/Jukebox.soundgraph",
+      "parameters": [
+        {
+          "name": "Track",
+          "type": "Asset",
+          "default": "Jukebox_MintMorning",
+          "range": "Allowed clips below",
+          "rise": 0,
+          "fall": 0,
+          "allowed": [
+            "Assets/DEV505/SoundManager/Samples/08-Jukebox/Music/Jukebox_MintMorning.wav",
+            "Assets/DEV505/SoundManager/Samples/08-Jukebox/Music/Jukebox_PeachSunset.wav",
+            "Assets/DEV505/SoundManager/Samples/08-Jukebox/Music/Jukebox_MidnightPixels.wav"
+          ]
+        },
+        {
+          "name": "Gain",
+          "type": "Float",
+          "default": 1,
+          "range": "0–1",
+          "rise": 0.4,
+          "fall": 0.4,
+          "allowed": []
+        },
+        {
+          "name": "Volume",
+          "type": "Float",
+          "default": 0.65,
+          "range": "0–1",
+          "rise": 4,
+          "fall": 4,
+          "allowed": []
+        }
+      ],
+      "signals": [],
+      "spatial": "2D",
+      "maxInstances": 2,
+      "concurrency": "RejectNew",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 64
+    },
+    {
+      "demo": "09-portals",
+      "name": "PortalArrival",
+      "key": "Sounds.PortalArrival",
+      "path": "Assets/DEV505/SoundManager/Samples/09-Portals/PortalArrival.soundgraph",
+      "parameters": [],
+      "signals": [],
+      "spatial": "3D · 3–22 units",
+      "maxInstances": 3,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 96
+    },
+    {
+      "demo": "09-portals",
+      "name": "PortalCut",
+      "key": "Sounds.PortalCut",
+      "path": "Assets/DEV505/SoundManager/Samples/09-Portals/PortalCut.soundgraph",
+      "parameters": [],
+      "signals": [],
+      "spatial": "3D · 3–22 units",
+      "maxInstances": 3,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 96
+    },
+    {
+      "demo": "09-portals",
+      "name": "PortalEcho",
+      "key": "Sounds.PortalEcho",
+      "path": "Assets/DEV505/SoundManager/Samples/09-Portals/PortalEcho.soundgraph",
+      "parameters": [],
+      "signals": [],
+      "spatial": "3D · 3–22 units",
+      "maxInstances": 3,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0,
+      "ownerLoss": "Detach",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 96
+    },
+    {
+      "demo": "09-portals",
+      "name": "PortalHum",
+      "key": "Sounds.PortalHum",
+      "path": "Assets/DEV505/SoundManager/Samples/09-Portals/PortalHum.soundgraph",
+      "parameters": [],
+      "signals": [],
+      "spatial": "3D · 3–22 units",
+      "maxInstances": 2,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 96
+    },
+    {
+      "demo": "09-portals",
+      "name": "PortalWorld",
+      "key": "Sounds.PortalWorld",
+      "path": "Assets/DEV505/SoundManager/Samples/09-Portals/PortalWorld.soundgraph",
+      "parameters": [
+        {
+          "name": "Ambience",
+          "type": "Asset",
+          "default": "Portal_Meadow",
+          "range": "Allowed clips below",
+          "rise": 0,
+          "fall": 0,
+          "allowed": [
+            "Assets/DEV505/SoundManager/Samples/09-Portals/Sounds/Portal_Meadow.wav",
+            "Assets/DEV505/SoundManager/Samples/09-Portals/Sounds/Portal_Crystals.wav"
+          ]
+        }
+      ],
+      "signals": [],
+      "spatial": "3D · 3–22 units",
+      "maxInstances": 2,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 96
+    },
+    {
+      "demo": "10-launch",
+      "name": "LaunchClamp",
+      "key": "Sounds.LaunchClamp",
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchClamp.soundgraph",
+      "parameters": [],
+      "signals": [],
+      "spatial": "3D · 3–18 units",
+      "maxInstances": 2,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0.5,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 128
+    },
+    {
+      "demo": "10-launch",
+      "name": "LaunchFlight",
+      "key": "Sounds.LaunchFlight",
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchFlight.soundgraph",
+      "parameters": [
+        {
+          "name": "Thrust",
+          "type": "Float",
+          "default": 1,
+          "range": "0–1",
+          "rise": 1,
+          "fall": 2,
+          "allowed": []
+        }
+      ],
+      "signals": [],
+      "spatial": "3D · 4–28 units",
+      "maxInstances": 1,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 128
+    },
+    {
+      "demo": "10-launch",
+      "name": "LaunchPad",
+      "key": "Sounds.LaunchPad",
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchPad.soundgraph",
+      "parameters": [
+        {
+          "name": "Power",
+          "type": "Float",
+          "default": 0,
+          "range": "0–1",
+          "rise": 0.24,
+          "fall": 0.6,
+          "allowed": []
+        },
+        {
+          "name": "Pressure",
+          "type": "Float",
+          "default": 0,
+          "range": "0–1",
+          "rise": 3,
+          "fall": 4,
+          "allowed": []
+        },
+        {
+          "name": "Release",
+          "type": "Bool",
+          "default": true,
+          "range": "false / true",
+          "rise": 0,
+          "fall": 0,
+          "allowed": []
+        },
+        {
+          "name": "ReleaseGain",
+          "type": "Float",
+          "default": 0.7,
+          "range": "0–1",
+          "rise": 0,
+          "fall": 0,
+          "allowed": []
+        }
+      ],
+      "signals": ["Abort"],
+      "spatial": "3D · 4–22 units",
+      "maxInstances": 2,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": true,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 128
+    },
+    {
+      "demo": "10-launch",
+      "name": "LaunchSequence",
+      "key": "Sounds.LaunchSequence",
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchSequence.soundgraph",
+      "parameters": [
+        {
+          "name": "Power",
+          "type": "Float",
+          "default": 0,
+          "range": "0–1",
+          "rise": 0,
+          "fall": 0,
+          "allowed": []
+        },
+        {
+          "name": "Pressure",
+          "type": "Float",
+          "default": 0,
+          "range": "0–1",
+          "rise": 0,
+          "fall": 0,
+          "allowed": []
+        },
+        {
+          "name": "ClampsOpen",
+          "type": "Bool",
+          "default": false,
+          "range": "false / true",
+          "rise": 0,
+          "fall": 0,
+          "allowed": []
+        }
+      ],
+      "signals": [],
+      "spatial": "3D · 4–22 units",
+      "maxInstances": 1,
+      "concurrency": "RejectNew",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 128
+    },
+    {
+      "demo": "10-launch",
+      "name": "LaunchUI",
+      "key": "Sounds.LaunchUI",
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchUI.soundgraph",
+      "parameters": [],
+      "signals": [],
+      "spatial": "2D",
+      "maxInstances": 3,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": true,
+      "protected": false,
+      "priority": 128
+    },
+    {
+      "demo": "10-launch",
+      "name": "LaunchVent",
+      "key": "Sounds.LaunchVent",
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchVent.soundgraph",
+      "parameters": [],
+      "signals": [],
+      "spatial": "3D · 3–18 units",
+      "maxInstances": 2,
+      "concurrency": "ReplaceOldest",
+      "cooldown": 0.7,
+      "ownerLoss": "Stop",
+      "keepAlive": false,
+      "ignorePause": false,
+      "protected": false,
+      "priority": 128
+    }
+  ]
+}

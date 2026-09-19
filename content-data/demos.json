@@ -15,7 +15,7 @@
     "description": "One footfall. Three surfaces. Many trimmed variations.",
     "feature": "Parameters",
     "slug": "02-footstep",
-    "status": "planned"
+    "status": "available"
   },
   {
     "number": "03",
@@ -24,7 +24,7 @@
     "description": "Follow a tiny moving emitter through 3D space.",
     "feature": "Spatial audio",
     "slug": "03-bee",
-    "status": "planned"
+    "status": "available"
   },
   {
     "number": "04",
@@ -33,7 +33,7 @@
     "description": "Shape layered loops with RPM, load, and signals.",
     "feature": "Live control",
     "slug": "04-engine",
-    "status": "planned"
+    "status": "available"
   },
   {
     "number": "05",
@@ -42,7 +42,7 @@
     "description": "Blend a storm, then hear thunder from its strike.",
     "feature": "Layers & delay",
     "slug": "05-weather",
-    "status": "planned"
+    "status": "available"
   },
   {
     "number": "06",
@@ -51,7 +51,7 @@
     "description": "Switch tools, order actions, and overlap hammer taps.",
     "feature": "Signals & flow",
     "slug": "06-workshop",
-    "status": "planned"
+    "status": "available"
   },
   {
     "number": "07",
@@ -60,7 +60,7 @@
     "description": "See what happens when a crowd of sounds competes.",
     "feature": "Concurrency",
     "slug": "07-arcade",
-    "status": "planned"
+    "status": "available"
   },
   {
     "number": "08",
@@ -69,7 +69,7 @@
     "description": "Crossfade two tracks and keep a little dancer moving.",
     "feature": "Music",
     "slug": "08-jukebox",
-    "status": "planned"
+    "status": "available"
   },
   {
     "number": "09",
@@ -78,7 +78,7 @@
     "description": "Let a world go. Choose which sounds stay behind.",
     "feature": "Ownership",
     "slug": "09-portals",
-    "status": "planned"
+    "status": "available"
   },
   {
     "number": "10",
@@ -87,6 +87,6 @@
     "description": "Conditions, countdowns, aborts, and a flying finale.",
     "feature": "Combined systems",
     "slug": "10-launch",
-    "status": "planned"
+    "status": "available"
   }
 ]

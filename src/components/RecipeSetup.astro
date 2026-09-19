@@ -1,0 +1,29 @@
+---
+import { sitePath } from '../lib/links';
+interface Props {
+  file: string;
+  events: string;
+}
+const { file, events } = Astro.props;
+---
+
+<p>
+  Start with <a href={sitePath('getting-started/')}>Your first sound</a> if you have not set up a
+  sound scene before. Use a separate test scene with <strong>one enabled Sound Manager</strong>,
+  generated Sound Keys, and <strong>one Audio Listener</strong> near the sound object. Add{' '}
+  <strong>{events}</strong> to the manager's <strong>Direct events</strong> list; these are the
+  supplied <code>.soundgraph</code> assets under <code>Assets/DEV505/SoundManager/Samples</code>.
+</p>
+<p>
+  Save the complete code below as <strong>{file}</strong> in <code>Assets/Scripts</code>. Wait for
+  Unity to compile it, create an empty GameObject, and drag the script onto it. The filename must
+  match the class name. Test one recipe component at a time so another demo controller does not
+  compete for the same events.
+</p>
+<slot />
+<p>
+  In Play Mode, wait until the Sound Manager is ready. To run a listed test action, open the
+  component's three-dot menu in the Inspector and choose that action. These are the script's{' '}
+  <code>ContextMenu</code> methods. Your own code or a Unity UI Button can call its public methods
+  too. Inspector edits made during Play Mode are temporary.
+</p>

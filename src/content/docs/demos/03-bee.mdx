@@ -1,0 +1,95 @@
+---
+title: 'A little buzz.'
+description: 'Follow a tiny moving emitter through 3D space.'
+kind: demo
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Samples/Bee/BeeFlightDemo.cs
+  - Assets/DEV505/SoundManager/Samples/03-Bee/Bee.soundgraph
+tags: [unity, sound, bee]
+demo:
+  number: 3
+  scene: Assets/DEV505/SoundManager/Samples/03-Bee/Demo.unity
+  keys: ['Sounds.Bee']
+  screenshots:
+    ['bee-flight-right', 'bee-rest', 'bee-flight-left', 'bee-graph', 'bee-spatial-settings']
+---
+
+import Capture from '../../../components/Capture.astro';
+import Explanation from '../../../components/Explanation.astro';
+import DemoContract from '../../../components/DemoContract.astro';
+import DemoNavigation from '../../../components/DemoNavigation.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation title="Move an object once. Its sound follows along.">
+  The bee has one looping buzz in 3D. As the demo moves it around the player, Sound Manager reads
+  its Transform and updates the sound’s position. You hear direction and distance without starting a
+  new sound every frame.
+</Explanation>
+
+<Capture id="bee-flight-right" eager />
+
+## Try it in Unity
+
+In Unity's **Project** window, open `Assets/DEV505/SoundManager/Samples/03-Bee/Demo.unity`. The supplied scene already has its Sound Manager, event registrations, generated keys, camera, and Audio Listener. Press **Play**, wait for the demo to be ready, and click the **Game** view before using the keyboard. If you are setting up a separate scene, follow <a href={sitePath('getting-started/')}>Your first sound</a> first.
+
+| Control                      | Action                        |
+| ---------------------------- | ----------------------------- |
+| **Space**                    | Release or recall the bee.    |
+| **Release bee / Recall bee** | The same action from the HUD. |
+
+Use headphones if possible. Release the bee, listen as it crosses to either side, and compare the distance shown in the HUD. Recall it to end the moving buzz. The listener represents **you at the central DEV505 player**, rather than the distant scene camera. Its orientation decides which direction is heard on the left and right.
+
+<Capture id="bee-rest" />
+<Capture id="bee-flight-left" />
+
+## Read the graph
+
+<Capture id="bee-graph" />
+
+The graph starts a looping recording and connects `WingSpeed` to playback speed. Increasing that value makes the buzz faster and higher pitched; it does not move the bee through the scene. The recording is imported for a mono spatial source. A single emitter position lets Unity place it relative to the listener.
+
+<Capture id="bee-spatial-settings" />
+
+Spatial blend is fully 3D. The saved distance range is **0.8–4 units** with linear rolloff: after the near distance, moving farther away reduces the level. Doppler is **0.3**, adding a modest pitch change from relative movement. These settings and the listener's position matter more than the camera's view of the island.
+
+## Start, follow, and stop
+
+The demo's essential call is:
+
+```csharp title="Following a bee · excerpt"
+var context = SoundPlayContext.Following(bee)
+    .With(SoundParameters.Bee.WingSpeed, 1f);
+var result = SoundBus.Play(Sounds.Bee, context);
+```
+
+`bee` is the Transform moved by the flight controller. Keep `result.Handle` only after checking `result.Accepted`. Following retains a reference to that Transform; the runtime reads it while the play is alive and updates its voices. It does not capture only the starting position. By contrast, `SoundPlayContext.At(position)` uses a fixed position.
+
+To recall the bee, stop the retained play with `SoundBus.Stop`. This graph's owner-loss policy is Stop, so destroying its follow target also ends playback. `Following(bee)` alone does **not** assign an explicit owner token. The complete recipe adds an owner for convenient object-wide cleanup and demonstrates how to change WingSpeed while buzzing.
+
+## What belongs to the demo?
+
+Flight paths, wing flapping, the flower perch, distance label, and glowing player are sample visuals and animation. Sound Manager follows the Transform and plays the graph. It does not calculate the bee's route or simulate its wings. The event permits one Bee play; starting another replaces the old one.
+
+## Common surprises
+
+- **The buzz stays in one place.** Use Following with the bee Transform, not At with a copied position.
+- **It sounds centered or too quiet.** Check the active Audio Listener, fully 3D settings, and the small distance range. Avoid a second listener on another camera.
+- **It keeps restarting.** Play once, retain the handle, and move the Transform. Repeated Play calls replace the current buzz.
+- **WingSpeed changes instantly.** This parameter has zero rise/fall smoothing in the saved graph. The flight animation's smoothing is separate.
+
+## Event settings, parameters, and signals
+
+<DemoContract demo="03-bee" />
+
+## Take it into your own game
+
+<a href={sitePath('recipes/moving-emitter/')}>Open the complete integration recipe</a> for the
+script, Inspector setup, a short test, and cleanup. Use
+<a href={sitePath('api/context/')}>Play context</a> for initial values and placement, and
+<a href={sitePath('api/sound-bus/')}>SoundBus</a> for playback controls.
+
+<a href={sitePath('captures/03-bee/')}>All Bee Unity captures</a> includes further states and
+readable graph details, with steps to reproduce each view.
+
+<DemoNavigation number={3} />

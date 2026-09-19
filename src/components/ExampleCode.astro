@@ -1,0 +1,16 @@
+---
+import { Code } from '@astrojs/starlight/components';
+interface Props {
+  file: string;
+}
+const { file } = Astro.props;
+const examples = import.meta.glob<string>('../../examples/*.cs', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+const code = examples[`../../examples/${file}`];
+if (!code) throw new Error(`Missing checked example: ${file}`);
+---
+
+<Code code={code} lang="csharp" title={file} />

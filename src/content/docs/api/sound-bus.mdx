@@ -9,7 +9,7 @@ sourcePaths:
 tags: [sound, unity, campfire]
 ---
 
-import { sitePath, sourceLink } from '../../../lib/links';
+import { sitePath } from '../../../lib/links';
 import Explanation from '../../../components/Explanation.astro';
 
 ```csharp title="Declaration"
@@ -45,11 +45,11 @@ public static SoundPlayResult Play(
 
 | Argument   | Meaning                                                                                                                                                          |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `key`      | The registered name of the event. Prefer generated `Sounds.*` values. An unknown key gives `NotRegistered`. |
+| `key`      | The registered name of the event. Prefer generated `Sounds.*` values. An unknown key gives `NotRegistered`.                                                      |
 | `context`  | Optional per-play position/follow target, owner, initial overrides, seed, and delay. A default context has no follow target or owner and uses its zero position. |
 | `position` | Fixed world point. The sound remains there if the object that caused it moves away.                                                                              |
 | `follow`   | Transform tracked while the play runs. This convenience overload also owns the play by `follow.gameObject`.                                                      |
-| `sound`    | An event asset reference. It still needs registration on the active manager, and the same validation and preparation rules apply. |
+| `sound`    | An event asset reference. It still needs registration on the active manager, and the same validation and preparation rules apply.                                |
 
 Returns `SoundPlayResult`: `Status` describes admission and `Handle` identifies an accepted play. `Accepted` is true for both `Accepted` and `Queued`. An accepted request is not a guarantee that a voice is already audible or that the play can never subsequently fail.
 
@@ -273,10 +273,6 @@ This excerpt observes every ending, cancellation, and failure, including other o
 
 A playback result reports admission; later failures and cancellations are reported through notifications. Every status above comes from the current enum, not a planned API.
 
-## Source and next steps
-
-<a href={sourceLink('Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs')}>
-  Read SoundBus at the documented revision ↗
-</a>
+## Next steps
 
 Try the <a href={sitePath('recipes/campfire-loop/')}>complete lifecycle recipe</a> or follow the <a href={sitePath('demos/01-campfire/')}>Campfire graph walkthrough</a>.

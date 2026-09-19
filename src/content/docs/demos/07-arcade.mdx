@@ -1,0 +1,132 @@
+---
+title: 'A little chaos.'
+description: 'See what happens when a crowd of sounds competes.'
+kind: demo
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Samples/Arcade/ArcadeDemo.cs
+  - Assets/DEV505/SoundManager/Samples/07-Arcade/ArcadeCoin.soundgraph
+  - Assets/DEV505/SoundManager/Samples/07-Arcade/ArcadeJackpot.soundgraph
+  - Assets/DEV505/SoundManager/Samples/07-Arcade/ArcadeZap.soundgraph
+tags: [unity, sound, arcade]
+demo:
+  number: 7
+  scene: Assets/DEV505/SoundManager/Samples/07-Arcade/Demo.unity
+  keys: ['Sounds.ArcadeCoin', 'Sounds.ArcadeJackpot', 'Sounds.ArcadeZap']
+  screenshots:
+    [
+      'arcade-chaos',
+      'arcade-calm',
+      'arcade-zap-limits',
+      'arcade-coin-limits',
+      'arcade-jackpot-cooldown',
+      'arcade-graph-arcadezap',
+      'arcade-graph-arcadecoin',
+      'arcade-graph-arcadejackpot',
+    ]
+---
+
+import Capture from '../../../components/Capture.astro';
+import Explanation from '../../../components/Explanation.astro';
+import DemoContract from '../../../components/DemoContract.astro';
+import DemoNavigation from '../../../components/DemoNavigation.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation title="See which requests play, wait out a cooldown, or get refused.">
+  Three arcade events use different overlap rules. Zaps replace an older zap, coins refuse extra
+  plays, and jackpots enforce a cooldown. The HUD turns those playback decisions into visible
+  counters.
+</Explanation>
+
+<Capture id="arcade-chaos" eager />
+
+## Try it in Unity
+
+In Unity's **Project** window, open `Assets/DEV505/SoundManager/Samples/07-Arcade/Demo.unity`. The supplied scene already has its Sound Manager, event registrations, generated keys, camera, and Audio Listener. Press **Play**, wait for the demo to be ready, and click the **Game** view before using the keyboard. If you are setting up a separate scene, follow <a href={sitePath('getting-started/')}>Your first sound</a> first.
+
+| Control                  | Action                                         |
+| ------------------------ | ---------------------------------------------- |
+| **1 / 2 / 3**            | Trigger Zap / Coin / Jackpot.                  |
+| **Space** / chaos button | Start or stop automatic requests.              |
+| Chaos slider             | Change how busy the automatic requests become. |
+| **R** / reset control    | Reset score and result counters.               |
+
+Tap Zap rapidly, then Coin. Zaps continue as older ones are replaced; coins stop accepting new requests at their overlap limit. Press Jackpot twice quickly: the second request is cooling down. Start automatic chaos and increase its pace to make the different outcomes easy to see.
+
+Each event follows its machine's sound origin. The listener is fixed near the island, and all three event distance ranges are **4–16 units**. Spatial placement tells you which machine is making the sound.
+
+<Capture id="arcade-calm" />
+
+## Three policies in six voice slots
+
+A **play** is one running event. A **voice** is a recording using a playback slot. Here each event has a simple one-voice playback path, and the scene's Sound Settings provide **six voices**.
+
+| Event key              | Allowed plays | When that event is full                                       |
+| ---------------------- | ------------- | ------------------------------------------------------------- |
+| `Sounds.ArcadeZap`     | 3             | ReplaceOldest accepts the new zap and cancels the oldest.     |
+| `Sounds.ArcadeCoin`    | 2             | RejectNew refuses the extra request.                          |
+| `Sounds.ArcadeJackpot` | 1             | RejectNew; a 3-second cooldown also limits repeated requests. |
+
+The limits add up to six. This setup leaves a slot for the jackpot when zaps and coins reach their own limits. It demonstrates overlap policy and cooldown; it does not demonstrate one event stealing another event's voice through priority. Jackpot is also protected from voice stealing in its settings, but protection does not create an unlimited voice budget.
+
+<Capture id="arcade-zap-limits" />
+<Capture id="arcade-coin-limits" />
+<Capture id="arcade-jackpot-cooldown" />
+
+## Read the graphs
+
+<Capture id="arcade-graph-arcadezap" />
+
+Zap chooses a recording through Random Clip with immediate repetition disabled, varies speed, plays it, and ends when it finishes. This adds variety without changing the overlap rule.
+
+<Capture id="arcade-graph-arcadecoin" />
+<Capture id="arcade-graph-arcadejackpot" />
+
+Coin and Jackpot have short authored playback paths. They do not inspect the scoreboard or decide their score value. Their settings control admission; the graph controls the accepted sound's playback. There are no exposed parameters or custom signals in these three events.
+
+## Read the result, then watch the lifetime
+
+```csharp title="A single request · excerpt"
+var result = SoundBus.Play(Sounds.ArcadeCoin, context);
+if (result.Accepted)
+{
+    // Count an accepted request.
+}
+else if (result.Status == SoundPlayStatus.ConcurrencyLimit)
+{
+    // Skip this coin sound: its allowed plays are already occupied.
+}
+```
+
+`context` follows the machine and carries the demo's owner. A result answers whether this **new request** was accepted. A replacement is different: the new zap is accepted, while the old zap receives a **Cancelled** notification with **ConcurrencyLimit** as its reason. The demo filters notifications by owner before incrementing its replacement counter.
+
+The controller counts Cooldown separately. It groups ConcurrencyLimit and CapacityExceeded as limited requests, and records other failures separately. An accepted request can still fail later, so the notification path also handles Failed. The complete recipe demonstrates these two reporting paths and disposes its subscription on disable.
+
+## What belongs to the demo?
+
+Score, confetti, cabinet movement, automatic request timing, and the custom HUD counters belong to `ArcadeDemo`. Sound Manager provides admission results, voice allocation, variation, and lifetime notifications. The counters show what happened; they are not a performance benchmark.
+
+The Sound Manager's optional **Show counters** and runtime graph inspection are debugging tools. Updating those editor interfaces during playback can reduce FPS. Turn them off when assessing ordinary runtime performance; there is no universal fixed FPS cost.
+
+## Common surprises
+
+- **A replacement still reports Accepted.** Check the old play's notification for the cancellation.
+- **A jackpot cannot immediately restart.** The cooldown is independent of whether you still hear its previous cue.
+- **Protected means unlimited.** Protection affects stealing, not registration, event limits, or total capacity.
+- **Every refused request is retried each frame.** Usually skip a nonessential effect and wait for the next real game action instead of creating a retry storm.
+
+## Event settings, parameters, and signals
+
+<DemoContract demo="07-arcade" />
+
+## Take it into your own game
+
+<a href={sitePath('recipes/playback-limits/')}>Open the complete integration recipe</a> for the
+script, Inspector setup, a short test, and cleanup. Use
+<a href={sitePath('api/context/')}>Play context</a> for initial values and placement, and
+<a href={sitePath('api/sound-bus/')}>SoundBus</a> for playback controls.
+
+<a href={sitePath('captures/07-arcade/')}>All Arcade Unity captures</a> includes further states and
+readable graph details, with steps to reproduce each view.
+
+<DemoNavigation number={7} />

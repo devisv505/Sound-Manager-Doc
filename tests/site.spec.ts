@@ -262,3 +262,201 @@ test('M3 picture galleries fit phones and remain reachable from the menu', async
     .click();
   await expect(page.locator('h1')).toHaveText('See the sound lab in Unity.');
 });
+
+const demos = JSON.parse(readFileSync('content-data/demos.json', 'utf8'));
+const recipes = JSON.parse(readFileSync('content-data/recipes.json', 'utf8'));
+const demoAudit = JSON.parse(readFileSync('content-data/demo-audit.json', 'utf8'));
+
+test('M4 all demo guides expose verified events, controls, pictures, and next navigation', async ({
+  page,
+}) => {
+  test.setTimeout(60000);
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto(base + 'demos/');
+  await expect(page.locator('.demo-card h3 a')).toHaveCount(10);
+  for (const demo of demos) {
+    await page.goto(base + `demos/${demo.slug}/`);
+    await page.reload();
+    await expect(page.locator('h1')).toHaveText(demo.title);
+    await expect(page.locator('.explanation').first()).toContainText('WHAT THIS DEMO SHOWS');
+    await expect(page.getByRole('heading', { name: 'Try it in Unity', exact: true })).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: 'Common surprises', exact: true }),
+    ).toBeVisible();
+    await expect(page.locator('.demo-navigation')).toBeVisible();
+    const expected = demoAudit.events.filter((event: { demo: string }) => event.demo === demo.slug);
+    for (const event of expected) {
+      await expect(page.locator('main')).toContainText(event.key);
+      if (demo.slug !== '01-campfire') {
+        const contract = page
+          .locator('.event-contract')
+          .filter({ has: page.locator(`#event-${event.name.toLowerCase()}`) });
+        await expect(contract).toContainText(event.ownerLoss);
+        for (const parameter of event.parameters)
+          await expect(contract).toContainText(parameter.name);
+        for (const signal of event.signals) await expect(contract).toContainText(signal);
+      }
+    }
+    const images = page.locator('.image-open img');
+    expect(await images.count()).toBeGreaterThanOrEqual(3);
+    await images.evaluateAll(async (elements) => {
+      await Promise.all(
+        elements.map(async (element) => {
+          const img = element as HTMLImageElement;
+          img.loading = 'eager';
+          await img.decode();
+          if (!img.naturalWidth || !img.currentSrc.includes('.webp'))
+            throw Error('Demo image failed to load');
+        }),
+      );
+    });
+  }
+  await page.goto(base + 'demos/06-workshop/');
+  await page.screenshot({ path: 'validation/m4/workshop-desktop.png' });
+  await page.locator('.demo-navigation').getByRole('link', { name: '07 / Arcade →' }).click();
+  await expect(page.locator('h1')).toHaveText('A little chaos.');
+  expect(errors).toEqual([]);
+});
+
+test('M4 twelve recipes are reachable and their complete scripts copy exactly', async ({
+  page,
+  context,
+}) => {
+  test.setTimeout(60000);
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await page.goto(base + 'recipes/');
+  await expect(page.locator('.recipe-list article')).toHaveCount(12);
+  await page.screenshot({ path: 'validation/m4/recipes-desktop.png' });
+  for (const recipe of recipes) {
+    await page.goto(base + `recipes/${recipe.slug}/`);
+    const name = recipe.example.replace('.cs', '');
+    const block = page
+      .locator('.expressive-code')
+      .filter({ hasText: `public sealed class ${name}` })
+      .first();
+    await block.getByRole('button', { name: /copy/i }).click();
+    const value = await page.evaluate(() => navigator.clipboard.readText());
+    expect(value.trim()).toBe(readFileSync(`examples/${recipe.example}`, 'utf8').trim());
+    if (name !== 'SurfaceFootsteps') await expect(page.locator('main')).toContainText('OnDisable');
+  }
+});
+
+test('M4 complex guides and recipes fit phones and the new menu routes work', async ({ page }) => {
+  test.setTimeout(60000);
+  await page.setViewportSize({ width: 320, height: 844 });
+  for (const route of [
+    ...demos.map((d: { slug: string }) => `demos/${d.slug}/`),
+    ...recipes.map((r: { slug: string }) => `recipes/${r.slug}/`),
+    'recipes/',
+  ]) {
+    await page.goto(base + route);
+    const size = await page.evaluate(() => ({
+      scroll: document.documentElement.scrollWidth,
+      client: document.documentElement.clientWidth,
+    }));
+    expect(size.scroll, route).toBeLessThanOrEqual(size.client + 1);
+  }
+  await page.goto(base + 'demos/08-jukebox/');
+  await page.locator('#event-jukebox').scrollIntoViewIfNeeded();
+  await page.screenshot({ path: 'validation/m4/jukebox-settings-mobile.png' });
+  await page.getByRole('button', { name: 'Menu', exact: true }).click();
+  await page
+    .locator('#starlight__sidebar')
+    .getByRole('link', { name: '10 · Launch', exact: true })
+    .click();
+  await expect(page.locator('h1')).toHaveText('A little liftoff.');
+  await page.screenshot({ path: 'validation/m4/launch-mobile.png' });
+});
+
+test('M4 search finds overlap and completion explanations', async ({ page }) => {
+  await page.goto(base + 'recipes/');
+  await page.locator('[data-open-modal]').click();
+  const input = page.locator('.pagefind-ui__search-input');
+  await input.fill('hammer');
+  await expect(page.locator('.pagefind-ui__results')).toContainText(/work|hammer/i);
+  await input.fill('clearance');
+  await expect(page.locator('.pagefind-ui__results')).toContainText(/liftoff|clearance/i);
+  await page.keyboard.press('Escape');
+});
+
+test('image previews fit below controls and actual-size scrolling stays inside the image', async ({
+  page,
+}) => {
+  for (const size of [
+    { width: 1551, height: 830 },
+    { width: 390, height: 844 },
+    { width: 844, height: 390 },
+  ]) {
+    await page.setViewportSize(size);
+    for (const [route, id] of [
+      ['demos/01-campfire/', 'campfire-graph'],
+      ['captures/03-bee/', 'bee-spatial-settings'],
+    ]) {
+      await page.goto(base + route);
+      const trigger = page.locator(`#${id} .image-open`);
+      await trigger.click();
+      const dialog = page.locator(`#${id}-dialog`);
+      await dialog.locator('img').evaluate((img: HTMLImageElement) => img.decode());
+      const fit = await dialog.evaluate((element) => {
+        const image = element.querySelector('img')!.getBoundingClientRect();
+        const toolbar = element.querySelector('.image-toolbar')!.getBoundingClientRect();
+        const caption = element.querySelector('p')!.getBoundingClientRect();
+        const viewport = element.querySelector('.image-viewport')!;
+        return {
+          top: image.top,
+          bottom: image.bottom,
+          left: image.left,
+          right: image.right,
+          toolbarBottom: toolbar.bottom,
+          captionTop: caption.top,
+          captionBottom: caption.bottom,
+          width: innerWidth,
+          height: innerHeight,
+          scrollWidth: viewport.scrollWidth,
+          clientWidth: viewport.clientWidth,
+          scrollHeight: viewport.scrollHeight,
+          clientHeight: viewport.clientHeight,
+        };
+      });
+      expect(fit.top).toBeGreaterThanOrEqual(fit.toolbarBottom);
+      expect(fit.bottom).toBeLessThanOrEqual(fit.captionTop);
+      expect(fit.left).toBeGreaterThanOrEqual(0);
+      expect(fit.right).toBeLessThanOrEqual(fit.width);
+      expect(fit.captionBottom).toBeLessThanOrEqual(fit.height);
+      expect(fit.scrollWidth).toBeLessThanOrEqual(fit.clientWidth + 1);
+      expect(fit.scrollHeight).toBeLessThanOrEqual(fit.clientHeight + 1);
+      if (size.width === 1551 && id === 'campfire-graph')
+        await page.screenshot({ path: 'validation/preview-fit-desktop.png' });
+      if (size.width === 390 && id === 'bee-spatial-settings')
+        await page.screenshot({ path: 'validation/preview-fit-mobile.png' });
+      await dialog.getByRole('button', { name: 'View actual size', exact: true }).click();
+      const toolbarBefore = await dialog.locator('.image-toolbar').boundingBox();
+      const native = await dialog
+        .locator('img')
+        .evaluate((img: HTMLImageElement) => ({
+          width: img.getBoundingClientRect().width,
+          natural: img.naturalWidth,
+        }));
+      expect(native.width).toBe(native.natural);
+      await dialog.locator('.image-viewport').evaluate((element) => {
+        element.scrollLeft = element.scrollWidth;
+        element.scrollTop = element.scrollHeight;
+      });
+      expect(await dialog.locator('.image-toolbar').boundingBox()).toEqual(toolbarBefore);
+      await expect(dialog.getByRole('button', { name: 'Close', exact: true })).toBeInViewport();
+      await page.keyboard.press('Escape');
+      await expect(trigger).toBeFocused();
+      await trigger.click();
+      await expect(
+        dialog.getByRole('button', { name: 'View actual size', exact: true }),
+      ).toHaveAttribute('aria-pressed', 'false');
+      expect(
+        await dialog
+          .locator('.image-viewport')
+          .evaluate((el) => ({ top: el.scrollTop, left: el.scrollLeft })),
+      ).toEqual({ top: 0, left: 0 });
+      await dialog.getByRole('button', { name: 'Close', exact: true }).click();
+    }
+  }
+});

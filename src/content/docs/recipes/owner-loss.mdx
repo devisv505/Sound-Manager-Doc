@@ -1,0 +1,57 @@
+---
+title: 'Compare Stop and Detach.'
+description: 'Destroy a temporary sound owner and hear whether its departure cue ends or stays at the last position.'
+kind: recipe
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayContext.cs
+tags: [unity, recipes, owner-loss]
+---
+
+import Explanation from '../../../components/Explanation.astro';
+import ExampleCode from '../../../components/ExampleCode.astro';
+import RecipeSetup from '../../../components/RecipeSetup.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation label="CODE RECIPE" title="Compare Stop and Detach.">
+  Destroy a temporary sound owner and hear whether its departure cue ends or stays at the last
+  position.
+</Explanation>
+
+## Set up the scene
+
+<RecipeSetup file="PortalOwnerComparison.cs" events="PortalEcho and PortalCut from 09-Portals">
+  <p>
+    No Inspector references are needed. Place the component a few units to one side of the listener.
+    It creates its own temporary sound owner for each comparison.
+  </p>
+</RecipeSetup>
+
+## Try the component
+
+Choose **Try Detach**. After 0.35 seconds, the temporary owner object is destroyed, but the echo should keep sounding from its original location. Let it finish. Choose **Try Stop**: the same recording should end when that owner is destroyed. Disable the component during an echo to check that final cleanup also reaches detached plays.
+
+The test coroutine uses a short real-time wait only to destroy the object. It is not the source of the echo's playback or audio delay. The graph defines the sound, and the event's Owner loss setting decides what happens after destruction.
+
+## Follow target and owner
+
+For each comparison, the script creates a GameObject, gets an owner token for it, and supplies both to Following. OwnerOf binds lifetime to the GameObject; Following reads its moving position while it exists. PortalEcho has Detach, while PortalCut has Stop.
+
+On loss, Detach keeps the last known position and allows the play to finish. It does not keep the GameObject alive or move the echo to the listener. Stop ends the play according to the event's stopping behavior.
+
+## Do not stop the sound before testing owner loss
+
+Destroying the rig is the action under test. Calling StopOwned first explicitly ends those plays regardless of the intended comparison. The script deliberately leaves that call out when removing the rig.
+
+Final cleanup is different. OnDisable stops every retained handle, including any detached plays, then removes remaining rigs and stops their coroutines. The full Portals demo follows this pattern while also switching world ambience and moving the player. It all takes place within one Unity scene.
+
+## Complete component
+
+<ExampleCode file="PortalOwnerComparison.cs" />
+
+## Keep exploring
+
+Read the <a href={sitePath('demos/09-portals/')}>demo walkthrough</a> for the graph, parameters, controls, and Unity screenshots. The <a href={sitePath('api/ownership/')}>related API reference</a> explains the calls used here. Return to <a href={sitePath('recipes/')}>all twelve recipes</a> to choose another interaction.
+
+This page imports the checked C# file directly. It was compiled against the documented Unity revision; its runtime checks and source hash are recorded in the documentation repository's validation files.

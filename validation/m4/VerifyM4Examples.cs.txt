@@ -1,0 +1,124 @@
+// Compile with all examples (using directives hoisted). Runs only temporary objects in Campfire Play Mode.
+public static class VerifyM4Examples
+{
+    static readonly System.Collections.Generic.List<string> Checks = new();
+    static void Check(bool ok, string label) { if (!ok) throw new System.Exception(label); Checks.Add(label); }
+    static T Field<T>(object o, string n) => (T)o.GetType().GetField(n, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(o);
+    static void Set(object o, string n, object v) => o.GetType().GetField(n, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(o, v);
+    static async System.Threading.Tasks.Task Until(System.Func<bool> test, string label, int milliseconds=7000)
+    { var end=System.DateTime.UtcNow.AddMilliseconds(milliseconds); while(!test() && System.DateTime.UtcNow<end) await System.Threading.Tasks.Task.Delay(30); Check(test(),label); }
+    public static async System.Threading.Tasks.Task<object> Main(string output)
+    {
+        Checks.Clear();
+        var manager=UnityEngine.Object.FindObjectsByType<DEV505.SoundManager.SoundManager>(UnityEngine.FindObjectsInactive.Exclude).First(m=>m.enabled);
+        Check(UnityEngine.Application.isPlaying && manager.Ready,"Campfire manager is ready in Play Mode");
+        var service=manager.Service;
+        var objects=new System.Collections.Generic.List<UnityEngine.GameObject>();
+        var added=new System.Collections.Generic.List<DEV505.SoundManager.SoundEvent>();
+        var notices=new System.Collections.Generic.List<DEV505.SoundManager.SoundNotification>();
+        int listenerCount=SoundBus.Notifications.ListenerCount;
+        var subscription=SoundBus.Notifications.Subscribe(notices.Add);
+        bool pausedBefore=service.Paused;
+        UnityEngine.GameObject Make(string n) { var go=new UnityEngine.GameObject("M4 temporary "+n); objects.Add(go); return go; }
+        try
+        {
+            service.Paused=false;
+            foreach(var path in UnityEditor.AssetDatabase.FindAssets("t:SoundEvent",new[]{"Assets/DEV505/SoundManager/Samples"}).Select(UnityEditor.AssetDatabase.GUIDToAssetPath).Where(p=>p.EndsWith(".soundgraph") && System.Text.RegularExpressions.Regex.IsMatch(p,@"Samples/\d\d-")))
+            {
+                var asset=UnityEditor.AssetDatabase.LoadAssetAtPath<SoundEvent>(path); string name=System.IO.Path.GetFileNameWithoutExtension(path);
+                if(service.TryResolve(name,out var _)) continue;
+                Check(service.Register(asset,name,out var error),"Registered "+name+": "+error); added.Add(asset);
+            }
+            await Until(()=>manager.Ready,"All sample clips prepared");
+            var footsteps=Make("footsteps").AddComponent<SurfaceFootsteps>();
+            foreach(int surface in new[]{1,2,3})
+            {
+                int before=notices.Count; footsteps.PlayStep(surface,new Vector3(surface,0,0));
+                await Until(()=>notices.Skip(before).Any(n=>n.Kind==SoundNotificationKind.Started),"Surface "+surface+" starts a footstep");
+                var h=notices.Skip(before).First(n=>n.Kind==SoundNotificationKind.Started).Handle;
+                Check(service.TryGetParameter(h,SoundParameters.Footstep.Surface,out var p)&&p.Current.integer==surface-1,"Ground enum maps to graph surface "+(surface-1));
+                await Until(()=>!h.IsAlive(),"Trimmed footstep "+surface+" ends naturally",2000);
+            }
+            int unknownBefore=notices.Count; footsteps.PlayStep(0,Vector3.zero); await System.Threading.Tasks.Task.Delay(80);
+            Check(notices.Count==unknownBefore,"Unknown surface is ignored");
+
+            var storm=Make("weather").AddComponent<StormSounds>(); var point=Make("strike point"); point.transform.position=new Vector3(2,1,-2); Set(storm,"strikePoint",point.transform);
+            storm.StartWeather(); var weather=Field<SoundHandle>(storm,"weather"); Check(weather.IsAlive(),"Weather starts once");
+            storm.StartWeather(); Check(weather.Equals(Field<SoundHandle>(storm,"weather")),"Repeated weather start retains its play");
+            Set(storm,"rain",1f); await Until(()=>service.TryGetParameter(weather,SoundParameters.Weather.Rain,out var v)&&v.Target.number==1,"Live Rain target changes");
+            Check(service.TryGetParameter(weather,SoundParameters.Weather.Rain,out var rain)&&rain.Current.number<1,"Rain rises gradually toward its target");
+            storm.Strike(); var thunder=Field<SoundHandle>(storm,"thunder"); Check(thunder.IsAlive()&&service.GetVoiceCount(thunder)==0,"Thunder begins with a silent Delay");
+            await Until(()=>service.GetVoiceCount(thunder)>0,"Thunder becomes audible after the delay",2000);
+            Check(manager.GetComponentsInChildren<AudioSource>().Any(s=>s.clip&&s.isPlaying&&Vector3.Distance(s.transform.position,point.transform.position)<.001f),"Thunder voice uses the strike position");
+            await System.Threading.Tasks.Task.Delay(4100); storm.Strike(); var waiting=Field<SoundHandle>(storm,"thunder");
+            Check(waiting.IsAlive()&&service.GetVoiceCount(waiting)==0,"A second thunder waits before playback"); storm.Clear();
+            await Until(()=>!waiting.IsAlive()&&!weather.IsAlive(),"Clear cancels waiting thunder and ends weather"); storm.enabled=false;
+
+            var work=Make("workshop").AddComponent<WorkshopSounds>(); work.Saw(); var session=Field<SoundHandle>(work,"session");
+            await Until(()=>service.GetVoiceCount(session)>0,"Work signal starts the handsaw");
+            work.Strike(); var taps=Field<SoundHandle>(work,"taps"); Check(taps.IsAlive()&&!taps.Equals(session),"Hammer over saw uses a second Workshop play");
+            await Until(()=>service.GetVoiceCount(taps)>0&&service.GetVoiceCount(session)>0,"Hammer and saw voices overlap");
+            work.Drill(); Check(Field<SoundHandle>(work,"session").Equals(session),"Tool switch reuses the main play");
+            Check(service.TryGetParameter(session,SoundParameters.Workshop.Tool,out var tool)&&tool.Current.integer==2,"Tool changes before the Work signal");
+            work.TakeBreak(); await Until(()=>service.GetVoiceCount(session)==0&&service.GetVoiceCount(taps)==0,"Pause signal stops tool voices");
+            Check(session.IsAlive()&&taps.IsAlive()&&!session.IsPaused(),"Keep Alive preserves silent sessions; Pause signal is not API pause");
+            work.enabled=false; await Until(()=>!session.IsAlive()&&!taps.IsAlive(),"Workshop disable stops both sessions");
+
+            var arcade=Make("arcade").AddComponent<ArcadeRequests>();
+            var z1=arcade.Request(Sounds.ArcadeZap); var z2=arcade.Request(Sounds.ArcadeZap); var z3=arcade.Request(Sounds.ArcadeZap); var z4=arcade.Request(Sounds.ArcadeZap);
+            Check(z1.Accepted&&z2.Accepted&&z3.Accepted&&z4.Accepted,"Fourth zap is accepted with replacement");
+            await Until(()=>arcade.Replacements==1&&!z1.Handle.IsAlive(),"Oldest zap is cancelled and replacement notification counted");
+            var c1=arcade.Request(Sounds.ArcadeCoin); var c2=arcade.Request(Sounds.ArcadeCoin); var c3=arcade.Request(Sounds.ArcadeCoin);
+            Check(c1.Accepted&&c2.Accepted&&c3.Status==SoundPlayStatus.ConcurrencyLimit,"Third coin request is refused");
+            var j1=arcade.Request(Sounds.ArcadeJackpot); var j2=arcade.Request(Sounds.ArcadeJackpot);
+            Check(j1.Accepted&&j2.Status==SoundPlayStatus.Cooldown,"Immediate jackpot repeat reports cooldown");
+            arcade.enabled=false; await Until(()=>!z4.Handle.IsAlive()&&!c1.Handle.IsAlive()&&!j1.Handle.IsAlive(),"Arcade disable cleans up owned plays");
+
+            var music=Make("music").AddComponent<TwoTrackMusic>();
+            Set(music,"firstTrack",UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/DEV505/SoundManager/Samples/08-Jukebox/Music/Jukebox_MintMorning.wav"));
+            Set(music,"secondTrack",UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/DEV505/SoundManager/Samples/08-Jukebox/Music/Jukebox_PeachSunset.wav"));
+            music.PlayFirst(); var first=Field<SoundHandle>(music,"current");
+            Check(first.IsAlive()&&service.TryGetParameter(first,SoundParameters.Jukebox.Gain,out var initial)&&initial.Current.number==0,"First track starts with initial Gain zero");
+            await Until(()=>service.TryGetParameter(first,SoundParameters.Jukebox.Gain,out var v)&&v.Current.number>.999f,"Graph fades first track up",4000);
+            music.PlaySecond(); var second=Field<SoundHandle>(music,"current");
+            await System.Threading.Tasks.Task.Delay(400);
+            Check(first.IsAlive()&&second.IsAlive()&&!first.Equals(second)&&service.GetVoiceCount(first)==1&&service.GetVoiceCount(second)==1,"Crossfade has two simultaneous music voices");
+            music.PauseMusic(); Check(first.IsPaused()&&second.IsPaused(),"Pause applies to both tracks");
+            service.TryGetParameter(first,SoundParameters.Jukebox.Gain,out var frozen);
+            await System.Threading.Tasks.Task.Delay(350); service.TryGetParameter(first,SoundParameters.Jukebox.Gain,out var afterPause);
+            Check(Mathf.Abs(frozen.Current.number-afterPause.Current.number)<.001f,"Paused fade holds its current gain");
+            music.ResumeMusic(); await Until(()=>!first.IsAlive()&&second.IsAlive(),"Resume completes fade and retires only outgoing track",4000);
+            music.enabled=false; await Until(()=>!second.IsAlive(),"Music disable cleans up remaining track");
+
+            var portals=Make("portals").AddComponent<PortalOwnerComparison>(); portals.transform.position=new Vector3(-2,1,2);
+            portals.TryDetach(); var detached=portals.LastDeparture;
+            await System.Threading.Tasks.Task.Delay(650); Check(detached.IsAlive(),"Detach keeps departure alive after its owner is destroyed");
+            Check(manager.GetComponentsInChildren<AudioSource>().Any(s=>s.clip&&s.isPlaying&&Vector3.Distance(s.transform.position,portals.transform.position)<.001f),"Detached voice retains its last position");
+            portals.TryStop(); var cut=portals.LastDeparture; Check(cut.IsAlive(),"Stop comparison begins playback");
+            await Until(()=>!cut.IsAlive(),"Stop policy ends departure when its owner is lost",1500);
+            portals.enabled=false; await Until(()=>!detached.IsAlive(),"Portal disable also stops detached handles");
+
+            var launch=Make("launch").AddComponent<LaunchAfterSound>(); var rocket=Make("rocket"); Set(launch,"rocket",rocket.transform);
+            launch.Begin(); var sequence=Field<SoundHandle>(launch,"sequence"); await System.Threading.Tasks.Task.Delay(100);
+            Check(sequence.IsAlive()&&service.GetVoiceCount(sequence)==0&&!launch.HasLaunched,"Launch waits silently for unmet conditions");
+            launch.Cancel(); await System.Threading.Tasks.Task.Delay(100); Check(!launch.HasLaunched&&!sequence.IsAlive(),"Cancelling the sequence does not start flight");
+            Set(launch,"power",.8f); Set(launch,"pressure",.1f); Set(launch,"clampsOpen",true); launch.Begin();
+            var approved=Field<SoundHandle>(launch,"sequence"); await Until(()=>service.GetVoiceCount(approved)>0,"Satisfied launch conditions begin countdown");
+            await Until(()=>launch.HasLaunched,"Natural Finished notification starts flight",8500); var flight=Field<SoundHandle>(launch,"flight");
+            Check(flight.IsAlive()&&!approved.IsAlive(),"Finished sequence is replaced by a live flight play");
+            rocket.transform.position=new Vector3(1,4,2);
+            await Until(()=>manager.GetComponentsInChildren<AudioSource>().Any(s=>s.clip&&s.isPlaying&&Vector3.Distance(s.transform.position,rocket.transform.position)<.001f),"Flight voice follows the rocket");
+            service.Paused=true; Check(flight.IsPaused(),"Global service pause reaches flight"); service.Paused=false;
+            launch.enabled=false; await Until(()=>!flight.IsAlive(),"Launch disable cleans up flight");
+            Check(SoundBus.Notifications.ListenerCount==listenerCount+1,"Example notification subscriptions are disposed");
+            var report=new{success=true,checks=Checks.ToArray(),sourceRevision="746a1cc7d2602bc59df6096eac50508ded6ef49e",unity=Application.unityVersion,utc=System.DateTime.UtcNow.ToString("o")};
+            System.IO.File.WriteAllText(output,Newtonsoft.Json.JsonConvert.SerializeObject(report,Newtonsoft.Json.Formatting.Indented)); return report;
+        }
+        finally
+        {
+            service.Paused=false; foreach(var go in objects) if(go) UnityEngine.Object.DestroyImmediate(go);
+            foreach(var asset in added) if(asset) service.Unregister(asset,0);
+            subscription.Dispose(); service.Paused=pausedBefore;
+        }
+    }
+}

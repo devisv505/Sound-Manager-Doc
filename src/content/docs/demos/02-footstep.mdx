@@ -1,0 +1,124 @@
+---
+title: 'Every step counts.'
+description: 'One footfall. Three surfaces. Many trimmed variations.'
+kind: demo
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Samples/Footstep/FootstepAudio.cs
+  - Assets/DEV505/SoundManager/Samples/02-Footstep/Footstep.soundgraph
+tags: [unity, sound, footstep]
+demo:
+  number: 2
+  scene: Assets/DEV505/SoundManager/Samples/02-Footstep/Demo.unity
+  keys: ['Sounds.Footstep']
+  screenshots:
+    [
+      'footstep-grass',
+      'footstep-stone',
+      'footstep-wood',
+      'footstep-graph',
+      'footstep-surface-selection',
+      'footstep-trim-range',
+      'footstep-grass-group',
+    ]
+---
+
+import Capture from '../../../components/Capture.astro';
+import Explanation from '../../../components/Explanation.astro';
+import DemoContract from '../../../components/DemoContract.astro';
+import DemoNavigation from '../../../components/DemoNavigation.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation title="One step chooses one surface and one variation.">
+  Each grounded footfall starts one short sound through `Sounds.Footstep`. An integer chooses grass,
+  stone, or wood, and the graph picks a trimmed section of that surface’s recording.
+</Explanation>
+
+<Capture id="footstep-grass" eager />
+
+## Try it in Unity
+
+In Unity's **Project** window, open `Assets/DEV505/SoundManager/Samples/02-Footstep/Demo.unity`. The supplied scene already has its Sound Manager, event registrations, generated keys, camera, and Audio Listener. Press **Play**, wait for the demo to be ready, and click the **Game** view before using the keyboard. If you are setting up a separate scene, follow <a href={sitePath('getting-started/')}>Your first sound</a> first.
+
+| Control                     | Action                                                      |
+| --------------------------- | ----------------------------------------------------------- |
+| **WASD / arrow keys**       | Walk across the island.                                     |
+| **Left Shift** while moving | Sprint; steps happen more often as you cover ground faster. |
+
+Walk over grass, then cross the stone and wooden areas. Listen for a change in texture at the next footfall: soft grass, harder stone, and hollow wood. Stop moving; footsteps stop too. The controller measures distance travelled while grounded. It does not play a loop while a movement key is held.
+
+The listener is already configured in the scene. This particular Footstep event is currently **2D**, so its surface choice changes the sound without distance fading or left/right placement. The contact position is still passed in the context; it becomes useful if you change the event to 3D for your own game.
+
+<Capture id="footstep-stone" />
+<Capture id="footstep-wood" />
+
+## From a footfall to a sound
+
+`FootstepPlayer` detects grounded movement and reports a contact point and a surface. `FootstepAudio` translates that surface to the graph's integer and makes one play request. These two sets of numbers differ:
+
+| Ground detected by the scene | Scene enum | Graph `Surface` |
+| ---------------------------- | ---------- | --------------- |
+| Unknown                      | 0          | Skip the sound. |
+| Grass                        | 1          | 0               |
+| Stone                        | 2          | 1               |
+| Wood                         | 3          | 2               |
+
+Casting the scene enum directly would select the wrong branch. The complete recipe uses an explicit switch and ignores unknown ground.
+
+```csharp title="One grass step · excerpt"
+var context = SoundPlayContext.At(contactPosition)
+    .With(SoundParameters.Footstep.Surface, 0);
+var result = SoundBus.Play(Sounds.Footstep, context);
+```
+
+Here `contactPosition` is the position supplied by your ground check. `0` is an **Int**, matching the graph. `0f` is a Float and would be the wrong type. Put this value in the initial context: the graph selects the recording as the play begins, so changing Surface afterward is too late for that step.
+
+## Read the graph
+
+<Capture id="footstep-graph" />
+
+Each surface has a named group containing four Wave Assets and a Random Clip node. The four entries can point to the same long recording but use different start times and lengths. Random Clip chooses a variation with immediate repetition disabled. Surface selects between the three groups; `On Start` triggers one Play Audio node. Its **Finished** output reaches **End Event**, so the short play cleans itself up.
+
+Random choice is part of the graph. The choice history for Random Clip is managed by the service, allowing successive footstep requests to avoid immediately repeating that choice. This does not make the order a fixed playlist or guarantee that every recording plays once before any repeats.
+
+<Capture id="footstep-surface-selection" />
+
+### Trim one footfall from a long recording
+
+<Capture id="footstep-trim-range" />
+
+Open the Footstep graph and select a Wave Asset inside a surface group. The compact node shows **Asset**, **Start**, and **Length**. Use the wave editing area to preview the recording and select the part containing one step. In the shown example, Start is **1.100 s** and Length is **0.530 s**, so playback ends at **1.630 s**. Length is a duration, not an end time.
+
+Move the selection to a clean attack and let the short tail finish. Repeat for the other entries, using a different footfall each time. The source recording stays intact; each Wave Asset stores its own trim. The waveform editing area is distinct from the compact node, which is why the node itself does not show a large waveform.
+
+<Capture id="footstep-grass-group" />
+
+The <a href={sitePath('captures/02-footstep/')}>capture library</a> also shows the matching Stone and Wood groups. Keep the same structure when adding more surfaces: variations first, then the surface selector, then one playback path.
+
+## What belongs to the demo?
+
+The sound graph handles trim ranges, variation, surface selection, and the end of each play. Player movement, ground detection, stride spacing, the glowing face, and HUD labels belong to the sample's C# and scene setup. Sound Manager does not detect what your character is standing on.
+
+## Common surprises
+
+- **A whole walking recording plays.** Check Start and Length on every variation; assigning the asset alone does not find individual steps.
+- **Stone sounds like wood.** Check the explicit enum mapping above.
+- **Steps play while standing still.** Trigger at a footfall, not every Update. For an animated character, an animation contact event can call your own step method.
+- **Moving the emitter makes no audible difference.** This saved graph is 2D. Use the Bee demo to hear spatial placement.
+- **Overlapping steps disappear under heavy traffic.** The event allows eight overlapping plays and replaces its oldest at the limit. The normal demo does not need an endless loop or a retained handle for each step.
+
+## Event settings, parameters, and signals
+
+<DemoContract demo="02-footstep" />
+
+## Take it into your own game
+
+<a href={sitePath('recipes/surface-footsteps/')}>Open the complete integration recipe</a> for the
+script, Inspector setup, a short test, and cleanup. Use
+<a href={sitePath('api/context/')}>Play context</a> for initial values and placement, and
+<a href={sitePath('api/sound-bus/')}>SoundBus</a> for playback controls.
+
+<a href={sitePath('captures/02-footstep/')}>All Footstep Unity captures</a> includes further states
+and readable graph details, with steps to reproduce each view.
+
+<DemoNavigation number={2} />

@@ -15,6 +15,12 @@ for (const f of files) {
   const html = await readFile(f, 'utf8');
   for (const m of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
     const raw = m[1];
+    if (
+      /^(?:https?:)?\/\/(?:github\.com|raw\.githubusercontent\.com)\/devisv505\/Sound-Manager(?:[/?#]|$)/i.test(
+        raw,
+      )
+    )
+      throw Error(`${f}: Link to the private Unity repository: ${raw}`);
     if (/^(https?:|data:|mailto:|tel:|javascript:|\/\/)/.test(raw)) continue;
     const current = base + path.relative('dist', f).replace(/index\.html$/, '');
     const url = new URL(raw, 'https://docs.test' + current);
@@ -40,8 +46,12 @@ for (const f of files) {
 }
 await access('dist/pagefind/pagefind.js');
 const coverage = JSON.parse(await readFile('content-data/api-coverage.json', 'utf8'));
-const references = new Set(coverage.types.flatMap((type) => type.members)
-  .filter((member) => member.status === 'documented').map((member) => member.page));
+const references = new Set(
+  coverage.types
+    .flatMap((type) => type.members)
+    .filter((member) => member.status === 'documented')
+    .map((member) => member.page),
+);
 for (const reference of references) {
   const [route, anchor] = reference.split('#');
   const html = await readFile(path.join('dist', route, 'index.html'), 'utf8');

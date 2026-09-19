@@ -1,0 +1,25 @@
+---
+import type { ImageMetadata } from 'astro';
+import Screenshot from './Screenshot.astro';
+import manifest from '../../content-data/captures.json';
+interface Props {
+  id: string;
+  eager?: boolean;
+}
+const { id, eager = false } = Astro.props;
+const capture = manifest.captures.find((item) => item.id === id);
+if (!capture) throw new Error(`Unknown Unity capture: ${id}`);
+const images = import.meta.glob<{ default: ImageMetadata }>('../assets/demos/**/*.png', {
+  eager: true,
+});
+const source = images[capture.publishedSource.replace('src/', '../')];
+if (!source) throw new Error(`Missing Unity capture: ${id}`);
+---
+
+<Screenshot
+  src={source.default}
+  id={id}
+  eager={eager}
+  alt={capture.alt}
+  caption={capture.caption}
+/>

@@ -1,0 +1,60 @@
+---
+title: 'Schedule thunder and cancel the whole storm.'
+description: 'Place each thunder at its strike point, let the graph delay it, and use one owner to clear pending and audible weather sounds.'
+kind: recipe
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayContext.cs
+tags: [unity, recipes, delayed-thunder]
+---
+
+import Explanation from '../../../components/Explanation.astro';
+import ExampleCode from '../../../components/ExampleCode.astro';
+import RecipeSetup from '../../../components/RecipeSetup.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation label="CODE RECIPE" title="Schedule thunder and cancel the whole storm.">
+  Place each thunder at its strike point, let the graph delay it, and use one owner to clear pending
+  and audible weather sounds.
+</Explanation>
+
+## Set up the scene
+
+<RecipeSetup file="StormSounds.cs" events="Weather and Thunder from 05-Weather">
+  <p>
+    Create an empty GameObject a few units to one side of the listener and assign it to{' '}
+    <strong>Strike Point</strong>. If left empty, thunder uses the component’s position. Rain and
+    Wind fields set the requested weather level.
+  </p>
+</RecipeSetup>
+
+## Try the component
+
+Choose **Start weather**. Raise Rain and Wind and hear them grow gradually. Choose **Strike thunder**: after 0.55 seconds, the rumble begins from Strike Point. Wait more than four seconds before another strike because the event has a cooldown.
+
+For the cancellation test, strike again and immediately choose **Clear weather**, before the 0.55-second delay finishes. The background fades and that waiting rumble should never start. Disable the component to test its final cleanup.
+
+The script does not draw lightning. The marked location inside the Accepted branch is where your own flash effect would start, giving the sound its delayed response. A refused request should not flash as though thunder had been scheduled.
+
+## A fixed position and a shared owner
+
+Weather starts with initial Rain and Wind of zero. Update sends the Inspector targets. Each Thunder request uses `At(strikePoint.position, owner)`: the strike stays at that point even if the cloud moves later.
+
+Both events carry the same owner token. Clear uses `StopOwned(owner, 0.85f)`, which reaches the weather loop and thunder plays, including those waiting inside a graph Delay. Stopping only the Weather handle would leave Thunder independent.
+
+The owner remains valid for another storm from this component. OnDisable stops its owned plays immediately and releases the owner record. The saved Weather event is 2D; Thunder is 3D with a 4–20 unit distance range. Positioning the weather bed itself does not add direction to it.
+
+## Keep the delay in one place
+
+This example sends the thunder request at the moment of the strike. The graph supplies the delay. Adding another C# timer before that request would add a second wait. A separate delayed callback would also need its own cancellation; the graph-owned delay already follows the play's lifetime.
+
+## Complete component
+
+<ExampleCode file="StormSounds.cs" />
+
+## Keep exploring
+
+Read the <a href={sitePath('demos/05-weather/')}>demo walkthrough</a> for the graph, parameters, controls, and Unity screenshots. The <a href={sitePath('api/ownership/')}>related API reference</a> explains the calls used here. Return to <a href={sitePath('recipes/')}>all twelve recipes</a> to choose another interaction.
+
+This page imports the checked C# file directly. It was compiled against the documented Unity revision; its runtime checks and source hash are recorded in the documentation repository's validation files.

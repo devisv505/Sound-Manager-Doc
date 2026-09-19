@@ -2,21 +2,21 @@
   "schemaVersion": 1,
   "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
   "unityVersion": "6000.6.0f1",
-  "compiledAt": "2026-09-19T20:38:07.847662Z",
+  "compiledAt": "2026-09-19T21:55:15.67636Z",
   "compilation": {
     "success": true,
     "diagnostics": [],
-    "method": "Unity CLI run_script in-memory compilation of the four complete example components plus the M2 harness."
+    "method": "Unity CLI run_script in-memory compilation of all eleven complete example components plus the M4 harness."
   },
-  "runtimeReport": "validation/m2-unity-runtime.json",
-  "runtimeHarness": "validation/VerifyM2Examples.cs.txt",
+  "runtimeReport": "validation/m4/runtime.json",
+  "runtimeHarness": "validation/m4/VerifyM4Examples.cs.txt",
   "examples": [
     {
       "file": "examples/CampfireSound.cs",
       "sha256": "7f3df98790bb90fd0173151d70cfcf3903db5b232af254a49f660c509f9b9c22",
       "compiled": true,
       "runtimeReport": "validation/campfire-example.json",
-      "scope": "Existing M1 lifecycle checks plus M2 recompile."
+      "scope": "Existing M1 lifecycle checks plus M4 recompile."
     },
     {
       "file": "examples/EngineSoundControls.cs",
@@ -38,6 +38,55 @@
       "compiled": true,
       "runtimeReport": "validation/m2-unity-runtime.json",
       "scope": "M2 actual Play Mode component behavior and cleanup checks."
+    },
+    {
+      "file": "examples/ArcadeRequests.cs",
+      "sha256": "2a91e36022b92dafa2fafe56037d0ce88fbc35e9d12de62ee75e6740ea529e50",
+      "compiled": true,
+      "runtimeReport": "validation/m4/runtime.json",
+      "scope": "M4 actual Play Mode component behavior and cleanup checks."
+    },
+    {
+      "file": "examples/LaunchAfterSound.cs",
+      "sha256": "eeeab734d7dddc374f6c7219a539fbc91a50cfaccba99414e99ee4da9f2fbc85",
+      "compiled": true,
+      "runtimeReport": "validation/m4/runtime.json",
+      "scope": "M4 actual Play Mode component behavior and cleanup checks."
+    },
+    {
+      "file": "examples/PortalOwnerComparison.cs",
+      "sha256": "4ca764d4273db3d03d05c9eaa60ae4c8ddfdb9d018ffd5712f2041b1d9dbd950",
+      "compiled": true,
+      "runtimeReport": "validation/m4/runtime.json",
+      "scope": "M4 actual Play Mode component behavior and cleanup checks."
+    },
+    {
+      "file": "examples/StormSounds.cs",
+      "sha256": "92ea6c21498bce3dc7b407d1e28039230758a41e9f96282202c58d31637387e3",
+      "compiled": true,
+      "runtimeReport": "validation/m4/runtime.json",
+      "scope": "M4 actual Play Mode component behavior and cleanup checks."
+    },
+    {
+      "file": "examples/SurfaceFootsteps.cs",
+      "sha256": "03686032114ce785a6287602f0655d79e669617241633dd576b6357070db024f",
+      "compiled": true,
+      "runtimeReport": "validation/m4/runtime.json",
+      "scope": "M4 actual Play Mode component behavior and cleanup checks."
+    },
+    {
+      "file": "examples/TwoTrackMusic.cs",
+      "sha256": "fcbefa4d0a14058fab59fc2fd97f1a15b5594dd88ea3bc7574df84a85eee1bb4",
+      "compiled": true,
+      "runtimeReport": "validation/m4/runtime.json",
+      "scope": "M4 actual Play Mode component behavior and cleanup checks."
+    },
+    {
+      "file": "examples/WorkshopSounds.cs",
+      "sha256": "28e0d0680ae04f48d83cb73022d13635ca619739cec943e9c2ec9094feac02e5",
+      "compiled": true,
+      "runtimeReport": "validation/m4/runtime.json",
+      "scope": "M4 actual Play Mode component behavior and cleanup checks."
     }
   ]
 }

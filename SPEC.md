@@ -1,6 +1,6 @@
 # DEV505 Sound Manager — documentation website specification
 
-Status: specification baseline; M1–M3 implemented on 19 September 2026. See the roadmap and [M3 validation report](validation/M3.md) for current progress.
+Status: specification baseline; M1–M4 implemented on 19–20 September 2026. See the roadmap and [M4 validation report](validation/M4.md) for current progress.
 
 Prepared: 19 September 2026.  
 Companion: [Implementation roadmap](ROADMAP.md).
@@ -21,7 +21,7 @@ Version-one deliverables:
 - A standalone static build, local preview commands, and a GitHub Pages deployment workflow.
 - A contributor guide explaining how to update content, validate examples, recapture screenshots, and release a new documentation revision.
 
-The initial planning step created `SPEC.md` and `ROADMAP.md`. M1 implements the foundation and Campfire slice. M2 adds the beginner setup path, core concepts, and consumer API. M3 supplies all ten screenshot galleries with verified Unity captures; the remaining scope is tracked by the implementation milestones in the roadmap.
+The initial planning step created `SPEC.md` and `ROADMAP.md`. M1 implements the foundation and Campfire slice. M2 adds the beginner setup path, core concepts, and consumer API. M3 supplies all ten screenshot galleries with verified Unity captures. M4 adds all ten detailed walkthroughs and twelve practical recipe topics; the remaining scope is tracked by the implementation milestones in the roadmap.
 
 ## 2. Source of truth and versioning
 
@@ -96,7 +96,7 @@ Select compatible stable framework versions and a supported Node LTS version whe
 
 GitHub Pages is the hosting target. A public documentation repository supports free Pages hosting; private-repository eligibility depends on the account plan. Keep this documentation project independent of the Unity source repository. See [GitHub Pages limits and availability](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits).
 
-Repository name: `Sound-Manager-Doc`. The configured URL is `https://devisv505.github.io/Sound-Manager-Doc/`. The M1 site was published through GitHub Actions after replacing the default Jekyll build. M3 is validated locally; publishing later changes remains a separate release step.
+Repository name: `Sound-Manager-Doc`. The configured URL is `https://devisv505.github.io/Sound-Manager-Doc/`. The M1 site was published through GitHub Actions after replacing the default Jekyll build. M4 is validated locally; publishing later changes remains a separate release step.
 
 Configure Astro `site` for the actual Pages origin and `base` for the repository subpath. Internal links, images, search assets, canonical URLs, and the sitemap must all work under that subpath. Direct navigation and refresh on nested pages must work without SPA rewrite rules. Follow the [official Astro GitHub Pages guide](https://docs.astro.build/en/guides/deploy/github/).
 
@@ -151,7 +151,7 @@ All routes below are relative to the configured site base.
 
 Use a desktop sidebar, compact mobile navigation, page table of contents, breadcrumbs where helpful, previous/next links, and prominent search. A user should reach any demo from the home page and any primary API type from the API index without searching through unrelated articles.
 
-Each page has a descriptive title, summary, content kind, source references/revision, and relevant feature tags. Demo pages also carry their number, exact scene title, scene path, event keys, and screenshot references. Define and validate this metadata during implementation.
+Each page has a descriptive title, summary, content kind, source references/revision, and relevant feature tags. Source paths and revision hashes are internal verification metadata. The Unity Sound-Manager repository is private: do not expose GitHub source links or an “Explore the source” section in the public site. Demo pages also carry their number, exact scene title, scene path, event keys, and screenshot references. Define and validate this metadata during implementation.
 
 ## 6. API documentation contract
 
@@ -332,7 +332,7 @@ Create a capture manifest containing scene path, demo slug, source revision, cap
 
 Protect the user's working session: inspect the current scene, dirty state, and Play Mode before switching; preserve unsaved edits; record and restore temporary capture settings and the original scene/state where feasible. Do not change project-wide settings solely to make a screenshot. Bring the running Editor to the foreground if background Play Mode prevents capture commands from progressing.
 
-M1 has captured and reviewed the Campfire pilot set. The remaining nine demos require captures in their implementation milestones.
+M1 captured and reviewed the Campfire pilot set. M3 completed the remaining nine demos; M4 reuses the 84 verified captures against the unchanged Unity source revision.
 
 ## 10. Visual system and interaction
 

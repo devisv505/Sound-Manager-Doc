@@ -1,0 +1,237 @@
+{
+  "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
+  "files": [
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/01-Campfire/Campfire.soundgraph",
+      "sha256": "59097aba47148b604bb7ba08890af0a04a80a7e6fd606e3b7a0086fc9f8cdc3d"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/01-Campfire/Campfire.soundgraph.meta",
+      "sha256": "c7c4314437ec06c47c876e64955c066f2354768dde3d67764ac050308e134937"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/02-Footstep/Footstep.soundgraph",
+      "sha256": "4970184a8bc9b602f5ec9439ccd2ae902cf5810af513df639b74ca8de0fa1248"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/02-Footstep/Footstep.soundgraph.meta",
+      "sha256": "f9666eb4460d6493072d6ad9ec73a4d40d38f3270ec335d02828366cee76f36c"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/03-Bee/Bee.soundgraph",
+      "sha256": "7b880b9487fca7c35adf03d31ddffebdedc911fe88539911d12d3a5d62aba5ba"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/03-Bee/Bee.soundgraph.meta",
+      "sha256": "2575d5a3fd1638820481ff4a7bed71c9d21640fc202185702d017bdf8a4d86e9"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/04-Engine/Engine.soundgraph",
+      "sha256": "534e35036943f3c9cbac715e9c562864797510ba5f2130166c72d827fb8a4c1e"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/04-Engine/Engine.soundgraph.meta",
+      "sha256": "ce85cc597b778250364761e52947fc8f2a2d90941b28ba0b028722d41345bdea"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/05-Weather/Thunder.soundgraph",
+      "sha256": "9862954f1fc4454feb56959f06385e2ee68a0a8bc5313f9af066382d638ccd2e"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/05-Weather/Thunder.soundgraph.meta",
+      "sha256": "5d9ccbd1d113c576b7b79afbb7cd1dcc37bd94076f90e4df268dd3da71242228"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/05-Weather/Weather.soundgraph",
+      "sha256": "4eb0b15707119a72f40aac103a464ed092ca2b5b8022bd965cc76b045d791cb0"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/05-Weather/Weather.soundgraph.meta",
+      "sha256": "0231ae224038f88c0346755dd13c354d8443df19b4e17bf031e5d4a9a7b8ca09"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/06-Workshop/Workshop.soundgraph",
+      "sha256": "09160d1343c76d1e9a1d1a588a20b2f6ede9c0a518142804f1a13635e9f6970e"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/06-Workshop/Workshop.soundgraph.meta",
+      "sha256": "0ded9fb33ec0065dcf497bd6d2466cefb0c88228cd2a4013f2b4f4616aa701dd"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/07-Arcade/ArcadeCoin.soundgraph",
+      "sha256": "22ed33175fd6462a0cdc84dff3518de52b9fe288d47cb533324a98d1547d1454"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/07-Arcade/ArcadeCoin.soundgraph.meta",
+      "sha256": "07619def7691fc07dc0122de6b847dce8ae8cbb113a469e52ee1ec60bf8dfb87"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/07-Arcade/ArcadeJackpot.soundgraph",
+      "sha256": "e111ceade9da6aa65fac2b129f35080ad23ccd3ca74fbfb93effe78074d8a33d"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/07-Arcade/ArcadeJackpot.soundgraph.meta",
+      "sha256": "624cb23a5144dab1feadcf688e68165ae05a2fcd19b801fc10f3ed36032a773c"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/07-Arcade/ArcadeSoundSettings.asset",
+      "sha256": "7d16dec89cf0c77092d42f3ba388fa4ea9470184286e02135963dd6e2fd93f1f"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/07-Arcade/ArcadeZap.soundgraph",
+      "sha256": "e7aa1f6783def1c75adf67f44fc8a867cfccb5ec4c9fd8f2f8d568d32c30a883"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/07-Arcade/ArcadeZap.soundgraph.meta",
+      "sha256": "0d76c63e151d85f72354f918c2de10d8f67105a072707ccf4bb624cdbdf944c5"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/08-Jukebox/Jukebox.soundgraph",
+      "sha256": "817da7c49187097eb10a903449bf58df36ea92ec38b0a22f5a35f9fbb83f947d"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/08-Jukebox/Jukebox.soundgraph.meta",
+      "sha256": "73825156cb011aa1467d95b7defabad47cf749c8e5b8cb9ae3cd7dbf43869d21"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/09-Portals/PortalArrival.soundgraph",
+      "sha256": "0a20bd311c8df4c1bc9adc0dfc6425bd43380accef15fe6c29757bbe4c510bac"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/09-Portals/PortalArrival.soundgraph.meta",
+      "sha256": "2a1cc120fd5fd980e546fcb12c4b098a9df3d57ff93bd9f2bcd6b4844e8c4b13"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/09-Portals/PortalCut.soundgraph",
+      "sha256": "d6762266286730b0d38b49edbe497906e5d3bbaf171f0d1e75a4c90cb7497972"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/09-Portals/PortalCut.soundgraph.meta",
+      "sha256": "9ab1ff6cb98425cce583abc3ab9ce56ef1831cf8ae1c1e27ed8663511213266c"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/09-Portals/PortalEcho.soundgraph",
+      "sha256": "a30a3a1cf8f7e38107c80be9c0ab310faf35db135cfc1096aa0de915639cccd2"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/09-Portals/PortalEcho.soundgraph.meta",
+      "sha256": "5e5c86db19b9f15a58dbe15ee0655e77d456d650f1797c84889f8943480db362"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/09-Portals/PortalHum.soundgraph",
+      "sha256": "1abf34c8ed656805227a5763431e35548f0d8cfb937d8b20bfd3fe4a01d22c9b"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/09-Portals/PortalHum.soundgraph.meta",
+      "sha256": "41dbe91225fb96118d74b3a3f3402342d3d95eb68ec82b7cd406020d7551fda3"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/09-Portals/PortalWorld.soundgraph",
+      "sha256": "c50813bc0cb45912c0b80d83eead5d5c8c7e3195a47e6386edc5a5c71f5f9b2d"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/09-Portals/PortalWorld.soundgraph.meta",
+      "sha256": "54b7fbf25cd3afd67c364787e242a68a07511453a7e1afa438b6548d2c0af19b"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchClamp.soundgraph",
+      "sha256": "3cbebb13dac1a15494ebe1b48bcb220c608a90ddc5400f9dfcf4bebd8994c8da"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchClamp.soundgraph.meta",
+      "sha256": "29e44b1fce9e5a8db1e0523b6f51cc5b521dc0e6d0304d26246c0b2a0257bf18"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchFlight.soundgraph",
+      "sha256": "5595f313775f06e6f451f092497e2a19227f14b216e4cf5ae022a2390c21eca4"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchFlight.soundgraph.meta",
+      "sha256": "f6de98eeb8451ad0cd95173f96cc717441fb852030237c5912a8b31cc878f9e2"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchPad.soundgraph",
+      "sha256": "42e8ff95b9f7f8acfd26ff722e5cbbe5971e4752575e55f784c50cbfc0be7385"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchPad.soundgraph.meta",
+      "sha256": "6e9fbd0d2596c9d95f9856691e6c7b556a5f4bfaa5c320b8ca3792edd82036d4"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchSequence.soundgraph",
+      "sha256": "9074e3b423b02d315fd5b9ddb1d4071bbcaff2ea212df61b95d96b2573aa0a01"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchSequence.soundgraph.meta",
+      "sha256": "e7023d23325ed78f9071c972c23aab95a11d802d8ca5d12f2b4e7ad2f6ab0f7d"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchUI.soundgraph",
+      "sha256": "e40a627b044a375885faf8a951e26a6efbd7e90be0cad5762dba4ac08f38e901"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchUI.soundgraph.meta",
+      "sha256": "4dc8a24e4acceb653cf41205f415bf8f1464713af82598a53aec6927b0c4783a"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchVent.soundgraph",
+      "sha256": "a5c1ed1f42d148442fd5699c9b743dd8bf030e48d37bfd7c86cfde42082dc517"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Samples/10-Launch/LaunchVent.soundgraph.meta",
+      "sha256": "05dedb16c8ee23cc74ba38fe6185d2963c2fe49f3d0bda6056b08789627e8f0b"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs",
+      "sha256": "db8ba2da341aa5d0e21577ef53d1fd8bc346a7c873ea1da4436588998203cfd0"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Samples/Arcade/ArcadeDemo.cs",
+      "sha256": "27927463ee0fb14e8cb47fa91a06eae066d4f52d5e09de0b37478cba98c9ce9f"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Samples/Bee/BeeFlightDemo.cs",
+      "sha256": "d1f10f953ee73aa1a634728ac173e690f91e509cf7c1e74e19ad20159e81b479"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Samples/Campfire/CampfireInteraction.cs",
+      "sha256": "bda0f0e333fbc2d168c5cb31feef1a621c7e9b99206fcf31fd566e86e20b8a8e"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Samples/Engine/EngineDriveDemo.cs",
+      "sha256": "91fa883672fd0fa244e77ee59e680ab599f729c09feec2063a2a62799c3da388"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Samples/Footstep/FootstepAudio.cs",
+      "sha256": "a1bc21239c60088f6a3ba076878a73a59caf6489f929db387fdfd4b19b9d34f3"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Samples/Footstep/FootstepPlayer.cs",
+      "sha256": "43af24b1b1f5cb5ce436f4d0918a01f7361d53e08aa2d04a100e406ce35eaa75"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Samples/Jukebox/JukeboxDemo.cs",
+      "sha256": "e2972b34fea24f31af3d2409d54093e7636aad4dc895ecc5292f6b3005314d16"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Samples/Launch/LaunchDemo.cs",
+      "sha256": "8fa27fb322a7661f694a2bbb0a09cbc1b6164daf92276538cad778486527031a"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Samples/Portals/PortalsDemo.cs",
+      "sha256": "db149ef9a7fae97258d863f32a2a87555977e30414a3de7a26afe6771b267374"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Samples/Weather/WeatherDemo.cs",
+      "sha256": "18528e8a977d23e424bce11bf5072f9a8dcbe10bb215b10adf371b8170cde3b9"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Samples/Workshop/WorkshopDemo.cs",
+      "sha256": "d79e45c6a62c4b76f9e3f6e05e26e70d4bd846a22b153cd3842ed3f7d0dce6b2"
+    },
+    {
+      "path": "Assets/InputSystem_Actions.inputactions",
+      "sha256": "1c6cbb519d65ecfe19a29231735b7f54741a20ac1a8ad4f46a18e1bfb28a3c39"
+    }
+  ]
+}

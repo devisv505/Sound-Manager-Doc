@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "diagnostics": [],
+  "compileMs": 340,
+  "exampleCount": 11,
+  "evidence": "validation/m4/runtime-cli.json",
+  "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e"
+}

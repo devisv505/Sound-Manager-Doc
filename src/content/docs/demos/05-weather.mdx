@@ -1,0 +1,125 @@
+---
+title: 'A little rain.'
+description: 'Blend a storm, then hear thunder from its strike.'
+kind: demo
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Samples/Weather/WeatherDemo.cs
+  - Assets/DEV505/SoundManager/Samples/05-Weather/Thunder.soundgraph
+  - Assets/DEV505/SoundManager/Samples/05-Weather/Weather.soundgraph
+tags: [unity, sound, weather]
+demo:
+  number: 5
+  scene: Assets/DEV505/SoundManager/Samples/05-Weather/Demo.unity
+  keys: ['Sounds.Thunder', 'Sounds.Weather']
+  screenshots:
+    [
+      'weather-rain',
+      'weather-clear',
+      'weather-lightning',
+      'weather-graph-weather',
+      'weather-rain-layers',
+      'weather-graph-thunder',
+      'weather-thunder-delay',
+    ]
+---
+
+import Capture from '../../../components/Capture.astro';
+import Explanation from '../../../components/Explanation.astro';
+import DemoContract from '../../../components/DemoContract.astro';
+import DemoNavigation from '../../../components/DemoNavigation.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation title="Build the storm, then place each rumble.">
+  Rain and wind blend through smoothed parameters. Thunder is a separate 3D play at the lightning
+  strike, with a short graph delay. Shared ownership lets clearing the weather cancel a rumble that
+  has not started yet.
+</Explanation>
+
+<Capture id="weather-rain" eager />
+
+## Try it in Unity
+
+In Unity's **Project** window, open `Assets/DEV505/SoundManager/Samples/05-Weather/Demo.unity`. The supplied scene already has its Sound Manager, event registrations, generated keys, camera, and Audio Listener. Press **Play**, wait for the demo to be ready, and click the **Game** view before using the keyboard. If you are setting up a separate scene, follow <a href={sitePath('getting-started/')}>Your first sound</a> first.
+
+| Control                | Action                           |
+| ---------------------- | -------------------------------- |
+| **Space**              | Start or clear the weather.      |
+| **1**                  | Choose light rain.               |
+| **2**                  | Choose a storm.                  |
+| **T** / thunder button | Request a strike when available. |
+| Rain and wind sliders  | Set the two weather targets.     |
+
+Start with light rain, then choose Storm. Listen as the rain fills out and wind strengthens over time. Trigger thunder: the lightning flash comes first, then the rumble. Clear the weather immediately after another strike to cancel a thunder request still waiting in its delay.
+
+Rain and wind use a **2D** event, providing a broad background. Thunder uses a **3D** event at the strike point. The listener stays in the scene's central listening area, so different strike positions change where the rumble is heard.
+
+<Capture id="weather-clear" />
+<Capture id="weather-lightning" />
+
+## Two events with different jobs
+
+`Sounds.Weather` supplies the continuous weather bed. `Sounds.Thunder` supplies a single delayed response. Both use the weather controller's owner token, allowing one StopOwned call to clean up the whole interaction.
+
+<Capture id="weather-graph-weather" />
+<Capture id="weather-rain-layers" />
+
+The Weather graph starts looping layers and maps Rain and Wind into their levels. Rain moves toward its target at 0.35 units per second upward and 0.5 downward; Wind uses 0.25 and 0.4. The demo starts both at zero in the initial context, then sets the requested targets, so the storm grows in instead of starting at full level.
+
+The controller reads the current smoothed values to drive the rain and cloud visuals. The sound graph does not render those effects.
+
+<Capture id="weather-graph-thunder" />
+<Capture id="weather-thunder-delay" />
+
+Thunder's `On Start` reaches a **0.55-second Delay**, then plays a randomly selected thunder variation. Playback speed varies slightly, from 0.92 to 1.06. After the recording finishes, the graph ends. This is a fixed artistic delay, not a calculation of the physical speed of sound from distance.
+
+## Start, strike, and clear
+
+```csharp title="Initial weather values · excerpt"
+var owner = service.OwnerOf(this);
+var context = SoundPlayContext.At(transform.position, owner)
+    .With(SoundParameters.Weather.Rain, 0f)
+    .With(SoundParameters.Weather.Wind, 0f);
+var result = SoundBus.Play(Sounds.Weather, context);
+```
+
+Retain the accepted handle, then send Rain and Wind targets with `SetFloat`. For each lightning strike, use the actual strike position:
+
+```csharp title="A strike and shared cleanup · excerpt"
+var strike = SoundBus.Play(Sounds.Thunder,
+    SoundPlayContext.At(strikePosition, owner));
+// Show the flash only if strike.Accepted.
+// Later, when the player clears the weather:
+service.StopOwned(owner, 0.85f);
+```
+
+The delay lives inside that thunder play. Stopping the owner cancels pending graph work as well as stopping weather voices; there is no separate delayed C# call left to fire afterward. The complete recipe keeps the owner until disable cleanup and releases it there.
+
+The graph enforces a **4-second thunder cooldown**. The demo's button waits 4.2 seconds and automatic strikes use a longer interval. In a strong storm (Rain above 0.78 and Wind above 0.65), the demo schedules automatic strikes: first after about 6 seconds, then at random intervals of 8–12 seconds. That scheduling belongs to the controller.
+
+## What belongs to the demo?
+
+The cloud and island models, falling rain, flash light, lightning bolt, weather presets, and automatic strike schedule are demo features. Sound Manager supplies the looping layers, smoothing, random variations, delayed playback, spatial position, cooldown, and owner cleanup.
+
+## Common surprises
+
+- **The rumble is not immediate.** The graph deliberately waits after the visual flash.
+- **Repeated strikes are refused.** Respect the cooldown rather than retrying each frame.
+- **Thunder happens after weather is cleared.** Use the same owner for both events and stop that owner; stopping only the Weather handle leaves independent Thunder plays alive.
+- **The sliders change before the sound settles.** They display targets; the graph smooths its current values.
+
+## Event settings, parameters, and signals
+
+<DemoContract demo="05-weather" />
+
+## Take it into your own game
+
+<a href={sitePath('recipes/delayed-thunder/')}>Open the complete integration recipe</a> for the
+script, Inspector setup, a short test, and cleanup. Use
+<a href={sitePath('api/context/')}>Play context</a> for initial values and placement, and
+<a href={sitePath('api/sound-bus/')}>SoundBus</a> for playback controls.
+
+<a href={sitePath('captures/05-weather/')}>All Weather Unity captures</a> includes further states
+and readable graph details, with steps to reproduce each view.
+
+<DemoNavigation number={5} />

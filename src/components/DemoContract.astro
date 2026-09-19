@@ -1,0 +1,174 @@
+---
+import audit from '../../content-data/demo-audit.json';
+import { sitePath } from '../lib/links';
+interface Props {
+  demo: string;
+}
+const events = audit.events.filter((event) => event.demo === Astro.props.demo);
+if (!events.length) throw new Error(`Missing verified events: ${Astro.props.demo}`);
+const responses: Record<string, string> = {
+  'Engine.Horn': 'Add the horn cue to this running engine.',
+  'Engine.Shift': 'Add the gear-change cue to this running engine.',
+  'Workshop.Work': 'Stop the old tool voices, select Tool, and start its work path.',
+  'Workshop.Pause': 'Stop tool voices and keep this silent session available.',
+  'Workshop.Strike': 'Play a short hammer impact.',
+  'LaunchPad.Abort': 'Enter the stopping flow and optional shutdown ending.',
+};
+const number = (value: number | string | boolean) =>
+  typeof value === 'number' ? Number(value.toFixed(3)) : String(value);
+---
+
+<p>
+  These are the saved graph settings. A play can supply different initial parameter values. Float
+  smoothing is measured in <strong>units per second</strong>; a rate of 0 applies changes
+  immediately.
+</p>
+{events.map((event) => (
+  <section class="event-contract" aria-labelledby={`event-${event.name.toLowerCase()}`}>
+    <h3 id={`event-${event.name.toLowerCase()}`}>
+      <code>{event.key}</code>
+    </h3>
+    <dl>
+      <dt>Position</dt>
+      <dd>
+        {event.spatial}
+        {event.spatial !== '2D' && ' (minimum–maximum distance)'}
+      </dd>
+      <dt>Overlapping plays</dt>
+      <dd>
+        {event.maxInstances} · <code>{event.concurrency}</code>
+      </dd>
+      <dt>Cooldown</dt>
+      <dd>{event.cooldown ? `${event.cooldown} seconds between accepted requests` : 'None'}</dd>
+      <dt>Owner loss</dt>
+      <dd>{event.ownerLoss}</dd>
+      <dt>Keep Alive</dt>
+      <dd>
+        {event.keepAlive
+          ? 'On — can wait silently for signals'
+          : 'Off — ends when its work is finished'}
+      </dd>
+      {event.ignorePause && (
+        <>
+          <dt>Game pause</dt>
+          <dd>Ignored — this UI cue can play while the service is paused</dd>
+        </>
+      )}
+      {event.demo === '07-arcade' && (
+        <>
+          <dt>Voice priority</dt>
+          <dd>
+            {event.priority}
+            {event.protected && ' · protected from voice stealing'}
+          </dd>
+        </>
+      )}
+    </dl>
+    {event.parameters.length ? (
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Range</th>
+            <th>Rise / fall rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {event.parameters.map((p) => (
+            <tr>
+              <td>
+                <code>{p.name}</code>
+              </td>
+              <td>{p.type}</td>
+              <td>{number(p.default)}</td>
+              <td>{p.range}</td>
+              <td>
+                {p.type === 'Float' ? `${number(p.rise)} / ${number(p.fall)}` : 'Not smoothed'}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ) : (
+      <p>No exposed parameters.</p>
+    )}
+    {event.parameters
+      .filter((p) => p.type === 'Asset')
+      .map((p) => (
+        <p>
+          <strong>{p.name} allowed clips: </strong>
+          {p.allowed.map((path, index) => (
+            <>
+              {index > 0 && ', '}
+              <code>{path.split('/').pop()}</code>
+            </>
+          ))}
+          .
+        </p>
+      ))}
+    {event.signals.length ? (
+      <table>
+        <thead>
+          <tr>
+            <th>Signal</th>
+            <th>Response in this graph</th>
+          </tr>
+        </thead>
+        <tbody>
+          {event.signals.map((signal) => (
+            <tr>
+              <td>
+                <code>{signal}</code>
+              </td>
+              <td>{responses[`${event.name}.${signal}`]}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ) : (
+      <p>
+        <strong>Signals:</strong> None authored.
+      </p>
+    )}
+  </section>
+))}
+<p>
+  For the meaning of these settings, see <a href={sitePath('api/settings/')}>Playback settings</a>.
+  The default numbers above come from the Unity graph audit stored with this documentation.
+</p>
+<style>
+  .event-contract {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--sl-color-gray-5);
+  }
+  dl {
+    display: grid;
+    grid-template-columns: minmax(8rem, 1fr) 2fr;
+    gap: 0.35rem 1rem;
+  }
+  dt {
+    font-weight: 600;
+  }
+  dd {
+    margin: 0;
+  }
+  dd code {
+    overflow-wrap: anywhere;
+  }
+  td {
+    vertical-align: top;
+  }
+  td code {
+    white-space: nowrap;
+  }
+  @media (max-width: 35rem) {
+    dl {
+      grid-template-columns: 1fr;
+    }
+    dd {
+      margin-bottom: 0.5rem;
+    }
+  }
+</style>

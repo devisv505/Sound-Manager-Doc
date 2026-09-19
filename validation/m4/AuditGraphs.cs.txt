@@ -1,0 +1,19 @@
+using System;
+using System.IO;
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
+using DEV505.SoundManager;
+public static class M4Audit
+{
+ public static object Run(string output)
+ {
+  var folders=new[]{"01-Campfire","02-Footstep","03-Bee","04-Engine","05-Weather","06-Workshop","07-Arcade","08-Jukebox","09-Portals","10-Launch"};
+  var events=folders.SelectMany(folder=>Directory.GetFiles("Assets/DEV505/SoundManager/Samples/"+folder,"*.soundgraph").Select(path=>{
+   var sound=AssetDatabase.LoadAssetAtPath<SoundEvent>(path);
+   return new {folder,path,name=sound.name,key="Sounds."+Path.GetFileNameWithoutExtension(path),parameters=sound.Parameters.Select(p=>new{p.id,p.name,type=p.type.ToString(),defaultFloat=p.defaultValue,p.minimum,p.maximum,p.riseRate,p.fallRate,p.defaultInt,p.minimumInt,p.maximumInt,p.defaultBool,defaultAsset=p.defaultAsset?AssetDatabase.GetAssetPath(p.defaultAsset):null,allowedAssets=p.allowedAssets?.Select(a=>a?AssetDatabase.GetAssetPath(a):null).ToArray()}).ToArray(),signals=sound.Nodes.Where(n=>n.operation==SoundOperation.OnSignal).Select(n=>n.parameter).Distinct().ToArray(),settings=JsonUtility.ToJson(sound.CopySettings()),nodes=sound.Nodes.Select(n=>new{n.id,operation=n.operation.ToString(),n.parameter,n.value,n.speed,n.fadeIn,n.fadeOut,n.loop,n.start,n.length,clip=n.clip?n.clip.name:null,n.count,n.noRepeat,n.minimum,n.maximum,inputs=n.inputs?.Select(i=>new{i.port,type=i.value.type.ToString(),i.value.number,i.value.integer,i.value.boolean}).ToArray()}).ToArray(),edges=sound.Edges};
+  })).ToArray();
+  var result=new {sourceRevision="746a1cc7d2602bc59df6096eac50508ded6ef49e",unity=Application.unityVersion,utc=DateTime.UtcNow.ToString("o"),scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,dirty=UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty,playing=EditorApplication.isPlaying,paused=EditorApplication.isPaused,background=Application.runInBackground,events};
+  File.WriteAllText(output,Newtonsoft.Json.JsonConvert.SerializeObject(result,Newtonsoft.Json.Formatting.Indented));return new{events=events.Length,result.scene,result.dirty,result.playing,result.paused};
+ }
+}

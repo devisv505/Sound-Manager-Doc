@@ -1,0 +1,86 @@
+[
+  {
+    "slug": "campfire-loop",
+    "title": "Start, loop, and stop.",
+    "description": "Start one loop, retain its handle, and let its release finish.",
+    "example": "CampfireSound.cs",
+    "demo": "01-campfire"
+  },
+  {
+    "slug": "surface-footsteps",
+    "title": "Play one step on the right surface.",
+    "description": "Choose a surface before playback starts, then let the graph choose and trim one variation.",
+    "example": "SurfaceFootsteps.cs",
+    "demo": "02-footstep"
+  },
+  {
+    "slug": "moving-emitter",
+    "title": "Follow a moving sound source.",
+    "description": "Start a looping buzz once, move its Transform, and adjust its pitch without replacing the play.",
+    "example": "MovingBeeSound.cs",
+    "demo": "03-bee"
+  },
+  {
+    "slug": "live-parameters",
+    "title": "Shape a running sound with parameters.",
+    "description": "Send a new target to an existing play and let the graph smooth the change in pitch or layer volume.",
+    "example": "EngineSoundControls.cs",
+    "demo": "04-engine"
+  },
+  {
+    "slug": "event-signals",
+    "title": "Send a command to a running graph.",
+    "description": "Use Horn, Work, or Strike to trigger another path inside a play that is already alive.",
+    "example": "EngineSoundControls.cs",
+    "demo": "04-engine"
+  },
+  {
+    "slug": "delayed-thunder",
+    "title": "Schedule thunder and cancel the whole storm.",
+    "description": "Place each thunder at its strike point, let the graph delay it, and use one owner to clear pending and audible weather sounds.",
+    "example": "StormSounds.cs",
+    "demo": "05-weather"
+  },
+  {
+    "slug": "workshop-tools",
+    "title": "Switch tools and overlap a hammer tap.",
+    "description": "Reuse one main Workshop play and a second tap play, with typed selection and ordered signal responses.",
+    "example": "WorkshopSounds.cs",
+    "demo": "06-workshop"
+  },
+  {
+    "slug": "playback-limits",
+    "title": "Handle busy sounds without a retry storm.",
+    "description": "Read request results, count replaced plays through notifications, and keep event limits separate from voice capacity.",
+    "example": "ArcadeRequests.cs",
+    "demo": "07-arcade"
+  },
+  {
+    "slug": "music-crossfade",
+    "title": "Crossfade two allowed music tracks.",
+    "description": "Supply Track before playback, fade through two retained handles, and retire the outgoing play only after it becomes silent.",
+    "example": "TwoTrackMusic.cs",
+    "demo": "08-jukebox"
+  },
+  {
+    "slug": "pause-interaction",
+    "title": "Pause every play in an interaction.",
+    "description": "Pause current and outgoing music together, and distinguish that local pause from the service-wide pause used by Launch.",
+    "example": "TwoTrackMusic.cs",
+    "demo": "08-jukebox"
+  },
+  {
+    "slug": "owner-loss",
+    "title": "Compare Stop and Detach.",
+    "description": "Destroy a temporary sound owner and hear whether its departure cue ends or stays at the last position.",
+    "example": "PortalOwnerComparison.cs",
+    "demo": "09-portals"
+  },
+  {
+    "slug": "launch-on-completion",
+    "title": "Wait for clearance and launch on sound completion.",
+    "description": "Keep a sequence alive while conditions are unmet, then use its matching Finished notification to start a following flight sound.",
+    "example": "LaunchAfterSound.cs",
+    "demo": "10-launch"
+  }
+]

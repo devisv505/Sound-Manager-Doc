@@ -1,0 +1,63 @@
+---
+title: 'Wait for clearance and launch on sound completion.'
+description: 'Keep a sequence alive while conditions are unmet, then use its matching Finished notification to start a following flight sound.'
+kind: recipe
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayContext.cs
+tags: [unity, recipes, launch-on-completion]
+---
+
+import Explanation from '../../../components/Explanation.astro';
+import ExampleCode from '../../../components/ExampleCode.astro';
+import RecipeSetup from '../../../components/RecipeSetup.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation label="CODE RECIPE" title="Wait for clearance and launch on sound completion.">
+  Keep a sequence alive while conditions are unmet, then use its matching Finished notification to
+  start a following flight sound.
+</Explanation>
+
+## Set up the scene
+
+<RecipeSetup file="LaunchAfterSound.cs" events="LaunchSequence and LaunchFlight from 10-Launch">
+  <p>
+    Create an empty GameObject named Rocket and assign its Transform to <strong>Rocket</strong>.
+    Start with Power 0, Pressure 0, and Clamps Open unchecked. Keep both objects near the listener.
+  </p>
+</RecipeSetup>
+
+## Try the component
+
+Choose **Begin waiting for clearance**. It should remain silent. Set **Power to 0.8**, **Pressure to 0.1**, and enable **Clamps Open**. You should hear the countdown and ignition, followed by the flight sound. Moving the Rocket Transform now moves the sound with it. This example does not animate the rocket itself.
+
+Choose **Cancel and stop** to reset. Begin again with the clamps closed, then cancel before completion. Flight must not begin. Disabling the component also cancels the sequence, stops flight, and disposes the notification subscription.
+
+## Three typed conditions
+
+The initial context supplies Power and Pressure as Floats and ClampsOpen as a Bool. Update sends later changes to the retained sequence. The authored condition requires Power at least 0.72, Pressure below 0.85, and open clamps.
+
+The graph waits until those conditions pass, orders the counter setup, repeats countdown ticks, delays, and plays ignition. The whole play's natural ending is reported as `SoundNotificationKind.Finished`.
+
+## Match both handle and outcome
+
+The callback first matches the retained sequence handle. A Finished notification sets a pending flag; a different terminal outcome clears it. Update consumes the pending flag only when the active service is not paused and the Rocket still exists, then starts LaunchFlight following that Transform.
+
+Clearing the sequence field before cancelling it prevents a later cancellation notification from being mistaken for an active launch request. Never treat every terminal notification as success: Cancelled and Failed do not mean that the sequence completed as intended.
+
+## Add gameplay safety separately
+
+Wait For Condition is an **initial gate**. Once it has released the countdown, lowering power or closing clamps does not rewind that gate. This small recipe demonstrates gating and completion only. The full Launch controller keeps checking safety afterward and aborts below Power 0.65, above Pressure 0.96, or with clamps closed.
+
+Add those checks if your game needs them. The small component also omits pad machinery, venting, visual countdown, flame effects, and rocket motion. Its HasLaunched property becomes true after the flight sound is accepted; use the marked code location to start your own movement.
+
+## Complete component
+
+<ExampleCode file="LaunchAfterSound.cs" />
+
+## Keep exploring
+
+Read the <a href={sitePath('demos/10-launch/')}>demo walkthrough</a> for the graph, parameters, controls, and Unity screenshots. The <a href={sitePath('api/notifications/')}>related API reference</a> explains the calls used here. Return to <a href={sitePath('recipes/')}>all twelve recipes</a> to choose another interaction.
+
+This page imports the checked C# file directly. It was compiled against the documented Unity revision; its runtime checks and source hash are recorded in the documentation repository's validation files.

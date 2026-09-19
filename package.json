@@ -8,11 +8,12 @@
   },
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
-    "check": "astro check && node scripts/check-content.mjs",
+    "check": "astro check && node scripts/check-content.mjs && node scripts/check-m4.mjs",
     "build": "astro build && node scripts/prepare-capture-output.mjs",
     "preview": "astro preview --host 127.0.0.1",
     "validate": "npm run check && npm run build && node scripts/check-build.mjs",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "audit:demos": "node scripts/sync-demo-audit.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "7.3.1",

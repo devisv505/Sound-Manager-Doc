@@ -1,0 +1,186 @@
+---
+title: 'A little liftoff.'
+description: 'Conditions, countdowns, aborts, and a flying finale.'
+kind: demo
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Samples/Launch/LaunchDemo.cs
+  - Assets/DEV505/SoundManager/Samples/10-Launch/LaunchClamp.soundgraph
+  - Assets/DEV505/SoundManager/Samples/10-Launch/LaunchFlight.soundgraph
+  - Assets/DEV505/SoundManager/Samples/10-Launch/LaunchPad.soundgraph
+  - Assets/DEV505/SoundManager/Samples/10-Launch/LaunchSequence.soundgraph
+  - Assets/DEV505/SoundManager/Samples/10-Launch/LaunchUI.soundgraph
+  - Assets/DEV505/SoundManager/Samples/10-Launch/LaunchVent.soundgraph
+tags: [unity, sound, launch]
+demo:
+  number: 10
+  scene: Assets/DEV505/SoundManager/Samples/10-Launch/Demo.unity
+  keys:
+    [
+      'Sounds.LaunchClamp',
+      'Sounds.LaunchFlight',
+      'Sounds.LaunchPad',
+      'Sounds.LaunchSequence',
+      'Sounds.LaunchUI',
+      'Sounds.LaunchVent',
+    ]
+  screenshots:
+    [
+      'launch-flight',
+      'launch-ready',
+      'launch-warning',
+      'launch-countdown',
+      'launch-aborted',
+      'launch-paused',
+      'launch-graph-launchpad',
+      'launch-pressure-condition',
+      'launch-graph-launchsequence',
+      'launch-launch-conditions',
+      'launch-countdown-flow',
+      'launch-ignition-finish',
+      'launch-graph-launchflight',
+      'launch-graph-launchclamp',
+      'launch-graph-launchvent',
+      'launch-release-flow',
+      'launch-graph-launchui',
+    ]
+---
+
+import Capture from '../../../components/Capture.astro';
+import Explanation from '../../../components/Explanation.astro';
+import DemoContract from '../../../components/DemoContract.astro';
+import DemoNavigation from '../../../components/DemoNavigation.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation title="Let the sound graph decide when the next action can begin.">
+  Power, pressure, and clamps gate a countdown. Repeating cues build tension, a natural completion
+  notification starts flight, and separate owners keep pad and rocket sounds under control. Abort
+  and pause tie the interaction together.
+</Explanation>
+
+<Capture id="launch-flight" eager />
+
+## Try it in Unity
+
+In Unity's **Project** window, open `Assets/DEV505/SoundManager/Samples/10-Launch/Demo.unity`. The supplied scene already has its Sound Manager, event registrations, generated keys, camera, and Audio Listener. Press **Play**, wait for the demo to be ready, and click the **Game** view before using the keyboard. If you are setting up a separate scene, follow <a href={sitePath('getting-started/')}>Your first sound</a> first.
+
+| Control                     | Action                                              |
+| --------------------------- | --------------------------------------------------- |
+| **Space**                   | Begin launch preparation.                           |
+| **M**                       | Switch Auto / Manual while the demo allows it.      |
+| **Up / Down**, power slider | Adjust power in Manual.                             |
+| **C**                       | Open or close the clamps during Manual preparation. |
+| **V**                       | Vent pressure when available.                       |
+| **X**                       | Abort.                                              |
+| **P**                       | Pause or resume the interaction.                    |
+| **R**                       | Reset for another launch.                           |
+
+Try Auto first. Start preparation, watch power rise and clamps open, then listen to three countdown ticks and ignition. Flight begins after the sequence sound finishes. Pause in flight and resume; rocket motion and its audio continue together.
+
+Reset and try Manual. Increase power with the clamps still closed. As pressure rises, the warning repeats faster. Vent, open the clamps, and supply enough power to satisfy clearance. Abort during preparation or countdown to hear shutdown without launching.
+
+The listener stays near Mission Control. Pad machinery remains on the island while the flight sound follows the rocket exhaust away from it.
+
+<Capture id="launch-ready" />
+<Capture id="launch-warning" />
+<Capture id="launch-countdown" />
+<Capture id="launch-aborted" />
+<Capture id="launch-paused" />
+
+## The six sound roles
+
+| Key                     | Job                                                |
+| ----------------------- | -------------------------------------------------- |
+| `Sounds.LaunchPad`      | Layered machinery, pressure warning, and shutdown. |
+| `Sounds.LaunchSequence` | Wait for clearance, count, and ignite.             |
+| `Sounds.LaunchFlight`   | Rocket thrust that follows the exhaust.            |
+| `Sounds.LaunchClamp`    | Short mechanical cue when clamps change.           |
+| `Sounds.LaunchVent`     | Short vent response.                               |
+| `Sounds.LaunchUI`       | 2D control-room click that can ignore game pause.  |
+
+### 1. Power up the pad
+
+<Capture id="launch-graph-launchpad" />
+
+LaunchPad stays alive while waiting for control. Power shapes its layered machinery; Pressure shapes the warning. The demo changes targets, then uses the smoothed current Power to simulate pressure building or draining. The graph does not simulate a real pressure vessel.
+
+<Capture id="launch-pressure-condition" />
+
+Track Condition keeps checking whether Pressure is above **0.72**. Its active branch runs a Repeat, with the warning interval mapped from **0.95 to 0.22 seconds** as pressure rises from 0.72 to 1. The warning accelerates because the interval changes; the controller is not starting a new pad event for every beep.
+
+### 2. Wait for clearance, then count
+
+<Capture id="launch-graph-launchsequence" />
+<Capture id="launch-launch-conditions" />
+
+LaunchSequence starts with Wait For Condition. All three conditions must be true: **Power at least 0.72**, **Pressure below 0.85**, and **ClampsOpen true**. These parameters are supplied at start and updated as the controls change.
+
+Once clearance is satisfied, a Sequence orders three commands: reset the Counter, start a one-second Repeat, then send the first count immediately. Counter's limit is three. Its count also maps the tick playback speed from 0.85 to 1.15, lifting the pitch as the count advances.
+
+<Capture id="launch-countdown-flow" />
+<Capture id="launch-ignition-finish" />
+
+At the limit, the graph stops the Repeat, waits one more second, then plays the two-second ignition. When that recording finishes and the graph has no remaining work, the play finishes naturally.
+
+**Wait For Condition is the initial gate, not a permanent safety monitor.** After clearance, `LaunchDemo` separately aborts if power drops below 0.65, pressure exceeds 0.96, or the clamps close. A game that needs ongoing safety must also keep checking it.
+
+### 3. Lift off on completion
+
+The controller subscribes to sound notifications and matches the sequence's handle. Only its natural **Finished** notification requests liftoff:
+
+```csharp title="React to this sequence only · excerpt"
+if (message.Handle.Equals(sequence) &&
+    message.Kind == SoundNotificationKind.Finished)
+{
+    launchPending = true;
+}
+```
+
+Here `message` is the notification delivered to the callback. The controller performs the next action in Update, respecting pause and abort state. Cancelled or Failed is not successful completion. The visual 3–2–1 countdown is a presentation estimate; it is not the timer that launches the rocket.
+
+<Capture id="launch-graph-launchflight" />
+
+The new flight context follows the rocket exhaust with a **rocket owner**, separate from the pad owner. Thrust controls the moving sound. The graph has a 12-second event length; the demo's shorter flight sequence can stop it earlier. Following updates position as the controller animates the rocket.
+
+### 4. Vent, clamp, abort, and pause
+
+<Capture id="launch-graph-launchclamp" />
+<Capture id="launch-graph-launchvent" />
+
+Clamp and Vent are short spatial responses. Their graph cooldowns are 0.5 and 0.7 seconds. The controller also limits its vent interaction, reduces simulated pressure, and animates the hardware.
+
+<Capture id="launch-release-flow" />
+
+Abort stops the countdown and sends `"Abort"` to LaunchPad. That signal reaches Stop Instance, which enters the pad's stopping flow. Its Release Bool decides whether to play the shutdown ending; ReleaseGain sets that ending's level. Reset suppresses Release before cleanup to avoid an unwanted shutdown cue while rebuilding the starting state.
+
+<Capture id="launch-graph-launchui" />
+
+Pause sets the sound service's global Paused state and pauses the demo's visual motion. LaunchUI is configured to ignore that game pause, allowing control clicks to remain audible. The controller restores the prior pause state when leaving the interaction. A per-play Resume alone would not override a paused service.
+
+## What belongs to the demo?
+
+Power input, pressure simulation, auto venting, safety checks, clamps, HUD timing, rocket motion, voxel fire, and lens flare are C# and scene effects. The graph supplies audio layers, conditions, scheduled pulses, signals, shutdown, and completion. Auto mode targets Power 0.86 and opens clamps after about 2.2 seconds; those choices are demo logic, not universal audio behavior.
+
+## Common surprises
+
+- **The countdown waits silently.** Check all three clearance conditions and their types, especially the Bool clamps value.
+- **An abort accidentally launches.** React only to Finished for the matching sequence handle, and clear pending work before cancelling.
+- **The rocket lifts on a guessed timer.** Use the actual sound completion notification; the visual timer can drift.
+- **Closing clamps after clearance does nothing in a small integration.** The graph's initial gate has already passed. Add ongoing safety checks as the full controller does.
+- **Resume does not unpause a sound.** Check both the handle's own pause and the service's global pause.
+
+## Event settings, parameters, and signals
+
+<DemoContract demo="10-launch" />
+
+## Take it into your own game
+
+<a href={sitePath('recipes/launch-on-completion/')}>Open the complete integration recipe</a> for the
+script, Inspector setup, a short test, and cleanup. Use
+<a href={sitePath('api/context/')}>Play context</a> for initial values and placement, and
+<a href={sitePath('api/sound-bus/')}>SoundBus</a> for playback controls.
+
+<a href={sitePath('captures/10-launch/')}>All Launch Unity captures</a> includes further states and
+readable graph details, with steps to reproduce each view.
+
+<DemoNavigation number={10} />

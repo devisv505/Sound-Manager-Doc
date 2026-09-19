@@ -1,0 +1,60 @@
+---
+title: 'Send a command to a running graph.'
+description: 'Use Horn, Work, or Strike to trigger another path inside a play that is already alive.'
+kind: recipe
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayContext.cs
+tags: [unity, recipes, event-signals]
+---
+
+import Explanation from '../../../components/Explanation.astro';
+import ExampleCode from '../../../components/ExampleCode.astro';
+import RecipeSetup from '../../../components/RecipeSetup.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation label="CODE RECIPE" title="Send a command to a running graph.">
+  Use Horn, Work, or Strike to trigger another path inside a play that is already alive.
+</Explanation>
+
+## Set up the scene
+
+<RecipeSetup file="EngineSoundControls.cs" events="Engine from 04-Engine">
+  <p>
+    No Inspector references are needed. The engine starts automatically; the component menu exposes
+    its horn, pause, resume, and stop methods.
+  </p>
+</RecipeSetup>
+
+## Try the component
+
+Enter Play Mode and choose **Sound horn** while the engine runs. You should hear a horn over the existing engine sound. Stop the engine, wait for it to end, and try the horn again: a finished play has no running graph to receive the signal. Start the engine to try again.
+
+## Send only when the action happens
+
+The complete component retains the accepted Engine handle, checks it is alive, and sends the exact authored signal name:
+
+```csharp title="Signal call inside SoundHorn · excerpt"
+SoundBus.SendSignal(engine, "Horn");
+```
+
+The graph's On Signal node named Horn responds by starting its horn voice. The engine loops continue. Calling Play with Sounds.Engine for every horn press would create or replace entire engine plays instead.
+
+Use the graph's exact signal spelling. For the Engine graph, `"Shift"` is another authored signal. A signal does not imply a universal engine command: a different graph responds only to the signals it defines.
+
+## Signals are different from notifications
+
+A **signal** travels from your code into a graph: “sound the horn.” A **notification** travels from the runtime back to your code: “this play finished or was cancelled.” The component subscribes once, matches its own handle, clears it on a terminal notification, and disposes the subscription on disable.
+
+Workshop uses the same mechanism for Work, Pause, and Strike. Set Tool first, then send Work. Its graph signal named Pause stops tool voices; it is not the runtime's pause function. Use the <a href={sitePath('recipes/workshop-tools/')}>complete Workshop recipe</a> for that combination and overlapping hammer impacts.
+
+## Complete component
+
+<ExampleCode file="EngineSoundControls.cs" />
+
+## Keep exploring
+
+Read the <a href={sitePath('demos/04-engine/')}>demo walkthrough</a> for the graph, parameters, controls, and Unity screenshots. The <a href={sitePath('api/notifications/')}>related API reference</a> explains the calls used here. Return to <a href={sitePath('recipes/')}>all twelve recipes</a> to choose another interaction.
+
+This page imports the checked C# file directly. It was compiled against the documented Unity revision; its runtime checks and source hash are recorded in the documentation repository's validation files.

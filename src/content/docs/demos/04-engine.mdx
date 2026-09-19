@@ -1,0 +1,120 @@
+---
+title: 'A little drive.'
+description: 'Shape layered loops with RPM, load, and signals.'
+kind: demo
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Samples/Engine/EngineDriveDemo.cs
+  - Assets/DEV505/SoundManager/Samples/04-Engine/Engine.soundgraph
+tags: [unity, sound, engine]
+demo:
+  number: 4
+  scene: Assets/DEV505/SoundManager/Samples/04-Engine/Demo.unity
+  keys: ['Sounds.Engine']
+  screenshots:
+    [
+      'engine-driving',
+      'engine-idle',
+      'engine-horn-shift',
+      'engine-graph',
+      'engine-rpm-mapping',
+      'engine-load-mapping',
+      'engine-horn-shift-graph',
+    ]
+---
+
+import Capture from '../../../components/Capture.astro';
+import Explanation from '../../../components/Explanation.astro';
+import DemoContract from '../../../components/DemoContract.astro';
+import DemoNavigation from '../../../components/DemoNavigation.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation title="One running engine, several ways to shape it.">
+  RPM and load change the speed and balance of layered engine recordings. Horn and Shift signals add
+  short responses to that same running event, while the car’s motion stays in the demo controller.
+</Explanation>
+
+<Capture id="engine-driving" eager />
+
+## Try it in Unity
+
+In Unity's **Project** window, open `Assets/DEV505/SoundManager/Samples/04-Engine/Demo.unity`. The supplied scene already has its Sound Manager, event registrations, generated keys, camera, and Audio Listener. Press **Play**, wait for the demo to be ready, and click the **Game** view before using the keyboard. If you are setting up a separate scene, follow <a href={sitePath('getting-started/')}>Your first sound</a> first.
+
+| Control                                            | Action                                       |
+| -------------------------------------------------- | -------------------------------------------- |
+| **Space** / engine button                          | Start or stop the engine.                    |
+| **W / Up**                                         | Apply throttle.                              |
+| **S / Down**                                       | Brake.                                       |
+| **G**                                              | Change gear through the four demo gears.     |
+| **H**                                              | Sound the horn.                              |
+| HUD throttle slider, brake, gear, and horn buttons | Control the same interaction with the mouse. |
+
+Start the engine and listen at idle. Raise the throttle, change gear, then brake. The sound climbs and settles as the parameters change. Press H while driving: the horn plays over the engine without restarting it. Stop the engine to hear its shutdown response.
+
+The listener is the scene's fixed listening point, and the engine follows the car. The saved 3D distance range is **3.2–14 units**, chosen for this small island.
+
+<Capture id="engine-idle" />
+<Capture id="engine-horn-shift" />
+
+## Read the graph
+
+<Capture id="engine-graph" />
+
+The engine's playback branches layer recordings instead of switching abruptly between a single idle file and a single fast file. `Rpm` feeds value-mapping nodes that shape playback speed and layer volume. `Load` adds the sound of working harder. Follow the colored value connections from each parameter to the playback inputs; the execution connections decide when those voices start or stop.
+
+<Capture id="engine-rpm-mapping" />
+<Capture id="engine-load-mapping" />
+
+Both parameters are normalized: **0–1**. The HUD's roughly 950–6500 RPM display is calculated by the controller. Do not pass a displayed RPM value such as 6000 into `SoundParameters.Engine.Rpm`. The graph expects a fraction of the working range.
+
+The parameter state has a target and a current value. `SetFloat` changes the target; the runtime moves the current value toward it using the graph's rise/fall rates. Rpm rises at 0.8 units per second and falls at 1.5, so letting go can settle faster than accelerating. Load responds faster still. This avoids abrupt sound jumps when input changes.
+
+## Start, update, and signal
+
+```csharp title="Start with known values · excerpt"
+var context = SoundPlayContext.Following(car, service.OwnerOf(this))
+    .With(SoundParameters.Engine.Rpm, 0f)
+    .With(SoundParameters.Engine.Load, 0f);
+var result = SoundBus.Play(Sounds.Engine, context);
+```
+
+Here `car` is the car Transform and `service` is the ready active sound service. Retain the accepted handle as `engine`, then update that play:
+
+```csharp title="Live controls · excerpt"
+SoundBus.SetFloat(engine, SoundParameters.Engine.Rpm, targetRpm);
+SoundBus.SetFloat(engine, SoundParameters.Engine.Load, targetLoad);
+SoundBus.SendSignal(engine, "Horn");
+```
+
+The two target variables are values between 0 and 1. Send Horn only for the horn action, not every frame. Shift works in the same way with the exact signal name `"Shift"`.
+
+<Capture id="engine-horn-shift-graph" />
+
+`On Signal` responds inside the existing play, adding the horn or gear-change cue. A signal is an instruction to that graph, not another call to Play the entire engine. Stopping the retained engine reaches the graph's `On Stop` shutdown path. The complete recipe also unsubscribes from notifications and cleans up when disabled.
+
+## What belongs to the demo?
+
+Throttle input, gears, speed simulation, wheel rotation, rocking, and the displayed RPM belong to `EngineDriveDemo`. It reads the smoothed audio parameter for consistent feedback, but Sound Manager is not a vehicle physics system. The graph owns sound layering, mapping, smoothing, signal responses, and shutdown.
+
+## Common surprises
+
+- **The engine always sounds at maximum.** Send normalized values, not the HUD's displayed RPM.
+- **A horn press restarts the engine.** Send Horn to the retained handle instead of starting another Engine play.
+- **The parameter does not jump to the requested value.** Check Current versus Target; smoothing is intentional.
+- **A signal does nothing after shutdown.** A stale handle no longer represents a running graph. Start an accepted play first.
+
+## Event settings, parameters, and signals
+
+<DemoContract demo="04-engine" />
+
+## Take it into your own game
+
+<a href={sitePath('recipes/live-parameters/')}>Open the complete integration recipe</a> for the
+script, Inspector setup, a short test, and cleanup. Use
+<a href={sitePath('api/context/')}>Play context</a> for initial values and placement, and
+<a href={sitePath('api/sound-bus/')}>SoundBus</a> for playback controls.
+
+<a href={sitePath('captures/04-engine/')}>All Engine Unity captures</a> includes further states and
+readable graph details, with steps to reproduce each view.
+
+<DemoNavigation number={4} />

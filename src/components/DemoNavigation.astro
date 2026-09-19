@@ -1,0 +1,37 @@
+---
+import demos from '../../content-data/demos.json';
+import { sitePath } from '../lib/links';
+interface Props {
+  number: number;
+}
+const { number } = Astro.props;
+const previous = demos[number - 2];
+const next = demos[number];
+---
+
+<nav class="demo-navigation" aria-label="Previous and next demo">
+  {previous && (
+    <a href={sitePath(`demos/${previous.slug}/`)}>
+      ← {previous.number} / {previous.name}
+    </a>
+  )}
+  <a href={sitePath('demos/')}>All ten demos</a>
+  {next && (
+    <a href={sitePath(`demos/${next.slug}/`)}>
+      {next.number} / {next.name} →
+    </a>
+  )}
+</nav>
+<style>
+  .demo-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--sl-color-gray-5);
+  }
+  .demo-navigation a {
+    font-weight: 600;
+  }
+</style>

@@ -44,24 +44,35 @@ const full = await getImage({ src, format: 'webp', quality: 94 });
         Close <span aria-hidden="true">×</span>
       </button>
     </div>
-    <img src={full.src} width={src.width} height={src.height} alt={alt} loading="lazy" />
+    <div class="image-viewport" tabindex="0" role="region" aria-label="Enlarged screenshot">
+      <img src={full.src} width={src.width} height={src.height} alt={alt} loading="lazy" />
+    </div>
     <p>{caption}</p>
   </dialog>
 </figure>
 <script>
   document.querySelectorAll<HTMLButtonElement>('[data-image-open]').forEach((button) => {
     const dialog = document.getElementById(button.dataset.imageOpen!) as HTMLDialogElement;
+    const viewport = dialog.querySelector<HTMLElement>('.image-viewport')!;
+    const sizeButton = dialog.querySelector<HTMLButtonElement>('.image-size')!;
+    const resetView = () => {
+      viewport.scrollTop = 0;
+      viewport.scrollLeft = 0;
+    };
     button.addEventListener('click', () => {
+      dialog.classList.remove('is-actual-size');
+      sizeButton.setAttribute('aria-pressed', 'false');
+      sizeButton.textContent = 'View actual size';
       dialog.showModal();
+      resetView();
       document.body.classList.add('image-modal-open');
     });
     dialog.querySelector('.image-close')!.addEventListener('click', () => dialog.close());
-    const sizeButton = dialog.querySelector<HTMLButtonElement>('.image-size')!;
     sizeButton.addEventListener('click', () => {
       const actual = dialog.classList.toggle('is-actual-size');
       sizeButton.setAttribute('aria-pressed', String(actual));
       sizeButton.textContent = actual ? 'Fit to window' : 'View actual size';
-      dialog.scrollLeft = 0;
+      resetView();
     });
     dialog.addEventListener('click', (event) => {
       if (event.target === dialog) dialog.close();

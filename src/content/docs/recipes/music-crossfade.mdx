@@ -1,0 +1,61 @@
+---
+title: 'Crossfade two allowed music tracks.'
+description: 'Supply Track before playback, fade through two retained handles, and retire the outgoing play only after it becomes silent.'
+kind: recipe
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayContext.cs
+tags: [unity, recipes, music-crossfade]
+---
+
+import Explanation from '../../../components/Explanation.astro';
+import ExampleCode from '../../../components/ExampleCode.astro';
+import RecipeSetup from '../../../components/RecipeSetup.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation label="CODE RECIPE" title="Crossfade two allowed music tracks.">
+  Supply Track before playback, fade through two retained handles, and retire the outgoing play only
+  after it becomes silent.
+</Explanation>
+
+## Set up the scene
+
+<RecipeSetup file="TwoTrackMusic.cs" events="Jukebox from 08-Jukebox">
+  <p>
+    Drag <strong>Jukebox_MintMorning.wav</strong> into First Track and{' '}
+    <strong>Jukebox_PeachSunset.wav</strong> into Second Track. Both are in{' '}
+    <code>08-Jukebox/Music</code> and in the graph’s allowed Track list. Leave Volume at 0.65 to
+    begin.
+  </p>
+</RecipeSetup>
+
+## Try the component
+
+Choose **Play first track** and wait about three seconds. Choose **Play second track**. Listen as the first recedes and the second rises over about 2.5 seconds. During that transition, choose **Pause both tracks**, wait, then **Resume both tracks**. Both songs and their fade should continue together.
+
+Wait for the transition to finish before selecting again. This small recipe refuses another selection while its outgoing play is alive. The full demo instead remembers the latest requested selection. **Stop music now** and disabling the component clean up immediately; the full demo also has a gradual normal-stop interaction.
+
+## Initial values prevent a loud first frame
+
+The Track Asset must belong to the graph's allowed list. The initial context also supplies Gain 0 and the chosen Volume. If the new request is refused, the existing song is left alone. Only after acceptance does the component hand the old handle to outgoing and make the new one current.
+
+It then sets the old Gain target to 0 and the new target to 1. The graph smooths Gain at 0.4 units per second and shapes it with a sine curve for an equal-power blend. This is a volume transition, not beat matching.
+
+## Clean up after the fade
+
+Update reads the outgoing Gain's **Current** value. Once it is at silence, it stops that play and clears the outgoing handle. Checking Target would stop it immediately because the target became zero as soon as the fade began.
+
+Volume is updated on both handles so the slider does not change the fade balance. Pause also reaches both. While paused, the recipe skips fade retirement; neither a paused song nor a paused parameter ramp should advance simply because wall-clock time has passed.
+
+This component has no automatic next-track timing, song progress estimate, or dancer. Add those gameplay features around this two-play lifecycle if you need them. Keep the two-instance graph limit in mind.
+
+## Complete component
+
+<ExampleCode file="TwoTrackMusic.cs" />
+
+## Keep exploring
+
+Read the <a href={sitePath('demos/08-jukebox/')}>demo walkthrough</a> for the graph, parameters, controls, and Unity screenshots. The <a href={sitePath('api/parameters/')}>related API reference</a> explains the calls used here. Return to <a href={sitePath('recipes/')}>all twelve recipes</a> to choose another interaction.
+
+This page imports the checked C# file directly. It was compiled against the documented Unity revision; its runtime checks and source hash are recorded in the documentation repository's validation files.

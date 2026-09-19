@@ -1,0 +1,51 @@
+---
+import recipes from '../../content-data/recipes.json';
+import demos from '../../content-data/demos.json';
+import { sitePath } from '../lib/links';
+---
+
+<div class="recipe-list">
+  {recipes.map((recipe, index) => (
+    <article>
+      <p class="eyebrow">
+        {String(index + 1).padStart(2, '0')} / {demos.find((d) => d.slug === recipe.demo)?.name}
+      </p>
+      <h2>
+        <a href={sitePath(`recipes/${recipe.slug}/`)}>{recipe.title}</a>
+      </h2>
+      <p>{recipe.description}</p>
+      <p class="recipe-file">
+        Complete component: <code>{recipe.example}</code>
+      </p>
+    </article>
+  ))}
+</div>
+<style>
+  .recipe-list {
+    display: grid;
+    gap: 1rem;
+  }
+  article {
+    background: var(--cream-light, #f5efdc);
+    padding: 1.5rem;
+    border-radius: 1rem;
+  }
+  article > h2 {
+    margin: 0.35rem 0 0.6rem;
+    font-size: 1.3rem;
+  }
+  p {
+    margin: 0.3rem 0;
+  }
+  .recipe-file {
+    font-size: 0.86rem;
+  }
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  code {
+    overflow-wrap: anywhere;
+  }
+</style>

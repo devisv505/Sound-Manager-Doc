@@ -1,6 +1,6 @@
 # DEV505 Sound Manager — documentation roadmap
 
-Status: M1–M3 complete; M4–M7 remain open, with the Pages workflow brought forward to fix M1 publication. M3 is validated locally and has not been published by this milestone.
+Status: M1–M4 complete; M5–M7 remain open, with the Pages workflow brought forward to fix M1 publication. M4 is validated locally and has not been published by this milestone.
 
 Prepared: 19 September 2026.  
 Specification: [SPEC.md](SPEC.md).  
@@ -121,34 +121,36 @@ Exit condition: every required screenshot reference resolves to a current Unity 
 
 Depends on: M1, the relevant M2 API contracts, and each demo's M3 captures.
 
-- [ ] Write all ten demo pages using the common specification template and exact current titles.
-- [ ] Add the “What this demo shows” panel below every demo title.
-- [ ] Verify controls, event keys, parameter types/ranges/defaults, and signal names against the current graph/controller.
-- [ ] Explain each interaction from input through C# calls and graph flow to the audible result.
-- [ ] Add small focused examples and complete integration examples where lifecycle/setup is necessary.
-- [ ] Explain the boundary between sample animation/gameplay code and Sound Manager functionality.
-- [ ] Add captions, graph annotations in prose, common mistakes, API/recipe links, and previous/next navigation.
-- [ ] Complete the recipe catalogue listed in `SPEC.md`, reusing checked code sources where possible.
-- [ ] Compile complete snippets and run focused Unity behavior checks for follow, owner loss, overlap, crossfade, pause, and graph completion.
+- [x] Write all ten demo pages using the common specification template and exact current titles.
+- [x] Add the “What this demo shows” panel below every demo title.
+- [x] Verify controls, event keys, parameter types/ranges/defaults, and signal names against the current graph/controller.
+- [x] Explain each interaction from input through C# calls and graph flow to the audible result.
+- [x] Add small focused examples and complete integration examples where lifecycle/setup is necessary.
+- [x] Explain the boundary between sample animation/gameplay code and Sound Manager functionality.
+- [x] Add captions, graph annotations in prose, common mistakes, API/recipe links, and previous/next navigation.
+- [x] Complete the recipe catalogue listed in `SPEC.md`, reusing checked code sources where possible.
+- [x] Compile complete snippets and run focused Unity behavior checks for follow, owner loss, overlap, crossfade, pause, and graph completion.
 
-Demo completion tracker — Unity images are supplied by M3; full walkthrough review remains in M4:
+Demo completion tracker — Unity images are supplied by M3; walkthroughs, code, and review completed in M4:
 
 | Demo | Detailed page | Unity images | Graph explanation | Code verified | Final review |
 | --- | --- | --- | --- | --- | --- |
-| 01-Campfire — A little warmth. | [ ] | [x] | [ ] | [ ] | [ ] |
-| 02-Footstep — Every step counts. | [ ] | [x] | [ ] | [ ] | [ ] |
-| 03-Bee — A little buzz. | [ ] | [x] | [ ] | [ ] | [ ] |
-| 04-Engine — A little drive. | [ ] | [x] | [ ] | [ ] | [ ] |
-| 05-Weather — A little rain. | [ ] | [x] | [ ] | [ ] | [ ] |
-| 06-Workshop — A little work. | [ ] | [x] | [ ] | [ ] | [ ] |
-| 07-Arcade — A little chaos. | [ ] | [x] | [ ] | [ ] | [ ] |
-| 08-Jukebox — A little groove. | [ ] | [x] | [ ] | [ ] | [ ] |
-| 09-Portals — A little elsewhere. | [ ] | [x] | [ ] | [ ] | [ ] |
-| 10-Launch — A little liftoff. | [ ] | [x] | [ ] | [ ] | [ ] |
+| 01-Campfire — A little warmth. | [x] | [x] | [x] | [x] | [x] |
+| 02-Footstep — Every step counts. | [x] | [x] | [x] | [x] | [x] |
+| 03-Bee — A little buzz. | [x] | [x] | [x] | [x] | [x] |
+| 04-Engine — A little drive. | [x] | [x] | [x] | [x] | [x] |
+| 05-Weather — A little rain. | [x] | [x] | [x] | [x] | [x] |
+| 06-Workshop — A little work. | [x] | [x] | [x] | [x] | [x] |
+| 07-Arcade — A little chaos. | [x] | [x] | [x] | [x] | [x] |
+| 08-Jukebox — A little groove. | [x] | [x] | [x] | [x] | [x] |
+| 09-Portals — A little elsewhere. | [x] | [x] | [x] | [x] | [x] |
+| 10-Launch — A little liftoff. | [x] | [x] | [x] | [x] | [x] |
 
 Deliverable: ten complete walkthroughs and a practical recipe library.
 
 Exit condition: a reader can identify what each demo demonstrates, reproduce its interactions, understand its graph, and adapt its C# integration without confusing sample code with package APIs.
+
+Validation: [M4 report](validation/M4.md) — 59 authored pages, 11 complete components compiled, 76 focused Unity checks, and 15 passing browser checks. Uses the unchanged M3 source/captures.
 
 ## M5 — Graph reference, advanced API, and troubleshooting
 
@@ -173,7 +175,7 @@ Exit condition: all advertised shipped capabilities have a supported explanation
 Depends on: M2–M5.
 
 - [ ] Perform a clean dependency install, content/framework checks, and production build from the documentation repository alone.
-- [ ] Validate all internal links, section anchors, image references, source links, and required metadata.
+- [ ] Validate all internal links, section anchors, image references, and required metadata; ensure the public site has no links to the private Unity repository.
 - [ ] Preview the production output under the real repository subpath; test nested-page refresh, 404 behavior, search, and all image/font URLs.
 - [ ] Test search with exact API symbols and human terms, including trim, follow, crossfade, and owner.
 - [ ] Review phone/tablet/desktop layouts, long signatures, tables, code copy controls, and image enlargement.
@@ -230,4 +232,4 @@ Future enhancements can include versioned documentation, localized content, opti
 
 The work is complete when all ten demos have detailed, accurate pages with actual Unity screenshots; the supported API and implemented graph features are documented; usage examples are verified; the shared visual style is recognizable; the static build and contributor workflow are reproducible; and the live GitHub Pages site passes the publication checks.
 
-M0 produced the specification and roadmap. M1 delivered the first working documentation slice with actual Unity captures and a verified example. The user subsequently established the public documentation repository and enabled Pages; its initial Jekyll build failed because the site uses Astro. The Pages workflow and deployment instructions were brought forward to support M1 publication. M2 adds the complete setup-to-integration path and everyday API reference, with source-derived signatures and checked Unity examples. M3 adds all ten screenshot galleries with actual Unity captures, readable graph details, event settings, and reproducible image records. M4–M7 remain open for the complete documentation release.
+M0 produced the specification and roadmap. M1 delivered the first working documentation slice with actual Unity captures and a verified example. The user subsequently established the public documentation repository and enabled Pages; its initial Jekyll build failed because the site uses Astro. The Pages workflow and deployment instructions were brought forward to support M1 publication. M2 adds the complete setup-to-integration path and everyday API reference, with source-derived signatures and checked Unity examples. M3 adds all ten screenshot galleries with actual Unity captures, readable graph details, event settings, and reproducible image records. M4 completes all ten detailed walkthroughs and twelve recipe topics, with eleven checked components. M5–M7 remain open for the complete documentation release.

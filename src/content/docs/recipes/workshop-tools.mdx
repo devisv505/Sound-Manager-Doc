@@ -1,0 +1,59 @@
+---
+title: 'Switch tools and overlap a hammer tap.'
+description: 'Reuse one main Workshop play and a second tap play, with typed selection and ordered signal responses.'
+kind: recipe
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayContext.cs
+tags: [unity, recipes, workshop-tools]
+---
+
+import Explanation from '../../../components/Explanation.astro';
+import ExampleCode from '../../../components/ExampleCode.astro';
+import RecipeSetup from '../../../components/RecipeSetup.astro';
+import { sitePath } from '../../../lib/links';
+
+<Explanation label="CODE RECIPE" title="Switch tools and overlap a hammer tap.">
+  Reuse one main Workshop play and a second tap play, with typed selection and ordered signal
+  responses.
+</Explanation>
+
+## Set up the scene
+
+<RecipeSetup file="WorkshopSounds.cs" events="Workshop from 06-Workshop">
+  <p>
+    Optionally assign a nearby Transform to <strong>Hammer Point</strong> for extra taps. Otherwise
+    they use the component’s position. Set Pace between 0 and 1.
+  </p>
+</RecipeSetup>
+
+## Try the component
+
+Choose **Work with handsaw**, then **One hammer impact**. The saw should keep running under the impact. Choose **Work with drill** to switch the main tool, then add another impact. Choose **Take a break** to stop both sets of tool voices. Disable the component to end the waiting sessions too.
+
+**Work with hammer** selects Hammer but does not automatically repeat hits in this smaller example. Use One hammer impact for each hit. In a game, call `Strike()` at the animation's contact frame. The full demo supplies its automatic hammer rhythm through animation logic.
+
+## Selection before action
+
+`Work(int selectedTool)` uses 0 for Hammer, 1 for Handsaw, and 2 for Drill. It creates a main session if needed, sets the Int parameter, then sends Work. That order ensures the branch reads the new tool.
+
+The graph's Work Sequence stops its existing tool voices, starts the selected tool path, and plays a latch click in order. These are synchronous commands. A Sequence does not wait for each sound to finish.
+
+## Two handles for overlap
+
+For Hammer, Strike goes to the main handle. For Saw or Drill, Strike goes to a separate Workshop play initialized with Tool 0. Each play has its own graph state, so stopping or switching the main tool does not reuse the tap's voice. The graph permits two Workshop instances.
+
+TakeBreak sends the graph's Pause signal to both handles. Keep Alive leaves silent sessions available for the next Work or Strike. This is not the same as `SetPaused`, which freezes time for later continuation. OnDisable stops both sessions by owner and releases that owner.
+
+Do not stack this recipe alongside the full demo controller on the same manager: both would compete for the event's two-instance allowance. Use the supplied scene to explore the visual demo and a separate scene to try this small integration.
+
+## Complete component
+
+<ExampleCode file="WorkshopSounds.cs" />
+
+## Keep exploring
+
+Read the <a href={sitePath('demos/06-workshop/')}>demo walkthrough</a> for the graph, parameters, controls, and Unity screenshots. The <a href={sitePath('api/notifications/')}>related API reference</a> explains the calls used here. Return to <a href={sitePath('recipes/')}>all twelve recipes</a> to choose another interaction.
+
+This page imports the checked C# file directly. It was compiled against the documented Unity revision; its runtime checks and source hash are recorded in the documentation repository's validation files.
