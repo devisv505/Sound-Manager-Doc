@@ -71,7 +71,13 @@ Preserve unsaved scene work, record temporary Game View/background settings, and
 
 ## GitHub Pages configuration
 
-The proposed site is `https://devisv505.github.io/Sound-Manager-Doc/`, configured as `site` plus `base` in `astro.config.mjs`. No remote repository or public deployment is created by M1. CI/deployment implementation and live publication are M6/M7.
+The site address is [devisv505.github.io/Sound-Manager-Doc](https://devisv505.github.io/Sound-Manager-Doc/), configured as `site` plus `base` in `astro.config.mjs`.
+
+In the repository's **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. The branch-based Jekyll builder cannot compile Astro files and reports invalid YAML front matter when it encounters an Astro component.
+
+[The Pages workflow](.github/workflows/pages.yml) runs on pushes to `main` and can also be started from the Actions tab. It installs the Node version in `.nvmrc`, runs `npm ci` and `npm run validate`, uploads only the generated `dist/` directory, and deploys that artifact to the `github-pages` environment. A failed validation prevents deployment. Actions are pinned to verified release commits, and deployment uses GitHub's built-in token; no personal token or Unity installation is required.
+
+To publish an update, validate locally, commit, and push to `main`. Check **Actions → Deploy documentation to GitHub Pages** for the build/deployment result. Do not switch Pages back to **Deploy from a branch** or commit generated `dist/` output. Deployment was brought forward to publish the M1 slice; the remaining content and full-site review milestones remain open.
 
 For implementation guidance see [Astro's GitHub Pages guide](https://docs.astro.build/en/guides/deploy/github/). Static search follows [Starlight's Pagefind integration](https://starlight.astro.build/guides/site-search/).
 

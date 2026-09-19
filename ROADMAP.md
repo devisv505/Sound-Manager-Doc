@@ -1,6 +1,7 @@
 # DEV505 Sound Manager — documentation roadmap
 
-Status: M1 complete; M2–M7 remain open.  
+Status: M1 complete; M2–M7 remain open, with the Pages workflow brought forward to fix M1 publication.
+
 Prepared: 19 September 2026.  
 Specification: [SPEC.md](SPEC.md).  
 Target directory: `/Users/devisv/Projects/Web/Sound-Manager-Doc`.
@@ -160,7 +161,7 @@ Depends on: M2–M5.
 - [ ] Measure image payloads and mobile Lighthouse performance; address avoidable regressions against the specification targets.
 - [ ] Check every demo page against the current source revision and recapture screenshots invalidated by source changes.
 - [ ] Confirm examples' Unity compilation/behavior records and document genuine limitations.
-- [ ] Add the Pages build/deploy workflow with appropriate permissions and pinned action versions verified at implementation time.
+- [x] Add the Pages build/deploy workflow with appropriate permissions and pinned action versions verified at implementation time. Brought forward on 19 September 2026 to fix the default Jekyll build for the M1 site.
 - [ ] Write `README.md` with local commands, content conventions, source/API validation, screenshot recapture, and deployment instructions.
 - [ ] Ensure no secrets, local filesystem links in published pages, Unity cache directories, or unnecessary source recordings are included.
 
@@ -208,4 +209,4 @@ Future enhancements can include versioned documentation, localized content, opti
 
 The work is complete when all ten demos have detailed, accurate pages with actual Unity screenshots; the supported API and implemented graph features are documented; usage examples are verified; the shared visual style is recognizable; the static build and contributor workflow are reproducible; and the live GitHub Pages site passes the publication checks.
 
-M0 produced the specification and roadmap. M1 now delivers the first working documentation slice with actual Unity captures and a verified example. M2–M7 remain open; no remote repository or public deployment was created.
+M0 produced the specification and roadmap. M1 now delivers the first working documentation slice with actual Unity captures and a verified example. The user subsequently established the public documentation repository and enabled Pages; its initial Jekyll build failed because the site uses Astro. The Pages workflow and deployment instructions were brought forward to support M1 publication. M2–M7 remain open for the complete documentation release.
