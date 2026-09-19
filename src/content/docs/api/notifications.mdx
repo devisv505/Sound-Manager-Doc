@@ -1,0 +1,81 @@
+---
+title: "Signals and notifications"
+description: "Trigger graph actions and subscribe to the lifetime of a play."
+kind: api
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundSignalId.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundNotifications.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundNotification.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundNotificationKind.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Tick.cs
+tags: [unity, setup, sound]
+---
+
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+import { sitePath } from '../../../lib/links';
+
+
+Send a signal **to** a running graph. Receive a notification **from** the service. The <a href={sitePath('guides/signals-and-notifications/')}>complete Engine example</a> shows both with setup and cleanup.
+
+## SoundSignalId
+
+Find an ID with `eventAsset.GetSignalId("Horn")`. It remembers a declared signal's name, slot, and stable identity. `IsValid` is false for a default or unresolved ID. You cannot call its internal constructor from normal gameplay code.
+
+`Name` is the remembered name. `Equals(SoundSignalId)` and `Equals(object)` compare stable identities, or case-sensitive names when no identity exists. `GetHashCode` follows that identity; `ToString` returns the name.
+
+```csharp title="Resolve a declared signal · excerpt"
+if (SoundBus.TryResolve(Sounds.Engine, out var sound))
+{
+    var horn = sound.GetSignalId("Horn");
+    if (horn.IsValid)
+        SoundBus.SendSignal(engine, horn);
+}
+```
+
+This excerpt needs a retained Engine handle `engine`. Cache the resolved ID if you send it repeatedly. Signal execution happens on the next service update, subject to the play still being able to process it. The string overload matches the exact authored name. The event needs an On Signal node and must still be alive.
+
+<ApiSignatures type="SoundSignalId" />
+
+## SoundNotifications
+
+Access the shared channel through `SoundBus.Notifications`; its constructor is internal.
+
+`Subscribe(Action<SoundNotification> listener)` adds a callback and returns an `IDisposable` token. Dispose it to remove the callback. A null listener throws `ArgumentNullException`. The same delegate is not added twice; the returned tokens refer to the same subscription, so disposing either removes it. Different lambda instances count as different delegates.
+
+`Unsubscribe(listener)` removes that delegate and returns true if it was registered, false otherwise, including for null. `ListenerCount` reports the number of callbacks currently subscribed. A callback throwing an exception is logged without preventing the other callbacks from running.
+
+<ApiSignatures type="SoundNotifications" />
+
+Subscribe in `OnEnable`, dispose in `OnDisable`, and keep callbacks short. The bus follows a manager replacement within the session. A new Unity play session clears subscriptions. Direct `ISoundService.Notification` subscriptions belong to that service instance and must be removed from the same instance.
+
+## SoundNotification
+
+| Field | Meaning |
+| --- | --- |
+| `Handle` | The play that changed state. Filter by it to ignore other sounds. |
+| `Kind` | Which stage is being reported. |
+| `Reason` | Failure/cancellation reason, otherwise `Accepted`. |
+| `Sound` | The played event asset. |
+| `Owner` | The original owner, still reported after owner loss. |
+| `EventId` | The event's identity. |
+| `Revision` | The event revision used for this play. |
+| `IsTerminal` | True for Finished, Cancelled, or Failed. |
+
+The constructor packages those fields in the order shown in its signature. Consumer code normally receives these records rather than constructing them. Constructing one does not send it to listeners.
+
+<ApiSignatures type="SoundNotification" />
+
+## SoundNotificationKind
+
+| Kind | Meaning |
+| --- | --- |
+| `Accepted` | A play was admitted, possibly still waiting. |
+| `Started` | Its graph began running. This does not promise the first voice is already audible. |
+| `Finished` | The play ended naturally. |
+| `Cancelled` | A stop, graph ending operation, or replacement ended it. A normal stop can have reason Accepted. |
+| `Failed` | An admitted play could not start or continue. Read Reason. |
+
+<ApiSignatures type="SoundNotificationKind" />
+
+The built-in service delivers queued notifications at the end of its update on the main thread, after advancing graph work. They are observations, not a way to modify the graph midway through a step. Immediate rejected requests usually have no notification because they never became a play; always inspect the original result too.

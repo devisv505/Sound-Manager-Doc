@@ -1,0 +1,20 @@
+---
+title: "What this reference covers."
+description: "An explicit inventory separates gameplay APIs from advanced integrations and implementation details."
+kind: index
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/ISoundService.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundEvent.cs
+tags: [unity, setup, sound]
+---
+
+import ApiCoverage from '../../../components/ApiCoverage.astro';
+
+This inventory comes from the current C# source, including explicitly public runtime, editor, and generated declarations. It excludes inherited Unity/System members and members inside private containing types. Partial class declarations are combined in the coverage record.
+
+Every everyday integration member is accounted for. A few public SoundEvent compilation members are deliberately classified as infrastructure: normal gameplay reads the imported event and uses its key rather than writing compiled graph records.
+
+The documentation repository stores the full signatures, source paths, file hashes, and per-member status in `content-data/public-api-inventory.json` and `content-data/api-coverage.json`. Advanced types are inventoried now so their remaining reference work is visible; they are not marked complete prematurely.
+
+<ApiCoverage />

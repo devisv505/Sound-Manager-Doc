@@ -82,10 +82,74 @@ test('mobile navigation and pages do not overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(base + 'getting-started/');
   await page.getByRole('button', { name: 'Menu', exact: true }).click();
+  await page.locator('#starlight__sidebar').getByText('API reference', { exact: true }).click();
   await page
     .locator('#starlight__sidebar')
     .getByRole('link', { name: 'SoundBus', exact: true })
     .click();
   await expect(page.locator('h1')).toHaveText('SoundBus');
   await page.screenshot({ path: 'validation/api-mobile.png', fullPage: true });
+});
+
+test('M2 guide navigation, exact signatures, and API coverage', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto(base + 'guides/');
+  await page.getByRole('link', { name: 'Change sounds with parameters', exact: true }).click();
+  await expect(page.locator('h1')).toHaveText('Change sounds with parameters.');
+  await page.getByRole('link', { name: 'parameter reference', exact: true }).click();
+  await expect(page.locator('#api-soundparameteroverride')).toContainText(
+    'public SoundParameterOverride(string name, SoundValue value)',
+  );
+  await page.goto(base + 'api/context/');
+  await page.reload();
+  await expect(page.locator('#api-soundplaycontext')).toContainText(
+    'public readonly SoundPlayContext With(SoundParameterId parameter, AudioClip value)',
+  );
+  await page.goto(base + 'api/coverage/');
+  await expect(page.getByRole('heading', { name: 'Everyday integration', exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'SoundRequest', exact: true })).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test('M2 complete components copy exactly and search finds beginner topics', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  for (const [route, name] of [
+    ['getting-started/', 'FirstSound'],
+    ['guides/position-and-ownership/', 'MovingBeeSound'],
+    ['guides/signals-and-notifications/', 'EngineSoundControls'],
+  ]) {
+    await page.goto(base + route);
+    const block = page.locator('.expressive-code').filter({ hasText: `public sealed class ${name}` }).first();
+    await block.getByRole('button', { name: /copy/i }).click();
+    const copied = await page.evaluate(() => navigator.clipboard.readText());
+    expect(copied.trim()).toBe(readFileSync(`examples/${name}.cs`, 'utf8').trim());
+  }
+  await page.locator('[data-open-modal]').click();
+  const input = page.locator('.pagefind-ui__search-input');
+  await input.fill('owner');
+  await expect(page.locator('.pagefind-ui__results')).toContainText(/owner/i);
+  await input.fill('SoundPlayContext');
+  await expect(page.locator('.pagefind-ui__results')).toContainText('SoundPlayContext');
+});
+
+test('M2 long reference pages and guides fit a narrow phone', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 844 });
+  for (const route of [
+    'getting-started/', 'guides/parameters/', 'guides/position-and-ownership/',
+    'guides/signals-and-notifications/', 'api/context/', 'api/services/',
+    'api/components/', 'api/settings/', 'api/coverage/',
+  ]) {
+    await page.goto(base + route);
+    const sizes = await page.evaluate(() => ({
+      scroll: document.documentElement.scrollWidth,
+      client: document.documentElement.clientWidth,
+    }));
+    expect(sizes.scroll, route).toBeLessThanOrEqual(sizes.client + 1);
+  }
+  await page.goto(base + 'getting-started/');
+  await page.screenshot({ path: 'validation/m2-first-sound-mobile.png', fullPage: true });
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto(base + 'guides/position-and-ownership/');
+  await page.screenshot({ path: 'validation/m2-moving-sound-desktop.png', fullPage: true });
 });

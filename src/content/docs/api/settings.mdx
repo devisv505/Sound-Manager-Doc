@@ -1,0 +1,95 @@
+---
+title: "Playback settings"
+description: "Look up event defaults, overlap rules, and the manager\u2019s capacity settings."
+kind: api
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundEventSettings.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundManagerSettings.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundManager.cs
+tags: [unity, setup, sound]
+---
+
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+import { sitePath } from '../../../lib/links';
+
+
+Event settings describe one sound recipe. Manager settings describe shared playback capacity and default output. Configure them before Play Mode; these are not live per-play volume controls. Use parameters when your game needs to change a running sound.
+
+## SoundEventSettings
+
+Select a `.soundgraph` asset in the Project window to edit its Inspector settings. Click **Apply** after making changes. New plays use the new imported revision; plays already running keep their original settings.
+
+| Field | Default | Meaning and accepted range |
+| --- | --- | --- |
+| `volume` | 1 | Multiplier on every voice's node volume; `0–1`. |
+| `speed` | 1 | Playback-speed multiplier that also changes pitch; `0.01–3`. |
+| `output` | null | AudioMixerGroup; null uses the manager's default output. |
+| `spatialBlend` | 0 | `0` is 2D; `1` is fully 3D; intermediate values blend. |
+| `minDistance` | 1 unit | Full-volume distance; at least `0.001`. |
+| `maxDistance` | 500 units | Distance beyond which rolloff stops changing; at least minDistance. |
+| `rolloff` | Logarithmic | Unity AudioRolloffMode: Logarithmic, Linear, or Custom. |
+| `rolloffCurve` | Linear `(0,1)` to `(1,0)` | For Custom rolloff: normalized distance/volume axes. Requires at least two keys with both coordinates in `0–1`. |
+| `doppler` | 1 | Strength of pitch change from movement; `0–5`. |
+| `spread` | 0 degrees | Source spread; `0–360`. |
+| `priority` | 128 | `0` is most important, `256` least; used by the eligible-priority replacement policy. |
+| `ignoreListenerPause` | false | Ignore service/global listener pause. Explicit per-play pause still applies. |
+| `keepAlive` | false | Keep an otherwise idle play available for signals until stopped. |
+| `protectedFromStealing` | false | Protect against ReplaceLowestPriorityEligible, not every replacement mode. |
+| `length` | -1 seconds | Negative values accepted down to `-1` disable the timer; use `-1` for no limit. Non-negative values request a timed ending. |
+| `stopTailTimeout` | -1 seconds | Use `-1` to wait for ending work; non-negative values bound the release lifetime. |
+| `cooldown` | 0 seconds | Minimum time after an accepted request before another play of this event is admitted; at least 0. |
+| `maxInstances` | 8 | Maximum concurrent plays of this event; positive integer. |
+| `concurrency` | ReplaceOldest | Response when this event reaches its instance limit. |
+| `ownerLoss` | Stop | What to do when an owner or followed object is lost. |
+
+Numbers must be finite. `IsValid` checks the settings' ranges, enum choices, and custom-curve keys. `Copy()` returns a separate settings object and rolloff curve. It does not apply that copy to a running play. For reading an event's settings, use `eventAsset.CopySettings()`.
+
+```csharp title="Read settings without changing the event · excerpt"
+if (SoundBus.TryResolve(Sounds.Bee, out var sound))
+{
+    var settings = sound.CopySettings();
+    Debug.Log($"3D blend: {settings.spatialBlend}; owner loss: {settings.ownerLoss}");
+}
+```
+
+This belongs in a component method with Bee registered. Spatial settings only matter for spatial playback; see <a href={sitePath('guides/position-and-ownership/')}>position and ownership</a>.
+
+<ApiSignatures type="SoundEventSettings" />
+
+## SoundConcurrency
+
+`ReplaceOldest` replaces the oldest play of this event. `RejectNew` refuses the incoming request. `ReplaceLowestPriorityEligible` chooses an unprotected play of this event whose priority is no greater than the incoming play's importance; ties use age and slot order. It does not steal voices from unrelated events. A full global instance or voice pool can still refuse a play.
+
+<ApiSignatures type="SoundConcurrency" />
+
+The `SoundOwnerLoss` options are described in <a href={sitePath('api/ownership/#soundownerloss')}>the ownership reference</a>.
+
+## SoundManagerSettings
+
+Create with **Assets → Create → DEV505 → Sound Manager → Sound Manager Settings**, then drag it into the manager's **Settings** field.
+
+| Field | Default | Purpose |
+| --- | --- | --- |
+| `voiceCapacity` | 64 | AudioSource pool size; Inspector range `1–512`. |
+| `instanceCapacity` | 256 | Live play slots; `1–1024`. |
+| `startupQueueCapacity` | 64 | Queued-start slots; `1–1024`, further bounded by instance capacity. |
+| `startupTimeout` | 5 seconds | Startup wait before failure; service conversion accepts `0.01–3600`, otherwise uses 5. |
+| `captureTrace` | false | Record graph execution for debugging; has memory cost. |
+| `traceCapacity` | 8192 | Records retained while tracing; `32–65536`. |
+| `defaultOutput` | null | AudioMixerGroup for events without a specific output. |
+| `mixerDefaults` | Empty | Exposed mixer volumes applied when the manager prepares. |
+
+`ToOptions()` returns service options with bounded instance/queue/timeout/trace values. Trace capacity becomes zero when captureTrace is off. AudioSource capacity and mixer output are configured separately by the manager's Unity backend; they are not fields of the returned options.
+
+<ApiSignatures type="SoundManagerSettings" />
+
+## SoundMixerDefault
+
+Each entry names an AudioMixer in `mixer`, an exposed parameter string in `parameter`, and a `decibels` value. `0` dB keeps the original level, negative values reduce it, and positive values boost it. The manager clamps finite values to `-80…20` dB and warns when it cannot apply a binding.
+
+These writes begin in Start or on a later preparation, not Awake. Make sure the named mixer parameter is exposed. They set starting mixer volumes; they do not poll a saved preferences file or update your volume UI automatically.
+
+<ApiSignatures type="SoundMixerDefault" />
+
+For diagnosing refused requests, read <a href={sitePath('guides/results-and-limits/')}>results and limits</a>. A graph's node settings and parameters can affect the final sound on top of these defaults.

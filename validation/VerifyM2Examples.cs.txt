@@ -1,0 +1,199 @@
+// Combine with the four examples, hoisting their using directives, then compile in memory with run_script.
+// Requires the existing Campfire scene in Play Mode; creates no saved assets or scene changes.
+public static class VerifyM2Examples
+{
+    static readonly System.Collections.Generic.List<string> Checks = new();
+    static void Check(bool condition, string message)
+    {
+        if (!condition) throw new System.Exception(message);
+        Checks.Add(message);
+    }
+    static T Field<T>(object value, string name) => (T)value.GetType().GetField(name,
+        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(value);
+    static void SetField(object value, string name, object next) => value.GetType().GetField(name,
+        System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(value, next);
+    static async System.Threading.Tasks.Task WaitFor(System.Func<bool> predicate, string message, int timeout = 8000)
+    {
+        var until = System.DateTime.UtcNow.AddMilliseconds(timeout);
+        while (!predicate() && System.DateTime.UtcNow < until) await System.Threading.Tasks.Task.Delay(50);
+        Check(predicate(), message);
+    }
+    sealed class ManualClock : DEV505.SoundManager.ISoundClock { public double Now { get; set; } }
+
+    public static async System.Threading.Tasks.Task<object> Main(string output)
+    {
+        Checks.Clear();
+        var manager = UnityEngine.Object.FindObjectsByType<DEV505.SoundManager.SoundManager>(UnityEngine.FindObjectsInactive.Exclude).First(m => m.enabled);
+        if (!UnityEngine.Application.isPlaying || !manager.Ready) throw new System.Exception("Need prepared Campfire Play Mode.");
+        var service = manager.Service;
+        var objects = new System.Collections.Generic.List<UnityEngine.GameObject>();
+        var added = new System.Collections.Generic.List<DEV505.SoundManager.SoundEvent>();
+        var transient = new System.Collections.Generic.List<DEV505.SoundManager.SoundEvent>();
+        var loose = new System.Collections.Generic.List<DEV505.SoundManager.SoundHandle>();
+        var oldPaused = service.Paused;
+        var listenersBefore = DEV505.SoundManager.SoundBus.Notifications.ListenerCount;
+        UnityEngine.GameObject Make(string name) { var go = new UnityEngine.GameObject("M2 temporary " + name); objects.Add(go); return go; }
+        DEV505.SoundManager.SoundEvent Register(string folder, string name)
+        {
+            var asset = UnityEditor.AssetDatabase.LoadAssetAtPath<DEV505.SoundManager.SoundEvent>("Assets/DEV505/SoundManager/Samples/" + folder + "/" + name + ".soundgraph");
+            if (!service.TryResolve(name, out var existing))
+            {
+                Check(service.Register(asset, name, out var error), "Registered " + name + ": " + error);
+                added.Add(asset);
+            }
+            return asset;
+        }
+        try
+        {
+            service.Paused = false;
+            var beeAsset = Register("03-Bee", "Bee");
+            Register("04-Engine", "Engine");
+            Register("02-Footstep", "Footstep");
+            await WaitFor(() => manager.Ready, "Sample clips prepared");
+
+            var first = Make("FirstSound").AddComponent<FirstSound>();
+            await WaitFor(() => Field<DEV505.SoundManager.SoundHandle>(first,"fire").IsAlive(), "FirstSound starts automatically and retains a live handle");
+            var firstHandle = Field<DEV505.SoundManager.SoundHandle>(first,"fire");
+            first.PlaySound();
+            Check(firstHandle.Equals(Field<DEV505.SoundManager.SoundHandle>(first,"fire")), "FirstSound ignores a repeated start");
+            first.StopSound();
+            Check(!Field<DEV505.SoundManager.SoundHandle>(first,"fire").IsValid, "FirstSound clears its field on stop");
+            await WaitFor(() => !firstHandle.IsAlive(), "FirstSound release ends and its old handle becomes stale");
+            first.PlaySound();
+            var nextFire = Field<DEV505.SoundManager.SoundHandle>(first,"fire");
+            first.enabled = false;
+            await WaitFor(() => !nextFire.IsAlive(), "FirstSound disable cleanup ends playback");
+
+            var bee = Make("MovingBeeSound").AddComponent<MovingBeeSound>();
+            await WaitFor(() => Field<DEV505.SoundManager.SoundHandle>(bee,"buzzing").IsAlive(), "MovingBeeSound starts an owned buzz");
+            var buzzing = Field<DEV505.SoundManager.SoundHandle>(bee,"buzzing");
+            var clips = beeAsset.Nodes.Where(n => n.clip).Select(n => n.clip).ToArray();
+            var sources = manager.GetComponentsInChildren<UnityEngine.AudioSource>();
+            await WaitFor(() => sources.Any(s => s.clip && clips.Contains(s.clip)), "Bee creates an actual AudioSource voice");
+            var source = sources.First(s => s.clip && clips.Contains(s.clip));
+            bee.transform.position = new UnityEngine.Vector3(3, 1, 2);
+            await WaitFor(() => UnityEngine.Vector3.Distance(source.transform.position, bee.transform.position) < .001f,
+                "Bee AudioSource follows the Transform after movement");
+            SetField(bee,"wingSpeed",1.3f);
+            await WaitFor(() => service.TryGetParameter(buzzing,DEV505.SoundManager.SoundParameters.Bee.WingSpeed,out var v) && System.Math.Abs(v.Target.number-1.3f)<.001f,
+                "Bee Inspector value updates the live WingSpeed target");
+            Check(DEV505.SoundManager.SoundBus.StopAll(bee.gameObject)>0, "Object-wide StopAll reaches the explicit shared owner");
+            await WaitFor(() => !buzzing.IsAlive(), "Owned Bee stop finishes");
+
+            var engine = Make("EngineSoundControls").AddComponent<EngineSoundControls>();
+            await WaitFor(() => Field<DEV505.SoundManager.SoundHandle>(engine,"engine").IsAlive(), "EngineSoundControls starts automatically");
+            var engineHandle = Field<DEV505.SoundManager.SoundHandle>(engine,"engine");
+            Check(DEV505.SoundManager.SoundBus.Notifications.ListenerCount == listenersBefore + 1, "Engine subscribes once");
+            SetField(engine,"rpm",.7f);
+            await WaitFor(() => service.TryGetParameter(engineHandle,DEV505.SoundManager.SoundParameters.Engine.Rpm,out var v) && System.Math.Abs(v.Target.number-.7f)<.001f,
+                "Engine Inspector RPM reaches the current play");
+            await System.Threading.Tasks.Task.Delay(400);
+            int voices = service.GetVoiceCount(engineHandle);
+            engine.SoundHorn();
+            await WaitFor(() => service.GetVoiceCount(engineHandle)>voices, "Horn signal starts another voice on the existing Engine play", 1500);
+            engine.PauseEngine();
+            Check(engineHandle.IsPaused(), "Engine per-play pause works");
+            engine.ResumeEngine();
+            Check(!engineHandle.IsPaused(), "Engine resume works");
+            service.Paused = true;
+            engine.ResumeEngine();
+            Check(engineHandle.IsPaused(), "Per-play resume does not override global pause");
+            service.Paused = false;
+            engine.StopEngine();
+            await WaitFor(() => !Field<DEV505.SoundManager.SoundHandle>(engine,"engine").IsValid, "Ending notification clears the matching Engine handle");
+            engine.StartEngine();
+            var restartedEngine = Field<DEV505.SoundManager.SoundHandle>(engine,"engine");
+            engine.enabled = false;
+            Check(DEV505.SoundManager.SoundBus.Notifications.ListenerCount == listenersBefore, "Disable disposes the Engine subscription");
+            await WaitFor(() => !restartedEngine.IsAlive(), "Engine disable cleanup ends playback");
+
+            var followTarget = Make("lost follow target");
+            var followed = DEV505.SoundManager.SoundBus.Play(DEV505.SoundManager.Sounds.Bee,
+                DEV505.SoundManager.SoundPlayContext.Following(followTarget.transform));
+            loose.Add(followed.Handle);
+            Check(followed.Accepted, "Following without an owner can play");
+            UnityEngine.Object.DestroyImmediate(followTarget);
+            await WaitFor(() => !followed.Handle.IsAlive(), "Destroyed follow target applies Stop without an explicit owner");
+
+            var detach = UnityEngine.ScriptableObject.CreateInstance<DEV505.SoundManager.SoundEvent>();
+            transient.Add(detach);
+            var settings = beeAsset.CopySettings(); settings.ownerLoss = DEV505.SoundManager.SoundOwnerLoss.Detach;
+            detach.name = "M2Detach";
+            detach.Initialize(System.Guid.NewGuid().ToString("N"), "m2", "m2", beeAsset.Nodes.ToArray(), beeAsset.Edges.ToArray(), beeAsset.Parameters.ToArray(), eventSettings:settings);
+            Check(service.Register(detach,out var detachError), "Registered in-memory detach fixture: " + detachError);
+            added.Add(detach);
+            var detachedTarget = Make("detach target"); detachedTarget.transform.position = new UnityEngine.Vector3(-2, 1, 3);
+            var detached = service.TryPlay(detach, DEV505.SoundManager.SoundPlayContext.Following(detachedTarget.transform));
+            loose.Add(detached.Handle);
+            await System.Threading.Tasks.Task.Delay(200);
+            var lastPosition = detachedTarget.transform.position;
+            UnityEngine.Object.DestroyImmediate(detachedTarget);
+            await System.Threading.Tasks.Task.Delay(200);
+            Check(detached.Handle.IsAlive(), "Detach keeps a play alive after target destruction");
+            Check(sources.Any(s => s.clip && clips.Contains(s.clip) && UnityEngine.Vector3.Distance(s.transform.position,lastPosition)<.001f),
+                "Detached voice stays at its last position");
+            detached.Handle.Stop(0);
+
+            var wrong = DEV505.SoundManager.SoundPlayContext.At(UnityEngine.Vector3.zero).With(DEV505.SoundManager.SoundParameters.Footstep.Surface,1f);
+            Check(DEV505.SoundManager.SoundBus.Play(DEV505.SoundManager.Sounds.Footstep,wrong).Status==DEV505.SoundManager.SoundPlayStatus.InvalidContext,
+                "A Float supplied to Footstep's Int Surface is rejected");
+            var owner = service.CreateOwner();
+            var context = DEV505.SoundManager.SoundPlayContext.At(UnityEngine.Vector3.zero,owner);
+            context.Parameters = new[] { new DEV505.SoundManager.SoundFloatOverride("Intensity",.1f) };
+            context.TypedParameters = new[] { new DEV505.SoundManager.SoundParameterOverride("Intensity",DEV505.SoundManager.SoundValue.Float(.2f)) };
+            context = context.With(DEV505.SoundManager.SoundParameters.Campfire.Intensity,.3f);
+            service.TryResolve(DEV505.SoundManager.Sounds.Campfire,out var campfire);
+            var extra = new[] { new DEV505.SoundManager.SoundFloatOverride("Intensity",.4f) };
+            var precedence = service.TryPlay(campfire,context,new System.ReadOnlySpan<DEV505.SoundManager.SoundFloatOverride>(extra)); loose.Add(precedence.Handle);
+            Check(precedence.Accepted && service.TryGetParameter(precedence.Handle,DEV505.SoundManager.SoundParameters.Campfire.Intensity,out var state) && System.Math.Abs(state.Current.number-.4f)<.001f,
+                "Additional Float span wins after float array, typed array, and With; initial value is immediate");
+            extra[0] = new DEV505.SoundManager.SoundFloatOverride("Intensity",.9f);
+            Check(service.TryGetParameter(precedence.Handle,DEV505.SoundManager.SoundParameters.Campfire.Intensity,out state) && System.Math.Abs(state.Current.number-.4f)<.001f,
+                "Changing the input array after Play does not change the play");
+            var copy = DEV505.SoundManager.SoundPlayContext.At(UnityEngine.Vector3.zero);
+            copy.With(DEV505.SoundManager.SoundParameters.Campfire.Intensity,.1f);
+            var unchanged = service.TryPlay(campfire,copy); loose.Add(unchanged.Handle);
+            Check(service.TryGetParameter(unchanged.Handle,DEV505.SoundManager.SoundParameters.Campfire.Intensity,out state) && System.Math.Abs(state.Current.number-.65f)<.001f,
+                "Discarding With's returned copy keeps the graph default");
+            for(int i=0;i<4;i++) copy=copy.With(DEV505.SoundManager.SoundParameters.Campfire.Intensity,.1f);
+            bool threw=false;try{copy.With(DEV505.SoundManager.SoundParameters.Campfire.Intensity,.2f);}catch(System.InvalidOperationException){threw=true;}
+            Check(threw,"Fifth With entry throws the documented exception");
+            owner.StopOwned(0); owner.ReleaseOwner();
+
+            var fixture = UnityEngine.ScriptableObject.CreateInstance<DEV505.SoundManager.SoundEvent>(); transient.Add(fixture);
+            fixture.Initialize(System.Guid.NewGuid().ToString("N"),"m2-five","m2-five",
+                new[] { new DEV505.SoundManager.SoundNodeRecord { id="start",operation=DEV505.SoundManager.SoundOperation.OnStart } },
+                System.Array.Empty<DEV505.SoundManager.SoundEdgeRecord>(),
+                Enumerable.Range(0,5).Select(i=>new DEV505.SoundManager.SoundParameterRecord { id="p"+i,name="Value"+i,type=DEV505.SoundManager.SoundParameterType.Float,minimum=0,maximum=1 }).ToArray(),
+                eventSettings:new DEV505.SoundManager.SoundEventSettings { keepAlive=true,maxInstances=1,concurrency=DEV505.SoundManager.SoundConcurrency.RejectNew });
+            var clock = new ManualClock();
+            using(var isolated = new DEV505.SoundManager.SoundService(clock,new DEV505.SoundManager.UnityAudioSourceBackend(Make("contract backend").transform,2,clock)))
+            {
+                Check(isolated.Register(fixture,out var err),"Registered five-parameter fixture: "+err);
+                var notices = new System.Collections.Generic.List<DEV505.SoundManager.SoundNotification>(); isolated.Notification += notices.Add;
+                var five = new DEV505.SoundManager.SoundPlayContext { TypedParameters=Enumerable.Range(0,5).Select(i=>new DEV505.SoundManager.SoundParameterOverride("Value"+i,DEV505.SoundManager.SoundValue.Float(.5f))).ToArray() };
+                var queued=isolated.TryPlay(fixture,five);
+                Check(queued.Status==DEV505.SoundManager.SoundPlayStatus.Queued && queued.Accepted,"A pre-preparation request is Queued and Accepted");
+                Check(notices.Count==0,"Notifications are not delivered inside TryPlay");
+                isolated.BeginPreparation(); clock.Now=.01; isolated.Tick();
+                Check(notices.Any(n=>n.Kind==DEV505.SoundManager.SoundNotificationKind.Started),"Started notification is delivered by Tick");
+                Check(Enumerable.Range(0,5).All(i=>isolated.TryGetParameter(queued.Handle,fixture.GetParameterId("Value"+i),out var value)&&value.Current.number==.5f),"Typed array supports five distinct initial parameters");
+                Check(isolated.TryPlay(fixture,default).Status==DEV505.SoundManager.SoundPlayStatus.ConcurrencyLimit,"RejectNew enforces the per-event limit");
+                isolated.Stop(queued.Handle,0); isolated.Tick();
+                Check(queued.Handle.IsValid&&!isolated.IsAlive(queued.Handle),"IsValid stays true after a play ends while IsAlive becomes false");
+            }
+            var result = new { success=true,checks=Checks.ToArray(),unity=UnityEngine.Application.unityVersion,sourceRevision="746a1cc7d2602bc59df6096eac50508ded6ef49e",utc=System.DateTime.UtcNow.ToString("o") };
+            System.IO.File.WriteAllText(output,Newtonsoft.Json.JsonConvert.SerializeObject(result,Newtonsoft.Json.Formatting.Indented));
+            return result;
+        }
+        finally
+        {
+            service.Paused=false;
+            foreach(var go in objects) if(go) UnityEngine.Object.DestroyImmediate(go);
+            foreach(var handle in loose) service.Stop(handle,0);
+            foreach(var asset in added) if(asset) service.Unregister(asset,0);
+            foreach(var asset in transient) if(asset) UnityEngine.Object.DestroyImmediate(asset);
+            service.Paused=oldPaused;
+        }
+    }
+}

@@ -1,0 +1,70 @@
+---
+title: "Owners and groups of sounds"
+description: "Group plays by an object or an explicit owner token."
+kind: api
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundOwnerToken.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Control.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Tick.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundEventSettings.cs
+tags: [unity, setup, sound]
+---
+
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+import { sitePath } from '../../../lib/links';
+
+
+An owner groups plays so you can stop or change them together. It also lets the event respond when the owning object is destroyed. Following a position and owning a play are separate choices.
+
+## Shared or separate ownership
+
+| Operation | Result |
+| --- | --- |
+| `service.OwnerOf(target)` | Reuses a shared owner for that exact Unity object, creating one on first use. A missing/destroyed target gives a default token. |
+| `service.TryGetOwner(target, out owner)` | Looks for that shared owner without creating one. False means there is none. |
+| `service.CreateOwner(target = null)` | Creates a fresh, separate owner on every call. A live target binds its lifetime; no target means you must release it. |
+| `service.ReleaseOwner(owner)` | Removes the owner record. A later service update applies each play's owner-loss policy. |
+
+Get `service` from `SoundServices.Current` and check for null. These operations belong on Unity's main thread. They do not register an event. Tokens from another service session cannot control this service's plays.
+
+## Stop an object's plays
+
+```csharp title="Use the same object for ownership and stop · excerpt"
+SoundBus.Play(Sounds.Campfire, transform);
+// Later:
+int stopped = SoundBus.StopAll(gameObject);
+```
+
+This excerpt belongs in a component with Campfire registered. The Transform overload owns the play by `transform.gameObject`, so the stop uses `gameObject`. `StopAll(this)` would look for the component's owner instead and would not find these plays.
+
+For an explicit context, pass `service.OwnerOf(gameObject)` to `At` or `Following`. This also makes object-wide bus calls reach the plays. `SoundRequest.Play(key, context, source)` is another way to provide a source; an owner already set in the context takes precedence.
+
+## Use a separate group
+
+```csharp title="A group's lifetime · excerpt"
+var owner = SoundServices.CreateOwner();
+var context = SoundPlayContext.At(transform.position, owner);
+var result = SoundBus.Play(Sounds.Campfire, context);
+// Later, when this group is no longer needed:
+owner.StopOwned(0.1f);
+owner.ReleaseOwner();
+```
+
+This illustrates the lifecycle inside a component with an active manager. In real code, keep the token in a field between the start and cleanup calls and handle a refused result. Do not release a shared `OwnerOf` token while other components still rely on that group.
+
+`StopOwned(owner, fade = 0.1f)` returns the number of plays that accepted a stop. `SetParameterOwned(owner, parameter, value)` returns the number accepting the value. `SendSignalOwned(owner, signal)` counts plays that accepted the signal. The active service exposes all three; `SoundServices` provides extensions for stop and release. It does not provide parameter/signal owner extensions.
+
+## SoundOwnerToken
+
+`Session` and `Id` identify the issuing service and owner record. `IsValid` means both are nonzero, not that the record is still alive. The constructor stores these numbers; normally use the service's owner creation methods instead. Both `Equals` overloads compare session and ID; `GetHashCode` uses the same identity.
+
+<ApiSignatures type="SoundOwnerToken" />
+
+## SoundOwnerLoss
+
+<ApiSignatures type="SoundOwnerLoss" />
+
+**Stop** starts the ending flow of a started play. **Detach** keeps it playing at its last known position with no owner or follow target. Both an owner being lost and a follow target being destroyed use this event setting. Disabling a component alone is not owner destruction; write `OnDisable` cleanup when appropriate.
+
+The <a href={sitePath('guides/position-and-ownership/')}>moving bee guide</a> demonstrates an explicit owner and a separate follow target. Exact owner method signatures are in <a href={sitePath('api/services/')}>SoundServices and ISoundService</a>.

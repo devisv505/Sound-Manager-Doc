@@ -1,0 +1,100 @@
+---
+title: "SoundServices and ISoundService"
+description: "Access pause, owner groups, parameter reads, and the active playback service."
+kind: api
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundServices.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/ISoundService.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Control.cs
+tags: [unity, setup, sound]
+---
+
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+import { sitePath } from '../../../lib/links';
+
+
+Use `SoundBus` for normal gameplay commands. `SoundServices` gives access to the active service and a few shortcuts. `ISoundService` describes the operations that service supports; the scene's Sound Manager creates and updates its built-in implementation.
+
+You do not need to construct a `SoundService` to use these methods. All playback access is main-thread-only. The built-in service can throw `InvalidOperationException` for off-thread calls; the bus's command dispatcher reports `InvalidContext` for that case. Query helpers and extension methods are not a thread-safe alternative.
+
+## SoundServices
+
+`Current` is the active `ISoundService` or null. `Changed` is an `Action<ISoundService>` event raised when the active service changes, with the new service or null. Remove subscriptions when your component stops using them. Do not store `Current` forever and assume it survives a manager replacement.
+
+`Paused` reads or writes the active service's global sound pause. Without a manager, it reads false and writes do nothing. Events with **Ignore pause** bypass it; explicit per-play pause still applies.
+
+The handle extensions mirror the service: `Stop(fade = 0.1f)`, `IsAlive()`, `SetPaused(bool)`, `IsPaused()`, the two `SetFloat` forms, and the two `SendSignal` forms. They return false without a manager or eligible target. `IsPaused` reports per-play/service pause, not all possible Unity listener state.
+
+`TryPlay` extends a `SoundEvent` asset. Both overloads require a context. The extra `ReadOnlySpan<SoundFloatOverride>` values apply after every context override and are read during the call, never retained. Without a manager, the result is `NoManager`. Direct asset playback still requires registration on the active service.
+
+`CreateOwner(target = null)` returns a fresh owner or default when there is no service. `owner.StopOwned(fade = 0.1f)` returns a count, or zero without a service. `owner.ReleaseOwner()` removes the record or does nothing without a service; loss policy is handled by a following service update.
+
+```csharp title="Read a value and use handle shortcuts · excerpt"
+var service = SoundServices.Current;
+if (service == null)
+    return;
+
+if (service.TryGetParameter(fire, SoundParameters.Campfire.Intensity, out var value))
+    Debug.Log(value.Current.number);
+
+fire.SetPaused(true);
+fire.SetPaused(false);
+```
+
+This belongs in a component method with a retained Campfire handle named `fire`. Include `using DEV505.SoundManager;` for the extensions. See <a href={sitePath('guides/stop-and-pause/')}>pause and cleanup</a> before adding them to your game.
+
+<ApiSignatures type="SoundServices" />
+
+## ISoundService: state and playback
+
+- `Ready` is true once no catalogue entries remain in the loading list. A missing clip is removed from that wait too, so readiness does not guarantee successful playback. Each play checks its own clips and capacity.
+- `Paused` pauses voices, fades, and graph timers of affected plays. New affected plays start paused.
+- `TryResolve(key, out sound)` returns whether the key is registered. Its output is null when not found.
+- `TryPlay(sound, context)` returns a result and admitted handle; the extra Float-span overload applies those values last. Passing an unregistered asset returns `NotRegistered`.
+- `Stop(handle, fade = 0.1f)` requests ending flow; the fade is finite, non-negative seconds. False includes missing, ended, already stopping, or invalid requests.
+- `IsAlive(handle)` checks for a nonterminal play in this session. Queued and stopping plays can be alive.
+- `SetPaused(handle, paused)` returns whether the explicit pause change was accepted. `IsPaused(handle)` reads explicit/service pause on a live play.
+
+## ISoundService: parameters and signals
+
+`SetFloat` accepts an ID or name. `SetParameter` accepts either an ID or name plus a `SoundValue`. `SetInt`, `SetBool`, and `SetAsset` are named conveniences for their corresponding types. All return bool, clamp accepted numbers to declared ranges, and reject wrong types, unknown parameters, or invalid targets. Live Float changes use declared smoothing; initial values do not.
+
+`TryGetParameter(handle, id, out state)` returns current and target values on success. Ignore the output when false. The interface has the ID overload; the concrete `SoundService` also exposes a string-name overload. Do not assume that concrete-only overload is available through `SoundServices.Current`.
+
+`SendSignal` accepts an ID or name and queues it for the next update. It returns false for a missing/ended/stopping play, unknown signal, or full signal queue. A successful send does not guarantee a downstream voice can be allocated later.
+
+## ISoundService: owner groups
+
+`OwnerOf` gets or creates the shared owner for a Unity object. `TryGetOwner` looks for it without creating one. `CreateOwner` creates a separate token every time; without a target, release it explicitly. `ReleaseOwner` removes the record.
+
+`StopOwned`, `SetParameterOwned`, and `SendSignalOwned` return how many plays accepted the operation. Tokens from another session affect none. See <a href={sitePath('api/ownership/')}>owners and groups</a> for object identity and destruction rules.
+
+## ISoundService: notifications
+
+The `Notification` event delivers `Action<SoundNotification>` callbacks on the main thread at the end of each built-in service update. Pair `+=` with `-=` on the same service instance. Prefer `SoundBus.Notifications.Subscribe` for subscriptions that should follow manager replacement.
+
+<ApiSignatures type="ISoundService" />
+
+## Reuse a Float override array
+
+This **advanced excerpt** belongs in a component. Keep the array as a field, then use it in a method with Campfire registered. Reusing the array avoids allocating a new one on every call. The service reads the span during the call and does not retain it, even for queued plays.
+
+```csharp title="Reusable array and additional Float span · excerpt"
+private readonly SoundFloatOverride[] values = new SoundFloatOverride[1];
+
+private void PlayWithValues()
+{
+    var service = SoundServices.Current;
+    if (service == null || !service.TryResolve(Sounds.Campfire, out var sound))
+        return;
+
+    var context = SoundPlayContext.At(transform.position);
+    values[0] = new SoundFloatOverride(SoundParameters.Campfire.Intensity, 0.4f);
+    var result = service.TryPlay(sound, context,
+        new System.ReadOnlySpan<SoundFloatOverride>(values));
+    // Save result.Handle on acceptance when this component owns the loop's cleanup.
+}
+```
+
+The span's values apply last. `SoundFloatOverride` contains managed string data through its ID, so it cannot be used with C# `stackalloc`. The normal `With` path is easier for up to four starting values.

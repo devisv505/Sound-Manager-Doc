@@ -1,0 +1,16 @@
+---
+import { Code } from '@astrojs/starlight/components';
+import inventory from '../../content-data/public-api-inventory.json';
+interface Props { type: string; names?: string[] }
+const { type, names } = Astro.props;
+const declarations = inventory.declarations.filter((entry) => entry.name === type && !entry.source.includes('/Editor/'));
+if (!declarations.length) throw new Error(`Unknown API type: ${type}`);
+const signatures = declarations.flatMap((entry) => entry.members)
+  .filter((member) => !names || names.includes(member.name))
+  .map((member) => member.signature);
+const code = signatures.join('\n');
+---
+
+<div id={`api-${type.toLowerCase().replaceAll('.', '-')}`}>
+  <Code code={code} lang="csharp" title={`${type} · declared members`} />
+</div>

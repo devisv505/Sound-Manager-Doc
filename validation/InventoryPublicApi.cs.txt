@@ -1,0 +1,80 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Collections.Generic;
+using System.Security.Cryptography;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Text.Json;
+
+public static class InventoryPublicApi
+{
+    public static object Main(string output)
+    {
+        var root = "Assets/DEV505/SoundManager/Scripts";
+        var files = Directory.GetFiles(root, "*.cs", SearchOption.AllDirectories)
+            .Where(p => p.Contains("/Runtime/") || p.Contains("/Editor/"))
+            .Concat(Directory.GetFiles("Assets/DEV505/SoundManager.Generated", "*.cs"));
+        var rows = new List<object>();
+        foreach (var file in files.OrderBy(p => p))
+        {
+            var text = File.ReadAllText(file);
+            var tree = CSharpSyntaxTree.ParseText(text);
+            foreach (var type in tree.GetRoot().DescendantNodes().OfType<BaseTypeDeclarationSyntax>())
+            {
+                if (!type.Modifiers.Any(SyntaxKind.PublicKeyword)) continue;
+                if (type.Ancestors().OfType<BaseTypeDeclarationSyntax>().Any(t => !t.Modifiers.Any(SyntaxKind.PublicKeyword))) continue;
+                var members = new List<object>();
+                if (type is EnumDeclarationSyntax enumeration)
+                    foreach (var value in enumeration.Members)
+                        members.Add(new { name = value.Identifier.Text, signature = value.ToString(), kind = "enum-value" });
+                if (type is TypeDeclarationSyntax declaration)
+                    foreach (var member in declaration.Members)
+                    {
+                        if (member is BaseTypeDeclarationSyntax) continue;
+                        if (!(type is InterfaceDeclarationSyntax) && !member.Modifiers.Any(SyntaxKind.PublicKeyword)) continue;
+                        string name = null;
+                        string signature = null;
+                        string kind = null;
+                        if (member is MethodDeclarationSyntax method)
+                        {
+                            name = method.Identifier.Text; kind = "method";
+                            signature = method.WithAttributeLists(default).WithBody(null).WithExpressionBody(null).WithSemicolonToken(default).NormalizeWhitespace().ToFullString().Trim();
+                        }
+                        else if (member is ConstructorDeclarationSyntax constructor)
+                        {
+                            name = type.Identifier.Text; kind = "constructor";
+                            signature = constructor.WithAttributeLists(default).WithInitializer(null).WithBody(null).WithExpressionBody(null).WithSemicolonToken(default).NormalizeWhitespace().ToFullString().Trim();
+                        }
+                        else if (member is PropertyDeclarationSyntax property)
+                        {
+                            name = property.Identifier.Text; kind = "property";
+                            var access = property.AccessorList == null ? "get;" : string.Join(" ", property.AccessorList.Accessors
+                                .Where(a => !a.Modifiers.Any(SyntaxKind.PrivateKeyword) && !a.Modifiers.Any(SyntaxKind.InternalKeyword))
+                                .Select(a => a.Keyword.Text + ";"));
+                            signature = property.Modifiers + " " + property.Type + " " + name + " { " + access + " }";
+                        }
+                        else if (member is BaseFieldDeclarationSyntax field)
+                        {
+                            kind = member is EventFieldDeclarationSyntax ? "event" : "field";
+                            foreach (var variable in field.Declaration.Variables)
+                                members.Add(new { name = variable.Identifier.Text, signature = (field.Modifiers + " " + (kind == "event" ? "event " : "") + field.Declaration.Type + " " + variable.Identifier.Text).Trim(), kind });
+                            continue;
+                        }
+                        else if (member is EventDeclarationSyntax evt)
+                        { name = evt.Identifier.Text; kind = "event"; signature = evt.Modifiers + " event " + evt.Type + " " + name; }
+                        else if (member is ConversionOperatorDeclarationSyntax conversion)
+                        { name = "implicit operator"; kind = "operator"; signature = conversion.WithBody(null).WithExpressionBody(null).WithSemicolonToken(default).NormalizeWhitespace().ToFullString().Trim(); }
+                        if (name != null) { signature = string.Join(" ", signature.Split('\n').Where(line => !line.TrimStart().StartsWith("///")).Select(line => line.Trim())); members.Add(new { name, signature, kind }); }
+                    }
+                string hash;
+                using (var sha = SHA256.Create()) hash = BitConverter.ToString(sha.ComputeHash(File.ReadAllBytes(file))).Replace("-", "").ToLowerInvariant();
+                var names = type.Ancestors().OfType<BaseTypeDeclarationSyntax>().Reverse().Select(t => t.Identifier.Text).Concat(new[] { type.Identifier.Text });
+                rows.Add(new { name = string.Join(".", names), source = file, sourceSha256 = hash, kind = type.Kind().ToString(), members });
+            }
+        }
+        File.WriteAllText(output, JsonSerializer.Serialize(new { sourceRevision = "746a1cc7d2602bc59df6096eac50508ded6ef49e", method = "Roslyn syntax inventory of explicitly public runtime, editor, and generated declarations; private enclosing types and inherited Unity/System members excluded.", declarations = rows }, new JsonSerializerOptions { WriteIndented = true }));
+        return new { declarations = rows.Count, output };
+    }
+}

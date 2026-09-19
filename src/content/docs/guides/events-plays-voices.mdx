@@ -1,0 +1,50 @@
+---
+title: "What happens when a sound plays?"
+description: "Understand an event, one play of that event, and the recordings it produces."
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Playback.cs
+tags: [unity, setup, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+
+Think of Campfire: one call starts an ignition sound, continues with crackling, and later plays an extinguish sound. These are parts of one sound behavior.
+
+## Three useful words
+
+| Word | Meaning | Campfire example |
+| --- | --- | --- |
+| **Event** | The saved sound recipe: its graph and settings. | The `Campfire.soundgraph` asset imported as a `SoundEvent`. |
+| **Play**, also called an **instance** | One running copy of that recipe. | The fire you started with one `SoundBus.Play` call. |
+| **Voice** | One recording currently using a playback slot. | The ignition recording, or the crackling loop. |
+
+Playing the same event twice creates two plays. They each have their own parameters and handle. One play can need several voices at the same time—for example, during a fade between two recordings.
+
+## From code to your speakers
+
+1. Your component calls `SoundBus.Play` with a key such as `Sounds.Campfire`.
+2. The active manager looks up that event and checks its settings, parameters, and available capacity.
+3. If it accepts the play, the result contains a handle. The play may wait for its clips to load.
+4. The graph starts at **On Start**. Connected nodes choose recordings and start voices.
+5. Unity's AudioSources produce the sound. The active Audio Listener determines where you hear 3D sounds from.
+6. The play finishes when its work ends, or you ask it to stop. The manager can report the ending through a notification.
+
+**SoundBus** is the code entry point. The manager's **service** is the runtime object that does this work. Most gameplay code can use SoundBus without creating a service itself.
+
+## Let one play run
+
+Start a looping sound once and keep its handle. Change its parameters while it runs. Calling `Play` every frame creates new plays and can make the same sound overlap many times.
+
+A **parameter** is an ongoing value, such as engine RPM. A **signal** is a request to do something once, such as sound the horn. Changing a parameter does not automatically rerun a branch that already chose its path at the beginning; the graph must read the new value or respond to a signal.
+
+## A stop can have an ending
+
+`Stop` asks a started play to run **On Stop**. That part of the graph can fade a loop and play an ending recording. A successful stop request therefore does not promise immediate silence.
+
+A graph with **Keep alive** enabled can remain available for signals after its recordings finish. Otherwise, once no voices or scheduled graph work remain, the instance can end. A handle can be alive while a play is waiting, paused, or ending; being alive does not mean it is audible right now.
+
+Continue with <a href={sitePath('guides/parameters/')}>parameters</a>, <a href={sitePath('guides/position-and-ownership/')}>position and ownership</a>, or <a href={sitePath('guides/stop-and-pause/')}>stopping and pausing</a>.

@@ -1,30 +1,49 @@
 ---
-title: 'A small API. A lot of control.'
-description: 'Start with SoundBus, then describe where a play happens and keep its handle when you need control.'
+title: "A small API. A lot of control."
+description: "Find the method or type you need, with plain explanations and exact signatures."
 kind: index
 sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
 sourcePaths:
   - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
-  - Assets/DEV505/SoundManager/Scripts/Samples/Campfire/CampfireInteraction.cs
-tags: [sound, unity, campfire]
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/ISoundService.cs
+tags: [unity, setup, sound]
 ---
 
 import { sitePath } from '../../../lib/links';
 
-## The everyday path
+The **API** is the set of C# types and methods your code can use. Start with `SoundBus.Play` to play an event. Add a context when you need to choose its position or starting values, and keep its handle when you need to change or stop that play.
 
-| Type                         | Role                                                                                   |
-| ---------------------------- | -------------------------------------------------------------------------------------- |
-| `SoundBus`                   | Routes play, parameter, signal, pause, and stop commands to the active manager.        |
-| `SoundPlayContext`           | Describes position/following, owner, initial parameters, seed, and delay for one play. |
-| `SoundPlayResult`            | Reports whether a request was admitted and returns its handle.                         |
-| `SoundHandle`                | Identifies one play so you can address it later.                                       |
-| `Sounds` / `SoundParameters` | Generated identifiers for this project's authored events and parameters.               |
+If those words are new, read <a href={sitePath('guides/events-plays-voices/')}>What happens when a sound plays?</a> first. All Sound Manager types below use the `DEV505.SoundManager` namespace.
 
-The complete <a href={sitePath('api/sound-bus/')}>SoundBus reference</a> is the first reference chapter. It covers every public method and overload in the current source, with the defaults and return behavior that affect gameplay code.
+## Find the operation you need
 
-## A concrete example
+| Your task | Reference |
+| --- | --- |
+| Play, stop, set a value, or send a signal | <a href={sitePath('api/sound-bus/')}>SoundBus</a> |
+| Choose position, following, initial values, seed, or delay | <a href={sitePath('api/context/')}>SoundPlayContext</a> |
+| Work with typed values and parameter IDs | <a href={sitePath('api/parameters/')}>Parameter values and IDs</a> |
+| Check a result or control the same play later | <a href={sitePath('api/results-and-handles/')}>Results and handles</a> |
+| Group sounds and handle destroyed objects | <a href={sitePath('api/ownership/')}>Owners and groups</a> |
+| Receive endings/failures and identify signals | <a href={sitePath('api/notifications/')}>Signals and notifications</a> |
+| Pause globally, read live values, or use owner controls | <a href={sitePath('api/services/')}>SoundServices and ISoundService</a> |
+| Pass a command as a C# value | <a href={sitePath('api/requests/')}>SoundRequest</a> |
+| Configure a manager, optional emitter, or listener | <a href={sitePath('api/components/')}>Scene components</a> |
+| Look up names and event/library assets | <a href={sitePath('api/keys-and-assets/')}>Keys, events, and libraries</a> |
+| Look up defaults and overlap/capacity limits | <a href={sitePath('api/settings/')}>Playback settings</a> |
 
-Read <a href={sitePath('recipes/campfire-loop/')}>Start, loop, and stop</a> for a complete component, or begin with <a href={sitePath('getting-started/')}>Your first sound</a> if you have not configured a manager yet.
+## Read the signatures
 
-This first edition focuses on the setup path and Campfire. Dedicated reference chapters for contexts, ownership, graph nodes, and advanced service integration will expand this API overview in the next documentation milestones.
+A **signature** shows a member's name, input types, defaults, and return type. An **overload** is another version of the same method with different inputs. `bool` means true or false; `out` returns an additional value through an argument; `in` passes a value for read-only use. You do not normally need to type `in` at the call site.
+
+Reference blocks list declared members, not complete scripts to attach to an object. Complete components are labeled separately. Fields' starting values and units appear in the accompanying tables. The signature blocks are extracted from the documented source revision; the explanation gives the behavior and constraints.
+
+Use playback APIs on Unity's main thread—for example, from a component's Start, Update, button callback, or animation event. Do not call them from a worker task.
+
+## Try complete components
+
+- <a href={sitePath('getting-started/#4-add-this-script-to-an-object')}>FirstSound</a>: start a Campfire automatically and stop it from the component menu.
+- <a href={sitePath('recipes/campfire-loop/')}>CampfireSound</a>: public start/stop methods with cleanup.
+- <a href={sitePath('guides/position-and-ownership/#try-the-complete-example')}>MovingBeeSound</a>: following, an owner, and a live Float parameter.
+- <a href={sitePath('guides/signals-and-notifications/#try-the-complete-engine-example')}>EngineSoundControls</a>: parameters, a horn signal, pause, and ending notifications.
+
+See the <a href={sitePath('api/coverage/')}>API coverage inventory</a> for the boundary between everyday gameplay integration, generated names, advanced interfaces, and implementation types. Advanced backend/graph authoring references remain in the later documentation stage.

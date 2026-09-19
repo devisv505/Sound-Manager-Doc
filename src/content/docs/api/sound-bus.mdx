@@ -20,13 +20,15 @@ namespace DEV505.SoundManager
 ```
 
 <Explanation label="AT A GLANCE" title="One active manager. An answer to every command.">
-  The bus routes commands synchronously to the active service. You get a play result, a success
-  flag, or a count of affected plays. Notifications are the separate broadcast channel.
+  Call SoundBus when your game needs to start or change a sound. It asks the active manager to do
+  the work and returns an answer immediately. Notifications tell your code what happens afterward.
 </Explanation>
+
+New to the terms on this page? An **event** is a saved sound recipe, a **play** is one running copy, and a **handle** is the value you keep to control that copy. Start with <a href={sitePath('getting-started/')}>Your first sound</a> for a complete script and scene setup. The blocks below are reference signatures or labeled excerpts, not separate scripts to attach to objects.
 
 ## Before calling
 
-Register the event or its library on an active `SoundManager`. Use Unity's owning/main thread for gameplay calls; the concrete service refuses off-thread dispatched commands as `InvalidContext`. Do not treat query helpers as a thread-safe API.
+Add the event to the active manager's **Direct events** or **Libraries** list before Play Mode. Call this API on Unity's main thread, for example from Start, Update, or a button callback. Commands dispatched from a worker thread to the built-in service return `InvalidContext`. Query helpers are not safe to call from a worker thread either.
 
 A missing manager returns `NoManager` from dispatch/play and logs a warning once per play session. It does not buffer requests until a manager appears. An existing manager may admit a play as `Queued` while clips prepare or while a request waits for the current tick to finish.
 
@@ -43,11 +45,11 @@ public static SoundPlayResult Play(
 
 | Argument   | Meaning                                                                                                                                                          |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `key`      | Registered event identity. Prefer generated `Sounds.*` values. An unresolved key gives `NotRegistered`.                                                          |
+| `key`      | The registered name of the event. Prefer generated `Sounds.*` values. An unknown key gives `NotRegistered`. |
 | `context`  | Optional per-play position/follow target, owner, initial overrides, seed, and delay. A default context has no follow target or owner and uses its zero position. |
 | `position` | Fixed world point. The sound remains there if the object that caused it moves away.                                                                              |
 | `follow`   | Transform tracked while the play runs. This convenience overload also owns the play by `follow.gameObject`.                                                      |
-| `sound`    | Event asset supplied directly rather than resolved by key. Normal service validation and preparation still apply.                                                |
+| `sound`    | An event asset reference. It still needs registration on the active manager, and the same validation and preparation rules apply. |
 
 Returns `SoundPlayResult`: `Status` describes admission and `Handle` identifies an accepted play. `Accepted` is true for both `Accepted` and `Queued`. An accepted request is not a guarantee that a voice is already audible or that the play can never subsequently fail.
 
@@ -155,7 +157,7 @@ public static bool SendSignal(SoundHandle handle, string signal);
 public static int SendSignal(UnityEngine.Object source, string signal);
 ```
 
-Delivers an authored signal to existing plays; it does not create a new event instance. The per-handle forms return acceptance; the source form counts reached owned plays. A missing signal or unavailable target gives false/zero. Signal execution follows the service's current tick/dispatch rules; acceptance is not proof a downstream voice already started.
+Queues a named graph action on existing plays. It does not start another play. The per-handle forms return whether the signal was accepted; the source form counts plays that accepted it. A missing signal, ended or stopping play, or full signal queue gives false/zero. The graph processes an accepted signal on the next service update; the call does not promise a recording has already started.
 
 ```csharp title="Engine horn · excerpt"
 SoundBus.SendSignal(engine, "Horn");
@@ -250,7 +252,7 @@ private void OnDisable()
 }
 ```
 
-This excerpt observes all terminal notifications. `Subscribe(null)` throws `ArgumentNullException`; duplicate delegates are not added twice. Do not add a second `OnDisable` method to the complete Campfire recipe—combine cleanup into the existing lifecycle method. Notifications that happen during `Play` can arrive before the caller assigns its returned handle.
+This excerpt observes every ending, cancellation, and failure, including other objects' sounds. `Subscribe(null)` throws `ArgumentNullException`; duplicate delegates are not added twice. Do not add a second `OnDisable` method to the complete Campfire recipe—combine cleanup into its existing method. The built-in service delivers notifications at the end of its update; subscribe before playing, then save the returned handle. The <a href={sitePath('guides/signals-and-notifications/')}>complete Engine example</a> shows how to filter messages for one play.
 
 ## Results and rejections
 

@@ -1,0 +1,88 @@
+---
+title: "Change sounds with parameters."
+description: "Set a starting value, update it during playback, and understand smoothing."
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayContext.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Values.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundParameterRecord.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Playback.cs
+tags: [unity, setup, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+
+A parameter is a value the graph can read. Footstep uses `Surface` to choose grass, stone, or wood. Campfire uses `Intensity` to change the crackle's volume. The graph defines what each value means.
+
+## Choose the right type
+
+| Type | Use it for | Example from the supplied graphs |
+| --- | --- | --- |
+| `Float` | A number with a fractional part. | Campfire `Intensity`: `0.35f`. The `f` marks a C# float. |
+| `Int` | A whole number, often a choice. | Footstep `Surface`: `0` grass, `1` stone, `2` wood. |
+| `Bool` | A yes/no choice: `true` or `false`. | LaunchSequence `ClampsOpen`. |
+| `Asset` | An AudioClip chosen from the graph's allowed list. | Jukebox `Track`. |
+
+Use the type declared in the graph. Passing `1f` to an Int parameter is not the same as passing `1`. A wrong type or unknown parameter is rejected. Valid numeric values are clamped to the declared range. Float values must be finite; asset values must belong to the graph's allowed clip list.
+
+## Supply the value before the graph starts
+
+The following is an **excerpt** for a method on your own footstep component. It needs the registered Footstep event, generated keys, and a `Vector3 footPosition` containing the contact position.
+
+```csharp title="One stone footstep · excerpt"
+var context = SoundPlayContext.At(footPosition)
+    .With(SoundParameters.Footstep.Surface, 1);
+var result = SoundBus.Play(Sounds.Footstep, context);
+```
+
+A **context** is the set of choices for this play: where it happens, what it follows, and its starting parameter values. The initial `Surface` value is applied before **On Start**, so the graph selects stone on its first decision. Setting the value after `Play` is too late for a branch that already ran.
+
+The Footstep demo's gameplay surface enum uses different numbers: Unknown `0`, Grass `1`, Stone `2`, Wood `3`. Map that enum to the graph's `0/1/2` choices; do not cast it directly.
+
+## Keep the context returned by With
+
+`With` returns a changed **copy** of the context. Chain it as above, or assign the result:
+
+```csharp title="Keep the added value · excerpt"
+context = context.With(SoundParameters.Footstep.Surface, 2);
+```
+
+Calling `context.With(...)` on its own and discarding the returned copy does not change `context`. Each call adds one entry, even if it names a parameter already added. A fifth `With` call throws `InvalidOperationException`.
+
+## More than four starting values
+
+Use `TypedParameters` for a larger list. This excerpt shows the format with two values from Engine; add more only when the event actually declares them. The public typed-array constructor accepts the parameter **name**.
+
+```csharp title="An array of initial values · excerpt"
+var context = SoundPlayContext.At(transform.position);
+context.TypedParameters = new[]
+{
+    new SoundParameterOverride("Rpm", SoundValue.Float(0.4f)),
+    new SoundParameterOverride("Load", SoundValue.Float(0.2f))
+};
+var result = SoundBus.Play(Sounds.Engine, context);
+```
+
+This belongs in a component method with Engine registered. Creating an array uses managed memory; reuse an array when it suits your code. The service reads its values during the call and does not keep the array, even if the play is queued. Changing that array later will not change the play.
+
+If the same parameter is supplied more than once, the last applied value wins. The order is: graph defaults → context `Parameters` float array → `TypedParameters` array → `With` entries → the additional float span on the service's `TryPlay` overload. Every supplied entry must still be valid; a later good value does not rescue an earlier wrong type.
+
+## Change a running sound
+
+Keep the returned handle when a play is accepted. Then update it instead of starting the event again. Here `fire` is the saved Campfire handle:
+
+```csharp title="Change crackle intensity · excerpt"
+bool changed = SoundBus.SetFloat(
+    fire, SoundParameters.Campfire.Intensity, 0.35f);
+```
+
+`changed` is false if there is no suitable play, the parameter is missing, or the value is refused. For a non-float type, use `SetParameter` with `SoundValue.Int`, `.Bool`, or `.Asset`. Updating a clip parameter changes the value the graph will read; it does not by itself restart an already playing voice with the new clip.
+
+## Why the value may change gradually
+
+A Float parameter can have a **rise rate** and **fall rate**, measured in value units per second. These make it move smoothly toward the requested value. Campfire's rates are `0.5`: moving from `0.65` to `0.35` takes about `0.6` seconds of unpaused graph time.
+
+An initial value is applied immediately before On Start. Later Float changes use smoothing when the relevant rate is positive. A zero rate changes immediately. Int, Bool, and Asset changes do not use Float smoothing.
+
+To inspect this in code, use the active service's `TryGetParameter`. Its `Current` is what the graph reads now; `Target` is what you requested. The <a href={sitePath('api/parameters/')}>parameter reference</a> lists the exact types and methods.

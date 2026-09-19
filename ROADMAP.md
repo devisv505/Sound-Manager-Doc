@@ -1,6 +1,6 @@
 # DEV505 Sound Manager — documentation roadmap
 
-Status: M1 complete; M2–M7 remain open, with the Pages workflow brought forward to fix M1 publication.
+Status: M1 and M2 complete; M3–M7 remain open, with the Pages workflow brought forward to fix M1 publication. M2 is validated locally and has not been published by this milestone.
 
 Prepared: 19 September 2026.  
 Specification: [SPEC.md](SPEC.md).  
@@ -10,7 +10,22 @@ Target directory: `/Users/devisv/Projects/Web/Sound-Manager-Doc`.
 
 Build one complete slice first: the shared theme, setup path, a useful API page, and the Campfire walkthrough with real Unity images. Use it to establish the visual and content pattern before expanding to all ten demos. Complete API and graph coverage alongside the remaining walkthroughs, then validate the actual GitHub Pages build.
 
-Checked items reflect completed work. M0 and M1 are complete; the remaining milestones are open. M1 validation and capture evidence are recorded in the linked report.
+Checked items reflect completed work. M0, M1, and M2 are complete; the remaining milestones are open. Validation and capture evidence are recorded in each milestone's linked report.
+
+## Writing requirement for every stage
+
+Use clear, natural language that someone new to Unity can follow. Apply the [writing requirements in the specification](SPEC.md#writing-for-someone-new-to-unity--required-in-every-stage) to every page, API explanation, demo, caption, and code example.
+
+Before marking any stage complete, review its content for these questions:
+
+- Does it explain what the reader will do and why?
+- Are unfamiliar Unity, audio, and Sound Manager terms explained when they appear?
+- Does it say exactly what to open, select, create, attach, or assign?
+- Does each code example explain its prerequisites, where it belongs, and its important lines?
+- Does the reader know what they should see or hear and what to check if it does not work?
+- Are advanced details introduced after the basic explanation, with accurate API names and behavior preserved?
+
+This requirement also applies when revising completed work. M2 includes a reading review and revision of the existing M1 pages; that review is recorded separately from M1's original implementation checks.
 
 ## M0 — Source audit and planning
 
@@ -51,15 +66,18 @@ Exit condition: a new reader can follow the first-sound example, the Campfire pa
 
 Depends on: M1; may proceed alongside M3.
 
-- [ ] Complete the public API inventory and classify supported consumer, advanced, and infrastructure types.
-- [ ] Finish setup, manager/library registration, graph creation, key generation, and first-play troubleshooting.
-- [ ] Write the event/play/voice model and the relationship between graph authoring and runtime commands.
-- [ ] Document context construction, initial typed parameters, override precedence, four-value inline limit, and larger override sets.
-- [ ] Document fixed versus followed positions, listener orientation, 2D/3D event settings, and owner/follow-target lifetime.
-- [ ] Document handles, stale identifiers, stop/fade/release, pause, source-wide operations, and cleanup.
-- [ ] Document signals, notifications, subscription lifecycle, result/status handling, concurrency, cooldown, and voice limits.
-- [ ] Complete the consumer API pages with exact signatures, overloads, defaults, examples, and links.
-- [ ] Record the source revision and validation state for every complete example.
+- [x] Review and revise the M1 setup, API, recipe, and Campfire pages using the beginner writing requirements above.
+- [x] Complete the public API inventory and classify supported consumer, advanced, and infrastructure types.
+- [x] Finish setup, manager/library registration, graph creation, key generation, and first-play troubleshooting.
+- [x] Write the event/play/voice model and the relationship between graph authoring and runtime commands.
+- [x] Document context construction, initial typed parameters, override precedence, four-value inline limit, and larger override sets.
+- [x] Document fixed versus followed positions, listener orientation, 2D/3D event settings, and owner/follow-target lifetime.
+- [x] Document handles, stale identifiers, stop/fade/release, pause, source-wide operations, and cleanup.
+- [x] Document signals, notifications, subscription lifecycle, result/status handling, concurrency, cooldown, and voice limits.
+- [x] Complete the consumer API pages with exact signatures, overloads, defaults, examples, and links.
+- [x] Record the source revision and validation state for every complete example.
+
+Completed: 19 September 2026. Evidence: [M2 validation report](validation/M2.md). The site has 27 authored pages and four verified complete examples. The inventory accounts for 163 public types and 867 member declarations, with advanced and infrastructure scope explicitly identified.
 
 Deliverable: a usable setup-to-integration documentation path and the main public API reference.
 
@@ -160,6 +178,7 @@ Depends on: M2–M5.
 - [ ] Check keyboard navigation, focus restoration, text contrast, alt text, semantic headings, 200% text zoom, and reduced-motion behavior.
 - [ ] Measure image payloads and mobile Lighthouse performance; address avoidable regressions against the specification targets.
 - [ ] Check every demo page against the current source revision and recapture screenshots invalidated by source changes.
+- [ ] Review the complete site as a reader new to Unity: explain terms, verify step-by-step setup and code placement, and make expected results and troubleshooting clear.
 - [ ] Confirm examples' Unity compilation/behavior records and document genuine limitations.
 - [x] Add the Pages build/deploy workflow with appropriate permissions and pinned action versions verified at implementation time. Brought forward on 19 September 2026 to fix the default Jekyll build for the M1 site.
 - [ ] Write `README.md` with local commands, content conventions, source/API validation, screenshot recapture, and deployment instructions.
@@ -209,4 +228,4 @@ Future enhancements can include versioned documentation, localized content, opti
 
 The work is complete when all ten demos have detailed, accurate pages with actual Unity screenshots; the supported API and implemented graph features are documented; usage examples are verified; the shared visual style is recognizable; the static build and contributor workflow are reproducible; and the live GitHub Pages site passes the publication checks.
 
-M0 produced the specification and roadmap. M1 now delivers the first working documentation slice with actual Unity captures and a verified example. The user subsequently established the public documentation repository and enabled Pages; its initial Jekyll build failed because the site uses Astro. The Pages workflow and deployment instructions were brought forward to support M1 publication. M2–M7 remain open for the complete documentation release.
+M0 produced the specification and roadmap. M1 delivered the first working documentation slice with actual Unity captures and a verified example. The user subsequently established the public documentation repository and enabled Pages; its initial Jekyll build failed because the site uses Astro. The Pages workflow and deployment instructions were brought forward to support M1 publication. M2 adds the complete setup-to-integration path and everyday API reference, with source-derived signatures and checked Unity examples. M3–M7 remain open for the complete documentation release.

@@ -1,0 +1,73 @@
+---
+title: "Stop, pause, and clean up."
+description: "Keep control of one play and avoid sounds that outlive the object that started them."
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundHandle.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Control.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/UnitySoundClock.cs
+tags: [unity, setup, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+
+When you start a loop, save the handle returned by an accepted play. A handle identifies one play, even if that play uses several recordings.
+
+## Check whether it is still running
+
+`handle.IsValid` only checks that the handle contains a nonzero session and generation. It can stay true after the sound has ended. Use `SoundBus.IsAlive(handle)` when you want to know whether that play still exists.
+
+A **stale handle** is one saved from a play that has ended, or from an older manager session. It cannot accidentally control a new play that reused the same internal slot. Do not construct handles yourself or save them as long-term game data.
+
+## Ask a sound to end
+
+In these excerpts, `fire` is a handle saved from a successful Campfire play:
+
+```csharp title="Stop one play · excerpt"
+SoundBus.Stop(fire, fade: 0.15f);
+fire = default;
+```
+
+The fade argument is in seconds. It must be finite and at least zero. A started play runs **On Stop**, then any existing voices not already stopped by that graph branch receive the requested fade. A graph node reached through its own **Stop** port uses its authored fade-out instead. New voices started by On Stop can finish as the ending sound.
+
+Campfire uses its own `0.3`-second ignition fade and `0.6`-second crackle fade, plus an extinguish recording. Changing the API fade alone does not change all three. Stopping a queued play before its graph starts cancels it without running the normal started-play ending.
+
+`Stop` returns true when the stop is accepted. It returns false for a finished play, an already stopping play, a missing manager, or an invalid fade. A stop requested while the service is already processing work is applied on its next update.
+
+## Pause one play
+
+```csharp title="Pause and resume · excerpt"
+SoundBus.SetPaused(fire, true);
+// Later, resume:
+SoundBus.SetPaused(fire, false);
+```
+
+A paused play keeps its handle, voices, and graph progress. Its graph timers and fades stop advancing. Resuming continues that play. It does not restart the ignition. A paused play still occupies capacity.
+
+## Pause the game's sounds
+
+```csharp title="Service-wide pause · excerpt"
+SoundServices.Paused = true;
+// When leaving your pause menu:
+SoundServices.Paused = false;
+```
+
+This affects the active manager's plays except events whose **Ignore pause** setting is enabled, such as menu sounds. It is separate from Unity's `Time.timeScale` and `AudioListener.pause`. Setting `Time.timeScale` to zero alone does not pause Sound Manager's clock. If your menu uses it, also set the sound pause explicitly.
+
+An explicit per-play pause still pauses an event that ignores global pause. Resuming one play does not override a global pause that still applies to it. `handle.IsPaused()` queries per-play/service pause; do not use it as a complete report of Unity's separate listener pause.
+
+If an interaction uses two plays—such as both tracks in a crossfade—pause both retained handles or use the service-wide setting.
+
+## Stop an object's group of sounds
+
+`Play(key, transform)` owns its play by `transform.gameObject`. Use that same GameObject with `SoundBus.StopAll(gameObject)`. Despite its name, this method stops that object's group, not all sounds in the game. It returns how many plays accepted the stop.
+
+For explicit owner tokens, use `owner.StopOwned()`. When you created an owner yourself, release it once you no longer need it. Shared owners returned by `OwnerOf` should not be released by one component while other components still use the same group.
+
+## Clean up when your component stops running
+
+Put cleanup in `OnDisable` for components that should be silent when disabled. Stop saved plays and dispose notification subscriptions there. Keep the manager running if you want an ending cue to finish; destroying the manager shuts down all playback immediately.
+
+See the <a href={sitePath('recipes/campfire-loop/')}>complete Campfire component</a> for a small example, or <a href={sitePath('guides/signals-and-notifications/')}>signals and notifications</a> for cleanup that also removes a subscription.

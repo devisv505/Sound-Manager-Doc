@@ -23,7 +23,8 @@ import { sitePath, sourceLink } from '../../../lib/links';
 
 <Explanation title="A complete sound, from start to finish">
   One event plays the ignition, keeps the fire crackling, and adds an extinguish sound. Learn how a
-  handle controls a whole sound behavior, even when that behavior uses several clips.
+  handle—the value code keeps after starting a sound—controls the whole play, even when it uses
+  several recordings.
 </Explanation>
 
 <Screenshot
@@ -36,14 +37,14 @@ import { sitePath, sourceLink } from '../../../lib/links';
 
 ## Try it in Unity
 
-Open `Assets/DEV505/SoundManager/Samples/01-Campfire/Demo.unity` and enter Play Mode.
+In Unity's **Project** window, open `Assets/DEV505/SoundManager/Samples/01-Campfire` and double-click `Demo.unity`. Save your current scene if Unity asks. Press the Editor's **Play** button, then click inside the **Game** view so it receives keyboard input.
 
 | Control                                  | Action                            |
 | ---------------------------------------- | --------------------------------- |
 | **F** with Game View focused             | Ignite or extinguish the fire.    |
 | **Ignite fire / Extinguish fire** button | The same toggle, through the HUD. |
 
-Start with the quiet scene. Ignite the fire and listen to the short starting cue. Its **Finished** output begins the continuous crackle, which fades in. Toggle again: the crackle fades out while the extinguish cue plays. The HUD changes immediately; the release audio is allowed to finish afterward.
+Start with the quiet scene. Ignite the fire and listen to the short starting sound. When that recording finishes, the graph begins the continuous crackle and fades it in. Toggle again: the crackle fades out while the extinguish sound plays. The HUD—the labels and controls over the scene—changes immediately. The ending audio, also called the **release**, is allowed to finish afterward.
 
 <Screenshot
   src={unlit}
@@ -65,6 +66,8 @@ Start with the quiet scene. Ignite the fire and listen to the short starting cue
 The static model contains the stones, coals, and straight logs. Flames, smoke, and embers are particle effects. The screenshot captures use the actual scene camera and final Game View, including the HUD.
 
 ## Read the graph
+
+A **node** is one block in this graph, and a **port** is one of its connection points. Connections can pass a value, such as which recording to use, or trigger an action, such as starting playback. A **voice** is one recording currently using a playback slot. If you have not edited a graph before, start with <a href={sitePath('guides/your-first-graph/')}>Make your first sound graph</a>.
 
 <Screenshot
   src={graph}
@@ -95,10 +98,10 @@ Calling stop is therefore the beginning of the ending, not necessarily an immedi
 | ------------------ | ------------------------ | ------------------------------------------------------------------------------ |
 | Event key          | `Sounds.Campfire`        | Resolves the registered Campfire event.                                        |
 | Spatial blend      | 1                        | Fully 3D playback.                                                             |
-| Min / max distance | 2 / 20                   | World-space attenuation settings.                                              |
+| Min / max distance | 2 / 20                   | Distances that shape how volume falls as the listener moves away. |
 | Owner loss         | Stop                     | Losing the owner/follow target stops the play according to the event's policy. |
 | Max instances      | 8                        | Event-level ceiling; the demo controller itself retains just one active fire.  |
-| Concurrency        | ReplaceOldest            | Policy when the event ceiling is reached.                                      |
+| Concurrency        | ReplaceOldest            | At the event's overlap limit, replace its oldest play. |
 | `Intensity`        | Float, 0–1; default 0.65 | Crackle volume, smoothed up/down at 0.5 units per second.                      |
 
 There are no authored signals in this graph and no intensity slider in the current Campfire HUD. Code can still set the exposed parameter.

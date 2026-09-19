@@ -1,0 +1,68 @@
+---
+title: "Managers, libraries, and keys."
+description: "Tell the manager which sounds it can play, and generate names you can use in C#."
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundCatalogue.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundManager.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Codegen/SoundKeyConstants.cs
+tags: [unity, setup, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+
+A **Sound Manager** is the scene component that runs your sounds. A **library** is a reusable list of sound events. A **key** is the name code uses to ask for one of those events.
+
+Start with <a href={sitePath('getting-started/')}>Your first sound</a> if you have not played Campfire yet.
+
+## Register one event
+
+Select your manager in the Hierarchy. In its Inspector, add the event to **Sound sources → Direct events**. The manager uses the event asset's filename, without its extension, as the key. `Campfire.soundgraph` therefore uses `Campfire`.
+
+The manager reads its event lists when it creates its playback service. Configure them before pressing Play. Editing the arrays in code on an already running manager does not automatically register new events. Advanced code can use the concrete service's registration methods; most scenes should use the Inspector lists.
+
+## Group events in a library
+
+1. In the Project window, choose a folder for your audio assets.
+2. Choose **Assets → Create → DEV505 → Sound Manager → Sound Library**. Name it `Game sounds`.
+3. Select the library. Add entries to its **Events** list and assign a sound graph to each entry's sound field.
+4. Leave an entry's **Key** empty to use its asset name, or enter your own name, such as `UI/Confirm`.
+5. Select the scene's Sound Manager. Add `Game sounds` to its **Libraries** list.
+6. Expand the manager's **Event keys** to check the result, then regenerate Sound Keys.
+
+A library does not play sounds itself. The manager reads it and prepares its clips. You can reuse the same library in different scenes.
+
+## Keep names predictable
+
+Keys are case-sensitive: `UI/Confirm` and `ui/confirm` are different. A slash is a naming convention; it does not create a folder or a separate playback system.
+
+A library key lets you rename the event asset without changing the name your code uses. If the key is empty, renaming the asset changes its fallback key. Regenerate names and update references after such a rename.
+
+The same event listed more than once is collected once, using its first entry. Direct events are collected before libraries. To use a library's custom key, remove that event from **Direct events** instead of registering it in both places. If two different events use the same key, the first keeps it and the manager reports a diagnostic for the collision.
+
+## Generate code names
+
+Use **Tools → DEV505 → Sound Manager → Generate Sound Keys** after adding or renaming an event, library key, or graph parameter. The manager also has a **Generate Sounds class** button under **Event keys**.
+
+The generated files are in `Assets/DEV505/SoundManager.Generated`:
+
+| File | What it gives you |
+| --- | --- |
+| `Sounds.cs` | `SoundKey` fields such as `Sounds.Campfire`. |
+| `SoundParameters.cs` | Parameter IDs grouped by event, such as `SoundParameters.Campfire.Intensity`. |
+| `DEV505.SoundManager.Generated.asmdef` | The Unity assembly definition for these files. |
+
+The generator scans valid project events and library entries, not only the open scene. A generated key can exist even when the current manager has not registered it. Check the actual generated field for keys containing spaces or punctuation; the generator makes a valid C# identifier.
+
+Do not edit generated files by hand. Change the asset or library, then regenerate. The next generation replaces manual edits.
+
+## Understand when the manager is ready
+
+The manager creates its service and registers events in `Awake`, an early Unity setup callback. It begins loading clips in `Start`. Plays admitted before their clips are ready wait in a limited queue. A missing manager does not keep requests for later.
+
+The manager's `Ready` property reports that its catalogue has no events still waiting in the preparation list. It is not proof that every event can play: an event with a missing clip can report `MissingClip` even when Ready is true. You can request a registered play before readiness and check its returned result; each play checks its own required clips.
+
+Disabling or destroying the manager stops its service and all its sounds. **Keep on load** keeps the manager GameObject when another scene loads. Keep it on a root GameObject, and avoid adding a second active manager in the new scene.
+
+See <a href={sitePath('api/components/')}>component settings</a> and <a href={sitePath('guides/results-and-limits/')}>results and playback limits</a> for the next checks.

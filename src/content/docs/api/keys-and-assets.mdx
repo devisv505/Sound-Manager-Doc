@@ -1,0 +1,78 @@
+---
+title: "Keys, events, and libraries"
+description: "Understand generated names and the assets they refer to."
+kind: api
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundKey.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundEvent.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundLibrary.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundCatalogue.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Codegen/SoundKeyConstants.cs
+tags: [unity, setup, sound]
+---
+
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+import { sitePath } from '../../../lib/links';
+
+
+Use `Sounds.Campfire` to ask for a sound by key. The active manager looks up the registered event, then plays its graph. Read <a href={sitePath('guides/setup-and-keys/')}>Managers, libraries, and keys</a> for the setup steps.
+
+## SoundKey
+
+`SoundKey(string name)` stores an event name. `Name` returns it, or null for an empty/default key. `IsValid` means it has a nonempty name; it does not prove registration. Comparison is case-sensitive. The implicit string conversion allows `SoundBus.Play("Campfire")`, but generated names reduce typing mistakes.
+
+Both `Equals` overloads compare name/hash identity. `GetHashCode` returns the cached name hash. `ToString` returns the name or `<no key>`. Neither whitespace trimming nor registration happens inside the key constructor. Library collection trims authored custom keys before registration.
+
+<ApiSignatures type="SoundKey" />
+
+## Generated Sounds and SoundParameters
+
+Run **Tools → DEV505 → Sound Manager → Generate Sound Keys**. `Sounds` contains static readonly keys for your project's events. `SoundParameters` contains nested event classes with declared parameter IDs. They are generated project output, not a fixed catalogue shipped in every user's game.
+
+```csharp title="Generated names from the supplied project · excerpt"
+var context = SoundPlayContext.At(transform.position)
+    .With(SoundParameters.Campfire.Intensity, 0.4f);
+var result = SoundBus.Play(Sounds.Campfire, context);
+```
+
+This belongs in a component with Campfire registered. Save the handle and stop the loop later. The current generated sample catalogue includes the ten demos' event keys; names and declarations are recorded in this documentation's API inventory. There is no generated signal-ID class in this revision.
+
+## SoundEvent
+
+Unity imports each `.soundgraph` into a `SoundEvent`. You assign the graph asset to a manager, library, or emitter and Unity uses this imported object. Edit the graph and its Inspector settings; do not try to change compiled records during gameplay.
+
+| Member | Meaning |
+| --- | --- |
+| `EventId` | Identity of the source event asset. Duplicated graphs get different event identities. |
+| `Revision` | Content hash for the imported event. Useful for diagnostics and source tracking. |
+| `Diagnostic` | Why compilation failed, or null when there is no diagnostic. |
+| `IsValid` | Whether the event has a compatible schema, no diagnostic, and nodes to run. |
+| `Parameters` | Read-only list of declared parameter records. Use generated IDs for normal gameplay. |
+| `CopySettings()` | Returns a new settings copy, including its own rolloff curve. This allocates; keep it if you need repeated reads. Editing the copy does not change the saved event. |
+| `GetParameterId(string name)` | Resolve a declared parameter by exact name; returns an invalid ID when absent or null. |
+| `GetSignalId(string name)` | Resolve an On Signal name; returns an invalid ID when absent or null. |
+
+```csharp title="Inspect registered content · excerpt"
+if (SoundBus.TryResolve(Sounds.Campfire, out var sound))
+{
+    var intensity = sound.GetParameterId("Intensity");
+    var settings = sound.CopySettings();
+    Debug.Log($"Parameter found: {intensity.IsValid}, 3D blend: {settings.spatialBlend}");
+}
+```
+
+This can run in a component method after the manager registers the event. It does not start a sound. Source-only compilation members (`SchemaVersion`, `GraphId`, `Nodes`, `Edges`, and `Initialize`) are classified as infrastructure in the inventory; they are not the gameplay authoring path. Parameter record authoring and compilation details belong to the advanced graph reference.
+
+<ApiSignatures type="SoundEvent" names={['EventId', 'Revision', 'Diagnostic', 'IsValid', 'Parameters', 'CopySettings', 'GetParameterId', 'GetSignalId']} />
+
+## SoundLibrary and SoundLibraryEntry
+
+Create a library with **Assets → Create → DEV505 → Sound Manager → Sound Library**. Its `entries` array defaults to empty. Each `SoundLibraryEntry` has a `sound` event reference and a `key` string. Leave key empty to use the event asset name; set it to preserve a custom name across an asset rename.
+
+Assign the library to the manager's **Libraries** list. It does not register or load itself. The manager collects direct events first, then libraries in order, keeping the first entry for a repeated event. A duplicate key on a different event is diagnosed instead of silently replacing the first event's key.
+
+<ApiSignatures type="SoundLibrary" />
+<ApiSignatures type="SoundLibraryEntry" />
+
+All Unity asset access belongs on the main thread. The common path uses key-based playback; `SoundBus.Play(sound, context)` also supports a direct asset reference, but the asset must still be registered on the active service.

@@ -1,105 +1,90 @@
 ---
-title: 'Your first sound.'
-description: 'Go from an existing demo to a sound you can start and stop from your own code.'
+title: "Your first sound."
+description: "Set up a manager, choose where you listen, and play the included Campfire sound."
 kind: guide
 sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
 sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundManager.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundComponentInspectors.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Codegen/SoundKeyConstants.cs
   - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
-  - Assets/DEV505/SoundManager/Scripts/Samples/Campfire/CampfireInteraction.cs
-tags: [sound, unity, campfire]
+tags: [unity, setup, sound]
 ---
 
-import Explanation from '../../../components/Explanation.astro';
-import { sitePath, sourceLink } from '../../../lib/links';
+import { Code } from '@astrojs/starlight/components';
+import firstSound from '../../../../examples/FirstSound.cs?raw';
+import { sitePath } from '../../../lib/links';
 
-<Explanation label="START SMALL" title="One manager. One event. One play.">
-  Use the included Campfire scene for your first run. It already has the event, audio clips,
-  listener, and registration wired together, so you can learn the API with a working sound.
-</Explanation>
+By the end of this guide, entering Play Mode will start a campfire sound. You will hear it catch fire, then continue crackling. No knowledge of sound graphs is needed yet.
 
-## Before you begin
+## Before you start
 
-These instructions were checked with **Unity 6000.6.0f1** and the Sound Manager source revision shown in the footer. This is the tested configuration, not a claim that every older Unity version is supported. Graph authoring uses Unity's Graph Toolkit. The sample visuals also use URP and the Input System.
+Use the Sound Manager project or import the asset and its samples into your Unity project using the distribution you received. This documentation was checked with **Unity 6000.6.0f1**. It does not claim compatibility with older versions that have not been tested.
 
-Open the existing Sound Manager project, or import your distribution of the asset with its dependencies. Preserve the asset's `.meta` files when bringing it into another project. This documentation does not assume an unpublished package-registry installation command.
+In Unity's **Project** window—the list of files in your project—check that `Assets/DEV505/SoundManager` exists. Open **Window → General → Console** and resolve any red compile errors before continuing. In the supplied project, the required packages are already configured. Its demos use the Universal Render Pipeline and Input System; the script below does not need keyboard input or a particular rendering pipeline.
 
-## 1. Run the included scene
+For a quick check that the supplied project works, double-click `Assets/DEV505/SoundManager/Samples/01-Campfire/Demo.unity`, press the Editor's **Play** button, then click **Ignite fire** in the Game view. Stop Play Mode before setting up your own scene below. Save your existing scene if Unity asks when switching.
 
-Open this asset in the Unity Project window:
+## 1. Create a place to try the sound
 
-```text title="Scene asset"
-Assets/DEV505/SoundManager/Samples/01-Campfire/Demo.unity
-```
+1. Create a new scene with **File → New Scene** and select a basic scene template with a camera. Save it as `FirstSoundDemo`.
+2. In the **Hierarchy**—the list of objects in the open scene—select **Main Camera**.
+3. In the **Inspector**—the panel that shows the selected object's settings—set its **Transform → Position** to `X 0`, `Y 1`, `Z -3` and **Rotation** to `0, 0, 0`.
+4. Check that the camera has an enabled **Audio Listener** component. This is the point from which you hear the scene. Use one active listener. The component is normally included on a new camera.
 
-Enter Play Mode. Click **Ignite fire** or focus the Game View and press **F**. The initial ignition cue gives way to a crackling loop. Press **F** again to put the fire out and hear its release cue.
+An empty scene is enough for this test. The script plays audio; it does not create a fire model or flames.
 
-The <a href={sitePath('demos/01-campfire/')}>Campfire walkthrough</a> shows the exact graph connections and screenshots of both states.
+## 2. Add the manager and register Campfire
 
-## 2. Understand the three pieces
+1. Choose **GameObject → Create Empty**. Rename the new object `Sound Manager`.
+2. With it selected, click **Add Component** in the Inspector, search for **Sound Manager**, and add the DEV505 component.
+3. Expand **Direct events** under **Sound sources**. Add one entry with the list's **+** control.
+4. Drag `Assets/DEV505/SoundManager/Samples/01-Campfire/Campfire.soundgraph` from the Project window into that entry. Unity imports this graph as a sound event—the sound recipe the manager will play.
+5. Expand **Event keys**. You should see `Campfire` pointing to the Campfire event. Leave **Settings** empty to use the built-in limits.
 
-| Piece                 | What it does                                                                                                                            |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `Campfire.soundgraph` | Authors the sound's clips, flow, spatial settings, and parameter. Importing produces a runtime `SoundEvent`.                            |
-| `SoundManager`        | Owns the playback service, registers events/libraries, prepares clips, and ticks playback. Only one manager can own the active service. |
-| Your component        | Calls `SoundBus.Play`, retains a handle, and stops that play when appropriate.                                                          |
+**Registering** means telling this manager which events it may play. Having an event file somewhere in the project is not enough. Use one active manager; a second manager disables itself. The Inspector's **Show counters** option is for debugging and can reduce frame rate while it updates the UI.
 
-In a new scene, add a GameObject with **DEV505 → Sound Manager → Sound Manager** from Add Component. Assign the imported Campfire event to the component's **Events** list, or assign a library containing it. Configure one active Unity Audio Listener at a useful listening position; this event is fully spatial. Keep a manager active for the lifetime of the sounds you want to hear.
+For several reusable events, use a library as described in <a href={sitePath('guides/setup-and-keys/')}>Managers, libraries, and keys</a>.
 
-`SoundManager` initializes early, but preparation begins in `Start`. A registered request can be accepted as `Queued` while clips prepare. Without a manager, the bus returns `NoManager` and does not keep the request for later.
+## 3. Generate the names used by code
 
-## 3. Generate the identifiers
+Run **Tools → DEV505 → Sound Manager → Generate Sound Keys**. Wait for Unity to finish compiling.
 
-Run **Tools → DEV505 → Sound Manager → Generate Sound Keys** after creating or renaming events and parameters.
+This creates `Sounds.cs` and `SoundParameters.cs` in `Assets/DEV505/SoundManager.Generated`. `Sounds.Campfire` gives your script a checked name for the event. Generating a name does not register the event; the previous step does that.
 
-The current project generates `Sounds.Campfire` and `SoundParameters.Campfire.Intensity`. These are your project's identifiers, not names built into every installation. Keep generated code visible to the assembly containing your gameplay scripts. If using your own assembly definitions, reference the runtime assembly and the assembly containing those generated files.
+If you use assembly definition files to divide your C# code into separate assemblies, add references to **DEV505.SoundManager.Runtime** and **DEV505.SoundManager.Generated** in your gameplay assembly. If you have not created an assembly definition, you can use the script below without this extra step.
 
-```csharp title="Namespace used by the examples"
-using DEV505.SoundManager;
-using UnityEngine;
-```
+## 4. Add this script to an object
 
-## 4. Play, then keep the handle
+1. Create an `Assets/Scripts` folder if you do not already have one.
+2. Create a C# MonoBehaviour script there named **FirstSound.cs**. Open it, replace its contents with the code below, and save it. The filename must match the class name `FirstSound`.
+3. Return to Unity and wait for compilation. Create an empty GameObject named `Fire sound` with **Position** `0, 0, 0`.
+4. Drag `FirstSound.cs` onto `Fire sound` in the Hierarchy. There are no Inspector references to assign on this script.
 
-This excerpt belongs inside a component method; `fire` is a `SoundHandle` field.
+<Code code={firstSound} lang="csharp" title="FirstSound.cs · complete component" />
 
-```csharp title="Start a followed, owned sound"
-var result = SoundBus.Play(Sounds.Campfire, transform);
-if (!result.Accepted)
-{
-    Debug.LogWarning($"Campfire did not start: {result.Status}.", this);
-    return;
-}
+## 5. Listen, stop, and start again
 
-fire = result.Handle;
-```
+Press **Play**. You should hear the ignition followed by crackling. Select `Fire sound`, open the **First Sound** component's menu at its top right, and choose **Stop sound**. The crackle fades and the extinguish sound finishes. Choose **Play sound** from the same menu to start again.
 
-Passing `transform` makes the sound follow it and uses its **GameObject** as the owner. `Accepted` includes a request admitted as `Queued`; it does not guarantee a voice was already audible when the call returned.
+`Start()` is a Unity method called when this component first starts running. It calls `PlaySound()` once. `transform` is the component that stores this object's position; passing it makes the sound move with the object.
 
-```csharp title="Stop the same play later"
-SoundBus.Stop(fire, fade: 0.15f);
-fire = default;
-```
+`result.Accepted` tells you the manager admitted the request. `fire` stores its **handle**, a value used to control that particular play later. `SoundBus.IsAlive(fire)` prevents another loop from starting while this one is still active. `OnDisable()` runs when the component is disabled and asks the sound to stop.
 
-Stopping lets the graph run `On Stop`. In Campfire, explicit Stop connections use the ignition and crackle nodes' authored fade-out values and a separate node plays the extinguish cue. The call's fade is the fallback for existing voices not already stopped by that branch.
-
-Use the <a href={sitePath('recipes/campfire-loop/')}>complete CampfireSound component</a> for a copyable example with repeated-start protection and cleanup. It has public methods that can be wired to UI buttons; it does not require a particular input package.
-
-## 5. Make a graph of your own
-
-Create **Assets → Create → DEV505 → Sound Manager → Sound Event Graph**. A new graph includes `On Start`. Add a `Wave Asset` with a clip and a `Play Audio` node. Connect the wave's **Asset** to **Audio Source**, and `On Start` **Out** to `Play Audio` **Play**. Save the graph, register the imported event on your manager, then regenerate keys.
-
-For a fire-like loop, use the existing <a href={sitePath('demos/01-campfire/#read-the-graph')}>Campfire graph</a> as the next step: its ignition's **Finished** output starts the loop, and `On Stop` handles the ending.
+The script clears its saved handle after asking for a stop. You may still hear the ending. The sound graph controls that ending, including its own fades.
 
 ## If you hear nothing
 
-| Check                 | What to look for                                                                                                                                                                          |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `result.Status`       | `NoManager`: no active service. `NotRegistered`: no matching event/key. Other results are described in the <a href={sitePath('api/sound-bus/#results-and-rejections')}>API reference</a>. |
-| Manager Inspector     | Registration diagnostics and readiness. An invalid graph must be fixed before it can play.                                                                                                |
-| Listener and distance | Campfire is 3D, with min/max distances of 2/20 world units. A listener far away may hear very little.                                                                                     |
-| Game View audio       | Check the Editor's mute control, output/mixer levels, and whether the game or play is paused.                                                                                             |
-| Generated keys        | Regenerate after changing names; registration still needs the actual event or library.                                                                                                    |
+Open the Console and check the message from the script first.
 
-<a href={sourceLink('Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundManager.cs')}>
-  Read the manager's setup and lifecycle source ↗
-</a>
+| What you see or hear | What to do |
+| --- | --- |
+| `NoManager` | Make sure the Sound Manager object and component are enabled in the running scene. |
+| `NotRegistered` | Add Campfire to **Direct events**, check **Event keys**, then stop and restart Play Mode. |
+| `Sounds` or `Campfire` does not exist in code | Generate Sound Keys. Check the sample is imported and any assembly references are set. |
+| Graph error or `InvalidEvent` | Select the graph asset and read its diagnostic. Use the supplied Campfire graph unchanged for this first test. |
+| No error, but silence | Check the Game view's audio mute button, computer volume, the enabled camera Audio Listener, and the camera/fire positions above. |
+| Sound starts later than expected | A request may be accepted as `Queued` while clips load. Check the manager's readiness and <a href={sitePath('guides/results-and-limits/')}>playback results</a> if it never starts. |
+| Two copies of the same fire | Use this test in its own scene. Do not add it beside the demo's existing fire controller. |
+
+Next, learn <a href={sitePath('guides/events-plays-voices/')}>what happens when you play a sound</a>, or <a href={sitePath('guides/your-first-graph/')}>make your own sound graph</a>.

@@ -4,9 +4,9 @@ A static documentation site styled after the Sound Lab Unity demos. Built with A
 
 ## Current milestone
 
-M1 contains the branded home page, all ten demo summaries, first-sound setup, the complete `SoundBus` reference, a copyable Campfire lifecycle recipe, and the detailed Campfire walkthrough. Its images are actual Unity captures. Detailed guides for demos 02–10 and the broader API/graph reference remain in later milestones.
+M2 completes the beginner setup path, core sound concepts, and everyday API reference. The site now has 27 authored pages, four complete C# examples checked in Unity, and an inventory of 163 public types with 867 member declarations. It retains M1's branded home page, all ten demo summaries, and the detailed Campfire walkthrough with actual Unity captures. Detailed walkthroughs for demos 02–10, the full graph catalogue, and advanced integration reference remain in later milestones.
 
-See [SPEC.md](SPEC.md), [ROADMAP.md](ROADMAP.md), and [the M1 validation report](validation/M1.md).
+See [SPEC.md](SPEC.md), [ROADMAP.md](ROADMAP.md), and [the M2 validation report](validation/M2.md). The earlier [M1 report](validation/M1.md) records the original capture work. M2 is validated locally; the last recorded Pages publication is M1.
 
 ## Run locally
 
@@ -40,20 +40,24 @@ npm run build
 npm run test:browser
 ```
 
-The browser checks exercise the production site: navigation, ten-card gallery, direct nested routes, images, keyboard dismissal/focus restoration, Pagefind search, C# copy, and 390/320 px layouts. Screenshots and the test report go to `validation/`; test failure artifacts are ignored. The configured preview starts automatically when no server already runs on port 4321. Stop an older preview first if its root belongs to another project.
+The eight browser checks exercise the production site: navigation, ten-card gallery, direct nested routes, images, keyboard dismissal/focus restoration, Pagefind search, exact copying of all four complete C# examples, source-derived API signatures, and 390/320 px layouts. Screenshots and the test report go to `validation/`; test failure artifacts are ignored. The configured preview starts automatically when no server already runs on port 4321. Stop an older preview first if its root belongs to another project.
 
 ## Content and source tracking
+
+Write for someone new to Unity, using clear, natural English. Explain unfamiliar terms, show exactly where to click and where code belongs, and describe what the reader should see or hear. Follow the [writing requirements in the specification](SPEC.md#writing-for-someone-new-to-unity--required-in-every-stage) for every stage, including revisions to existing pages. Keep API names and behavior precise while explaining them in ordinary language.
 
 Pages are Markdown/MDX under `src/content/docs/`. Their schema requires a content kind, source revision, and source paths; demo metadata also includes a scene, keys, and screenshot IDs. All authored route links should use `sitePath()` from `src/lib/links.ts` in MDX/components. It respects the Pages repository subpath.
 
 - `content-data/source-baseline.json`: documented Unity source revision and audit scope.
-- `content-data/api-coverage.json`: public member coverage; M1 accounts for every `SoundBus` method/overload and its notification property.
+- `content-data/public-api-inventory.json`: source-derived public declarations, source paths, and file hashes; partial declarations remain separate here.
+- `content-data/api-coverage.json`: combined public type inventory and per-member coverage. Everyday, generated, advanced, and infrastructure types have explicit scope and reasons. The build checks every documented target page and anchor.
 - `content-data/demos.json`: exact titles, feature summaries, and guide availability for all ten demos.
 - `content-data/captures.json`: Unity image provenance, states, dimensions, reproduction steps, and hashes.
-- `examples/CampfireSound.cs`: the complete checked example. The recipe imports this file directly instead of duplicating it in a Markdown fence.
-- `validation/campfire-example.json`: Unity compilation/behavior evidence and the example hash.
+- `examples/*.cs`: the four complete components. Pages import these files directly instead of duplicating them in Markdown fences.
+- `validation/examples.json`: source revision, compilation results, file hashes, and runtime evidence for every complete example. Content checks reject changed examples until their verification records are updated.
+- `validation/campfire-example.json` and `validation/m2-unity-runtime.json`: actual Unity behavior results.
 
-Short API snippets are explicitly labeled excerpts and state their surrounding assumptions. Their contract review is separate from the complete component's compilation/runtime proof.
+Short API snippets are explicitly labeled excerpts and state their surrounding assumptions. Their contract review is separate from the complete components' compilation/runtime proof. API member blocks are rendered from the inventory through `ApiSignatures.astro`, keeping declared signatures consistent across pages.
 
 Do not use historical README statements as the sole source for current behavior. In particular, the Campfire graph's explicit Stop connections use the nodes' authored fade-outs; the API fade applies to remaining existing voices. The site describes the runtime implementation rather than repeating the sample's older broad fade comment.
 
@@ -63,11 +67,15 @@ Original PNGs live in `media-source/unity/` and are excluded from the published 
 
 M1 reads the composed Game View render surface at 1920 × 1080 so the HUD is included. The home hero is a second real capture with only the runtime HUD temporarily hidden. The graph uses its own Unity GUI render surface at 3456 × 2008; this avoids capturing unrelated desktop windows. Metal's texture-row orientation is normalized during capture.
 
-The `.cs.txt` files in `validation/` record the actual temporary Unity scripts used for capture/restoration and testing. They are audit/support files outside `Assets`, not production Unity components. Capture scripts currently retain the original workstation paths; adapt those explicit output paths to your machine before reuse. Do not run the setup/restoration scripts blindly against someone else's open scene.
+The capture and runtime-test `.cs.txt` files in `validation/` record the temporary Unity scripts used for this work. They stay outside `Assets`. Capture scripts currently retain the original workstation paths; adapt those explicit output paths to your machine before reuse. Do not run the setup/restoration scripts blindly against someone else's open scene. `InventoryPublicApi.cs.txt` is a separate .NET/Roslyn helper, not a Unity script.
 
 To revalidate the complete C# example, combine `examples/CampfireSound.cs` with `validation/VerifyCampfireExample.cs.txt` in a temporary `.cs` file outside Unity `Assets`, then run its `VerifyCampfireExample.Main` entry with the connected Editor's `run_script` command. The active Campfire scene must be in Play Mode with its manager ready and the scene fire stopped. This creates and removes one temporary test GameObject. Record the returned checks, source revision, and SHA-256 of the example in the validation JSON. The website content check rejects a changed example until that proof is updated.
 
 Preserve unsaved scene work, record temporary Game View/background settings, and restore them after capture. Never write `.unity`/`.asset` files by hand for this documentation process.
+
+For M2, combine the four files in `examples/` with `validation/VerifyM2Examples.cs.txt`, hoisting their `using` directives to the top and adding `using System.Linq;`. Call `VerifyM2Examples.Main(outputPath)` through the connected Editor's `run_script` command with Campfire open, ready, and in Play Mode. The harness temporarily registers Bee, Engine, and Footstep, creates test objects and in-memory event fixtures, then removes them in its cleanup block. It does not save scene or asset changes. Record compilation diagnostics and all example hashes as well as the runtime report. Campfire's unchanged component retains its M1 behavior evidence and is recompiled with M2.
+
+To rebuild the public inventory, use `validation/InventoryPublicApi.cs.txt` in a small .NET console project with references to the SDK's `Microsoft.CodeAnalysis.dll` and `Microsoft.CodeAnalysis.CSharp.dll` under `Roslyn/bincore`. Run from the Unity project root and call `InventoryPublicApi.Main(outputPath)`. The recorded audit used .NET 9. Update the source revision literal when changing baselines. Review newly found types and members in `api-coverage.json`; do not automatically mark them documented. This helper is separate from the website build, which uses the committed JSON and needs no Unity or .NET installation.
 
 ## GitHub Pages configuration
 

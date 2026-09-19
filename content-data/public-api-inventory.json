@@ -1,0 +1,5672 @@
+{
+  "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
+  "method": "Roslyn syntax inventory of explicitly public runtime, editor, and generated declarations; private enclosing types and inherited Unity/System members excluded.",
+  "declarations": [
+    {
+      "name": "SoundParameters",
+      "source": "Assets/DEV505/SoundManager.Generated/SoundParameters.cs",
+      "sourceSha256": "089a23838010a3d7f1ab04073ab8925bfa896c5c1a12b93e04488ea711b98886",
+      "kind": "ClassDeclaration",
+      "members": []
+    },
+    {
+      "name": "SoundParameters.Bee",
+      "source": "Assets/DEV505/SoundManager.Generated/SoundParameters.cs",
+      "sourceSha256": "089a23838010a3d7f1ab04073ab8925bfa896c5c1a12b93e04488ea711b98886",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "WingSpeed",
+          "signature": "public static readonly SoundParameterId WingSpeed",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundParameters.Campfire",
+      "source": "Assets/DEV505/SoundManager.Generated/SoundParameters.cs",
+      "sourceSha256": "089a23838010a3d7f1ab04073ab8925bfa896c5c1a12b93e04488ea711b98886",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Intensity",
+          "signature": "public static readonly SoundParameterId Intensity",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundParameters.Engine",
+      "source": "Assets/DEV505/SoundManager.Generated/SoundParameters.cs",
+      "sourceSha256": "089a23838010a3d7f1ab04073ab8925bfa896c5c1a12b93e04488ea711b98886",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Rpm",
+          "signature": "public static readonly SoundParameterId Rpm",
+          "kind": "field"
+        },
+        {
+          "name": "Load",
+          "signature": "public static readonly SoundParameterId Load",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundParameters.Footstep",
+      "source": "Assets/DEV505/SoundManager.Generated/SoundParameters.cs",
+      "sourceSha256": "089a23838010a3d7f1ab04073ab8925bfa896c5c1a12b93e04488ea711b98886",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Surface",
+          "signature": "public static readonly SoundParameterId Surface",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundParameters.Jukebox",
+      "source": "Assets/DEV505/SoundManager.Generated/SoundParameters.cs",
+      "sourceSha256": "089a23838010a3d7f1ab04073ab8925bfa896c5c1a12b93e04488ea711b98886",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Track",
+          "signature": "public static readonly SoundParameterId Track",
+          "kind": "field"
+        },
+        {
+          "name": "Gain",
+          "signature": "public static readonly SoundParameterId Gain",
+          "kind": "field"
+        },
+        {
+          "name": "Volume",
+          "signature": "public static readonly SoundParameterId Volume",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundParameters.LaunchFlight",
+      "source": "Assets/DEV505/SoundManager.Generated/SoundParameters.cs",
+      "sourceSha256": "089a23838010a3d7f1ab04073ab8925bfa896c5c1a12b93e04488ea711b98886",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Thrust",
+          "signature": "public static readonly SoundParameterId Thrust",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundParameters.LaunchPad",
+      "source": "Assets/DEV505/SoundManager.Generated/SoundParameters.cs",
+      "sourceSha256": "089a23838010a3d7f1ab04073ab8925bfa896c5c1a12b93e04488ea711b98886",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Power",
+          "signature": "public static readonly SoundParameterId Power",
+          "kind": "field"
+        },
+        {
+          "name": "Pressure",
+          "signature": "public static readonly SoundParameterId Pressure",
+          "kind": "field"
+        },
+        {
+          "name": "Release",
+          "signature": "public static readonly SoundParameterId Release",
+          "kind": "field"
+        },
+        {
+          "name": "ReleaseGain",
+          "signature": "public static readonly SoundParameterId ReleaseGain",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundParameters.LaunchSequence",
+      "source": "Assets/DEV505/SoundManager.Generated/SoundParameters.cs",
+      "sourceSha256": "089a23838010a3d7f1ab04073ab8925bfa896c5c1a12b93e04488ea711b98886",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Power",
+          "signature": "public static readonly SoundParameterId Power",
+          "kind": "field"
+        },
+        {
+          "name": "Pressure",
+          "signature": "public static readonly SoundParameterId Pressure",
+          "kind": "field"
+        },
+        {
+          "name": "ClampsOpen",
+          "signature": "public static readonly SoundParameterId ClampsOpen",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundParameters.PortalWorld",
+      "source": "Assets/DEV505/SoundManager.Generated/SoundParameters.cs",
+      "sourceSha256": "089a23838010a3d7f1ab04073ab8925bfa896c5c1a12b93e04488ea711b98886",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Ambience",
+          "signature": "public static readonly SoundParameterId Ambience",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundParameters.Weather",
+      "source": "Assets/DEV505/SoundManager.Generated/SoundParameters.cs",
+      "sourceSha256": "089a23838010a3d7f1ab04073ab8925bfa896c5c1a12b93e04488ea711b98886",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Rain",
+          "signature": "public static readonly SoundParameterId Rain",
+          "kind": "field"
+        },
+        {
+          "name": "Wind",
+          "signature": "public static readonly SoundParameterId Wind",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundParameters.Workshop",
+      "source": "Assets/DEV505/SoundManager.Generated/SoundParameters.cs",
+      "sourceSha256": "089a23838010a3d7f1ab04073ab8925bfa896c5c1a12b93e04488ea711b98886",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Tool",
+          "signature": "public static readonly SoundParameterId Tool",
+          "kind": "field"
+        },
+        {
+          "name": "Pace",
+          "signature": "public static readonly SoundParameterId Pace",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "Sounds",
+      "source": "Assets/DEV505/SoundManager.Generated/Sounds.cs",
+      "sourceSha256": "55c59411a5d2fc54b26f2c91fac1c1ed75b2ed567dbe51cb30c57d06d83233aa",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "ArcadeCoin",
+          "signature": "public static readonly SoundKey ArcadeCoin",
+          "kind": "field"
+        },
+        {
+          "name": "ArcadeJackpot",
+          "signature": "public static readonly SoundKey ArcadeJackpot",
+          "kind": "field"
+        },
+        {
+          "name": "ArcadeZap",
+          "signature": "public static readonly SoundKey ArcadeZap",
+          "kind": "field"
+        },
+        {
+          "name": "Bee",
+          "signature": "public static readonly SoundKey Bee",
+          "kind": "field"
+        },
+        {
+          "name": "Campfire",
+          "signature": "public static readonly SoundKey Campfire",
+          "kind": "field"
+        },
+        {
+          "name": "Engine",
+          "signature": "public static readonly SoundKey Engine",
+          "kind": "field"
+        },
+        {
+          "name": "Footstep",
+          "signature": "public static readonly SoundKey Footstep",
+          "kind": "field"
+        },
+        {
+          "name": "Jukebox",
+          "signature": "public static readonly SoundKey Jukebox",
+          "kind": "field"
+        },
+        {
+          "name": "LaunchClamp",
+          "signature": "public static readonly SoundKey LaunchClamp",
+          "kind": "field"
+        },
+        {
+          "name": "LaunchFlight",
+          "signature": "public static readonly SoundKey LaunchFlight",
+          "kind": "field"
+        },
+        {
+          "name": "LaunchPad",
+          "signature": "public static readonly SoundKey LaunchPad",
+          "kind": "field"
+        },
+        {
+          "name": "LaunchSequence",
+          "signature": "public static readonly SoundKey LaunchSequence",
+          "kind": "field"
+        },
+        {
+          "name": "LaunchUI",
+          "signature": "public static readonly SoundKey LaunchUI",
+          "kind": "field"
+        },
+        {
+          "name": "LaunchVent",
+          "signature": "public static readonly SoundKey LaunchVent",
+          "kind": "field"
+        },
+        {
+          "name": "PortalArrival",
+          "signature": "public static readonly SoundKey PortalArrival",
+          "kind": "field"
+        },
+        {
+          "name": "PortalCut",
+          "signature": "public static readonly SoundKey PortalCut",
+          "kind": "field"
+        },
+        {
+          "name": "PortalEcho",
+          "signature": "public static readonly SoundKey PortalEcho",
+          "kind": "field"
+        },
+        {
+          "name": "PortalHum",
+          "signature": "public static readonly SoundKey PortalHum",
+          "kind": "field"
+        },
+        {
+          "name": "PortalWorld",
+          "signature": "public static readonly SoundKey PortalWorld",
+          "kind": "field"
+        },
+        {
+          "name": "Thunder",
+          "signature": "public static readonly SoundKey Thunder",
+          "kind": "field"
+        },
+        {
+          "name": "Weather",
+          "signature": "public static readonly SoundKey Weather",
+          "kind": "field"
+        },
+        {
+          "name": "Workshop",
+          "signature": "public static readonly SoundKey Workshop",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "PcmWaveProcessor",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/AudioProcessing/PcmWaveProcessor.cs",
+      "sourceSha256": "5fd3c1a1b071b0bd9a46dffca52e3fa4cdcc6e0d1004a5bc7dfd2af7857bc87c",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Read",
+          "signature": "public static Pcm Read(string path)",
+          "kind": "method"
+        },
+        {
+          "name": "Trim",
+          "signature": "public static Pcm Trim(Pcm source, int startFrame, int frameCount)",
+          "kind": "method"
+        },
+        {
+          "name": "Reverse",
+          "signature": "public static void Reverse(Pcm pcm)",
+          "kind": "method"
+        },
+        {
+          "name": "Gain",
+          "signature": "public static void Gain(Pcm pcm, float db)",
+          "kind": "method"
+        },
+        {
+          "name": "Fade",
+          "signature": "public static void Fade(Pcm pcm, int fadeInFrames, int fadeOutFrames)",
+          "kind": "method"
+        },
+        {
+          "name": "Normalize",
+          "signature": "public static void Normalize(Pcm pcm, float targetDb)",
+          "kind": "method"
+        },
+        {
+          "name": "Write",
+          "signature": "public static void Write(string path, Pcm pcm)",
+          "kind": "method"
+        },
+        {
+          "name": "WriteFloat",
+          "signature": "public static void WriteFloat(string path, Pcm pcm)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "PcmWaveProcessor.Pcm",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/AudioProcessing/PcmWaveProcessor.cs",
+      "sourceSha256": "5fd3c1a1b071b0bd9a46dffca52e3fa4cdcc6e0d1004a5bc7dfd2af7857bc87c",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "samples",
+          "signature": "public readonly float[] samples",
+          "kind": "field"
+        },
+        {
+          "name": "channels",
+          "signature": "public readonly int channels",
+          "kind": "field"
+        },
+        {
+          "name": "rate",
+          "signature": "public readonly int rate",
+          "kind": "field"
+        },
+        {
+          "name": "Frames",
+          "signature": "public int Frames { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Pcm",
+          "signature": "public Pcm(float[] samples, int channels, int rate)",
+          "kind": "constructor"
+        }
+      ]
+    },
+    {
+      "name": "SoundClipTrims",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/AudioProcessing/SoundClipTrims.cs",
+      "sourceSha256": "c5afe7c9de6d0792a276a11ed3441dac23f0e523cf500bba7f97215d1a5c5072",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Folder",
+          "signature": "public const string Folder",
+          "kind": "field"
+        },
+        {
+          "name": "IsTrimmed",
+          "signature": "public static bool IsTrimmed(float start, float length)",
+          "kind": "method"
+        },
+        {
+          "name": "TryGetFrames",
+          "signature": "public static bool TryGetFrames(AudioClip clip, double start, double length, out int first, out int count, out string error)",
+          "kind": "method"
+        },
+        {
+          "name": "DerivedPath",
+          "signature": "public static string DerivedPath(AudioClip source, int first, int count)",
+          "kind": "method"
+        },
+        {
+          "name": "Resolve",
+          "signature": "public static AudioClip Resolve(AudioClip source, float start, float length, bool allowWrite, string reimportPath, out string error)",
+          "kind": "method"
+        },
+        {
+          "name": "DeleteUnused",
+          "signature": "public static int DeleteUnused()",
+          "kind": "method"
+        },
+        {
+          "name": "TryDecode",
+          "signature": "public static bool TryDecode(AudioClip clip, out PcmWaveProcessor.Pcm pcm, out string error)",
+          "kind": "method"
+        },
+        {
+          "name": "TryGetPeaks",
+          "signature": "public static bool TryGetPeaks(AudioClip clip, out float[] peaks, out double seconds, out string error)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundKeyConstants",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Codegen/SoundKeyConstants.cs",
+      "sourceSha256": "f33883c104d8ef7b01272a06ec121ca23c67bf7ca919b6dd28d3bc5c0421aeb2",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Folder",
+          "signature": "public const string Folder",
+          "kind": "field"
+        },
+        {
+          "name": "FilePath",
+          "signature": "public const string FilePath",
+          "kind": "field"
+        },
+        {
+          "name": "ParametersFilePath",
+          "signature": "public const string ParametersFilePath",
+          "kind": "field"
+        },
+        {
+          "name": "Generate",
+          "signature": "public static void Generate()",
+          "kind": "method"
+        },
+        {
+          "name": "CollectKeys",
+          "signature": "public static List<(SoundKey key, string asset)> CollectKeys()",
+          "kind": "method"
+        },
+        {
+          "name": "CollectKeys",
+          "signature": "public static List<(SoundKey key, string asset)> CollectKeys(SoundEvent[] events, SoundLibrary[] libraries)",
+          "kind": "method"
+        },
+        {
+          "name": "CollectEntries",
+          "signature": "public static List<SoundCatalogueEntry> CollectEntries()",
+          "kind": "method"
+        },
+        {
+          "name": "Write",
+          "signature": "public static bool Write(List<SoundCatalogueEntry> entries)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundGraphCompiler",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Compilation/SoundGraphCompiler.cs",
+      "sourceSha256": "eb6d7470db1df2a09ef372f0b55af435805a6fc6fe2185bfa51b320a5ea8bd81",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Option",
+          "signature": "public static T Option<T>(INode node, string name)",
+          "kind": "method"
+        },
+        {
+          "name": "SettingsOf",
+          "signature": "public static SoundEventSettings SettingsOf(SoundGraph graph)",
+          "kind": "method"
+        },
+        {
+          "name": "Validate",
+          "signature": "public static List<(INode node, string message)> Validate(SoundGraph graph)",
+          "kind": "method"
+        },
+        {
+          "name": "SignalName",
+          "signature": "public static string SignalName(INode node)",
+          "kind": "method"
+        },
+        {
+          "name": "Parameter",
+          "signature": "public static SoundParameterRecord Parameter(INode node, SoundOperation operation)",
+          "kind": "method"
+        },
+        {
+          "name": "Compile",
+          "signature": "public static SoundEvent Compile(SoundGraph graph, string assetGuid, bool importing = false, SoundEventSettings settings = null)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundGraphImporter",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Compilation/SoundGraphImporter.cs",
+      "sourceSha256": "022ca36d2ea516bd1b74c78b36f343c3a3e709b6b4643e9521daf7d38380b690",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "MainObjectIdentifier",
+          "signature": "public const string MainObjectIdentifier",
+          "kind": "field"
+        },
+        {
+          "name": "Settings",
+          "signature": "public SoundEventSettings Settings { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "ApplySettings",
+          "signature": "public static void ApplySettings(string graphPath, SoundEventSettings settings)",
+          "kind": "method"
+        },
+        {
+          "name": "OnImportAsset",
+          "signature": "public override void OnImportAsset(AssetImportContext context)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundGraphBuildValidation",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Compilation/SoundGraphImporter.cs",
+      "sourceSha256": "022ca36d2ea516bd1b74c78b36f343c3a3e709b6b4643e9521daf7d38380b690",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "callbackOrder",
+          "signature": "public int callbackOrder { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "OnPreprocessBuild",
+          "signature": "public void OnPreprocessBuild(BuildReport report)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundGraph",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs",
+      "sourceSha256": "833d62326d5e241b744b3f27c0374b34bde3f07b6a95cb8db1048fe70c4e12e9",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Extension",
+          "signature": "public const string Extension",
+          "kind": "field"
+        },
+        {
+          "name": "EventSettings",
+          "signature": "public SoundEventSettings EventSettings { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "ChangeVersion",
+          "signature": "public int ChangeVersion { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "OnGraphChanged",
+          "signature": "public override void OnGraphChanged(GraphLogger logger)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "OnStartNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs",
+      "sourceSha256": "833d62326d5e241b744b3f27c0374b34bde3f07b6a95cb8db1048fe70c4e12e9",
+      "kind": "ClassDeclaration",
+      "members": []
+    },
+    {
+      "name": "OnSignalNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs",
+      "sourceSha256": "833d62326d5e241b744b3f27c0374b34bde3f07b6a95cb8db1048fe70c4e12e9",
+      "kind": "ClassDeclaration",
+      "members": []
+    },
+    {
+      "name": "WaveAssetNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs",
+      "sourceSha256": "833d62326d5e241b744b3f27c0374b34bde3f07b6a95cb8db1048fe70c4e12e9",
+      "kind": "ClassDeclaration",
+      "members": []
+    },
+    {
+      "name": "PlayAudioNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs",
+      "sourceSha256": "833d62326d5e241b744b3f27c0374b34bde3f07b6a95cb8db1048fe70c4e12e9",
+      "kind": "ClassDeclaration",
+      "members": []
+    },
+    {
+      "name": "OnStopNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs",
+      "sourceSha256": "833d62326d5e241b744b3f27c0374b34bde3f07b6a95cb8db1048fe70c4e12e9",
+      "kind": "ClassDeclaration",
+      "members": []
+    },
+    {
+      "name": "EndEventNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs",
+      "sourceSha256": "833d62326d5e241b744b3f27c0374b34bde3f07b6a95cb8db1048fe70c4e12e9",
+      "kind": "ClassDeclaration",
+      "members": []
+    },
+    {
+      "name": "FloatParameterNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs",
+      "sourceSha256": "833d62326d5e241b744b3f27c0374b34bde3f07b6a95cb8db1048fe70c4e12e9",
+      "kind": "ClassDeclaration",
+      "members": []
+    },
+    {
+      "name": "FloatNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs",
+      "sourceSha256": "833d62326d5e241b744b3f27c0374b34bde3f07b6a95cb8db1048fe70c4e12e9",
+      "kind": "ClassDeclaration",
+      "members": []
+    },
+    {
+      "name": "BoolNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs",
+      "sourceSha256": "833d62326d5e241b744b3f27c0374b34bde3f07b6a95cb8db1048fe70c4e12e9",
+      "kind": "ClassDeclaration",
+      "members": []
+    },
+    {
+      "name": "RandomFloatNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs",
+      "sourceSha256": "833d62326d5e241b744b3f27c0374b34bde3f07b6a95cb8db1048fe70c4e12e9",
+      "kind": "ClassDeclaration",
+      "members": []
+    },
+    {
+      "name": "RandomClipNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs",
+      "sourceSha256": "833d62326d5e241b744b3f27c0374b34bde3f07b6a95cb8db1048fe70c4e12e9",
+      "kind": "ClassDeclaration",
+      "members": []
+    },
+    {
+      "name": "SoundGraphCreation",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraphCreation.cs",
+      "sourceSha256": "ffb3b225b7c630a5d9897864b870c507d5a6e6e9e63a7b37e5e18cd094b762f0",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Action",
+          "signature": "public override void Action(EntityId entityId, string pathName, string resourceFile)",
+          "kind": "method"
+        },
+        {
+          "name": "Create",
+          "signature": "public static void Create(string path)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundGraphTemplate",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraphTemplates.cs",
+      "sourceSha256": "bc1b697c61ff98e17f3d35fe6fc1de7cced16b0152bc3455a5889253c335aad0",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "OneShot",
+          "signature": "OneShot",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Footsteps",
+          "signature": "Footsteps",
+          "kind": "enum-value"
+        },
+        {
+          "name": "LoopingAmbience",
+          "signature": "LoopingAmbience",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundGraphTemplates",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraphTemplates.cs",
+      "sourceSha256": "bc1b697c61ff98e17f3d35fe6fc1de7cced16b0152bc3455a5889253c335aad0",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "AudioRoot",
+          "signature": "public const string AudioRoot",
+          "kind": "field"
+        },
+        {
+          "name": "ShowMenu",
+          "signature": "public static void ShowMenu()",
+          "kind": "method"
+        },
+        {
+          "name": "Create",
+          "signature": "public static void Create(string path, SoundGraphTemplate template)",
+          "kind": "method"
+        },
+        {
+          "name": "Populate",
+          "signature": "public static void Populate(SoundGraph graph, SoundGraphTemplate template)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundLogicNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public abstract SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "IntParameterNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "BoolParameterNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "AssetParameterNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "IntNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "RandomIntNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "RemapFloatNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "CurveNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "FloatCompareNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "FloatMathNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "MultiplierToSemitonesNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "SemitonesToMultiplierNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "ConvertToFloatNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "ConvertToIntNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "FloatFunctionNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "IntCompareNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "IntFunctionNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "IntOpNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "SelectFloatNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "SelectIntNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "SmoothstepFloatNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "SelectByIndexNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "TrackConditionNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "DelayNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "SequenceNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "BranchNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "BranchByIndexNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "RandomBranchNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "ForLoopNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "RepeatNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "WaitForConditionNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "IdleLoopNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "CounterNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "StopInstanceNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "NotNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "AndNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "OrNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "XorNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "PassthroughNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sourceSha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public override SoundOperation Operation { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "SoundNodeStyle",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundNodeStyle.cs",
+      "sourceSha256": "3adcdd8eaaa9074f929dba979505b40b4cad6ce6ed0b81ef9dbac560f488fbf0",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Events",
+          "signature": "public const string Events",
+          "kind": "field"
+        },
+        {
+          "name": "EventsIcon",
+          "signature": "public const string EventsIcon",
+          "kind": "field"
+        },
+        {
+          "name": "Sources",
+          "signature": "public const string Sources",
+          "kind": "field"
+        },
+        {
+          "name": "SourcesIcon",
+          "signature": "public const string SourcesIcon",
+          "kind": "field"
+        },
+        {
+          "name": "Playback",
+          "signature": "public const string Playback",
+          "kind": "field"
+        },
+        {
+          "name": "PlaybackIcon",
+          "signature": "public const string PlaybackIcon",
+          "kind": "field"
+        },
+        {
+          "name": "Parameters",
+          "signature": "public const string Parameters",
+          "kind": "field"
+        },
+        {
+          "name": "ParametersIcon",
+          "signature": "public const string ParametersIcon",
+          "kind": "field"
+        },
+        {
+          "name": "Values",
+          "signature": "public const string Values",
+          "kind": "field"
+        },
+        {
+          "name": "ValuesIcon",
+          "signature": "public const string ValuesIcon",
+          "kind": "field"
+        },
+        {
+          "name": "Random",
+          "signature": "public const string Random",
+          "kind": "field"
+        },
+        {
+          "name": "RandomIcon",
+          "signature": "public const string RandomIcon",
+          "kind": "field"
+        },
+        {
+          "name": "Logic",
+          "signature": "public const string Logic",
+          "kind": "field"
+        },
+        {
+          "name": "LogicIcon",
+          "signature": "public const string LogicIcon",
+          "kind": "field"
+        },
+        {
+          "name": "CategoryColors",
+          "signature": "public static IReadOnlyDictionary<string, Color> CategoryColors { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "CategoryColor",
+          "signature": "public static Color CategoryColor(string category)",
+          "kind": "method"
+        },
+        {
+          "name": "ColorOf",
+          "signature": "public static Color ColorOf(Type nodeType)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundNode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundNodeStyle.cs",
+      "sourceSha256": "3adcdd8eaaa9074f929dba979505b40b4cad6ce6ed0b81ef9dbac560f488fbf0",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "OnEnable",
+          "signature": "public override void OnEnable()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundPreviewTarget",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Preview/SoundGraphPreview.cs",
+      "sourceSha256": "788101191ba8357fbc265f208e1a16475b5a95b41068feff095e07513df772d7",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Handle",
+          "signature": "public SoundHandle Handle { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Definition",
+          "signature": "public CompiledSoundEvent Definition { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "StartedAt",
+          "signature": "public double StartedAt { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "EndedAt",
+          "signature": "public double EndedAt { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "State",
+          "signature": "public string State { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Parameters",
+          "signature": "public Dictionary<string, float> Parameters { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "TypedParameters",
+          "signature": "public Dictionary<string, SoundValue> TypedParameters { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Elapsed",
+          "signature": "public double Elapsed { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Label",
+          "signature": "public string Label { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "SoundGraphPreview",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Preview/SoundGraphPreview.cs",
+      "sourceSha256": "788101191ba8357fbc265f208e1a16475b5a95b41068feff095e07513df772d7",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Service",
+          "signature": "public SoundService Service { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "History",
+          "signature": "public SoundPreviewHistory History { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Targets",
+          "signature": "public IReadOnlyList<SoundPreviewTarget> Targets { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Selected",
+          "signature": "public SoundPreviewTarget Selected { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "IsDisposed",
+          "signature": "public bool IsDisposed { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "AudioPlaying",
+          "signature": "public bool AudioPlaying { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "IsAlive",
+          "signature": "public bool IsAlive { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "SelectedVoices",
+          "signature": "public int SelectedVoices { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "CurrentRevision",
+          "signature": "public string CurrentRevision { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Diagnostic",
+          "signature": "public string Diagnostic { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "RevisionMatches",
+          "signature": "public bool RevisionMatches { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "TraceEnabled",
+          "signature": "public bool TraceEnabled { get; set; }",
+          "kind": "property"
+        },
+        {
+          "name": "Frozen",
+          "signature": "public bool Frozen { get; set; }",
+          "kind": "property"
+        },
+        {
+          "name": "ReducedMotion",
+          "signature": "public bool ReducedMotion { get; set; }",
+          "kind": "property"
+        },
+        {
+          "name": "Status",
+          "signature": "public string Status { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "SoundGraphPreview",
+          "signature": "public SoundGraphPreview(SoundGraph graph, bool visualize = false)",
+          "kind": "constructor"
+        },
+        {
+          "name": "RefreshRevision",
+          "signature": "public void RefreshRevision()",
+          "kind": "method"
+        },
+        {
+          "name": "Play",
+          "signature": "public SoundPlayResult Play(uint seed = 0, SoundFloatOverride[] parameters = null, bool addInstance = false, SoundParameterOverride[] typedParameters = null)",
+          "kind": "method"
+        },
+        {
+          "name": "Select",
+          "signature": "public void Select(SoundPreviewTarget target)",
+          "kind": "method"
+        },
+        {
+          "name": "SetFloat",
+          "signature": "public bool SetFloat(string parameter, float value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetParameter",
+          "signature": "public bool SetParameter(string parameter, SoundValue value)",
+          "kind": "method"
+        },
+        {
+          "name": "SendSignal",
+          "signature": "public bool SendSignal(string signal)",
+          "kind": "method"
+        },
+        {
+          "name": "Stop",
+          "signature": "public void Stop()",
+          "kind": "method"
+        },
+        {
+          "name": "StopAll",
+          "signature": "public void StopAll()",
+          "kind": "method"
+        },
+        {
+          "name": "StopAllPreviews",
+          "signature": "public static void StopAllPreviews()",
+          "kind": "method"
+        },
+        {
+          "name": "ClearTrace",
+          "signature": "public void ClearTrace()",
+          "kind": "method"
+        },
+        {
+          "name": "Dispose",
+          "signature": "public void Dispose()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundPreviewHistory",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/Preview/SoundPreviewHistory.cs",
+      "sourceSha256": "3e81c0eb6e069648748859cd62c840e22337fa59d1be8c229717c23e2c287afa",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Records",
+          "signature": "public IReadOnlyList<SoundExecutionRecord> Records { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Dropped",
+          "signature": "public long Dropped { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Version",
+          "signature": "public int Version { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Frozen",
+          "signature": "public bool Frozen { get; set; }",
+          "kind": "property"
+        },
+        {
+          "name": "SoundPreviewHistory",
+          "signature": "public SoundPreviewHistory(int capacity = 8192)",
+          "kind": "constructor"
+        },
+        {
+          "name": "Select",
+          "signature": "public void Select(SoundHandle handle, SoundExecutionTrace trace)",
+          "kind": "method"
+        },
+        {
+          "name": "Clear",
+          "signature": "public void Clear(SoundExecutionTrace trace, bool includeRetained = false)",
+          "kind": "method"
+        },
+        {
+          "name": "Read",
+          "signature": "public void Read(SoundExecutionTrace trace, Action<SoundExecutionRecord> observe = null)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundManagerInspector",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundComponentInspectors.cs",
+      "sourceSha256": "5799b3a869617beaf10340d537791a78453f924e2dcd4df8c1e169cf0d1b0966",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "CreateInspectorGUI",
+          "signature": "public override VisualElement CreateInspectorGUI()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundEmitterInspector",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundComponentInspectors.cs",
+      "sourceSha256": "5799b3a869617beaf10340d537791a78453f924e2dcd4df8c1e169cf0d1b0966",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "CreateInspectorGUI",
+          "signature": "public override VisualElement CreateInspectorGUI()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundListenerInspector",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundComponentInspectors.cs",
+      "sourceSha256": "5799b3a869617beaf10340d537791a78453f924e2dcd4df8c1e169cf0d1b0966",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "CreateInspectorGUI",
+          "signature": "public override VisualElement CreateInspectorGUI()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundLibraryInspector",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundComponentInspectors.cs",
+      "sourceSha256": "5799b3a869617beaf10340d537791a78453f924e2dcd4df8c1e169cf0d1b0966",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "CreateInspectorGUI",
+          "signature": "public override VisualElement CreateInspectorGUI()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundEventInspector",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundComponentInspectors.cs",
+      "sourceSha256": "5799b3a869617beaf10340d537791a78453f924e2dcd4df8c1e169cf0d1b0966",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "CreateInspectorGUI",
+          "signature": "public override VisualElement CreateInspectorGUI()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundGraphAuditionOverlay",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundGraphAuditionPanel.cs",
+      "sourceSha256": "63b30300a22182a779d76af43b3ffb3534ac6c0861578d6a6d41dc1170d46f71",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "OverlayId",
+          "signature": "public const string OverlayId",
+          "kind": "field"
+        },
+        {
+          "name": "Transport",
+          "signature": "public SoundGraphTransport Transport { get; set; }",
+          "kind": "property"
+        },
+        {
+          "name": "CreatePanelContent",
+          "signature": "public override VisualElement CreatePanelContent()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundGraphAuditionPanel",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundGraphAuditionPanel.cs",
+      "sourceSha256": "63b30300a22182a779d76af43b3ffb3534ac6c0861578d6a6d41dc1170d46f71",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "SoundGraphAuditionPanel",
+          "signature": "public SoundGraphAuditionPanel(SoundGraphTransport source)",
+          "kind": "constructor"
+        }
+      ]
+    },
+    {
+      "name": "SoundGraphBlackboard",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundGraphBlackboard.cs",
+      "sourceSha256": "7cf12c53dab2155b0cd42c983f707d912fca3c2dcae88cc7961a3c89e201a60c",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "SoundGraphBlackboard",
+          "signature": "public SoundGraphBlackboard(SoundGraph graph)",
+          "kind": "constructor"
+        },
+        {
+          "name": "ApplyDefaults",
+          "signature": "public static void ApplyDefaults(SoundGraph graph, SoundGraphTransport transport)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundGraphClipDrop",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundGraphClipDrop.cs",
+      "sourceSha256": "6c50402e64fd2c1de72e9b54a3764eeafc5c76db41475ff87fae3a434e029a89",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "SoundGraphClipDrop",
+          "signature": "public SoundGraphClipDrop(EditorWindow window)",
+          "kind": "constructor"
+        },
+        {
+          "name": "AddClips",
+          "signature": "public static void AddClips(SoundGraph graph, AudioClip[] clips, Vector2 position)",
+          "kind": "method"
+        },
+        {
+          "name": "Dispose",
+          "signature": "public void Dispose()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundGraphImporterInspector",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundGraphImporterInspector.cs",
+      "sourceSha256": "328ba5402d193848acdb724cf9e571b37defe736ad3f15c9e38ba05ba0c7c468",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "showImportedObject",
+          "signature": "public override bool showImportedObject { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "CreateInspectorGUI",
+          "signature": "public override VisualElement CreateInspectorGUI()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundGraphTransport",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundGraphTransport.cs",
+      "sourceSha256": "a89575d07d04e329953f3116be484d13e01ffee45cb5be8052ab92d0ae2618ac",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "containerWindow",
+          "signature": "public EditorWindow containerWindow { get; set; }",
+          "kind": "property"
+        },
+        {
+          "name": "Preview",
+          "signature": "public SoundGraphPreview Preview { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Graph",
+          "signature": "public SoundGraph Graph { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Overrides",
+          "signature": "public Dictionary<string, float> Overrides { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "TypedOverrides",
+          "signature": "public Dictionary<string, SoundValue> TypedOverrides { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Seed",
+          "signature": "public uint Seed { get; set; }",
+          "kind": "property"
+        },
+        {
+          "name": "Message",
+          "signature": "public string Message { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "CompileStatus",
+          "signature": "public string CompileStatus { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "DefinitionVersion",
+          "signature": "public int DefinitionVersion { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "SoundGraphTransport",
+          "signature": "public SoundGraphTransport()",
+          "kind": "constructor"
+        },
+        {
+          "name": "ShowSettings",
+          "signature": "public void ShowSettings()",
+          "kind": "method"
+        },
+        {
+          "name": "ShowControls",
+          "signature": "public void ShowControls()",
+          "kind": "method"
+        },
+        {
+          "name": "StartPreview",
+          "signature": "public void StartPreview(bool addInstance = false)",
+          "kind": "method"
+        },
+        {
+          "name": "StopAllPreviews",
+          "signature": "public void StopAllPreviews()",
+          "kind": "method"
+        },
+        {
+          "name": "StopPreview",
+          "signature": "public void StopPreview()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundLibraryEntryDrawer",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundLibraryEntryDrawer.cs",
+      "sourceSha256": "85c7bc813b94ecac3af3ca169e4b9e01420d3efeb7dd810b2825e1d7701983ce",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "CreatePropertyGUI",
+          "signature": "public override VisualElement CreatePropertyGUI(SerializedProperty property)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundManagerSettingsInspector",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundManagerSettingsInspector.cs",
+      "sourceSha256": "8c9fcecaecbc040b4104967ad1af5fa4fd02783ab319918e96257b9d11f18570",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "CreateInspectorGUI",
+          "signature": "public override VisualElement CreateInspectorGUI()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundMixerDefaultDrawer",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundManagerSettingsInspector.cs",
+      "sourceSha256": "8c9fcecaecbc040b4104967ad1af5fa4fd02783ab319918e96257b9d11f18570",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "CreatePropertyGUI",
+          "signature": "public override VisualElement CreatePropertyGUI(SerializedProperty property)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundWaveRangeView",
+      "source": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundWaveRange.cs",
+      "sourceSha256": "dab02432008e6271779f33deddfc11cdf96d289673514e567ae2e2b1d79fb3a2",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Shortest",
+          "signature": "public const double Shortest",
+          "kind": "field"
+        },
+        {
+          "name": "Seconds",
+          "signature": "public double Seconds { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Start",
+          "signature": "public double Start { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Length",
+          "signature": "public double Length { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Dragging",
+          "signature": "public bool Dragging { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Changed",
+          "signature": "public event Action Changed",
+          "kind": "event"
+        },
+        {
+          "name": "Committed",
+          "signature": "public event Action Committed",
+          "kind": "event"
+        },
+        {
+          "name": "SoundWaveRangeView",
+          "signature": "public SoundWaveRangeView()",
+          "kind": "constructor"
+        },
+        {
+          "name": "SetAudio",
+          "signature": "public void SetAudio(float[] envelope, double clipSeconds, string status)",
+          "kind": "method"
+        },
+        {
+          "name": "SetRange",
+          "signature": "public void SetRange(double rangeStart, double rangeLength)",
+          "kind": "method"
+        },
+        {
+          "name": "Drag",
+          "signature": "public static (double start, double length) Drag(double seconds, double start, double length, bool moveStart, double at)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundEdgeRecord",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundEdgeRecord.cs",
+      "sourceSha256": "4644280f52c3a477a3c769ce4fa602e312611bb6ee77464b874924a2fa27827f",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "from",
+          "signature": "public int from",
+          "kind": "field"
+        },
+        {
+          "name": "to",
+          "signature": "public int to",
+          "kind": "field"
+        },
+        {
+          "name": "outputName",
+          "signature": "public string outputName",
+          "kind": "field"
+        },
+        {
+          "name": "inputName",
+          "signature": "public string inputName",
+          "kind": "field"
+        },
+        {
+          "name": "outputId",
+          "signature": "public string outputId",
+          "kind": "field"
+        },
+        {
+          "name": "inputId",
+          "signature": "public string inputId",
+          "kind": "field"
+        },
+        {
+          "name": "execution",
+          "signature": "public bool execution",
+          "kind": "field"
+        },
+        {
+          "name": "Id",
+          "signature": "public string Id { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "SoundEvent",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundEvent.cs",
+      "sourceSha256": "6920b7db1f14ad5dab09dda1e44b76363941cf322b37da91a1641c95bc1cdd55",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "SchemaVersion",
+          "signature": "public int SchemaVersion { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "EventId",
+          "signature": "public string EventId { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "GraphId",
+          "signature": "public string GraphId { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Revision",
+          "signature": "public string Revision { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Diagnostic",
+          "signature": "public string Diagnostic { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "IsValid",
+          "signature": "public bool IsValid { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Nodes",
+          "signature": "public IReadOnlyList<SoundNodeRecord> Nodes { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Edges",
+          "signature": "public IReadOnlyList<SoundEdgeRecord> Edges { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Parameters",
+          "signature": "public IReadOnlyList<SoundParameterRecord> Parameters { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "CopySettings",
+          "signature": "public SoundEventSettings CopySettings()",
+          "kind": "method"
+        },
+        {
+          "name": "GetParameterId",
+          "signature": "public SoundParameterId GetParameterId(string name)",
+          "kind": "method"
+        },
+        {
+          "name": "GetSignalId",
+          "signature": "public SoundSignalId GetSignalId(string name)",
+          "kind": "method"
+        },
+        {
+          "name": "Initialize",
+          "signature": "public void Initialize(string identity, string authoringId, string contentRevision, SoundNodeRecord[] compiledNodes, SoundEdgeRecord[] compiledEdges, SoundParameterRecord[] declarations, string error = null, SoundEventSettings eventSettings = null)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundConcurrency",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundEventSettings.cs",
+      "sourceSha256": "b083ca189fc9f44fa630f2bd599fb72751aa564ad835cd287b5ae01a3e28e269",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "ReplaceOldest",
+          "signature": "ReplaceOldest",
+          "kind": "enum-value"
+        },
+        {
+          "name": "RejectNew",
+          "signature": "RejectNew",
+          "kind": "enum-value"
+        },
+        {
+          "name": "ReplaceLowestPriorityEligible",
+          "signature": "ReplaceLowestPriorityEligible",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundOwnerLoss",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundEventSettings.cs",
+      "sourceSha256": "b083ca189fc9f44fa630f2bd599fb72751aa564ad835cd287b5ae01a3e28e269",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Stop",
+          "signature": "Stop",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Detach",
+          "signature": "Detach",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundEventSettings",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundEventSettings.cs",
+      "sourceSha256": "b083ca189fc9f44fa630f2bd599fb72751aa564ad835cd287b5ae01a3e28e269",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "volume",
+          "signature": "public float volume",
+          "kind": "field"
+        },
+        {
+          "name": "speed",
+          "signature": "public float speed",
+          "kind": "field"
+        },
+        {
+          "name": "output",
+          "signature": "public AudioMixerGroup output",
+          "kind": "field"
+        },
+        {
+          "name": "spatialBlend",
+          "signature": "public float spatialBlend",
+          "kind": "field"
+        },
+        {
+          "name": "minDistance",
+          "signature": "public float minDistance",
+          "kind": "field"
+        },
+        {
+          "name": "maxDistance",
+          "signature": "public float maxDistance",
+          "kind": "field"
+        },
+        {
+          "name": "rolloff",
+          "signature": "public AudioRolloffMode rolloff",
+          "kind": "field"
+        },
+        {
+          "name": "rolloffCurve",
+          "signature": "public AnimationCurve rolloffCurve",
+          "kind": "field"
+        },
+        {
+          "name": "doppler",
+          "signature": "public float doppler",
+          "kind": "field"
+        },
+        {
+          "name": "spread",
+          "signature": "public float spread",
+          "kind": "field"
+        },
+        {
+          "name": "priority",
+          "signature": "public int priority",
+          "kind": "field"
+        },
+        {
+          "name": "ignoreListenerPause",
+          "signature": "public bool ignoreListenerPause",
+          "kind": "field"
+        },
+        {
+          "name": "keepAlive",
+          "signature": "public bool keepAlive",
+          "kind": "field"
+        },
+        {
+          "name": "protectedFromStealing",
+          "signature": "public bool protectedFromStealing",
+          "kind": "field"
+        },
+        {
+          "name": "length",
+          "signature": "public float length",
+          "kind": "field"
+        },
+        {
+          "name": "stopTailTimeout",
+          "signature": "public float stopTailTimeout",
+          "kind": "field"
+        },
+        {
+          "name": "cooldown",
+          "signature": "public float cooldown",
+          "kind": "field"
+        },
+        {
+          "name": "maxInstances",
+          "signature": "public int maxInstances",
+          "kind": "field"
+        },
+        {
+          "name": "concurrency",
+          "signature": "public SoundConcurrency concurrency",
+          "kind": "field"
+        },
+        {
+          "name": "ownerLoss",
+          "signature": "public SoundOwnerLoss ownerLoss",
+          "kind": "field"
+        },
+        {
+          "name": "IsValid",
+          "signature": "public bool IsValid { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Copy",
+          "signature": "public SoundEventSettings Copy()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundLibraryEntry",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundLibrary.cs",
+      "sourceSha256": "456626eac414c825ba66486f75b0bc3ec7eb0b47a3074541bec1c98bfcf0a638",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "sound",
+          "signature": "public SoundEvent sound",
+          "kind": "field"
+        },
+        {
+          "name": "key",
+          "signature": "public string key",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundLibrary",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundLibrary.cs",
+      "sourceSha256": "456626eac414c825ba66486f75b0bc3ec7eb0b47a3074541bec1c98bfcf0a638",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "entries",
+          "signature": "public SoundLibraryEntry[] entries",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundMixerDefault",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundManagerSettings.cs",
+      "sourceSha256": "7fc784d6a5a2954c1de9d5bd0673832f8ed74490dc436e4a575627ffceae0eaf",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "mixer",
+          "signature": "public AudioMixer mixer",
+          "kind": "field"
+        },
+        {
+          "name": "parameter",
+          "signature": "public string parameter",
+          "kind": "field"
+        },
+        {
+          "name": "decibels",
+          "signature": "public float decibels",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundManagerSettings",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundManagerSettings.cs",
+      "sourceSha256": "7fc784d6a5a2954c1de9d5bd0673832f8ed74490dc436e4a575627ffceae0eaf",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "voiceCapacity",
+          "signature": "public int voiceCapacity",
+          "kind": "field"
+        },
+        {
+          "name": "instanceCapacity",
+          "signature": "public int instanceCapacity",
+          "kind": "field"
+        },
+        {
+          "name": "startupQueueCapacity",
+          "signature": "public int startupQueueCapacity",
+          "kind": "field"
+        },
+        {
+          "name": "startupTimeout",
+          "signature": "public float startupTimeout",
+          "kind": "field"
+        },
+        {
+          "name": "captureTrace",
+          "signature": "public bool captureTrace",
+          "kind": "field"
+        },
+        {
+          "name": "traceCapacity",
+          "signature": "public int traceCapacity",
+          "kind": "field"
+        },
+        {
+          "name": "defaultOutput",
+          "signature": "public AudioMixerGroup defaultOutput",
+          "kind": "field"
+        },
+        {
+          "name": "mixerDefaults",
+          "signature": "public SoundMixerDefault[] mixerDefaults",
+          "kind": "field"
+        },
+        {
+          "name": "ToOptions",
+          "signature": "public SoundServiceOptions ToOptions()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundCompare",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundNodeModes.cs",
+      "sourceSha256": "022beb52e65ee8d6ec4850f08e598ceb5c1c76b1042b06ac4bc4750b053efa15",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Less",
+          "signature": "Less",
+          "kind": "enum-value"
+        },
+        {
+          "name": "LessEqual",
+          "signature": "LessEqual",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Equal",
+          "signature": "Equal",
+          "kind": "enum-value"
+        },
+        {
+          "name": "GreaterEqual",
+          "signature": "GreaterEqual",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Greater",
+          "signature": "Greater",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundFloatMath",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundNodeModes.cs",
+      "sourceSha256": "022beb52e65ee8d6ec4850f08e598ceb5c1c76b1042b06ac4bc4750b053efa15",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Add",
+          "signature": "Add",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Subtract",
+          "signature": "Subtract",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Multiply",
+          "signature": "Multiply",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Divide",
+          "signature": "Divide",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Min",
+          "signature": "Min",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Max",
+          "signature": "Max",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Pow",
+          "signature": "Pow",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundFloatFunction",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundNodeModes.cs",
+      "sourceSha256": "022beb52e65ee8d6ec4850f08e598ceb5c1c76b1042b06ac4bc4750b053efa15",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Abs",
+          "signature": "Abs",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Sqrt",
+          "signature": "Sqrt",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Floor",
+          "signature": "Floor",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Ceil",
+          "signature": "Ceil",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Round",
+          "signature": "Round",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Sign",
+          "signature": "Sign",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Sin",
+          "signature": "Sin",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Cos",
+          "signature": "Cos",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Log",
+          "signature": "Log",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Exp",
+          "signature": "Exp",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundIntMath",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundNodeModes.cs",
+      "sourceSha256": "022beb52e65ee8d6ec4850f08e598ceb5c1c76b1042b06ac4bc4750b053efa15",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Add",
+          "signature": "Add",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Subtract",
+          "signature": "Subtract",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Multiply",
+          "signature": "Multiply",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Divide",
+          "signature": "Divide",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Min",
+          "signature": "Min",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Max",
+          "signature": "Max",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Modulo",
+          "signature": "Modulo",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundIntFunction",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundNodeModes.cs",
+      "sourceSha256": "022beb52e65ee8d6ec4850f08e598ceb5c1c76b1042b06ac4bc4750b053efa15",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Abs",
+          "signature": "Abs",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Sign",
+          "signature": "Sign",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Negate",
+          "signature": "Negate",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundRounding",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundNodeModes.cs",
+      "sourceSha256": "022beb52e65ee8d6ec4850f08e598ceb5c1c76b1042b06ac4bc4750b053efa15",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Round",
+          "signature": "Round",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Floor",
+          "signature": "Floor",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Ceil",
+          "signature": "Ceil",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Truncate",
+          "signature": "Truncate",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundCurveMode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundNodeModes.cs",
+      "sourceSha256": "022beb52e65ee8d6ec4850f08e598ceb5c1c76b1042b06ac4bc4750b053efa15",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Linear",
+          "signature": "Linear",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Step",
+          "signature": "Step",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundInputValue",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundNodeRecord.cs",
+      "sourceSha256": "daf535f238c5d8365cfa42c0a29a58b1ed307002e66ab508ce83b5f35b44e8b4",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "port",
+          "signature": "public string port",
+          "kind": "field"
+        },
+        {
+          "name": "value",
+          "signature": "public SoundValue value",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundNodeRecord",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundNodeRecord.cs",
+      "sourceSha256": "daf535f238c5d8365cfa42c0a29a58b1ed307002e66ab508ce83b5f35b44e8b4",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "id",
+          "signature": "public string id",
+          "kind": "field"
+        },
+        {
+          "name": "operation",
+          "signature": "public SoundOperation operation",
+          "kind": "field"
+        },
+        {
+          "name": "clip",
+          "signature": "public AudioClip clip",
+          "kind": "field"
+        },
+        {
+          "name": "start",
+          "signature": "public float start",
+          "kind": "field"
+        },
+        {
+          "name": "length",
+          "signature": "public float length",
+          "kind": "field"
+        },
+        {
+          "name": "parameter",
+          "signature": "public string parameter",
+          "kind": "field"
+        },
+        {
+          "name": "value",
+          "signature": "public float value",
+          "kind": "field"
+        },
+        {
+          "name": "speed",
+          "signature": "public float speed",
+          "kind": "field"
+        },
+        {
+          "name": "fadeIn",
+          "signature": "public float fadeIn",
+          "kind": "field"
+        },
+        {
+          "name": "fadeOut",
+          "signature": "public float fadeOut",
+          "kind": "field"
+        },
+        {
+          "name": "loop",
+          "signature": "public bool loop",
+          "kind": "field"
+        },
+        {
+          "name": "minimum",
+          "signature": "public float minimum",
+          "kind": "field"
+        },
+        {
+          "name": "maximum",
+          "signature": "public float maximum",
+          "kind": "field"
+        },
+        {
+          "name": "boolValue",
+          "signature": "public bool boolValue",
+          "kind": "field"
+        },
+        {
+          "name": "singleValue",
+          "signature": "public bool singleValue",
+          "kind": "field"
+        },
+        {
+          "name": "noRepeat",
+          "signature": "public bool noRepeat",
+          "kind": "field"
+        },
+        {
+          "name": "clipCount",
+          "signature": "public int clipCount",
+          "kind": "field"
+        },
+        {
+          "name": "definitionId",
+          "signature": "public string definitionId",
+          "kind": "field"
+        },
+        {
+          "name": "count",
+          "signature": "public int count",
+          "kind": "field"
+        },
+        {
+          "name": "mode",
+          "signature": "public int mode",
+          "kind": "field"
+        },
+        {
+          "name": "intValue",
+          "signature": "public int intValue",
+          "kind": "field"
+        },
+        {
+          "name": "clamp",
+          "signature": "public bool clamp",
+          "kind": "field"
+        },
+        {
+          "name": "initialState",
+          "signature": "public bool initialState",
+          "kind": "field"
+        },
+        {
+          "name": "keepTracking",
+          "signature": "public bool keepTracking",
+          "kind": "field"
+        },
+        {
+          "name": "inputs",
+          "signature": "public SoundInputValue[] inputs",
+          "kind": "field"
+        },
+        {
+          "name": "curve",
+          "signature": "public Vector2[] curve",
+          "kind": "field"
+        },
+        {
+          "name": "curveMode",
+          "signature": "public SoundCurveMode curveMode",
+          "kind": "field"
+        },
+        {
+          "name": "Copy",
+          "signature": "public SoundNodeRecord Copy()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundOperation",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundOperation.cs",
+      "sourceSha256": "c6740ef5a6e4302359ce72573d4a3ef1f4c06600f433ba2203b48188ed3f8805",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "OnStart",
+          "signature": "OnStart = 1",
+          "kind": "enum-value"
+        },
+        {
+          "name": "OnSignal",
+          "signature": "OnSignal = 2",
+          "kind": "enum-value"
+        },
+        {
+          "name": "OnStop",
+          "signature": "OnStop = 3",
+          "kind": "enum-value"
+        },
+        {
+          "name": "WaveAsset",
+          "signature": "WaveAsset = 10",
+          "kind": "enum-value"
+        },
+        {
+          "name": "SelectByIndex",
+          "signature": "SelectByIndex = 11",
+          "kind": "enum-value"
+        },
+        {
+          "name": "PlayAudio",
+          "signature": "PlayAudio = 20",
+          "kind": "enum-value"
+        },
+        {
+          "name": "FloatParameter",
+          "signature": "FloatParameter = 30",
+          "kind": "enum-value"
+        },
+        {
+          "name": "IntParameter",
+          "signature": "IntParameter = 31",
+          "kind": "enum-value"
+        },
+        {
+          "name": "AssetParameter",
+          "signature": "AssetParameter = 32",
+          "kind": "enum-value"
+        },
+        {
+          "name": "RandomInt",
+          "signature": "RandomInt = 40",
+          "kind": "enum-value"
+        },
+        {
+          "name": "RandomFloat",
+          "signature": "RandomFloat = 41",
+          "kind": "enum-value"
+        },
+        {
+          "name": "RemapFloat",
+          "signature": "RemapFloat = 42",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Curve",
+          "signature": "Curve = 43",
+          "kind": "enum-value"
+        },
+        {
+          "name": "FloatCompare",
+          "signature": "FloatCompare = 44",
+          "kind": "enum-value"
+        },
+        {
+          "name": "FloatMath",
+          "signature": "FloatMath = 45",
+          "kind": "enum-value"
+        },
+        {
+          "name": "MultiplierToSemitones",
+          "signature": "MultiplierToSemitones = 46",
+          "kind": "enum-value"
+        },
+        {
+          "name": "SemitonesToMultiplier",
+          "signature": "SemitonesToMultiplier = 47",
+          "kind": "enum-value"
+        },
+        {
+          "name": "TrackCondition",
+          "signature": "TrackCondition = 50",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Delay",
+          "signature": "Delay = 51",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Sequence",
+          "signature": "Sequence = 52",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Branch",
+          "signature": "Branch = 53",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Counter",
+          "signature": "Counter = 54",
+          "kind": "enum-value"
+        },
+        {
+          "name": "StopInstance",
+          "signature": "StopInstance = 61",
+          "kind": "enum-value"
+        },
+        {
+          "name": "EndEvent",
+          "signature": "EndEvent = 63",
+          "kind": "enum-value"
+        },
+        {
+          "name": "ConvertToFloat",
+          "signature": "ConvertToFloat = 80",
+          "kind": "enum-value"
+        },
+        {
+          "name": "ConvertToInt",
+          "signature": "ConvertToInt = 81",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Float",
+          "signature": "Float = 82",
+          "kind": "enum-value"
+        },
+        {
+          "name": "FloatFunction",
+          "signature": "FloatFunction = 83",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Int",
+          "signature": "Int = 84",
+          "kind": "enum-value"
+        },
+        {
+          "name": "IntCompare",
+          "signature": "IntCompare = 85",
+          "kind": "enum-value"
+        },
+        {
+          "name": "IntFunction",
+          "signature": "IntFunction = 86",
+          "kind": "enum-value"
+        },
+        {
+          "name": "IntOp",
+          "signature": "IntOp = 87",
+          "kind": "enum-value"
+        },
+        {
+          "name": "SelectFloat",
+          "signature": "SelectFloat = 88",
+          "kind": "enum-value"
+        },
+        {
+          "name": "SelectInt",
+          "signature": "SelectInt = 89",
+          "kind": "enum-value"
+        },
+        {
+          "name": "SmoothstepFloat",
+          "signature": "SmoothstepFloat = 90",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Bool",
+          "signature": "Bool = 100",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Not",
+          "signature": "Not = 101",
+          "kind": "enum-value"
+        },
+        {
+          "name": "And",
+          "signature": "And = 102",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Or",
+          "signature": "Or = 103",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Xor",
+          "signature": "Xor = 104",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Passthrough",
+          "signature": "Passthrough = 105",
+          "kind": "enum-value"
+        },
+        {
+          "name": "BranchByIndex",
+          "signature": "BranchByIndex = 106",
+          "kind": "enum-value"
+        },
+        {
+          "name": "RandomBranch",
+          "signature": "RandomBranch = 107",
+          "kind": "enum-value"
+        },
+        {
+          "name": "ForLoop",
+          "signature": "ForLoop = 108",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Repeat",
+          "signature": "Repeat = 109",
+          "kind": "enum-value"
+        },
+        {
+          "name": "WaitForCondition",
+          "signature": "WaitForCondition = 110",
+          "kind": "enum-value"
+        },
+        {
+          "name": "IdleLoop",
+          "signature": "IdleLoop = 111",
+          "kind": "enum-value"
+        },
+        {
+          "name": "RandomClip",
+          "signature": "RandomClip = 1000",
+          "kind": "enum-value"
+        },
+        {
+          "name": "BoolParameter",
+          "signature": "BoolParameter = 1001",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundParameterRecord",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundParameterRecord.cs",
+      "sourceSha256": "f76992d8aeae2140ff71d024ceb0ede82333c356aa42f17244f6f66f478cae2b",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "id",
+          "signature": "public string id",
+          "kind": "field"
+        },
+        {
+          "name": "name",
+          "signature": "public string name",
+          "kind": "field"
+        },
+        {
+          "name": "type",
+          "signature": "public SoundParameterType type",
+          "kind": "field"
+        },
+        {
+          "name": "defaultValue",
+          "signature": "public float defaultValue",
+          "kind": "field"
+        },
+        {
+          "name": "minimum",
+          "signature": "public float minimum",
+          "kind": "field"
+        },
+        {
+          "name": "maximum",
+          "signature": "public float maximum",
+          "kind": "field"
+        },
+        {
+          "name": "riseRate",
+          "signature": "public float riseRate",
+          "kind": "field"
+        },
+        {
+          "name": "fallRate",
+          "signature": "public float fallRate",
+          "kind": "field"
+        },
+        {
+          "name": "defaultInt",
+          "signature": "public int defaultInt",
+          "kind": "field"
+        },
+        {
+          "name": "minimumInt",
+          "signature": "public int minimumInt",
+          "kind": "field"
+        },
+        {
+          "name": "maximumInt",
+          "signature": "public int maximumInt",
+          "kind": "field"
+        },
+        {
+          "name": "defaultBool",
+          "signature": "public bool defaultBool",
+          "kind": "field"
+        },
+        {
+          "name": "defaultAsset",
+          "signature": "public AudioClip defaultAsset",
+          "kind": "field"
+        },
+        {
+          "name": "allowedAssets",
+          "signature": "public AudioClip[] allowedAssets",
+          "kind": "field"
+        },
+        {
+          "name": "Default",
+          "signature": "public SoundValue Default { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Accepts",
+          "signature": "public bool Accepts(SoundValue value)",
+          "kind": "method"
+        },
+        {
+          "name": "Clamp",
+          "signature": "public readonly SoundValue Clamp(SoundValue value)",
+          "kind": "method"
+        },
+        {
+          "name": "Copy",
+          "signature": "public SoundParameterRecord Copy()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundParameterType",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundValue.cs",
+      "sourceSha256": "f65c76dc415536b9c651d5be60923776c35309bf90ab958b1c20e4ca562b828a",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Float",
+          "signature": "Float",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Int",
+          "signature": "Int",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Bool",
+          "signature": "Bool",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Asset",
+          "signature": "Asset",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundValue",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundValue.cs",
+      "sourceSha256": "f65c76dc415536b9c651d5be60923776c35309bf90ab958b1c20e4ca562b828a",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "type",
+          "signature": "public SoundParameterType type",
+          "kind": "field"
+        },
+        {
+          "name": "number",
+          "signature": "public float number",
+          "kind": "field"
+        },
+        {
+          "name": "integer",
+          "signature": "public int integer",
+          "kind": "field"
+        },
+        {
+          "name": "boolean",
+          "signature": "public bool boolean",
+          "kind": "field"
+        },
+        {
+          "name": "asset",
+          "signature": "public AudioClip asset",
+          "kind": "field"
+        },
+        {
+          "name": "Float",
+          "signature": "public static SoundValue Float(float value)",
+          "kind": "method"
+        },
+        {
+          "name": "Int",
+          "signature": "public static SoundValue Int(int value)",
+          "kind": "method"
+        },
+        {
+          "name": "Bool",
+          "signature": "public static SoundValue Bool(bool value)",
+          "kind": "method"
+        },
+        {
+          "name": "Asset",
+          "signature": "public static SoundValue Asset(AudioClip value)",
+          "kind": "method"
+        },
+        {
+          "name": "ToString",
+          "signature": "public override string ToString()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundEmitter",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundEmitter.cs",
+      "sourceSha256": "3eab1d683dcb13f0e0705ade34872ebb6afa654274f493febee51a535b65c405",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "defaultEvent",
+          "signature": "public SoundEvent defaultEvent",
+          "kind": "field"
+        },
+        {
+          "name": "events",
+          "signature": "public SoundEventSlot[] events",
+          "kind": "field"
+        },
+        {
+          "name": "origin",
+          "signature": "public Transform origin",
+          "kind": "field"
+        },
+        {
+          "name": "positionMode",
+          "signature": "public SoundPositionMode positionMode",
+          "kind": "field"
+        },
+        {
+          "name": "playOnEnable",
+          "signature": "public bool playOnEnable",
+          "kind": "field"
+        },
+        {
+          "name": "stopOnDisable",
+          "signature": "public bool stopOnDisable",
+          "kind": "field"
+        },
+        {
+          "name": "stopFade",
+          "signature": "public float stopFade",
+          "kind": "field"
+        },
+        {
+          "name": "LastResult",
+          "signature": "public SoundPlayResult LastResult { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Diagnostic",
+          "signature": "public string Diagnostic { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "WaitingForReady",
+          "signature": "public bool WaitingForReady { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Owner",
+          "signature": "public SoundOwnerToken Owner { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "OwnedCount",
+          "signature": "public int OwnedCount { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "LatestHandle",
+          "signature": "public SoundHandle LatestHandle { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Play",
+          "signature": "public void Play()",
+          "kind": "method"
+        },
+        {
+          "name": "PlayEvent",
+          "signature": "public void PlayEvent(string eventKey)",
+          "kind": "method"
+        },
+        {
+          "name": "TryPlay",
+          "signature": "public SoundPlayResult TryPlay()",
+          "kind": "method"
+        },
+        {
+          "name": "TryPlayEvent",
+          "signature": "public SoundPlayResult TryPlayEvent(string eventKey)",
+          "kind": "method"
+        },
+        {
+          "name": "SendSignal",
+          "signature": "public void SendSignal(string signal)",
+          "kind": "method"
+        },
+        {
+          "name": "TrySendSignal",
+          "signature": "public bool TrySendSignal(string signal)",
+          "kind": "method"
+        },
+        {
+          "name": "SetParameter",
+          "signature": "public bool SetParameter(string name, SoundValue value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetFloat",
+          "signature": "public bool SetFloat(string name, float value)",
+          "kind": "method"
+        },
+        {
+          "name": "Stop",
+          "signature": "public void Stop()",
+          "kind": "method"
+        },
+        {
+          "name": "StopEvent",
+          "signature": "public void StopEvent(string eventKey)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundEventSlot",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundEventSlot.cs",
+      "sourceSha256": "4b73e9d4e175d1a4fec85c673074b8823e28d15edbbaf72ca1d2dc5bd8e19843",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "key",
+          "signature": "public string key",
+          "kind": "field"
+        },
+        {
+          "name": "sound",
+          "signature": "public SoundEvent sound",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundFollowSync",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundFollowSync.cs",
+      "sourceSha256": "6e695a6ecd5e8735d911960d1ab0884bc13e6f1556441cfd9c510607ec672b4d",
+      "kind": "ClassDeclaration",
+      "members": []
+    },
+    {
+      "name": "SoundListener",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundListener.cs",
+      "sourceSha256": "9ca8abae4e1557bd84dcda0238ea73790f1e369a2ea9127da7e0bc070eaf6ef2",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "activateOnEnable",
+          "signature": "public bool activateOnEnable",
+          "kind": "field"
+        },
+        {
+          "name": "Native",
+          "signature": "public AudioListener Native { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "IsActive",
+          "signature": "public bool IsActive { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Diagnostic",
+          "signature": "public string Diagnostic { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Conflict",
+          "signature": "public AudioListener Conflict { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "MakeActive",
+          "signature": "public void MakeActive()",
+          "kind": "method"
+        },
+        {
+          "name": "Recheck",
+          "signature": "public void Recheck()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundManager",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundManager.cs",
+      "sourceSha256": "df6c412b01e08875cb0b1a594f9916b7ed739a300326f7a598e93f7253128145",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "events",
+          "signature": "public SoundEvent[] events",
+          "kind": "field"
+        },
+        {
+          "name": "libraries",
+          "signature": "public SoundLibrary[] libraries",
+          "kind": "field"
+        },
+        {
+          "name": "settings",
+          "signature": "public SoundManagerSettings settings",
+          "kind": "field"
+        },
+        {
+          "name": "persistAcrossScenes",
+          "signature": "public bool persistAcrossScenes",
+          "kind": "field"
+        },
+        {
+          "name": "showDiagnostics",
+          "signature": "public bool showDiagnostics",
+          "kind": "field"
+        },
+        {
+          "name": "Diagnostics",
+          "signature": "public IReadOnlyList<string> Diagnostics { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Service",
+          "signature": "public SoundService Service { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Ready",
+          "signature": "public bool Ready { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "SoundPositionMode",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundPositionMode.cs",
+      "sourceSha256": "4897026e3a6ff071a4310d0236d06e06b98878517eac679a72177ea750aafa50",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "FollowOrigin",
+          "signature": "FollowOrigin",
+          "kind": "enum-value"
+        },
+        {
+          "name": "PositionAtPlay",
+          "signature": "PositionAtPlay",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "CompiledSoundEvent",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/CompiledSoundEvent.cs",
+      "sourceSha256": "76e39d77afe748970e202f6329b334445ff9941ff1cbe65f84956bb1293040f2",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Asset",
+          "signature": "public SoundEvent Asset { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "EventId",
+          "signature": "public string EventId { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "GraphId",
+          "signature": "public string GraphId { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Revision",
+          "signature": "public string Revision { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Nodes",
+          "signature": "public IReadOnlyList<SoundNodeRecord> Nodes { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Edges",
+          "signature": "public IReadOnlyList<SoundEdgeRecord> Edges { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Parameters",
+          "signature": "public IReadOnlyList<SoundParameterRecord> Parameters { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "SoundExecutionKind",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundExecutionKind.cs",
+      "sourceSha256": "3ca066ce65675695b36891903a1de5762c2034dac4a9cad8b717478e71776140",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Accepted",
+          "signature": "Accepted",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Started",
+          "signature": "Started",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Node",
+          "signature": "Node",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Edge",
+          "signature": "Edge",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Value",
+          "signature": "Value",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Voice",
+          "signature": "Voice",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Finished",
+          "signature": "Finished",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Cancelled",
+          "signature": "Cancelled",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Failed",
+          "signature": "Failed",
+          "kind": "enum-value"
+        },
+        {
+          "name": "MissingSource",
+          "signature": "MissingSource",
+          "kind": "enum-value"
+        },
+        {
+          "name": "VoiceCapacity",
+          "signature": "VoiceCapacity",
+          "kind": "enum-value"
+        },
+        {
+          "name": "ContinuationCapacity",
+          "signature": "ContinuationCapacity",
+          "kind": "enum-value"
+        },
+        {
+          "name": "InputValue",
+          "signature": "InputValue",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundExecutionRecord",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundExecutionRecord.cs",
+      "sourceSha256": "0f8300d7823fa6df7d0a7e286e39e203323e858e84ff856a48547bb49e3efb42",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "Sequence",
+          "signature": "public readonly long Sequence",
+          "kind": "field"
+        },
+        {
+          "name": "Time",
+          "signature": "public readonly double Time",
+          "kind": "field"
+        },
+        {
+          "name": "Handle",
+          "signature": "public readonly SoundHandle Handle",
+          "kind": "field"
+        },
+        {
+          "name": "Revision",
+          "signature": "public readonly string Revision",
+          "kind": "field"
+        },
+        {
+          "name": "Kind",
+          "signature": "public readonly SoundExecutionKind Kind",
+          "kind": "field"
+        },
+        {
+          "name": "Node",
+          "signature": "public readonly int Node",
+          "kind": "field"
+        },
+        {
+          "name": "Edge",
+          "signature": "public readonly int Edge",
+          "kind": "field"
+        },
+        {
+          "name": "Voice",
+          "signature": "public readonly int Voice",
+          "kind": "field"
+        },
+        {
+          "name": "Value",
+          "signature": "public readonly float Value",
+          "kind": "field"
+        },
+        {
+          "name": "VoiceState",
+          "signature": "public readonly SoundVoiceState VoiceState",
+          "kind": "field"
+        },
+        {
+          "name": "SoundExecutionRecord",
+          "signature": "public SoundExecutionRecord(long sequence, double time, SoundHandle handle, string revision, SoundExecutionKind kind, int node, int edge, int voice, float value, SoundVoiceState state)",
+          "kind": "constructor"
+        }
+      ]
+    },
+    {
+      "name": "SoundExecutionTrace",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundExecutionTrace.cs",
+      "sourceSha256": "467f54d4c976500e03106efa9b57869d32e2d5ddf55cdd52116f23755cb55569",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "SoundExecutionTrace",
+          "signature": "public SoundExecutionTrace(int capacity)",
+          "kind": "constructor"
+        },
+        {
+          "name": "Count",
+          "signature": "public long Count { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Capacity",
+          "signature": "public int Capacity { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Enabled",
+          "signature": "public bool Enabled { get; set; }",
+          "kind": "property"
+        },
+        {
+          "name": "Recording",
+          "signature": "public bool Recording { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "OldestSequence",
+          "signature": "public long OldestSequence { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "TryRead",
+          "signature": "public bool TryRead(long sequence, out SoundExecutionRecord record)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundNodeCatalogue",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundNodeCatalogue.cs",
+      "sourceSha256": "ee028bc196bbda581ffa03c64976b20e7ee88a498b45b707904bedfe550fc748",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Definitions",
+          "signature": "public static IReadOnlyList<SoundNodeDefinition> Definitions { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Find",
+          "signature": "public static SoundNodeDefinition Find(SoundOperation operation)",
+          "kind": "method"
+        },
+        {
+          "name": "IsParameter",
+          "signature": "public static bool IsParameter(SoundOperation operation)",
+          "kind": "method"
+        },
+        {
+          "name": "ParameterType",
+          "signature": "public static SoundParameterType ParameterType(SoundOperation operation)",
+          "kind": "method"
+        },
+        {
+          "name": "HasCount",
+          "signature": "public static bool HasCount(SoundOperation operation)",
+          "kind": "method"
+        },
+        {
+          "name": "ModeCount",
+          "signature": "public static int ModeCount(SoundOperation operation)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundNodeCatalogue",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundNodeCatalogue.Validation.cs",
+      "sourceSha256": "ea01b0d76c82784a2df52b284bbdcdffd1de7631c39de181bbdcb84e74880033",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Validate",
+          "signature": "public static string Validate(IReadOnlyList<SoundNodeRecord> nodes, IReadOnlyList<SoundEdgeRecord> edges, IReadOnlyList<SoundParameterRecord> parameters, SoundEventSettings settings)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundNodeDefinition",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundNodeDefinition.cs",
+      "sourceSha256": "6552647c942183a08f03ed293f6433f6c5dad6b010b914eb2a7ccb61946d497f",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Operation",
+          "signature": "public SoundOperation Operation { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Name",
+          "signature": "public string Name { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Ports",
+          "signature": "public IReadOnlyList<SoundPortDefinition> Ports { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "TryPort",
+          "signature": "public bool TryPort(string name, bool input, out SoundPortDefinition port)",
+          "kind": "method"
+        },
+        {
+          "name": "GetPorts",
+          "signature": "public IEnumerable<SoundPortDefinition> GetPorts(int count)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundNodeState",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundNodeState.cs",
+      "sourceSha256": "340c7d718e694240fbdda36b815e31d681f2902d110982ac965ab7ea5a7d5130",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Inactive",
+          "signature": "Inactive",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Waiting",
+          "signature": "Waiting",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Repeating",
+          "signature": "Repeating",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Tracking",
+          "signature": "Tracking",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Idle",
+          "signature": "Idle",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Playing",
+          "signature": "Playing",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Stopping",
+          "signature": "Stopping",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundPortDefinition",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundPortDefinition.cs",
+      "sourceSha256": "10e1f62f9d26e9daeec4cb02d887570cf99ff2f06aa0c8eac75b2c59b328c654",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "Name",
+          "signature": "public readonly string Name",
+          "kind": "field"
+        },
+        {
+          "name": "Type",
+          "signature": "public readonly SoundPortType Type",
+          "kind": "field"
+        },
+        {
+          "name": "Input",
+          "signature": "public readonly bool Input",
+          "kind": "field"
+        },
+        {
+          "name": "SoundPortDefinition",
+          "signature": "public SoundPortDefinition(string name, SoundPortType type, bool input)",
+          "kind": "constructor"
+        }
+      ]
+    },
+    {
+      "name": "SoundPortType",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundPortType.cs",
+      "sourceSha256": "97d8659750072dc592a04a8222f7c9bbea56dad93862e491ded15775426a004e",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Execution",
+          "signature": "Execution",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Float",
+          "signature": "Float",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Clip",
+          "signature": "Clip",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Bool",
+          "signature": "Bool",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Int",
+          "signature": "Int",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "ISoundClock",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/ISoundClock.cs",
+      "sourceSha256": "1f05d0c868c388fb49e0abf4d568b7307528796a4c48353f18cc065c9506ba2f",
+      "kind": "InterfaceDeclaration",
+      "members": [
+        {
+          "name": "Now",
+          "signature": "double Now { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "ISoundService",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/ISoundService.cs",
+      "sourceSha256": "6ca63993de0caf11d6d91b56e4d03886b55654de3b7ce4d5a2ef1b48d981677c",
+      "kind": "InterfaceDeclaration",
+      "members": [
+        {
+          "name": "Ready",
+          "signature": "bool Ready { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Paused",
+          "signature": "bool Paused { get; set; }",
+          "kind": "property"
+        },
+        {
+          "name": "TryResolve",
+          "signature": "bool TryResolve(SoundKey key, out SoundEvent sound)",
+          "kind": "method"
+        },
+        {
+          "name": "TryPlay",
+          "signature": "SoundPlayResult TryPlay(SoundEvent sound, in SoundPlayContext context)",
+          "kind": "method"
+        },
+        {
+          "name": "TryPlay",
+          "signature": "SoundPlayResult TryPlay(SoundEvent sound, in SoundPlayContext context, ReadOnlySpan<SoundFloatOverride> parameters)",
+          "kind": "method"
+        },
+        {
+          "name": "Stop",
+          "signature": "bool Stop(SoundHandle handle, float fade = .1f)",
+          "kind": "method"
+        },
+        {
+          "name": "IsAlive",
+          "signature": "bool IsAlive(SoundHandle handle)",
+          "kind": "method"
+        },
+        {
+          "name": "SetPaused",
+          "signature": "bool SetPaused(SoundHandle handle, bool paused)",
+          "kind": "method"
+        },
+        {
+          "name": "IsPaused",
+          "signature": "bool IsPaused(SoundHandle handle)",
+          "kind": "method"
+        },
+        {
+          "name": "SetFloat",
+          "signature": "bool SetFloat(SoundHandle handle, SoundParameterId parameter, float value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetFloat",
+          "signature": "bool SetFloat(SoundHandle handle, string name, float value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetParameter",
+          "signature": "bool SetParameter(SoundHandle handle, SoundParameterId parameter, SoundValue value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetParameter",
+          "signature": "bool SetParameter(SoundHandle handle, string name, SoundValue value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetInt",
+          "signature": "bool SetInt(SoundHandle handle, string name, int value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetBool",
+          "signature": "bool SetBool(SoundHandle handle, string name, bool value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetAsset",
+          "signature": "bool SetAsset(SoundHandle handle, string name, AudioClip value)",
+          "kind": "method"
+        },
+        {
+          "name": "TryGetParameter",
+          "signature": "bool TryGetParameter(SoundHandle handle, SoundParameterId parameter, out SoundParameterState value)",
+          "kind": "method"
+        },
+        {
+          "name": "SendSignal",
+          "signature": "bool SendSignal(SoundHandle handle, SoundSignalId signal)",
+          "kind": "method"
+        },
+        {
+          "name": "SendSignal",
+          "signature": "bool SendSignal(SoundHandle handle, string signal)",
+          "kind": "method"
+        },
+        {
+          "name": "StopOwned",
+          "signature": "int StopOwned(SoundOwnerToken owner, float fade = .1f)",
+          "kind": "method"
+        },
+        {
+          "name": "SetParameterOwned",
+          "signature": "int SetParameterOwned(SoundOwnerToken owner, SoundParameterId parameter, SoundValue value)",
+          "kind": "method"
+        },
+        {
+          "name": "SendSignalOwned",
+          "signature": "int SendSignalOwned(SoundOwnerToken owner, SoundSignalId signal)",
+          "kind": "method"
+        },
+        {
+          "name": "OwnerOf",
+          "signature": "SoundOwnerToken OwnerOf(UnityEngine.Object target)",
+          "kind": "method"
+        },
+        {
+          "name": "TryGetOwner",
+          "signature": "bool TryGetOwner(UnityEngine.Object target, out SoundOwnerToken owner)",
+          "kind": "method"
+        },
+        {
+          "name": "CreateOwner",
+          "signature": "SoundOwnerToken CreateOwner(UnityEngine.Object target = null)",
+          "kind": "method"
+        },
+        {
+          "name": "ReleaseOwner",
+          "signature": "void ReleaseOwner(SoundOwnerToken owner)",
+          "kind": "method"
+        },
+        {
+          "name": "Notification",
+          "signature": "event Action<SoundNotification> Notification",
+          "kind": "event"
+        }
+      ]
+    },
+    {
+      "name": "ISoundVoiceBackend",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/ISoundVoiceBackend.cs",
+      "sourceSha256": "3be31bb0dcf41229958f7f7b8acf349a3c6c34dc2787de8a7a7de99bafcda641",
+      "kind": "InterfaceDeclaration",
+      "members": [
+        {
+          "name": "Capacity",
+          "signature": "int Capacity { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "FreeCount",
+          "signature": "int FreeCount { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "ListenerPaused",
+          "signature": "bool ListenerPaused { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Prepare",
+          "signature": "SoundClipReadiness Prepare(AudioClip clip)",
+          "kind": "method"
+        },
+        {
+          "name": "Play",
+          "signature": "SoundVoiceHandle Play(in SoundVoiceRequest request)",
+          "kind": "method"
+        },
+        {
+          "name": "State",
+          "signature": "SoundVoiceState State(SoundVoiceHandle voice)",
+          "kind": "method"
+        },
+        {
+          "name": "SetControls",
+          "signature": "void SetControls(SoundVoiceHandle voice, float volume, float speed)",
+          "kind": "method"
+        },
+        {
+          "name": "Stop",
+          "signature": "void Stop(SoundVoiceHandle voice, float fade)",
+          "kind": "method"
+        },
+        {
+          "name": "Pause",
+          "signature": "void Pause(SoundVoiceHandle voice, bool paused)",
+          "kind": "method"
+        },
+        {
+          "name": "DetachFollow",
+          "signature": "void DetachFollow(SoundVoiceHandle voice)",
+          "kind": "method"
+        },
+        {
+          "name": "Tick",
+          "signature": "void Tick()",
+          "kind": "method"
+        },
+        {
+          "name": "StopAll",
+          "signature": "void StopAll()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundClipReadiness",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundClipReadiness.cs",
+      "sourceSha256": "82396cdaaeed39c2518042bc7c5f0cfec04b0a27ce3a1e0fa53e8d9eb99d9826",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Ready",
+          "signature": "Ready",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Loading",
+          "signature": "Loading",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Missing",
+          "signature": "Missing",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundFloatOverride",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundFloatOverride.cs",
+      "sourceSha256": "dc1733254ded60104c15959eb6e38b4ad5f19c582972b7b9acdaed10e276a260",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "Parameter",
+          "signature": "public readonly SoundParameterId Parameter",
+          "kind": "field"
+        },
+        {
+          "name": "Value",
+          "signature": "public readonly float Value",
+          "kind": "field"
+        },
+        {
+          "name": "SoundFloatOverride",
+          "signature": "public SoundFloatOverride(SoundParameterId parameter, float value)",
+          "kind": "constructor"
+        },
+        {
+          "name": "SoundFloatOverride",
+          "signature": "public SoundFloatOverride(string name, float value)",
+          "kind": "constructor"
+        },
+        {
+          "name": "Name",
+          "signature": "public string Name { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "SoundHandle",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundHandle.cs",
+      "sourceSha256": "15eb2aaa54624a60656dfda77a9b0788a8c8055c8cf057dc6031a7804154d471",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "Session",
+          "signature": "public readonly uint Session",
+          "kind": "field"
+        },
+        {
+          "name": "Slot",
+          "signature": "public readonly int Slot",
+          "kind": "field"
+        },
+        {
+          "name": "Generation",
+          "signature": "public readonly uint Generation",
+          "kind": "field"
+        },
+        {
+          "name": "SoundHandle",
+          "signature": "public SoundHandle(uint session, int slot, uint generation)",
+          "kind": "constructor"
+        },
+        {
+          "name": "IsValid",
+          "signature": "public bool IsValid { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Equals",
+          "signature": "public bool Equals(SoundHandle other)",
+          "kind": "method"
+        },
+        {
+          "name": "Equals",
+          "signature": "public override bool Equals(object obj)",
+          "kind": "method"
+        },
+        {
+          "name": "GetHashCode",
+          "signature": "public override int GetHashCode()",
+          "kind": "method"
+        },
+        {
+          "name": "ToString",
+          "signature": "public override string ToString()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundNotification",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundNotification.cs",
+      "sourceSha256": "84d3f9dc0a5068da87d13db4e05ad20f2875c35842d652e6a6f3ef14d9c4ba4f",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "Handle",
+          "signature": "public readonly SoundHandle Handle",
+          "kind": "field"
+        },
+        {
+          "name": "Kind",
+          "signature": "public readonly SoundNotificationKind Kind",
+          "kind": "field"
+        },
+        {
+          "name": "Reason",
+          "signature": "public readonly SoundPlayStatus Reason",
+          "kind": "field"
+        },
+        {
+          "name": "Sound",
+          "signature": "public readonly SoundEvent Sound",
+          "kind": "field"
+        },
+        {
+          "name": "Owner",
+          "signature": "public readonly SoundOwnerToken Owner",
+          "kind": "field"
+        },
+        {
+          "name": "EventId",
+          "signature": "public readonly string EventId",
+          "kind": "field"
+        },
+        {
+          "name": "Revision",
+          "signature": "public readonly string Revision",
+          "kind": "field"
+        },
+        {
+          "name": "SoundNotification",
+          "signature": "public SoundNotification(SoundHandle handle, SoundNotificationKind kind, SoundPlayStatus reason, SoundEvent sound, SoundOwnerToken owner, string eventId, string revision)",
+          "kind": "constructor"
+        },
+        {
+          "name": "IsTerminal",
+          "signature": "public bool IsTerminal { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "SoundNotificationKind",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundNotificationKind.cs",
+      "sourceSha256": "ac0c2f068dfd422cc7b9755088aacecc4d12617c6f366239b9080ef314428468",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Accepted",
+          "signature": "Accepted",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Started",
+          "signature": "Started",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Finished",
+          "signature": "Finished",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Cancelled",
+          "signature": "Cancelled",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Failed",
+          "signature": "Failed",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundOwnerToken",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundOwnerToken.cs",
+      "sourceSha256": "f07e72466b21d9f8eb6a8931a067abbb23a2385c84f72d463624b0f14c0887e8",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "Session",
+          "signature": "public readonly uint Session",
+          "kind": "field"
+        },
+        {
+          "name": "Id",
+          "signature": "public readonly uint Id",
+          "kind": "field"
+        },
+        {
+          "name": "SoundOwnerToken",
+          "signature": "public SoundOwnerToken(uint session, uint id)",
+          "kind": "constructor"
+        },
+        {
+          "name": "IsValid",
+          "signature": "public bool IsValid { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Equals",
+          "signature": "public bool Equals(SoundOwnerToken other)",
+          "kind": "method"
+        },
+        {
+          "name": "Equals",
+          "signature": "public override bool Equals(object obj)",
+          "kind": "method"
+        },
+        {
+          "name": "GetHashCode",
+          "signature": "public override int GetHashCode()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundParameterId",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundParameterId.cs",
+      "sourceSha256": "ad9a3eced3fb6ae14737eb5f088f170d36869c76b3ca75830d6fadcc7700333b",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "Name",
+          "signature": "public readonly string Name",
+          "kind": "field"
+        },
+        {
+          "name": "Declared",
+          "signature": "public static SoundParameterId Declared(string name, int index, string stableId)",
+          "kind": "method"
+        },
+        {
+          "name": "IsValid",
+          "signature": "public bool IsValid { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Equals",
+          "signature": "public bool Equals(SoundParameterId other)",
+          "kind": "method"
+        },
+        {
+          "name": "Equals",
+          "signature": "public override bool Equals(object obj)",
+          "kind": "method"
+        },
+        {
+          "name": "GetHashCode",
+          "signature": "public override int GetHashCode()",
+          "kind": "method"
+        },
+        {
+          "name": "ToString",
+          "signature": "public override string ToString()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundParameterOverride",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundParameterOverride.cs",
+      "sourceSha256": "5d05119690cdf8b3afd78f1026bd3031201ad715f822d140122070cc8263c568",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "Parameter",
+          "signature": "public readonly SoundParameterId Parameter",
+          "kind": "field"
+        },
+        {
+          "name": "Value",
+          "signature": "public readonly SoundValue Value",
+          "kind": "field"
+        },
+        {
+          "name": "SoundParameterOverride",
+          "signature": "public SoundParameterOverride(string name, SoundValue value)",
+          "kind": "constructor"
+        }
+      ]
+    },
+    {
+      "name": "SoundParameterState",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundParameterState.cs",
+      "sourceSha256": "c7d2f87f6060bdeae34953f067e7609da62f007f07b7bba3e663ce877300294a",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "Current",
+          "signature": "public readonly SoundValue Current",
+          "kind": "field"
+        },
+        {
+          "name": "Target",
+          "signature": "public readonly SoundValue Target",
+          "kind": "field"
+        },
+        {
+          "name": "SoundParameterState",
+          "signature": "public SoundParameterState(SoundValue current, SoundValue target)",
+          "kind": "constructor"
+        }
+      ]
+    },
+    {
+      "name": "SoundPlayContext",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayContext.cs",
+      "sourceSha256": "2aa23c844a4bd61da71720b3a3dbe20a11b65f6cacec244907b9acc082a56706",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "MaxInlineParameters",
+          "signature": "public const int MaxInlineParameters",
+          "kind": "field"
+        },
+        {
+          "name": "Position",
+          "signature": "public Vector3 Position",
+          "kind": "field"
+        },
+        {
+          "name": "Follow",
+          "signature": "public Transform Follow",
+          "kind": "field"
+        },
+        {
+          "name": "Owner",
+          "signature": "public SoundOwnerToken Owner",
+          "kind": "field"
+        },
+        {
+          "name": "Parameters",
+          "signature": "public SoundFloatOverride[] Parameters",
+          "kind": "field"
+        },
+        {
+          "name": "TypedParameters",
+          "signature": "public SoundParameterOverride[] TypedParameters",
+          "kind": "field"
+        },
+        {
+          "name": "Seed",
+          "signature": "public uint Seed",
+          "kind": "field"
+        },
+        {
+          "name": "Delay",
+          "signature": "public double Delay",
+          "kind": "field"
+        },
+        {
+          "name": "At",
+          "signature": "public static SoundPlayContext At(Vector3 position, SoundOwnerToken owner = default)",
+          "kind": "method"
+        },
+        {
+          "name": "Following",
+          "signature": "public static SoundPlayContext Following(Transform target, SoundOwnerToken owner = default)",
+          "kind": "method"
+        },
+        {
+          "name": "With",
+          "signature": "public readonly SoundPlayContext With(SoundParameterId parameter, SoundValue value)",
+          "kind": "method"
+        },
+        {
+          "name": "With",
+          "signature": "public readonly SoundPlayContext With(SoundParameterId parameter, float value)",
+          "kind": "method"
+        },
+        {
+          "name": "With",
+          "signature": "public readonly SoundPlayContext With(SoundParameterId parameter, int value)",
+          "kind": "method"
+        },
+        {
+          "name": "With",
+          "signature": "public readonly SoundPlayContext With(SoundParameterId parameter, bool value)",
+          "kind": "method"
+        },
+        {
+          "name": "With",
+          "signature": "public readonly SoundPlayContext With(SoundParameterId parameter, AudioClip value)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundPlayResult",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayResult.cs",
+      "sourceSha256": "9633cc054dd6fe6f8564305965f3c4cf683f63f1b6013e0f9b3aad4c2d3a4c54",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "Status",
+          "signature": "public readonly SoundPlayStatus Status",
+          "kind": "field"
+        },
+        {
+          "name": "Handle",
+          "signature": "public readonly SoundHandle Handle",
+          "kind": "field"
+        },
+        {
+          "name": "SoundPlayResult",
+          "signature": "public SoundPlayResult(SoundPlayStatus status, SoundHandle handle = default)",
+          "kind": "constructor"
+        },
+        {
+          "name": "Accepted",
+          "signature": "public bool Accepted { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "SoundPlayStatus",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayStatus.cs",
+      "sourceSha256": "ae37c89d2ca9894d31453af73014800d01b126c0843cdf0adaf8a2c13bf01a67",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Accepted",
+          "signature": "Accepted",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Queued",
+          "signature": "Queued",
+          "kind": "enum-value"
+        },
+        {
+          "name": "NoManager",
+          "signature": "NoManager",
+          "kind": "enum-value"
+        },
+        {
+          "name": "NotRegistered",
+          "signature": "NotRegistered",
+          "kind": "enum-value"
+        },
+        {
+          "name": "InvalidEvent",
+          "signature": "InvalidEvent",
+          "kind": "enum-value"
+        },
+        {
+          "name": "NotReady",
+          "signature": "NotReady",
+          "kind": "enum-value"
+        },
+        {
+          "name": "MissingClip",
+          "signature": "MissingClip",
+          "kind": "enum-value"
+        },
+        {
+          "name": "ConcurrencyLimit",
+          "signature": "ConcurrencyLimit",
+          "kind": "enum-value"
+        },
+        {
+          "name": "CapacityExceeded",
+          "signature": "CapacityExceeded",
+          "kind": "enum-value"
+        },
+        {
+          "name": "InvalidContext",
+          "signature": "InvalidContext",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Cooldown",
+          "signature": "Cooldown",
+          "kind": "enum-value"
+        },
+        {
+          "name": "NoTarget",
+          "signature": "NoTarget",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundServiceOptions",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundServiceOptions.cs",
+      "sourceSha256": "3e7bda63cd8c322183ff9c7064eafb5f2a1c5f45d4a7b1e0b2c22b5df4526440",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "InstanceCapacity",
+          "signature": "public int InstanceCapacity",
+          "kind": "field"
+        },
+        {
+          "name": "QueueCapacity",
+          "signature": "public int QueueCapacity",
+          "kind": "field"
+        },
+        {
+          "name": "TraceCapacity",
+          "signature": "public int TraceCapacity",
+          "kind": "field"
+        },
+        {
+          "name": "StartupTimeout",
+          "signature": "public double StartupTimeout",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundSignalId",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundSignalId.cs",
+      "sourceSha256": "325c672cc554ddf746af0ef26cbc386def9b342f587fbe87cd19a1da36f71a4c",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "Name",
+          "signature": "public readonly string Name",
+          "kind": "field"
+        },
+        {
+          "name": "IsValid",
+          "signature": "public bool IsValid { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Equals",
+          "signature": "public bool Equals(SoundSignalId other)",
+          "kind": "method"
+        },
+        {
+          "name": "Equals",
+          "signature": "public override bool Equals(object obj)",
+          "kind": "method"
+        },
+        {
+          "name": "GetHashCode",
+          "signature": "public override int GetHashCode()",
+          "kind": "method"
+        },
+        {
+          "name": "ToString",
+          "signature": "public override string ToString()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundVoiceHandle",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundVoiceHandle.cs",
+      "sourceSha256": "eecb9235bf3386c96086f1605471af7f3feca7a649815c0eb47d7840087e0d4a",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "Slot",
+          "signature": "public readonly int Slot",
+          "kind": "field"
+        },
+        {
+          "name": "Generation",
+          "signature": "public readonly uint Generation",
+          "kind": "field"
+        },
+        {
+          "name": "SoundVoiceHandle",
+          "signature": "public SoundVoiceHandle(int slot, uint generation)",
+          "kind": "constructor"
+        },
+        {
+          "name": "IsValid",
+          "signature": "public bool IsValid { get; }",
+          "kind": "property"
+        }
+      ]
+    },
+    {
+      "name": "SoundVoiceRequest",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundVoiceRequest.cs",
+      "sourceSha256": "556ef5f9ff7349bec6dbcd4af8b2951fc8c80a94611555e74a60c6d3fd3999ce",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "Clip",
+          "signature": "public AudioClip Clip",
+          "kind": "field"
+        },
+        {
+          "name": "Settings",
+          "signature": "public SoundEventSettings Settings",
+          "kind": "field"
+        },
+        {
+          "name": "Position",
+          "signature": "public Vector3 Position",
+          "kind": "field"
+        },
+        {
+          "name": "Follow",
+          "signature": "public Transform Follow",
+          "kind": "field"
+        },
+        {
+          "name": "Volume",
+          "signature": "public float Volume",
+          "kind": "field"
+        },
+        {
+          "name": "Speed",
+          "signature": "public float Speed",
+          "kind": "field"
+        },
+        {
+          "name": "FadeIn",
+          "signature": "public float FadeIn",
+          "kind": "field"
+        },
+        {
+          "name": "Loop",
+          "signature": "public bool Loop",
+          "kind": "field"
+        },
+        {
+          "name": "StartAt",
+          "signature": "public double StartAt",
+          "kind": "field"
+        }
+      ]
+    },
+    {
+      "name": "SoundVoiceState",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundVoiceState.cs",
+      "sourceSha256": "64f7dfeb28d79201dab0ab8cddb4c49afa9cac0d509242140a6c9b604ee72f34",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Free",
+          "signature": "Free",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Scheduled",
+          "signature": "Scheduled",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Playing",
+          "signature": "Playing",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Paused",
+          "signature": "Paused",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Fading",
+          "signature": "Fading",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundBus",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs",
+      "sourceSha256": "db8ba2da341aa5d0e21577ef53d1fd8bc346a7c873ea1da4436588998203cfd0",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Notifications",
+          "signature": "public static SoundNotifications Notifications { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Dispatch",
+          "signature": "public static SoundPlayResult Dispatch(in SoundRequest request)",
+          "kind": "method"
+        },
+        {
+          "name": "Play",
+          "signature": "public static SoundPlayResult Play(SoundKey key, in SoundPlayContext context = default)",
+          "kind": "method"
+        },
+        {
+          "name": "Play",
+          "signature": "public static SoundPlayResult Play(SoundKey key, Vector3 position)",
+          "kind": "method"
+        },
+        {
+          "name": "Play",
+          "signature": "public static SoundPlayResult Play(SoundKey key, Transform follow)",
+          "kind": "method"
+        },
+        {
+          "name": "Play",
+          "signature": "public static SoundPlayResult Play(SoundEvent sound, in SoundPlayContext context = default)",
+          "kind": "method"
+        },
+        {
+          "name": "Stop",
+          "signature": "public static bool Stop(SoundHandle handle, float fade = .1f)",
+          "kind": "method"
+        },
+        {
+          "name": "StopAll",
+          "signature": "public static int StopAll(Object source, float fade = .1f)",
+          "kind": "method"
+        },
+        {
+          "name": "SetFloat",
+          "signature": "public static bool SetFloat(SoundHandle handle, SoundParameterId parameter, float value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetFloat",
+          "signature": "public static bool SetFloat(SoundHandle handle, string name, float value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetFloat",
+          "signature": "public static int SetFloat(Object source, string name, float value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetParameter",
+          "signature": "public static bool SetParameter(SoundHandle handle, SoundParameterId parameter, SoundValue value)",
+          "kind": "method"
+        },
+        {
+          "name": "SendSignal",
+          "signature": "public static bool SendSignal(SoundHandle handle, SoundSignalId signal)",
+          "kind": "method"
+        },
+        {
+          "name": "SendSignal",
+          "signature": "public static bool SendSignal(SoundHandle handle, string signal)",
+          "kind": "method"
+        },
+        {
+          "name": "SendSignal",
+          "signature": "public static int SendSignal(Object source, string signal)",
+          "kind": "method"
+        },
+        {
+          "name": "IsAlive",
+          "signature": "public static bool IsAlive(SoundHandle handle)",
+          "kind": "method"
+        },
+        {
+          "name": "SetPaused",
+          "signature": "public static bool SetPaused(SoundHandle handle, bool paused)",
+          "kind": "method"
+        },
+        {
+          "name": "TryResolve",
+          "signature": "public static bool TryResolve(SoundKey key, out SoundEvent sound)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundCatalogue",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundCatalogue.cs",
+      "sourceSha256": "8b6f3ea15462a48f9749e873dd68118d4c0a7561811fa16ba3ea2efe983ae38b",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Collect",
+          "signature": "public static List<SoundCatalogueEntry> Collect(SoundEvent[] events, SoundLibrary[] libraries, List<string> diagnostics = null)",
+          "kind": "method"
+        },
+        {
+          "name": "Contains",
+          "signature": "public static bool Contains(List<SoundCatalogueEntry> catalogue, SoundEvent sound)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundCatalogueEntry",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundCatalogueEntry.cs",
+      "sourceSha256": "02313a177b81c0f6391070af15da3b12f3c3369e8ba2a1a1d01f726cec9f60f9",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "Sound",
+          "signature": "public readonly SoundEvent Sound",
+          "kind": "field"
+        },
+        {
+          "name": "Key",
+          "signature": "public readonly SoundKey Key",
+          "kind": "field"
+        },
+        {
+          "name": "SoundCatalogueEntry",
+          "signature": "public SoundCatalogueEntry(SoundEvent sound, SoundKey key)",
+          "kind": "constructor"
+        }
+      ]
+    },
+    {
+      "name": "SoundKey",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundKey.cs",
+      "sourceSha256": "7c439b02df0f607c6b36e7b13c87a496cb34688e24c65774b2767cccba2afb79",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "SoundKey",
+          "signature": "public SoundKey(string name)",
+          "kind": "constructor"
+        },
+        {
+          "name": "Name",
+          "signature": "public string Name { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "IsValid",
+          "signature": "public bool IsValid { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "implicit operator",
+          "signature": "public static implicit operator SoundKey(string name)",
+          "kind": "operator"
+        },
+        {
+          "name": "Equals",
+          "signature": "public bool Equals(SoundKey other)",
+          "kind": "method"
+        },
+        {
+          "name": "Equals",
+          "signature": "public override bool Equals(object other)",
+          "kind": "method"
+        },
+        {
+          "name": "GetHashCode",
+          "signature": "public override int GetHashCode()",
+          "kind": "method"
+        },
+        {
+          "name": "ToString",
+          "signature": "public override string ToString()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundListeners",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundListeners.cs",
+      "sourceSha256": "bcdaab22bec2528e2baf7b398a40bb0b34add40aecb5d0461945e008ffe99aa8",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Active",
+          "signature": "public static SoundListener Active { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Conflict",
+          "signature": "public static AudioListener Conflict { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "ListeningObject",
+          "signature": "public static AudioListener ListeningObject { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Diagnostic",
+          "signature": "public static string Diagnostic { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "MakeActive",
+          "signature": "public static bool MakeActive(SoundListener listener)",
+          "kind": "method"
+        },
+        {
+          "name": "Recheck",
+          "signature": "public static void Recheck()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundNotifications",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundNotifications.cs",
+      "sourceSha256": "790adca04135920447c33579e56c31edb25446d0058b47afdaf5f98bedfb1c87",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "ListenerCount",
+          "signature": "public int ListenerCount { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Subscribe",
+          "signature": "public IDisposable Subscribe(Action<SoundNotification> listener)",
+          "kind": "method"
+        },
+        {
+          "name": "Unsubscribe",
+          "signature": "public bool Unsubscribe(Action<SoundNotification> listener)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundRequestKind",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundRequest.cs",
+      "sourceSha256": "1d8fc8947f729ade0f05ff4b05f8be70ea1a4f2d4a18f936119aafdb5d24c448",
+      "kind": "EnumDeclaration",
+      "members": [
+        {
+          "name": "Play",
+          "signature": "Play",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Stop",
+          "signature": "Stop",
+          "kind": "enum-value"
+        },
+        {
+          "name": "StopAll",
+          "signature": "StopAll",
+          "kind": "enum-value"
+        },
+        {
+          "name": "SetParameter",
+          "signature": "SetParameter",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Signal",
+          "signature": "Signal",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Pause",
+          "signature": "Pause",
+          "kind": "enum-value"
+        },
+        {
+          "name": "Resume",
+          "signature": "Resume",
+          "kind": "enum-value"
+        }
+      ]
+    },
+    {
+      "name": "SoundRequest",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundRequest.cs",
+      "sourceSha256": "1d8fc8947f729ade0f05ff4b05f8be70ea1a4f2d4a18f936119aafdb5d24c448",
+      "kind": "StructDeclaration",
+      "members": [
+        {
+          "name": "Kind",
+          "signature": "public SoundRequestKind Kind { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Key",
+          "signature": "public SoundKey Key { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Sound",
+          "signature": "public SoundEvent Sound { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Context",
+          "signature": "public SoundPlayContext Context { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Handle",
+          "signature": "public SoundHandle Handle { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Parameter",
+          "signature": "public SoundParameterId Parameter { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Value",
+          "signature": "public SoundValue Value { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Signal",
+          "signature": "public SoundSignalId Signal { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Fade",
+          "signature": "public float Fade { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Source",
+          "signature": "public UnityEngine.Object Source { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Play",
+          "signature": "public static SoundRequest Play(SoundKey key, in SoundPlayContext context = default)",
+          "kind": "method"
+        },
+        {
+          "name": "Play",
+          "signature": "public static SoundRequest Play(SoundEvent sound, in SoundPlayContext context = default)",
+          "kind": "method"
+        },
+        {
+          "name": "Stop",
+          "signature": "public static SoundRequest Stop(SoundHandle handle, float fade = .1f)",
+          "kind": "method"
+        },
+        {
+          "name": "SetParameter",
+          "signature": "public static SoundRequest SetParameter(SoundHandle handle, SoundParameterId parameter, SoundValue value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetFloat",
+          "signature": "public static SoundRequest SetFloat(SoundHandle handle, SoundParameterId parameter, float value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetParameter",
+          "signature": "public static SoundRequest SetParameter(SoundHandle handle, string name, SoundValue value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetFloat",
+          "signature": "public static SoundRequest SetFloat(SoundHandle handle, string name, float value)",
+          "kind": "method"
+        },
+        {
+          "name": "SendSignal",
+          "signature": "public static SoundRequest SendSignal(SoundHandle handle, SoundSignalId signal)",
+          "kind": "method"
+        },
+        {
+          "name": "SendSignal",
+          "signature": "public static SoundRequest SendSignal(SoundHandle handle, string signal)",
+          "kind": "method"
+        },
+        {
+          "name": "Play",
+          "signature": "public static SoundRequest Play(SoundKey key, Transform follow)",
+          "kind": "method"
+        },
+        {
+          "name": "Play",
+          "signature": "public static SoundRequest Play(SoundKey key, in SoundPlayContext context, UnityEngine.Object source)",
+          "kind": "method"
+        },
+        {
+          "name": "StopAll",
+          "signature": "public static SoundRequest StopAll(UnityEngine.Object source, float fade = .1f)",
+          "kind": "method"
+        },
+        {
+          "name": "SetParameter",
+          "signature": "public static SoundRequest SetParameter(UnityEngine.Object source, string name, SoundValue value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetFloat",
+          "signature": "public static SoundRequest SetFloat(UnityEngine.Object source, string name, float value)",
+          "kind": "method"
+        },
+        {
+          "name": "SendSignal",
+          "signature": "public static SoundRequest SendSignal(UnityEngine.Object source, string signal)",
+          "kind": "method"
+        },
+        {
+          "name": "Pause",
+          "signature": "public static SoundRequest Pause(SoundHandle handle)",
+          "kind": "method"
+        },
+        {
+          "name": "Resume",
+          "signature": "public static SoundRequest Resume(SoundHandle handle)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundService",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Control.cs",
+      "sourceSha256": "0b77228ffab6e17ec9cfdff3e08bec588b51ee3e491868da95875d7d33468c28",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "IsAlive",
+          "signature": "public bool IsAlive(SoundHandle handle)",
+          "kind": "method"
+        },
+        {
+          "name": "SetFloat",
+          "signature": "public bool SetFloat(SoundHandle handle, SoundParameterId parameter, float value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetFloat",
+          "signature": "public bool SetFloat(SoundHandle handle, string name, float value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetParameter",
+          "signature": "public bool SetParameter(SoundHandle handle, SoundParameterId parameter, SoundValue value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetParameter",
+          "signature": "public bool SetParameter(SoundHandle handle, string name, SoundValue value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetInt",
+          "signature": "public bool SetInt(SoundHandle handle, string name, int value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetBool",
+          "signature": "public bool SetBool(SoundHandle handle, string name, bool value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetAsset",
+          "signature": "public bool SetAsset(SoundHandle handle, string name, AudioClip value)",
+          "kind": "method"
+        },
+        {
+          "name": "TryGetParameter",
+          "signature": "public bool TryGetParameter(SoundHandle handle, SoundParameterId parameter, out SoundParameterState value)",
+          "kind": "method"
+        },
+        {
+          "name": "TryGetParameter",
+          "signature": "public bool TryGetParameter(SoundHandle handle, string name, out SoundParameterState value)",
+          "kind": "method"
+        },
+        {
+          "name": "TryGetObservedValue",
+          "signature": "public bool TryGetObservedValue(SoundHandle handle, int node, out SoundValue value)",
+          "kind": "method"
+        },
+        {
+          "name": "GetNodeState",
+          "signature": "public SoundNodeState GetNodeState(SoundHandle handle, int index)",
+          "kind": "method"
+        },
+        {
+          "name": "SendSignal",
+          "signature": "public bool SendSignal(SoundHandle handle, SoundSignalId signal)",
+          "kind": "method"
+        },
+        {
+          "name": "SendSignal",
+          "signature": "public bool SendSignal(SoundHandle handle, string signal)",
+          "kind": "method"
+        },
+        {
+          "name": "SetPaused",
+          "signature": "public bool SetPaused(SoundHandle handle, bool pause)",
+          "kind": "method"
+        },
+        {
+          "name": "IsPaused",
+          "signature": "public bool IsPaused(SoundHandle handle)",
+          "kind": "method"
+        },
+        {
+          "name": "Stop",
+          "signature": "public bool Stop(SoundHandle handle, float fade = .1f)",
+          "kind": "method"
+        },
+        {
+          "name": "StopOwned",
+          "signature": "public int StopOwned(SoundOwnerToken owner, float fade = .1f)",
+          "kind": "method"
+        },
+        {
+          "name": "SetParameterOwned",
+          "signature": "public int SetParameterOwned(SoundOwnerToken owner, SoundParameterId parameter, SoundValue value)",
+          "kind": "method"
+        },
+        {
+          "name": "SendSignalOwned",
+          "signature": "public int SendSignalOwned(SoundOwnerToken owner, SoundSignalId signal)",
+          "kind": "method"
+        },
+        {
+          "name": "OwnerOf",
+          "signature": "public SoundOwnerToken OwnerOf(UnityEngine.Object target)",
+          "kind": "method"
+        },
+        {
+          "name": "TryGetOwner",
+          "signature": "public bool TryGetOwner(UnityEngine.Object target, out SoundOwnerToken owner)",
+          "kind": "method"
+        },
+        {
+          "name": "CreateOwner",
+          "signature": "public SoundOwnerToken CreateOwner(UnityEngine.Object target = null)",
+          "kind": "method"
+        },
+        {
+          "name": "ReleaseOwner",
+          "signature": "public void ReleaseOwner(SoundOwnerToken owner)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundService",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.cs",
+      "sourceSha256": "fdb57ca32ebed359150141f98e69725c9b1dcf2072552c76a21a6f36e6d19acc",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "SoundService",
+          "signature": "public SoundService(ISoundClock clock, ISoundVoiceBackend backend, SoundServiceOptions options = null)",
+          "kind": "constructor"
+        },
+        {
+          "name": "Session",
+          "signature": "public uint Session { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Ready",
+          "signature": "public bool Ready { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Trace",
+          "signature": "public SoundExecutionTrace Trace { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Paused",
+          "signature": "public bool Paused { get; set; }",
+          "kind": "property"
+        },
+        {
+          "name": "Notification",
+          "signature": "public event Action<SoundNotification> Notification",
+          "kind": "event"
+        },
+        {
+          "name": "LiveInstances",
+          "signature": "public int LiveInstances { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "QueuedInstances",
+          "signature": "public int QueuedInstances { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "ActiveVoices",
+          "signature": "public int ActiveVoices { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "RegisteredEvents",
+          "signature": "public int RegisteredEvents { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "OwnerCount",
+          "signature": "public int OwnerCount { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Dispose",
+          "signature": "public void Dispose()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundService",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Playback.cs",
+      "sourceSha256": "5d3e8be9e543507f6f666a5fa3becfb7c3426961837b32818effdfa5c4746c71",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "TryPlay",
+          "signature": "public SoundPlayResult TryPlay(SoundEvent sound, in SoundPlayContext context)",
+          "kind": "method"
+        },
+        {
+          "name": "TryPlay",
+          "signature": "public SoundPlayResult TryPlay(SoundEvent sound, in SoundPlayContext context, ReadOnlySpan<SoundFloatOverride> parameters)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundService",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Registration.cs",
+      "sourceSha256": "4f274657aeec1fc1b32e165fd3dd8d8837ffa344e9d34c7655203ec422277151",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Register",
+          "signature": "public bool Register(SoundEvent sound, out string diagnostic)",
+          "kind": "method"
+        },
+        {
+          "name": "Register",
+          "signature": "public bool Register(SoundEvent sound, SoundKey key, out string diagnostic)",
+          "kind": "method"
+        },
+        {
+          "name": "TryResolve",
+          "signature": "public bool TryResolve(SoundKey key, out SoundEvent sound)",
+          "kind": "method"
+        },
+        {
+          "name": "Unregister",
+          "signature": "public bool Unregister(SoundEvent sound, float fade = .1f)",
+          "kind": "method"
+        },
+        {
+          "name": "TryGetDefinition",
+          "signature": "public bool TryGetDefinition(SoundHandle handle, out CompiledSoundEvent definition)",
+          "kind": "method"
+        },
+        {
+          "name": "GetVoiceCount",
+          "signature": "public int GetVoiceCount(SoundHandle handle)",
+          "kind": "method"
+        },
+        {
+          "name": "BeginPreparation",
+          "signature": "public void BeginPreparation()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundService",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Tick.cs",
+      "sourceSha256": "91202db977b9be3df4d836ceba993dd4754c886b5e6afcf3ef86a86cc6a8c744",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Tick",
+          "signature": "public void Tick()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "SoundServices",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundServices.cs",
+      "sourceSha256": "cd326dea23f34dd304ceca1a73d6bdbc6d7a07a5b3a0342a0561967cafb50331",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Current",
+          "signature": "public static ISoundService Current { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "Changed",
+          "signature": "public static event Action<ISoundService> Changed",
+          "kind": "event"
+        },
+        {
+          "name": "Paused",
+          "signature": "public static bool Paused { get; set; }",
+          "kind": "property"
+        },
+        {
+          "name": "TryPlay",
+          "signature": "public static SoundPlayResult TryPlay(this SoundEvent sound, in SoundPlayContext context)",
+          "kind": "method"
+        },
+        {
+          "name": "TryPlay",
+          "signature": "public static SoundPlayResult TryPlay(this SoundEvent sound, in SoundPlayContext context, ReadOnlySpan<SoundFloatOverride> parameters)",
+          "kind": "method"
+        },
+        {
+          "name": "Stop",
+          "signature": "public static bool Stop(this SoundHandle handle, float fade = .1f)",
+          "kind": "method"
+        },
+        {
+          "name": "IsAlive",
+          "signature": "public static bool IsAlive(this SoundHandle handle)",
+          "kind": "method"
+        },
+        {
+          "name": "SetPaused",
+          "signature": "public static bool SetPaused(this SoundHandle handle, bool paused)",
+          "kind": "method"
+        },
+        {
+          "name": "IsPaused",
+          "signature": "public static bool IsPaused(this SoundHandle handle)",
+          "kind": "method"
+        },
+        {
+          "name": "SetFloat",
+          "signature": "public static bool SetFloat(this SoundHandle handle, SoundParameterId parameter, float value)",
+          "kind": "method"
+        },
+        {
+          "name": "SetFloat",
+          "signature": "public static bool SetFloat(this SoundHandle handle, string name, float value)",
+          "kind": "method"
+        },
+        {
+          "name": "SendSignal",
+          "signature": "public static bool SendSignal(this SoundHandle handle, SoundSignalId signal)",
+          "kind": "method"
+        },
+        {
+          "name": "SendSignal",
+          "signature": "public static bool SendSignal(this SoundHandle handle, string signal)",
+          "kind": "method"
+        },
+        {
+          "name": "CreateOwner",
+          "signature": "public static SoundOwnerToken CreateOwner(UnityEngine.Object target = null)",
+          "kind": "method"
+        },
+        {
+          "name": "StopOwned",
+          "signature": "public static int StopOwned(this SoundOwnerToken owner, float fade = .1f)",
+          "kind": "method"
+        },
+        {
+          "name": "ReleaseOwner",
+          "signature": "public static void ReleaseOwner(this SoundOwnerToken owner)",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "UnityAudioSourceBackend",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/UnityAudioSourceBackend.cs",
+      "sourceSha256": "0b9ed3dc1db78ab329c35a14ca91ebefce93ce03d160906ebe3609b3a534d1e0",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "UnityAudioSourceBackend",
+          "signature": "public UnityAudioSourceBackend(Transform parent, int capacity, ISoundClock clock, AudioMixerGroup defaultOutput = null)",
+          "kind": "constructor"
+        },
+        {
+          "name": "Capacity",
+          "signature": "public int Capacity { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "ListenerPaused",
+          "signature": "public bool ListenerPaused { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "FreeCount",
+          "signature": "public int FreeCount { get; }",
+          "kind": "property"
+        },
+        {
+          "name": "SyncFollowersInTick",
+          "signature": "public bool SyncFollowersInTick { get; set; }",
+          "kind": "property"
+        },
+        {
+          "name": "GetSource",
+          "signature": "public AudioSource GetSource(int slot)",
+          "kind": "method"
+        },
+        {
+          "name": "Prepare",
+          "signature": "public SoundClipReadiness Prepare(AudioClip clip)",
+          "kind": "method"
+        },
+        {
+          "name": "Play",
+          "signature": "public SoundVoiceHandle Play(in SoundVoiceRequest request)",
+          "kind": "method"
+        },
+        {
+          "name": "State",
+          "signature": "public SoundVoiceState State(SoundVoiceHandle voice)",
+          "kind": "method"
+        },
+        {
+          "name": "SetControls",
+          "signature": "public void SetControls(SoundVoiceHandle voice, float volume, float speed)",
+          "kind": "method"
+        },
+        {
+          "name": "Stop",
+          "signature": "public void Stop(SoundVoiceHandle voice, float fade)",
+          "kind": "method"
+        },
+        {
+          "name": "Pause",
+          "signature": "public void Pause(SoundVoiceHandle voice, bool paused)",
+          "kind": "method"
+        },
+        {
+          "name": "DetachFollow",
+          "signature": "public void DetachFollow(SoundVoiceHandle voice)",
+          "kind": "method"
+        },
+        {
+          "name": "Tick",
+          "signature": "public void Tick()",
+          "kind": "method"
+        },
+        {
+          "name": "SyncFollowers",
+          "signature": "public void SyncFollowers()",
+          "kind": "method"
+        },
+        {
+          "name": "StopAll",
+          "signature": "public void StopAll()",
+          "kind": "method"
+        },
+        {
+          "name": "Dispose",
+          "signature": "public void Dispose()",
+          "kind": "method"
+        }
+      ]
+    },
+    {
+      "name": "UnitySoundClock",
+      "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/UnitySoundClock.cs",
+      "sourceSha256": "e9e501fe686c4bfbee02a15dc9c83dfa7299254d14b046685f3d65df50fd14a9",
+      "kind": "ClassDeclaration",
+      "members": [
+        {
+          "name": "Now",
+          "signature": "public double Now { get; }",
+          "kind": "property"
+        }
+      ]
+    }
+  ]
+}

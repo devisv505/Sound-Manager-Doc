@@ -1,0 +1,65 @@
+---
+title: "Ask for an action. Hear when it ends."
+description: "Use a signal to trigger the horn and a notification to learn what happened to a play."
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundNotifications.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Tick.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+tags: [unity, setup, sound]
+---
+
+import { Code } from '@astrojs/starlight/components';
+import example from '../../../../examples/EngineSoundControls.cs?raw';
+import { sitePath } from '../../../lib/links';
+
+A **signal** asks an already running sound to do something. A **notification** tells your code what happened to a play. They travel in opposite directions.
+
+For example, send `Horn` to the Engine event to ask it to sound the horn. Listen for a terminal notification to know when the whole engine play ends. “Terminal” means that play has finished, been cancelled, or failed.
+
+## Send a signal to the right play
+
+This excerpt needs a retained Engine handle named `engine`:
+
+```csharp title="Ask the Engine graph for its horn · excerpt"
+bool accepted = SoundBus.SendSignal(engine, "Horn");
+```
+
+The graph must contain **On Signal** nodes with that exact name. A successful call queues the signal for the next service update. It does not start another Engine play. False means the play ended or is stopping, the signal name is missing, or its signal queue is full.
+
+For frequent signals, use `SoundBus.TryResolve` to find the registered event, then `eventAsset.GetSignalId("Horn")` once. Check the ID's `IsValid` property before using it. Signal IDs are resolved from events; the current key generator does not create a `SoundSignals` class.
+
+A graph that should wait for signals while otherwise silent needs **Keep alive** or other pending work. Otherwise it may finish before you send the signal.
+
+## Try the complete Engine example
+
+1. Set up a separate test scene with a manager and listener.
+2. Add `Samples/04-Engine/Engine.soundgraph` to the manager's **Direct events**, then generate keys.
+3. Save this code as **EngineSoundControls.cs** under `Assets/Scripts`. Attach it to an empty GameObject near the listener. No object references need to be assigned.
+4. Press Play. The engine starts. Change **Rpm** in the Inspector to hear its layers change.
+5. Open the component menu and choose **Sound horn**, **Pause engine**, **Resume engine**, or **Stop engine**. Use **Start engine** to start again after it ends.
+6. With the Console open, stop the engine and watch for the ending message. A normal explicit stop reports `Cancelled`; that label does not mean something went wrong.
+
+<Code code={example} lang="csharp" title="EngineSoundControls.cs · complete component" />
+
+This script controls audio only. It does not move a car. Use it in its own test scene rather than alongside the Engine demo's existing controller.
+
+## Understand the subscription
+
+`Subscribe` returns an `IDisposable`: a token with a `Dispose()` method that removes your callback. The component subscribes in `OnEnable` and disposes it in `OnDisable`. This prevents disabled components from continuing to receive messages.
+
+The bus reports **all** plays, including those started by other components. `message.Handle.Equals(engine)` filters for this script's engine. `message.IsTerminal` filters for an ending. The script then clears the saved handle so another start is allowed.
+
+`StopEngine()` deliberately keeps the handle until the ending notification arrives. Clearing it immediately would make that callback's handle comparison fail. During disable, the script unsubscribes first and then clears its own state.
+
+## Know when messages arrive
+
+The built-in service collects notifications and delivers them at the end of a service update on Unity's main thread. Subscribe before starting sounds, then save the accepted handle. Calls made from inside a notification callback can queue new work for a later update; avoid assuming it will run inside the callback.
+
+The bus follows a replacement active manager within the same play session. Your old handles still belong to the old service and become stale. Subscriptions are cleared when a new Unity play session starts.
+
+An immediate rejected play request usually gives you only its `SoundPlayResult`, because no play was admitted. Check that result even when you also subscribe to notifications. Later failures of admitted plays are reported as `Failed`.
+
+Read <a href={sitePath('api/notifications/')}>notification fields and kinds</a> or <a href={sitePath('guides/results-and-limits/')}>results and limits</a> for the exact meanings.

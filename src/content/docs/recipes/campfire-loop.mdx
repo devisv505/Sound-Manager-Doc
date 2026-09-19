@@ -14,16 +14,20 @@ import example from '../../../../examples/CampfireSound.cs?raw';
 import Explanation from '../../../components/Explanation.astro';
 import { sitePath } from '../../../lib/links';
 
-<Explanation label="RECIPE / LIFECYCLE" title="Let the graph own the sound's shape.">
+<Explanation label="RECIPE / START AND STOP" title="Give your sound a beginning and an ending.">
   Your component asks the fire to start and stop. The graph decides how ignition leads into crackle
   and how the ending sounds.
 </Explanation>
 
 ## Prerequisites
 
-Use an active `SoundManager` with the included Campfire event registered and the generated `Sounds.Campfire` key available to your script. This is the setup in <a href={sitePath('getting-started/')}>Your first sound</a>. Place the object within hearing distance of the listener.
+Complete <a href={sitePath('getting-started/')}>Your first sound</a> first. You need one enabled Sound Manager, the Campfire graph in its **Direct events** list, generated Sound Keys, and an Audio Listener near the object playing the sound.
 
-Save this as **CampfireSound.cs**, attach it to your sound-origin GameObject, and connect your input or buttons to `Ignite()` and `Extinguish()`. In the included demo, use its existing controller instead of attaching a second one to the same fire. This example controls audio only; the demo's particles and HUD are explained separately.
+Save this as **CampfireSound.cs** under `Assets/Scripts`. Create an empty GameObject named `Fire sound` near the listener and drag the script onto it. No fields need an Inspector reference. Remove the first tutorial's `FirstSound` component if you are reusing that object, so two components do not start the same fire.
+
+This component waits for you to call `Ignite()`; it does not play automatically. If your scene has a Unity UI Button, add an entry to the Button's **On Click** list, drag `Fire sound` into the object field, and choose **CampfireSound → Ignite()**. Wire a second button to **Extinguish()**. Your own interaction script can call the same methods. For a test that needs no button setup, use the complete first-sound tutorial instead.
+
+When you trigger Ignite, you should hear ignition followed by crackling. Extinguish fades it and plays an ending cue. This example creates no fire model or particles. Use the supplied demo's existing controller when trying its full visual scene.
 
 ## Complete component
 
@@ -31,7 +35,7 @@ Save this as **CampfireSound.cs**, attach it to your sound-origin GameObject, an
 
 ## Why these calls belong here
 
-`Ignite()` checks liveness before asking for another play, so repeated input does not stack loops. A handle's `IsValid` property alone would not answer whether playback has ended. The active/enabled check prevents an inactive component from starting a new loop.
+`Ignite()` checks whether its previous play is still alive before starting another, so repeated button presses do not stack loops. The handle identifies that play. Its `IsValid` property alone does not say whether the sound has finished; `SoundBus.IsAlive` does. The active/enabled check prevents a disabled component from starting a new loop.
 
 `Play(Sounds.Campfire, transform)` follows this transform and assigns its GameObject as owner. The success path retains the returned handle; a rejected request reports its actual status.
 
@@ -43,7 +47,7 @@ Save this as **CampfireSound.cs**, attach it to your sound-origin GameObject, an
 
 The call passes a fallback fade of `0.15f` seconds. In the supplied graph, `On Stop` explicitly reaches the ignition and crackle nodes' **Stop** ports, so those voices use their node fade-outs: **0.3 s** and **0.6 s**. Remaining pre-existing voices would use the requested fallback. The extinguish cue is a new release voice and is allowed to finish.
 
-This distinction comes from the current graph/runtime, even though the older sample comments describe the stop fade more broadly. Read the <a href={sitePath('demos/01-campfire/#read-the-graph')}>graph walkthrough</a> alongside this example.
+Think of the API fade as the fallback, and the graph's explicit Stop connections as more specific instructions. Read the <a href={sitePath('demos/01-campfire/#read-the-graph')}>graph walkthrough</a> alongside this example.
 
 ## Change the fire's intensity
 

@@ -1,6 +1,7 @@
 # DEV505 Sound Manager — documentation website specification
 
-Status: specification baseline; M1 implemented on 19 September 2026. See the roadmap and `validation/M1.md` for current progress.  
+Status: specification baseline; M1 and M2 implemented on 19 September 2026. See the roadmap and [M2 validation report](validation/M2.md) for current progress.
+
 Prepared: 19 September 2026.  
 Companion: [Implementation roadmap](ROADMAP.md).
 
@@ -20,7 +21,7 @@ Version-one deliverables:
 - A standalone static build, local preview commands, and a GitHub Pages deployment workflow.
 - A contributor guide explaining how to update content, validate examples, recapture screenshots, and release a new documentation revision.
 
-The initial planning step created `SPEC.md` and `ROADMAP.md`. M1 now implements the foundation and Campfire slice; the remaining scope is tracked by the implementation milestones in the roadmap.
+The initial planning step created `SPEC.md` and `ROADMAP.md`. M1 implements the foundation and Campfire slice. M2 adds the beginner setup path, core concepts, and consumer API; the remaining scope is tracked by the implementation milestones in the roadmap.
 
 ## 2. Source of truth and versioning
 
@@ -68,6 +69,23 @@ Published pages must use site-relative links or verified repository URLs, never 
 
 No account or login is required to read, search, copy examples, or view screenshots. English is the initial documentation language, matching the existing HUD titles.
 
+### Writing for someone new to Unity — required in every stage
+
+Write in clear, natural English for a reader who may be new to both Unity and Sound Manager. This applies to every milestone and every reader-facing part of the site: setup steps, API explanations, demo walkthroughs, code comments, captions, navigation labels, and troubleshooting. Review existing M1 pages against this requirement as the documentation expands.
+
+- Start with what the reader wants to do and what they will see or hear. Explain one idea at a time with short sentences and familiar words.
+- Explain Unity and audio terms when they first appear on a page. For example, describe a GameObject as an object in the scene and the Inspector as the panel where its settings appear. Link to a fuller explanation when useful; a glossary must not be required just to follow a step.
+- Use the same plain explanation for Sound Manager concepts throughout the site. Introduce a parameter as a value the sound graph can read, such as the surface under a foot. Explain a handle as a value saved after starting a sound so the code can control that particular play.
+- Give concrete, numbered setup steps. Name the window or menu to open, the object or asset to select, the setting to change, and any field where a reference must be assigned. Avoid instructions such as “configure the context” without showing how.
+- Before each code example, explain what must already exist. For complete scripts, state the filename, where to put the script, which object to attach it to, which Inspector fields to fill in, and how to try it. Explain the important lines after the example. Clearly label short excerpts that cannot run on their own.
+- End each practical sequence with the expected result and a simple check if it does not work. For demos, connect the control the reader uses to the sound they hear and the setting or code that caused it.
+- Keep exact API names, signatures, units, defaults, and behavior accurate. Put detailed reference information after the plain explanation, and identify advanced sections with links to their prerequisites.
+- Use helpful, conversational wording. Avoid unexplained acronyms, dense strings of technical terms, and phrases such as “obviously”, “simply”, or “just” that dismiss a beginner's difficulty.
+
+For example, introduce `.Following(bee)` with: “The buzzing sound moves with the bee. Pass the bee's Transform—the component that stores its position—to tell Sound Manager which object to follow.” Then explain the exact API behavior and any required setup.
+
+Every stage's content review must answer: Can someone new to Unity tell where to start, what to click or change, where the code belongs, what should happen, and what to check if it does not? Revise unclear passages before marking that stage complete.
+
 ## 4. Static architecture and hosting
 
 Use **Astro with Starlight**, Markdown/MDX content, local image assets, and custom theme/components. Use its static output and built-in Pagefind search. There is no application server, database, paid search service, or runtime connection to Unity. Pagefind indexing is checked against a production build, since the development server is not the final search environment. See the [Starlight search documentation](https://starlight.astro.build/guides/site-search/).
@@ -78,7 +96,7 @@ Select compatible stable framework versions and a supported Node LTS version whe
 
 GitHub Pages is the hosting target. A public documentation repository supports free Pages hosting; private-repository eligibility depends on the account plan. Keep this documentation project independent of the Unity source repository. See [GitHub Pages limits and availability](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits).
 
-Proposed repository name: `Sound-Manager-Doc`. Based on the current source repository owner, the proposed URL is `https://devisv505.github.io/Sound-Manager-Doc/`. This is a configuration proposal, not an existing deployment.
+Repository name: `Sound-Manager-Doc`. The configured URL is `https://devisv505.github.io/Sound-Manager-Doc/`. The M1 site was published through GitHub Actions after replacing the default Jekyll build. M2 is validated locally; publishing later changes remains a separate release step.
 
 Configure Astro `site` for the actual Pages origin and `base` for the repository subpath. Internal links, images, search assets, canonical URLs, and the sitemap must all work under that subpath. Direct navigation and refresh on nested pages must work without SPA rewrite rules. Follow the [official Astro GitHub Pages guide](https://docs.astro.build/en/guides/deploy/github/).
 
@@ -351,6 +369,7 @@ Performance targets: optimized route images, lazy loading below the fold, self-h
 
 Validation must cover:
 
+- A beginner reading review using the writing requirements in section 3: explained terms, explicit prerequisites, actionable steps, code placement, expected results, and helpful troubleshooting.
 - Clean `npm ci`, framework/content checks, and static build from a fresh documentation checkout.
 - Internal routes, API anchors, captions, source references, and image paths; no production link to a local filesystem path.
 - The actual `/Sound-Manager-Doc/` base path, including search, direct nested-page refresh, canonical URLs, and 404 handling.
@@ -368,4 +387,4 @@ Completion requires all ten detailed pages, current Unity screenshots and graph 
 
 Out of scope for this release: changing Sound Manager itself, rebuilding its demo models, adding new demo scenes, WebGL ports, a browser graph editor, cloud accounts/backends, paid hosting, automatic API-doc publishing from an unreviewed source update, and translating the whole site. These can be separate follow-up projects.
 
-Implementation can proceed using the choices in this specification. The actual repository owner/name and Pages configuration must be verified when deployment is undertaken; no remote repository or live site has been created as part of M1.
+Implementation can proceed using the choices in this specification. The documentation repository and GitHub Actions Pages configuration were established for M1 publication. Verify them again when publishing later revisions; local milestone completion alone does not publish the site.

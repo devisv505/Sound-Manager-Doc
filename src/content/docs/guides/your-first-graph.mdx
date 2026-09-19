@@ -1,0 +1,59 @@
+---
+title: "Make your first sound graph."
+description: "Connect one recording to one playback node, save it, and register the result."
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraphCreation.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundGraphBlackboard.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundGraphImporterInspector.cs
+tags: [unity, setup, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+
+A **sound graph** is a set of connected nodes that describes a sound. A node is one block in the graph. Its **ports** are the connection points on that block.
+
+This guide makes one short sound with a clear beginning and end. Keep a scene with a working manager and Audio Listener from <a href={sitePath('getting-started/')}>Your first sound</a>.
+
+## 1. Create the asset
+
+1. Choose a folder in the Project window.
+2. Use **Assets → Create → DEV505 → Sound Manager → Sound Event Graph**.
+3. Name it `FirstChime`, then double-click it to open the graph editor.
+
+The new graph contains **On Start**. This node runs when code starts a play of this event.
+
+## 2. Add a recording and a playback node
+
+1. Open the graph's node creation menu on empty graph space and add **Wave Asset** and **Play Audio**.
+2. On **Wave Asset**, assign a short AudioClip to **Asset**. An AudioClip is Unity's imported audio recording. Use a recording already imported into your project.
+3. For this first test, keep the whole recording. To use only part of it later, edit the wave's **Start** and **Length** or its trim-range control.
+4. Connect **Wave Asset → Asset** to **Play Audio → Audio Source**.
+5. Connect **On Start → Out** to **Play Audio → Play**. Leave looping off on Play Audio.
+
+These two connections have different jobs. The asset connection tells Play Audio **which recording** to use. The On Start connection tells it **when to play**. A recording connected without a Play trigger stays silent.
+
+## 3. Save and check it
+
+Save the graph. Select `FirstChime.soundgraph` in the Project window and check its Inspector for errors. Unity imports the saved graph as a `SoundEvent`, the runtime form used by the manager.
+
+Leave **Spatial audio → Spatial blend** at `0` for this first sound. A 2D sound keeps the same level when the listener moves. If you change event settings in this Inspector, click **Apply** to save them.
+
+## 4. Register and play it
+
+1. Add `FirstChime.soundgraph` to your manager's **Direct events** list before entering Play Mode.
+2. Run **Tools → DEV505 → Sound Manager → Generate Sound Keys**.
+3. In a copy of the complete `FirstSound` component, change `Sounds.Campfire` to the generated key `Sounds.FirstChime`. Give the copied class and its file the same new name if you keep both scripts.
+4. Attach your script to an empty GameObject and press **Play**.
+
+You should hear the recording once. When it finishes and no graph work remains, the play ends. If nothing plays, check both connections, the clip assignment, the saved graph diagnostic, and the manager's **Event keys**.
+
+## Add a value you can change
+
+The graph's **Parameters** panel has **+ Float**, **+ Int**, **+ Bool**, and **+ Asset** buttons. A parameter is a named value your code can supply.
+
+For a volume control, click **+ Float**. This also adds a **Float Parameter** node to the graph. Name the parameter `Loudness`, set **Min** to `0`, **Max** to `1`, and **Default** to `0.5`. Connect that node's **Value** output to the Play Audio node's **Volume** input. Save and regenerate names. Your project will then have `SoundParameters.FirstChime.Loudness` if you used these exact names.
+
+Read <a href={sitePath('guides/parameters/')}>Change sounds with parameters</a> to supply the starting value and change it while the sound runs. The <a href={sitePath('demos/01-campfire/#read-the-graph')}>Campfire graph walkthrough</a> shows the next step: a starting cue, a loop, and an ending cue.

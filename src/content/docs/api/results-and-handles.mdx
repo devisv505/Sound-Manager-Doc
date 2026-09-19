@@ -1,0 +1,62 @@
+---
+title: "Results and handles"
+description: "Read whether a request was accepted and keep control of the play it created."
+kind: api
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayResult.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayStatus.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundHandle.cs
+tags: [unity, setup, sound]
+---
+
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+import { sitePath } from '../../../lib/links';
+
+
+`SoundPlayResult` answers a request. Its `Handle` identifies the admitted play. These are ordinary C# values, not components to attach to a GameObject.
+
+## SoundPlayResult
+
+```csharp title="Check and remember a play · excerpt"
+var result = SoundBus.Play(Sounds.Campfire, transform);
+if (result.Accepted)
+    fire = result.Handle;
+else
+    Debug.LogWarning($"Campfire: {result.Status}");
+```
+
+This belongs in a component method with a `SoundHandle fire` field and a registered Campfire event. The <a href={sitePath('recipes/campfire-loop/')}>complete component</a> includes cleanup.
+
+`Status` contains the answer. `Accepted` is true for `Accepted` and `Queued`. `Handle` is normally valid for an admitted play; a successful object-wide control command may have no single handle. The constructor `SoundPlayResult(status, handle = default)` only packages values. It does not start playback.
+
+An admitted play may be silent, waiting, or fail later. Subscribe to notifications when you need to observe those later changes. An immediate rejection usually has no play to send an ending notification.
+
+<ApiSignatures type="SoundPlayResult" />
+
+## SoundPlayStatus
+
+<ApiSignatures type="SoundPlayStatus" />
+
+The <a href={sitePath('guides/results-and-limits/#read-the-status-first')}>status table</a> explains every value and what to check. `ConcurrencyLimit` can describe a new refusal or the reason an existing play was replaced. A regular explicit stop produces a `Cancelled` notification with reason `Accepted`.
+
+For `Dispatch` control commands, `Accepted` means at least one target accepted the operation. A failure commonly becomes `NoTarget`, including some invalid parameter/signal/fade requests. Do not interpret it only as “the handle never existed.”
+
+## SoundHandle
+
+A handle combines `Session`, `Slot`, and `Generation`. The session identifies the service; the slot identifies its internal entry; the generation distinguishes later plays that reuse that slot. Keep the handle returned by playback. Do not make your own using its public constructor or persist it in a saved game.
+
+`IsValid` checks nonzero session and generation. It is not an alive check and does not fully validate an arbitrary manually constructed slot. Use `SoundBus.IsAlive(handle)` or the extension `handle.IsAlive()` to query the current service.
+
+`Equals(SoundHandle)` and `Equals(object)` compare all three values. `GetHashCode()` supports dictionary/set lookups. `ToString()` produces a diagnostic `session/slot:generation` string; it is not a reusable event key.
+
+```csharp title="Ignore another play's notification · excerpt"
+if (!message.Handle.Equals(fire))
+    return;
+```
+
+This line belongs in a notification callback receiving `SoundNotification message`. The complete subscription pattern appears in <a href={sitePath('guides/signals-and-notifications/')}>the signals and notifications guide</a>.
+
+<ApiSignatures type="SoundHandle" />
+
+A finished handle cannot control a new play or a replacement manager. Its liveness query returns false; control helpers normally return false or `NoTarget`. A queued, paused, or stopping play can remain alive. See <a href={sitePath('guides/stop-and-pause/')}>stop and pause</a> for those distinctions.

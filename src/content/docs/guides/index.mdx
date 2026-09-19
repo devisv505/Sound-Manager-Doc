@@ -1,0 +1,28 @@
+---
+title: "Build your sound knowledge."
+description: "A practical reading path from one sound to a controlled, moving sound system."
+kind: index
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayContext.cs
+tags: [unity, setup, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+
+Start with one audible sound, then add the behavior your game needs. Each guide explains the idea before the API details.
+
+| What you want to do | Read next |
+| --- | --- |
+| Hear a sound in a new scene | <a href={sitePath('getting-started/')}>Your first sound</a> |
+| Organize events and generate code names | <a href={sitePath('guides/setup-and-keys/')}>Managers, libraries, and keys</a> |
+| Build a sound from one recording | <a href={sitePath('guides/your-first-graph/')}>Make your first sound graph</a> |
+| Understand event, play, voice, and handle | <a href={sitePath('guides/events-plays-voices/')}>What happens when a sound plays?</a> |
+| Choose a surface or change volume/speed | <a href={sitePath('guides/parameters/')}>Change sounds with parameters</a> |
+| Move a sound and manage its owner | <a href={sitePath('guides/position-and-ownership/')}>Where a sound is, and who owns it</a> |
+| Stop a loop or pause your game audio | <a href={sitePath('guides/stop-and-pause/')}>Stop, pause, and clean up</a> |
+| Trigger a horn or react to an ending | <a href={sitePath('guides/signals-and-notifications/')}>Ask for an action. Hear when it ends.</a> |
+| Fix a refused or silent play | <a href={sitePath('guides/results-and-limits/')}>When a sound does not start</a> |
+
+The examples use the supplied demo events and their generated `Sounds.*` keys. If you create your own graphs, regenerate keys and use the names and parameter types your graphs declare. The <a href={sitePath('api/')}>API reference</a> gives exact signatures once you know the idea you need.

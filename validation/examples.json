@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
+  "unityVersion": "6000.6.0f1",
+  "compiledAt": "2026-09-19T20:38:07.847662Z",
+  "compilation": {
+    "success": true,
+    "diagnostics": [],
+    "method": "Unity CLI run_script in-memory compilation of the four complete example components plus the M2 harness."
+  },
+  "runtimeReport": "validation/m2-unity-runtime.json",
+  "runtimeHarness": "validation/VerifyM2Examples.cs.txt",
+  "examples": [
+    {
+      "file": "examples/CampfireSound.cs",
+      "sha256": "7f3df98790bb90fd0173151d70cfcf3903db5b232af254a49f660c509f9b9c22",
+      "compiled": true,
+      "runtimeReport": "validation/campfire-example.json",
+      "scope": "Existing M1 lifecycle checks plus M2 recompile."
+    },
+    {
+      "file": "examples/EngineSoundControls.cs",
+      "sha256": "476d452930e5c74ec88ac3672f1c88309a579633ee3480d625f681cb4fe01c9f",
+      "compiled": true,
+      "runtimeReport": "validation/m2-unity-runtime.json",
+      "scope": "M2 actual Play Mode component behavior and cleanup checks."
+    },
+    {
+      "file": "examples/FirstSound.cs",
+      "sha256": "499c935abc16a43c9a5d180d2e406adcf1fd332203a57dfd302bc936c4049bea",
+      "compiled": true,
+      "runtimeReport": "validation/m2-unity-runtime.json",
+      "scope": "M2 actual Play Mode component behavior and cleanup checks."
+    },
+    {
+      "file": "examples/MovingBeeSound.cs",
+      "sha256": "37acc59f040e4dcb73e71c5b13c87b71d18c671d70e953dda639dcd38e73f547",
+      "compiled": true,
+      "runtimeReport": "validation/m2-unity-runtime.json",
+      "scope": "M2 actual Play Mode component behavior and cleanup checks."
+    }
+  ]
+}

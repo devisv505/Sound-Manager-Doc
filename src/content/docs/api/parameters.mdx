@@ -1,0 +1,90 @@
+---
+title: "Parameter values and IDs"
+description: "Choose the correct type, set initial values, and inspect smoothing."
+kind: api
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundValue.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundParameterId.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundFloatOverride.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundParameterOverride.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundParameterState.cs
+tags: [unity, setup, sound]
+---
+
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+import { sitePath } from '../../../lib/links';
+
+
+A parameter ID identifies a declared graph value. A `SoundValue` carries its value and type. Start with <a href={sitePath('guides/parameters/')}>the parameter guide</a> before using this reference.
+
+## SoundParameterId
+
+Use `SoundParameters.Campfire.Intensity` or resolve a name once with `eventAsset.GetParameterId("Intensity")`. The generated fields and resolved IDs use stable identities so moving or renaming a declaration does not silently retarget a cached ID. An ID with a stable identity will not fall back to a different parameter merely because its old name matches.
+
+`Name` is the remembered name. `IsValid` means the name was resolved to a declared slot; it is false for a default or unresolved ID. String overloads use name-only IDs internally, which can still match when applied. `Declared(name, index, stableId)` is public for generated code: `index` is zero-based and the stable ID comes from the graph. Prefer generation over inventing these values.
+
+`Equals(SoundParameterId)` and `Equals(object)` compare stable IDs, or names when no stable ID exists, using case-sensitive comparison. `GetHashCode` follows that identity. `ToString` returns `Name`.
+
+<ApiSignatures type="SoundParameterId" />
+
+## SoundValue and SoundParameterType
+
+Build values with the factory matching the declared type:
+
+```csharp title="Update a running Workshop · excerpt"
+bool changed = SoundBus.SetParameter(
+    workshop, SoundParameters.Workshop.Tool, SoundValue.Int(2));
+```
+
+This excerpt requires a retained Workshop handle named `workshop`. It changes the Tool value to Drill; the graph still needs its own signal or flow to act on the choice. It does not create a new play.
+
+`Float(float)` stores `type = Float` and `number`; `Int(int)` stores `integer`; `Bool(bool)` stores `boolean`; `Asset(AudioClip)` stores `asset`. Each returns a value. Only the field matching `type` is meaningful. The factories themselves do not validate a graph's restrictions; validation happens when you submit the value.
+
+`ToString()` formats the active value for a log: a number, a bool, the clip name, or `None` for an empty clip. Do not use this display text to serialize parameters.
+
+<ApiSignatures type="SoundValue" />
+<ApiSignatures type="SoundParameterType" />
+
+## Initial override arrays
+
+`SoundFloatOverride` stores `Parameter` and `Value`. Its constructors accept either a parameter ID or a name plus a Float. `Name` returns `Parameter.Name`. Use its array in `context.Parameters` or its span in the service's extra-parameter overload.
+
+`SoundParameterOverride` stores a typed `Value` and `Parameter`. Its public constructor takes **a string name** and `SoundValue`. The ID-taking constructor is internal; use `context.With(generatedId, value)` for a small typed list with generated IDs.
+
+```csharp title="Initial Engine values · excerpt"
+var context = SoundPlayContext.At(transform.position);
+context.Parameters = new[]
+{
+    new SoundFloatOverride(SoundParameters.Engine.Rpm, 0.25f)
+};
+context.TypedParameters = new[]
+{
+    new SoundParameterOverride("Load", SoundValue.Float(0.5f))
+};
+var result = SoundBus.Play(Sounds.Engine, context);
+```
+
+This is a component-method excerpt with Engine registered. Both arrays are read during the call and not retained. The typed array overrides matching entries from the Float array; `With` entries apply after both. All entries must be acceptable to the event.
+
+<ApiSignatures type="SoundFloatOverride" />
+<ApiSignatures type="SoundParameterOverride" />
+
+## SoundParameterState
+
+`Current` is the typed value the graph reads now. `Target` is its requested value. They differ while a Float with a positive rise/fall rate is moving toward its target. The constructor stores the two values; it does not change a play.
+
+```csharp title="Read a live Campfire parameter · excerpt"
+var service = SoundServices.Current;
+if (service != null && service.TryGetParameter(
+        fire, SoundParameters.Campfire.Intensity, out var state))
+{
+    Debug.Log($"Now: {state.Current.number}, target: {state.Target.number}");
+}
+```
+
+Here `fire` is a saved Campfire handle. Check the bool before reading the output. A wrong parameter or ended play returns false. `number` is appropriate because Intensity is a Float; read the matching field for other types.
+
+<ApiSignatures type="SoundParameterState" />
+
+Call playback setters and queries on Unity's main thread. Unknown parameters and refused values return false from live setters; initial invalid overrides reject the play. See <a href={sitePath('api/services/')}>service overloads</a> for `SetInt`, `SetBool`, `SetAsset`, and owner-wide changes.

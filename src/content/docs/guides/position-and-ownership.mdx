@@ -1,0 +1,80 @@
+---
+title: "Where a sound is, and who owns it."
+description: "Place a sound once, follow a moving object, and decide what happens when that object disappears."
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundFollowSync.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/UnityAudioSourceBackend.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Tick.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Control.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundListener.cs
+tags: [unity, setup, sound]
+---
+
+import { Code } from '@astrojs/starlight/components';
+import example from '../../../../examples/MovingBeeSound.cs?raw';
+import { sitePath } from '../../../lib/links';
+
+A footstep should stay where the foot landed. A bee's buzzing should move with the bee. An **owner** answers a different question: which object or group is responsible for this play?
+
+## Hear from one place
+
+Unity's **Audio Listener** acts as your ears in the scene. Its position and rotation determine the direction and distance of a 3D sound. It is often on the camera or player. Keep one active Audio Listener across the loaded scenes.
+
+Sound Manager's optional **Sound Listener** component manages switching between listening viewpoints. Add it to the same GameObject as an Audio Listener. Use its `MakeActive()` method to switch viewpoints. An enabled Audio Listener without a Sound Listener blocks managed handover; add the wrapper there or disable that unwanted listener, then recheck.
+
+In the event asset's Inspector, **Spatial audio → Spatial blend** controls whether position matters: `0` is 2D, `1` is fully 3D. **Min distance**, **Max distance**, and **Rolloff** control how volume falls with distance. Max distance is where that falloff stops changing, not a universal “silent beyond here” rule. See [Unity's AudioSource reference](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/AudioSource.html) for the underlying audio component.
+
+## A fixed position
+
+This excerpt belongs in a component method with Footstep registered:
+
+```csharp title="Keep the footstep where it happened · excerpt"
+var context = SoundPlayContext.At(transform.position)
+    .With(SoundParameters.Footstep.Surface, 0);
+SoundBus.Play(Sounds.Footstep, context);
+```
+
+`At` copies the position at the time of the call. Moving that object afterward does not move this sound. `SoundBus.Play(key, position)` is the shorter overload when you do not need initial parameters.
+
+## Follow a moving object
+
+`SoundPlayContext.Following(bee)` stores a reference to the bee's Transform. Sound Manager reads its position while the sound is playing. With the scene manager, unpaused followed AudioSources are updated each frame in a late `LateUpdate`, after normal gameplay movement. Paused voices resume following when playback resumes. This work runs on Unity's main thread.
+
+Following does not make the bee fly. Your game moves the bee, and the audio follows. It also does not turn a 2D event into a 3D one; the event's spatial settings still apply.
+
+## Try the complete example
+
+1. Use a separate test scene with a manager and one listener, as in the first-sound guide.
+2. Add `Samples/03-Bee/Bee.soundgraph` to the manager's **Direct events** and regenerate keys.
+3. Save the following script as **MovingBeeSound.cs** in `Assets/Scripts` and attach it to an empty `Bee audio` GameObject.
+4. Drag the moving bee GameObject into the script's **Bee** field. To try it without a model, leave Bee empty; it will use `Bee audio` itself.
+5. Keep the object close to the listener and press Play. Move the bee left and right using the Scene view or its Transform Position fields. You should hear the buzz change direction. Headphones make this easier to notice.
+6. Change **Wing Speed** in the Inspector while playing. Open the component menu and choose **Stop buzzing** when finished.
+
+<Code code={example} lang="csharp" title="MovingBeeSound.cs · complete component" />
+
+`Following(target, owner)` selects what moves the sound and which object owns it. `With` gives WingSpeed its initial value; `Update` sends later Inspector changes to the same play. This script adds audio only. Do not attach it beside the supplied Bee demo's existing audio controller, or you will start two buzzes.
+
+## Choose ownership deliberately
+
+| Code | Position | Owner |
+| --- | --- | --- |
+| `SoundBus.Play(key, transform)` | Follows the Transform. | Automatically the Transform's GameObject. |
+| `SoundBus.Play(key, position)` | Fixed world position. | None. |
+| `SoundPlayContext.Following(target)` | Follows the target. | None unless you pass one. |
+| `SoundPlayContext.At(position, owner)` | Fixed world position. | The token you pass. |
+
+`service.OwnerOf(gameObject)` gets a shared owner for that exact object. `SoundBus.StopAll(gameObject)` can later stop plays in that group. A GameObject and one of its components are different object identities; pass the same object used for ownership.
+
+`service.CreateOwner(target)` makes a separate owner each time, useful for an independent group. An owner with no target must be released explicitly. The <a href={sitePath('api/ownership/')}>ownership reference</a> covers these options.
+
+## When the object disappears
+
+An event's **Owner loss** setting applies when its owner or follow target is destroyed:
+
+- **Stop** asks the play to stop and runs its ending flow if it started.
+- **Detach** removes following and ownership. The play continues at its last known position. Keep its handle if you need to stop it later.
+
+Disabling an object is not the same as destroying it. Your component should stop the sound in `OnDisable` when that is what your game needs. Releasing an owner removes its record; the next service update notices the loss and applies the event's policy. It is not a guaranteed immediate stop. Use `StopOwned` first when you explicitly want to stop its plays.

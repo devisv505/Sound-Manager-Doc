@@ -1,0 +1,70 @@
+---
+title: "When a sound does not start."
+description: "Read the result, check the right limit, and find the next useful fix."
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayStatus.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Playback.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundEventSettings.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundManagerSettings.cs
+tags: [unity, setup, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+
+Always inspect the result when starting a sound matters to your game. `Accepted` means the manager admitted the request. It includes `Queued`, where the sound is waiting for a later update or for clips to load.
+
+An accepted request can still fail later. For example, its graph might need another voice when the pool is full. Notifications report those later failures.
+
+## Read the status first
+
+| Status | In ordinary language | First thing to check |
+| --- | --- | --- |
+| `Accepted` | The play was admitted immediately, or a control command reached a target. | Save the play handle if you need to control it. |
+| `Queued` | The play was admitted and will try to start later. | Clips loading, manager readiness, startup timeout. |
+| `NoManager` | There is no active sound service. | Add or enable one Sound Manager. The request was not saved for later. |
+| `NotRegistered` | This event or key is not available on the active manager. | **Direct events**, **Libraries**, and **Event keys**. |
+| `InvalidEvent` | The graph is invalid or failed while running. | The graph's diagnostic and Console. |
+| `NotReady` | The service shut down, or an admitted play waited too long to start. | Manager lifetime and startup timeout. |
+| `MissingClip` | A required recording is absent or could not load. | Wave Asset assignments and allowed clips. |
+| `ConcurrencyLimit` | Too many plays of this event overlap, or this play was replaced. | Event **Max instances** and **At limit**. |
+| `CapacityExceeded` | There is no free instance slot, queue entry, or voice. | Manager settings and overlapping/layered sounds. |
+| `InvalidContext` | A supplied position, delay, owner, or parameter is invalid. It can also mean an off-thread dispatch. | Parameter type/name, finite values, owner session, and calling thread. |
+| `Cooldown` | This event was accepted too recently to start again. | Event **Cooldown (s)**. Wait before retrying. |
+| `NoTarget` | A control request did not affect an eligible play. | Saved handle, ownership identity, parameter/signal name, and whether it already ended. |
+
+Control helpers such as `SetFloat` return a bool, while object-wide helpers return a count. `Dispatch` can return a status, but a failed control operation is commonly reported as `NoTarget`; it does not expose every underlying validation reason.
+
+## Understand the three manager limits
+
+Create a settings asset with **Assets → Create → DEV505 → Sound Manager → Sound Manager Settings**, then assign it to the manager's **Settings** field before pressing Play.
+
+| Setting | Built-in default | What it limits |
+| --- | --- | --- |
+| Voice capacity | `64` | AudioSource playback slots. One play may use several. |
+| Instance capacity | `256` | Live plays, including admitted plays waiting to start. |
+| Startup queue capacity | `64` | Plays waiting to begin. The instance limit still applies. |
+| Startup timeout | `5` seconds | How long an admitted play may wait for its clips. |
+
+A paused or inaudible sound can still use capacity. Raising a limit may be appropriate, but first check for loops started every frame, missing stop calls, and graphs that stay alive unnecessarily.
+
+## Limit one event's overlap
+
+Select the `.soundgraph` asset and open **Concurrency & priority** in its Inspector. **Max instances** limits overlapping plays of this particular event. **At limit** chooses the response:
+
+- **ReplaceOldest** ends the oldest eligible play of this event to make room.
+- **RejectNew** leaves current plays alone and refuses the new request.
+- **ReplaceLowestPriorityEligible** considers unprotected plays of this same event. It can replace one only if it is no more important than the incoming play. A smaller priority number means greater importance.
+
+This policy does not provide cross-event voice stealing. A new event is not guaranteed to displace an unrelated sound when the global voice pool is full. Replacement also needs a free instance slot because terminal plays retain their slot until their ending notifications are delivered.
+
+## Leave time between repeated triggers
+
+**Cooldown (s)** is measured from the last accepted request for that event, including queued requests. `0` allows immediate repeats. It applies across owners, so two objects asking for the same event can affect each other. Handle a cooldown refusal calmly; do not log an error every frame.
+
+## An accepted sound is still silent
+
+Check that the graph reaches a Play Audio node, the recording is assigned, volumes are nonzero, and the game or play is not paused. For 3D audio, check the listener's position, rotation, and distance. A graph can intentionally wait or remain alive without playing a recording.
+
+Use <a href={sitePath('api/results-and-handles/')}>the result and handle reference</a> for exact types, or return to <a href={sitePath('getting-started/#if-you-hear-nothing')}>the first-sound checklist</a>.

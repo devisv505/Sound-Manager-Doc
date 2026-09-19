@@ -1,0 +1,119 @@
+---
+title: "Scene components"
+description: "Set up the manager, an optional emitter, and the listening viewpoint."
+kind: api
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundManager.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundEmitter.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundListener.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundListeners.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundEventSlot.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundPositionMode.cs
+tags: [unity, setup, sound]
+---
+
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+import { sitePath } from '../../../lib/links';
+
+
+Components are settings and behavior attached to GameObjects. A GameObject is an object in your scene. Select it in the Hierarchy to see its components in the Inspector.
+
+The <a href={sitePath('getting-started/')}>first-sound guide</a> uses a manager and key-based C# calls. An emitter is optional; it offers direct event references and methods that can be connected to buttons or animation events.
+
+## SoundManager
+
+Add through **Add Component → Sound Manager**. Use one enabled manager across your loaded scenes. A duplicate manager disables itself. Disabling or destroying the active manager stops its service and all playback.
+
+| Member | Inspector label / default | Purpose |
+| --- | --- | --- |
+| `events` | Direct events; empty | Event references to register using their asset names as keys. |
+| `libraries` | Libraries; empty | Reusable lists of events and optional custom keys. |
+| `settings` | Settings; none | Optional SoundManagerSettings asset. None uses built-in defaults. |
+| `persistAcrossScenes` | Keep on load; true | Keep this root GameObject when scenes change. |
+| `showDiagnostics` | Show counters; true | Runtime Inspector counters for debugging. UI updates add overhead and can reduce FPS. |
+| `Diagnostics` | Read-only | Registration problems such as duplicate keys or missing events. |
+| `Service` | Read-only | The owned concrete SoundService, or null when disabled/duplicate. |
+| `Ready` | Read-only; false without a service | Whether no catalogue entries remain in the loading list. Missing clips can still refuse a play. |
+
+Registration happens when the service is created in Awake/OnEnable. Preparation begins in Start, or on a later re-enable after Start has already run. Configure event lists and settings before Play Mode. Changing the arrays alone does not update a running service.
+
+<ApiSignatures type="SoundManager" />
+
+## SoundEmitter
+
+An emitter starts sounds from an object and remembers the plays it started. To try it without a script:
+
+1. Add **Sound Emitter** to an empty GameObject close to your listener.
+2. Assign the registered Campfire graph to **Default Event**.
+3. Press Play in Unity, then click **Play** in the emitter Inspector.
+4. Click **Stop owned sounds** to end only the plays started by this emitter.
+
+Do not add this beside another controller that automatically starts the same sound unless you intend both to play. Emitter slots refer to event assets; their local names are separate from global `Sounds.*` keys. Key-based scripts remain the main tutorial path.
+
+| Member | Default | Purpose |
+| --- | --- | --- |
+| `defaultEvent` | null | Event played by `Play()` / `TryPlay()`. Still needs manager registration. |
+| `events` | Empty | Named `SoundEventSlot` entries for `PlayEvent`. |
+| `origin` | null | Transform used as sound origin; null uses this object's Transform. |
+| `positionMode` | FollowOrigin | Follow the origin or keep its position at play time. |
+| `playOnEnable` | false | Request one default play each enable, once a manager is ready. |
+| `stopOnDisable` | true | Stop this emitter's plays when disabled. |
+| `stopFade` | 0.1 seconds | Fade requested for its stop calls. Finite negatives clamp to zero; non-finite values fall back to 0.1. |
+| `LastResult` | Default until an attempt | Latest play result, including attempts refused by the emitter. |
+| `Diagnostic` | null after success | Human-readable reason for a failed play, signal, or parameter attempt. |
+| `WaitingForReady` | false normally | Whether an enable-time play is pending. |
+| `Owner` | Default without a service | This emitter's separate owner token. It is not the GameObject's shared owner. |
+| `OwnedCount` | 0 initially | Number of its remembered plays still alive. Ending plays may remain counted. |
+| `LatestHandle` | Default when none | Most recent still-live play, used by its signal and parameter methods. |
+
+### Playback and controls
+
+`Play()` and `PlayEvent(string eventKey)` return void so UnityEvents and animation events can invoke them. `TryPlay()` and `TryPlayEvent(string eventKey)` return the corresponding `SoundPlayResult`. A missing/duplicate slot key returns `InvalidEvent`; a missing default asset also returns `InvalidEvent`. Play attempts outside Play Mode or on an inactive/disabled emitter return `NotReady`; no service returns `NoManager`.
+
+`SendSignal(string)` is the void wrapper for `TrySendSignal(string)`, which returns acceptance on **LatestHandle**. `SetParameter(string, SoundValue)` and `SetFloat(string, float)` also target that latest play and return bool. They do not update every play owned by the emitter.
+
+`Stop()` cancels any pending play-on-enable and asks all remembered plays to stop. `StopEvent(string)` stops only plays from that local slot; it does not cancel the default pending enable play. Both return void. They use `stopFade`, with the usual graph-specific release behavior.
+
+```csharp title="Call an assigned emitter · excerpt"
+var result = emitter.TryPlay();
+if (result.Accepted)
+    emitter.SetFloat("Intensity", 0.35f);
+// Later:
+emitter.Stop();
+```
+
+Here `emitter` is an assigned `SoundEmitter` with Campfire as its default event. The Intensity update is a live change, not an initial override before On Start. Use the context-based bus API when a starting branch needs a value immediately.
+
+<ApiSignatures type="SoundEmitter" />
+
+### SoundEventSlot and SoundPositionMode
+
+`SoundEventSlot.key` is a nonempty, unique, case-sensitive local name. `sound` is the referenced event. `FollowOrigin` keeps moving with the origin; `PositionAtPlay` copies its world position when started.
+
+<ApiSignatures type="SoundEventSlot" />
+<ApiSignatures type="SoundPositionMode" />
+
+## SoundListener
+
+Add **Sound Listener** to your player or camera when you want managed listener switching. Unity ensures an AudioListener exists on the same object. The wrapper does its work during Play Mode.
+
+`activateOnEnable` defaults to true and lets this listener take over when none is active. `Native` returns the wrapped AudioListener. `IsActive` reports whether this is the selected listener and its native component is enabled. `Diagnostic` explains conflicts; `Conflict` is an active AudioListener without a SoundListener wrapper, or null.
+
+`MakeActive()` returns void and asks to switch to this enabled listener. It cannot override an unmanaged conflict. `Recheck()` rescans loaded scenes and settles the listening viewpoint; use it after changing listeners in a way the normal enable/disable events did not detect.
+
+```csharp title="Switch to an assigned listening viewpoint · excerpt"
+listener.MakeActive();
+```
+
+`listener` is a reference to the target SoundListener. In Play Mode, its Inspector also has **Make Active** and **Recheck** buttons. Use these instead of manually toggling a wrapped AudioListener behind the manager's back.
+
+<ApiSignatures type="SoundListener" />
+
+## SoundListeners
+
+The static registry exposes `Active` (selected SoundListener), `Conflict` (unmanaged AudioListener), `ListeningObject` (the native AudioListener doing the listening), and `Diagnostic` (a problem message or null). `Active` can be null while an unmanaged listener is the listening object.
+
+`MakeActive(SoundListener listener)` returns whether it could activate the requested enabled listener. `Recheck()` rescans listeners. Both belong to the main-thread, Play Mode setup path. Use the component methods above for a simple integration.
+
+<ApiSignatures type="SoundListeners" />

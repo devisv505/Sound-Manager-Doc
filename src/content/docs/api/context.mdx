@@ -1,0 +1,63 @@
+---
+title: "SoundPlayContext"
+description: "Choose where one sound plays and the values it starts with."
+kind: api
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayContext.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Playback.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Values.cs
+tags: [unity, setup, sound]
+---
+
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+import { sitePath } from '../../../lib/links';
+
+
+A `SoundPlayContext` holds the choices for **one play**. You usually create it with `At` or `Following`, add initial parameter values with `With`, then pass it to `SoundBus.Play`.
+
+Read <a href={sitePath('guides/parameters/')}>Change sounds with parameters</a> for a first example. All types on this page are in `DEV505.SoundManager`; positions, transforms, and clips are Unity types.
+
+## At and Following
+
+```csharp title="A moving bee with an initial value · excerpt"
+var context = SoundPlayContext.Following(bee)
+    .With(SoundParameters.Bee.WingSpeed, 1.2f);
+var result = SoundBus.Play(Sounds.Bee, context);
+```
+
+This belongs in a component method. It needs a `Transform bee`, registered Bee event, and generated names. Keep `result.Handle` when accepted if you need to stop the buzz. The complete setup and cleanup are in <a href={sitePath('guides/position-and-ownership/')}>Where a sound is, and who owns it</a>.
+
+`At(Vector3 position, SoundOwnerToken owner = default)` copies a world position and optional owner. `Following(Transform target, SoundOwnerToken owner = default)` stores a Transform reference and optional owner. Both return a context. Neither creates an owner. The simpler `SoundBus.Play(key, transform)` overload also assigns the Transform's GameObject as owner; this context builder does not.
+
+When `Follow` is assigned, its current position is used for following. Pass a live Transform. A destroyed follow target during playback uses the event's owner-loss policy. A default context has position `(0, 0, 0)`, no follow target, no owner, no initial overrides, and no delay.
+
+## With overloads
+
+The `SoundValue`, `float`, `int`, `bool`, and `AudioClip` overloads all return a **copy** with one added parameter entry. Use the generated ID for that event. The convenience overload selects the corresponding value type; it does not convert a Float into an Int or vice versa.
+
+Assign or chain the return value. `MaxInlineParameters` is `4`. A fifth call throws `InvalidOperationException`, including when the calls repeat the same parameter. Use `TypedParameters` for more values.
+
+Every supplied parameter is validated. Unknown IDs, wrong types, non-finite floats, or clips outside an Asset parameter's allowed list reject the play as `InvalidContext`. Accepted numbers are clamped to the graph's range.
+
+## Fields and defaults
+
+| Field | Default | Meaning |
+| --- | --- | --- |
+| `Position` | `(0, 0, 0)` | Fixed world position. Every coordinate must be finite, even when a follow target is supplied. |
+| `Follow` | `null` | Transform to follow. Does not choose 2D/3D behavior; the event does that. |
+| `Owner` | `default` | No owner. A supplied valid token must belong to this service and still exist. |
+| `Parameters` | `null` | Initial Float overrides. Read during the play call and not retained. |
+| `TypedParameters` | `null` | Initial overrides of any declared type. Also read once and not retained. |
+| `Seed` | `0` | Use the service's play sequence. A nonzero seed selects a repeatable isolated random stream. |
+| `Delay` | `0` seconds | Delay each voice this play starts, except release voices from On Stop. Finite range: `0–86400`. |
+
+Defaults are applied first, then `Parameters`, `TypedParameters`, and `With` entries in that order. The service's additional Float-span overload applies last. Later entries for the same parameter win. This happens before **On Start**, even when playback is queued. Initial values bypass live Float smoothing.
+
+`Delay` does not postpone the entire graph or replace a graph Delay node. For example, the graph can make a branch decision immediately while a voice is waiting to sound. A seed makes random choices repeatable within the graph's rules; it does not promise sample-accurate timing or identical scene animation. Random Clip's no-repeat history can also depend on earlier plays under that owner.
+
+## Exact members
+
+<ApiSignatures type="SoundPlayContext" />
+
+Use these values on Unity's main thread when calling the playback API. Constructing a context does not start anything by itself. See <a href={sitePath('api/parameters/')}>parameter value types</a> and <a href={sitePath('api/ownership/')}>owner tokens</a>.

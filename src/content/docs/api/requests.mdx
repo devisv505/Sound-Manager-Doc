@@ -1,0 +1,60 @@
+---
+title: "SoundRequest"
+description: "Package a playback command when you need to pass it to another part of your code."
+kind: api
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundRequest.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
+tags: [unity, setup, sound]
+---
+
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+import { sitePath } from '../../../lib/links';
+
+
+Most code can call `SoundBus.Play`, `Stop`, or `SetFloat` directly. `SoundRequest` is useful when another part of your code needs to receive a command value and dispatch it later.
+
+Creating a request does not run it. Send it with `SoundBus.Dispatch(request)` on Unity's main thread. The dispatcher returns a `SoundPlayResult`.
+
+```csharp title="Build, then dispatch a request · excerpt"
+var context = SoundPlayContext.At(transform.position)
+    .With(SoundParameters.Campfire.Intensity, 0.4f);
+var request = SoundRequest.Play(Sounds.Campfire, context, gameObject);
+var result = SoundBus.Dispatch(request);
+```
+
+This belongs in a component with Campfire registered. The position stays fixed; `gameObject` supplies ownership. A valid owner already in `context` takes precedence over that source. Keep the returned handle on acceptance, or use the same GameObject for later source-wide commands.
+
+## Factory methods
+
+| Factory | Meaning |
+| --- | --- |
+| `Play(key, context = default)` | Play by registered key. |
+| `Play(sound, context = default)` | Play a registered asset reference. |
+| `Play(key, follow)` | Follow a Transform and own the play by its GameObject. |
+| `Play(key, context, source)` | Use the context and supply an owner source if the context has no valid owner. |
+| `Stop(handle, fade = 0.1f)` | Stop one play. Fade is non-negative, finite seconds. |
+| `StopAll(source, fade = 0.1f)` | Stop plays using that source's shared owner. |
+| `SetParameter(handle, id or name, value)` | Change one play's typed parameter. |
+| `SetFloat(handle, id or name, value)` | Change one play's Float parameter. |
+| `SetParameter(source, name, value)` / `SetFloat(source, name, value)` | Change matching parameters on that source's owned plays. |
+| `SendSignal(handle, id or name)` | Queue an authored signal on one play. |
+| `SendSignal(source, name)` | Queue a signal on that source's owned plays. |
+| `Pause(handle)` / `Resume(handle)` | Set or clear one play's explicit pause. |
+
+Each factory returns a request value; it does not validate that the target is registered or alive. Those checks happen during dispatch. There is no separate position-only factory: use `SoundPlayContext.At(position)`.
+
+## Read-only properties
+
+`Kind` tells the dispatcher what to do. `Key`, `Sound`, and `Context` describe playback. `Handle` addresses one play. `Parameter` and `Value` describe a value change. `Signal` identifies an action. `Fade` is used by stop requests. `Source` supplies or selects object ownership.
+
+Only properties relevant to a request kind are read; the others are default. `Key` takes precedence over `Sound` when a valid key is present. The request is a readonly struct, but arrays or Unity objects referred to by a copied context are still references. Build and dispatch it while those inputs are valid.
+
+<ApiSignatures type="SoundRequest" />
+
+## SoundRequestKind
+
+<ApiSignatures type="SoundRequestKind" />
+
+These kinds describe supported commands, not a background job queue. The bus answers dispatch immediately. A play can be admitted as Queued by the service. Missing-manager requests are not buffered. For controls, a failed operation is commonly `NoTarget`; source-wide requests report acceptance if at least one play accepts them. Use the bus's source helpers when you need the affected count.

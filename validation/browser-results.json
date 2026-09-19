@@ -90,12 +90,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 389,
+                  "duration": 350,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-19T19:52:15.778Z",
+                  "startTime": "2026-09-19T20:46:46.092Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -124,12 +124,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 395,
+                  "duration": 496,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-19T19:52:16.361Z",
+                  "startTime": "2026-09-19T20:46:46.626Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -158,12 +158,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 551,
+                  "duration": 612,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-19T19:52:16.763Z",
+                  "startTime": "2026-09-19T20:46:47.127Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -192,12 +192,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 124,
+                  "duration": 155,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-19T19:52:17.318Z",
+                  "startTime": "2026-09-19T20:46:47.744Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -226,12 +226,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 573,
+                  "duration": 596,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-19T19:52:17.446Z",
+                  "startTime": "2026-09-19T20:46:47.910Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -243,15 +243,117 @@
           "file": "site.spec.ts",
           "line": 68,
           "column": 1
+        },
+        {
+          "title": "M2 guide navigation, exact signatures, and API coverage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 261,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-19T20:46:48.511Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c02723ad68c2a0d50c5-d3f8700070b25579aa02",
+          "file": "site.spec.ts",
+          "line": 94,
+          "column": 1
+        },
+        {
+          "title": "M2 complete components copy exactly and search finds beginner topics",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1198,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-19T20:46:48.775Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c02723ad68c2a0d50c5-a9265400f90e466f7aa2",
+          "file": "site.spec.ts",
+          "line": 115,
+          "column": 1
+        },
+        {
+          "title": "M2 long reference pages and guides fit a narrow phone",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 556,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-19T20:46:49.979Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c02723ad68c2a0d50c5-b022b2eb7f1a521c2f87",
+          "file": "site.spec.ts",
+          "line": 136,
+          "column": 1
         }
       ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-09-19T19:52:15.619Z",
-    "duration": 2431.7940000000003,
-    "expected": 5,
+    "startTime": "2026-09-19T20:46:45.923Z",
+    "duration": 4643.188,
+    "expected": 8,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
