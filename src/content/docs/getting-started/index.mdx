@@ -2,10 +2,14 @@
 title: "Your first sound."
 description: "Set up a manager, choose where you listen, and play the included Campfire sound."
 kind: guide
+# Panel additions: working-tree review in validation/GETTING-STARTED-PANEL.md.
 sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
 sourcePaths:
   - Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundManager.cs
   - Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundComponentInspectors.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Setup/SoundManagerHub.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Setup/SoundManagerHub.uxml
+  - Assets/DEV505/SoundManager/Scripts/Editor/Setup/SoundManagerSetup.cs
   - Assets/DEV505/SoundManager/Scripts/Editor/Codegen/SoundKeyConstants.cs
   - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundBus.cs
 tags: [unity, setup, sound]
@@ -23,7 +27,19 @@ Use the Sound Manager project or import the asset and its samples into your Unit
 
 In Unity's **Project** window—the list of files in your project—check that `Assets/DEV505/SoundManager` exists. Open **Window → General → Console** and resolve any red compile errors before continuing. In the supplied project, the required packages are already configured. Its demos use the Universal Render Pipeline and Input System; the script below does not need keyboard input or a particular rendering pipeline.
 
-For a quick check that the supplied project works, double-click `Assets/DEV505/SoundManager/Samples/01-Campfire/Demo.unity`, press the Editor's **Play** button, then click **Ignite fire** in the Game view. Stop Play Mode before setting up your own scene below. Save your existing scene if Unity asks when switching.
+## Open the Getting Started panel
+
+Choose **Tools → DEV505 → Sound Manager → Getting Started**. This opens the **Sound Manager** window, where you can prepare your scene and choose which sounds it can play. The panel also opens on Editor startup by default. Clear **Show on Editor startup** at the bottom if you prefer to open it yourself.
+
+The panel has three sections:
+
+| Section | What you can do here |
+| --- | --- |
+| **Scene setup** | Add the manager, set up where you hear sounds from, and assign the included playback settings. |
+| **Register your sounds** | Give this scene's manager a sound graph or library, create new ones, and generate their names for C# code. |
+| **Explore & author** | Open a demo, the included documentation file, the default audio mixer, or the playback settings. |
+
+For a quick listen, select **01 Campfire** under **Explore & author** and click **Open demo**. Unity asks about unsaved scene changes before switching. Press the Editor's **Play** button, then click **Ignite fire** in the Game view. Stop Play Mode before setting up your own scene below.
 
 ## 1. Create a place to try the sound
 
@@ -36,11 +52,20 @@ An empty scene is enough for this test. The script plays audio; it does not crea
 
 ## 2. Add the manager and register Campfire
 
-1. Choose **GameObject → Create Empty**. Rename the new object `Sound Manager`.
-2. With it selected, click **Add Component** in the Inspector, search for **Sound Manager**, and add the DEV505 component.
-3. Expand **Direct events** under **Sound sources**. Add one entry with the list's **+** control.
-4. Drag `Assets/DEV505/SoundManager/Samples/01-Campfire/Campfire.soundgraph` from the Project window into that entry. Unity imports this graph as a sound event—the sound recipe the manager will play.
-5. Expand **Event keys**. You should see `Campfire` pointing to the Campfire event. Leave **Settings** empty to use the built-in limits.
+1. Return to the **Getting Started** panel. Check that **Scene setup** shows `FirstSoundDemo`, then click **Set up active scene**.
+2. Check the three rows: **Sound Manager**, **Listening point**, and **Playback settings**. Setup adds missing components and assigns the included default settings. In this scene, it adds a **Sound Listener** to your camera alongside Unity's **Audio Listener**.
+3. Under **Register your sounds**, drag `Assets/DEV505/SoundManager/Samples/01-Campfire/Campfire.soundgraph` from the Project window into the field beside **Register**. Unity imports this graph as a sound event—the sound recipe the manager will play.
+4. Click **Register**. To check the assignment, click **Select** on the **Sound Manager** row and expand **Event keys** in the Inspector. You should see `Campfire` pointing to the Campfire event.
+5. Save the scene with **File → Save**. The panel changes your scene, but does not save it for you. Scene setup and registration support Unity's **Undo**.
+
+If the scene already has a manager or assigned settings, setup keeps them. Once all three checks pass, the button changes to **Check scene setup**. If a row reports a disabled component or extra listeners, use **Select** to inspect it and follow the message. Setup only changes the active scene; keep one active manager and listening point across any scenes loaded together.
+
+<details>
+<summary>Register an event through the Inspector instead</summary>
+
+Select your scene's **Sound Manager**. Expand **Sound sources → Direct events**, add an entry with **+**, and drag the graph into it. This is the same assignment the panel makes for a new event. You only need to register it once.
+
+</details>
 
 **Registering** means telling this manager which events it may play. Having an event file somewhere in the project is not enough. Use one active manager; a second manager disables itself. The Inspector's **Show counters** option is for debugging and can reduce frame rate while it updates the UI.
 
@@ -48,7 +73,7 @@ For several reusable events, use a library as described in <a href={sitePath('gu
 
 ## 3. Generate the names used by code
 
-Run **Tools → DEV505 → Sound Manager → Generate Sound Keys**. Wait for Unity to finish compiling.
+Click **Generate sound keys** in the Getting Started panel. You can also use **Tools → DEV505 → Sound Manager → Generate Sound Keys**. Wait for Unity to finish compiling.
 
 This creates `Sounds.cs` and `SoundParameters.cs` in `Assets/DEV505/SoundManager.Generated`. `Sounds.Campfire` gives your script a checked name for the event. Generating a name does not register the event; the previous step does that.
 
@@ -80,7 +105,8 @@ Open the Console and check the message from the script first.
 | What you see or hear | What to do |
 | --- | --- |
 | `NoManager` | Make sure the Sound Manager object and component are enabled in the running scene. |
-| `NotRegistered` | Add Campfire to **Direct events**, check **Event keys**, then stop and restart Play Mode. |
+| `NotRegistered` | Stop Play Mode, drag Campfire into the Getting Started panel and click **Register**, then try Play again. |
+| Panel setup buttons are unavailable | Stop Play Mode, leave Prefab Mode, and wait for Unity to finish importing or compiling. Open the scene you want to set up. |
 | `Sounds` or `Campfire` does not exist in code | Generate Sound Keys. Check the sample is imported and any assembly references are set. |
 | Graph error or `InvalidEvent` | Select the graph asset and read its diagnostic. Use the supplied Campfire graph unchanged for this first test. |
 | No error, but silence | Check the Game view's audio mute button, computer volume, the enabled camera Audio Listener, and the camera/fire positions above. |

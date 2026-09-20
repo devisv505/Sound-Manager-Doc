@@ -2,11 +2,15 @@
 title: "Managers, libraries, and keys."
 description: "Tell the manager which sounds it can play, and generate names you can use in C#."
 kind: guide
+# Panel additions: working-tree review in validation/GETTING-STARTED-PANEL.md.
 sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
 sourcePaths:
   - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundCatalogue.cs
   - Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundManager.cs
   - Assets/DEV505/SoundManager/Scripts/Editor/Codegen/SoundKeyConstants.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Setup/SoundManagerHub.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Setup/SoundManagerHub.uxml
+  - Assets/DEV505/SoundManager/Scripts/Editor/Setup/SoundManagerSetup.cs
 tags: [unity, setup, sound]
 ---
 
@@ -18,7 +22,9 @@ Start with <a href={sitePath('getting-started/')}>Your first sound</a> if you ha
 
 ## Register one event
 
-Select your manager in the Hierarchy. In its Inspector, add the event to **Sound sources → Direct events**. The manager uses the event asset's filename, without its extension, as the key. `Campfire.soundgraph` therefore uses `Campfire`.
+Open **Tools → DEV505 → Sound Manager → Getting Started** while outside Play Mode. If the scene is not set up yet, click **Set up active scene**. Under **Register your sounds**, drag in your `.soundgraph` asset and click **Register**, then save the scene.
+
+You can also select your manager in the Hierarchy and add the event to **Sound sources → Direct events** in its Inspector. The manager uses the event asset's filename, without its extension, as the key. `Campfire.soundgraph` therefore uses `Campfire`.
 
 The manager reads its event lists when it creates its playback service. Configure them before pressing Play. Editing the arrays in code on an already running manager does not automatically register new events. Advanced code can use the concrete service's registration methods; most scenes should use the Inspector lists.
 
@@ -30,6 +36,10 @@ The manager reads its event lists when it creates its playback service. Configur
 4. Leave an entry's **Key** empty to use its asset name, or enter your own name, such as `UI/Confirm`.
 5. Select the scene's Sound Manager. Add `Game sounds` to its **Libraries** list.
 6. Expand the manager's **Event keys** to check the result, then regenerate Sound Keys.
+
+You can also create the library with **New library** in the Getting Started panel. Fill its **Events** list in the Inspector, then return to the panel, choose the library beside **Register**, and click **Register**. Creating a library alone does not register it. Save the scene after registration.
+
+The panel avoids adding the same asset again. If an event already belongs to a registered library, registering that event through the panel keeps its existing library key.
 
 A library does not play sounds itself. The manager reads it and prepares its clips. You can reuse the same library in different scenes.
 
@@ -43,7 +53,7 @@ The same event listed more than once is collected once, using its first entry. D
 
 ## Generate code names
 
-Use **Tools → DEV505 → Sound Manager → Generate Sound Keys** after adding or renaming an event, library key, or graph parameter. The manager also has a **Generate Sounds class** button under **Event keys**.
+Use **Tools → DEV505 → Sound Manager → Generate Sound Keys** after adding or renaming an event, library key, or graph parameter. The Getting Started panel has a **Generate sound keys** button, and the manager Inspector has **Generate Sounds class** under **Event keys**.
 
 The generated files are in `Assets/DEV505/SoundManager.Generated`:
 
@@ -58,6 +68,8 @@ The generator scans valid project events and library entries, not only the open 
 Do not edit generated files by hand. Change the asset or library, then regenerate. The next generation replaces manual edits.
 
 ## Understand when the manager is ready
+
+The Getting Started panel's **events ready** count shows how many event entries the scene's manager has collected. It does not mean their audio has loaded or that every graph can play.
 
 The manager creates its service and registers events in `Awake`, an early Unity setup callback. It begins loading clips in `Start`. Plays admitted before their clips are ready wait in a limited queue. A missing manager does not keep requests for later.
 
