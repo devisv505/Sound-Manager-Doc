@@ -1,0 +1,112 @@
+{
+  "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
+  "sources": [
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundNodeStyle.cs",
+      "sha256": "3adcdd8eaaa9074f929dba979505b40b4cad6ce6ed0b81ef9dbac560f488fbf0"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs",
+      "sha256": "833d62326d5e241b744b3f27c0374b34bde3f07b6a95cb8db1048fe70c4e12e9"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5"
+    }
+  ],
+  "categories": [
+    {
+      "name": "Events",
+      "color": "#78B8FF",
+      "colorName": "Blue",
+      "description": "Start a branch when the event starts, receives a signal, or stops."
+    },
+    {
+      "name": "Sources",
+      "color": "#EDCC7A",
+      "colorName": "Yellow",
+      "description": "Provide or choose the audio recording that a Play Audio node will use."
+    },
+    {
+      "name": "Playback",
+      "color": "#59CCB3",
+      "colorName": "Teal",
+      "description": "Start and stop an audio voice: one playing recording."
+    },
+    {
+      "name": "Parameters",
+      "color": "#B394FF",
+      "colorName": "Purple",
+      "description": "Read named values supplied by your game, such as speed, surface, or a chosen clip."
+    },
+    {
+      "name": "Values",
+      "color": "#9ED678",
+      "colorName": "Green",
+      "description": "Provide constants, calculate numbers, convert values, or compare them."
+    },
+    {
+      "name": "Random",
+      "color": "#F285C2",
+      "colorName": "Pink",
+      "description": "Choose a random number or execution branch."
+    },
+    {
+      "name": "Logic",
+      "color": "#F28F66",
+      "colorName": "Orange",
+      "description": "Control commands: choose a path, wait, repeat, test a condition, or end a play."
+    }
+  ],
+  "nodes": {
+    "OnStart": "Events",
+    "OnSignal": "Events",
+    "WaveAsset": "Sources",
+    "PlayAudio": "Playback",
+    "OnStop": "Events",
+    "EndEvent": "Logic",
+    "FloatParameter": "Parameters",
+    "Float": "Values",
+    "Bool": "Values",
+    "RandomFloat": "Random",
+    "RandomClip": "Sources",
+    "IntParameter": "Parameters",
+    "BoolParameter": "Parameters",
+    "AssetParameter": "Parameters",
+    "Int": "Values",
+    "RandomInt": "Random",
+    "RemapFloat": "Values",
+    "Curve": "Values",
+    "FloatCompare": "Values",
+    "FloatMath": "Values",
+    "MultiplierToSemitones": "Values",
+    "SemitonesToMultiplier": "Values",
+    "ConvertToFloat": "Values",
+    "ConvertToInt": "Values",
+    "FloatFunction": "Values",
+    "IntCompare": "Values",
+    "IntFunction": "Values",
+    "IntOp": "Values",
+    "SelectFloat": "Logic",
+    "SelectInt": "Logic",
+    "SmoothstepFloat": "Values",
+    "SelectByIndex": "Sources",
+    "TrackCondition": "Logic",
+    "Delay": "Logic",
+    "Sequence": "Logic",
+    "Branch": "Logic",
+    "BranchByIndex": "Logic",
+    "RandomBranch": "Random",
+    "ForLoop": "Logic",
+    "Repeat": "Logic",
+    "WaitForCondition": "Logic",
+    "IdleLoop": "Logic",
+    "Counter": "Logic",
+    "StopInstance": "Logic",
+    "Not": "Logic",
+    "And": "Logic",
+    "Or": "Logic",
+    "Xor": "Logic",
+    "Passthrough": "Logic"
+  }
+}

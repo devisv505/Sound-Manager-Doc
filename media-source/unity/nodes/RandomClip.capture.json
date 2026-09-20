@@ -1,0 +1,25 @@
+{
+  "operation": "RandomClip",
+  "title": "Random Clip",
+  "capturedAt": "2026-09-19T23:12:00.0500700Z",
+  "unityVersion": "6000.6.0f1",
+  "width": 456,
+  "height": 464,
+  "zoom": 1.25,
+  "pixelsPerPoint": 2.0,
+  "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+  "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+  "bounds": "(x:100.00, y:120.00, width:210.00, height:213.75)",
+  "cropX": 182,
+  "cropY": 222,
+  "labels": [
+    "Random Clip",
+    "Clips",
+    "2",
+    "No Repeat",
+    "Clip 1",
+    "Clip 2",
+    "Asset",
+    "Random Clip"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "operation": "StopInstance",
+  "title": "Stop Instance",
+  "capturedAt": "2026-09-19T23:12:22.1078980Z",
+  "unityVersion": "6000.6.0f1",
+  "width": 443,
+  "height": 326,
+  "zoom": 1.25,
+  "pixelsPerPoint": 2.0,
+  "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+  "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+  "bounds": "(x:100.00, y:120.00, width:203.13, height:145.00)",
+  "cropX": 182,
+  "cropY": 222,
+  "labels": [
+    "Stop Instance",
+    "In",
+    "Fade",
+    "0",
+    "Stop Instance"
+  ]
+}

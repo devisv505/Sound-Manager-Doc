@@ -1,0 +1,115 @@
+---
+title: 'Shaping values and making choices'
+description: 'Calculate volumes, speeds, conditions, indexes, and small random variations.'
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundNodeCatalogue.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Execution.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Flow.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Values.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs
+tags: [unity, graph, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+import Capture from '../../../components/Capture.astro';
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+
+import NodeReference from '../../../components/NodeReference.astro';
+
+Data nodes are read when another node needs their result. They do not need an execution wire. Float means a decimal number, Int means a whole number, and Bool means true or false. Use converter nodes where port types differ.
+
+<a href={sitePath('recipes/music-crossfade/')}>
+  See it in a complete example: Jukebox track selection and crossfades.
+</a>
+For the full list, open the <a href={sitePath('graph/')}>node catalogue</a>.
+
+<Capture id="engine-rpm-mapping" />
+
+## Random Float
+
+<NodeReference operation="RandomFloat" />
+
+## Random Int
+
+<NodeReference operation="RandomInt" />
+
+## Remap Float
+
+<NodeReference operation="RemapFloat" />
+
+## Float Compare
+
+<NodeReference operation="FloatCompare" />
+
+## Float Math
+
+<NodeReference operation="FloatMath" />
+
+## Int Compare
+
+<NodeReference operation="IntCompare" />
+
+## Int Op
+
+<NodeReference operation="IntOp" />
+
+## Curve
+
+<NodeReference operation="Curve" />
+
+## Multiplier To Semitones
+
+<NodeReference operation="MultiplierToSemitones" />
+
+## Semitones To Multiplier
+
+<NodeReference operation="SemitonesToMultiplier" />
+
+## Float Function
+
+<NodeReference operation="FloatFunction" />
+
+## Int Function
+
+<NodeReference operation="IntFunction" />
+
+## Convert To Int
+
+<NodeReference operation="ConvertToInt" />
+
+## Convert To Float
+
+<NodeReference operation="ConvertToFloat" />
+
+## Not
+
+<NodeReference operation="Not" />
+
+## Select Float
+
+<NodeReference operation="SelectFloat" />
+
+## Select Int
+
+<NodeReference operation="SelectInt" />
+
+## Smoothstep Float
+
+<NodeReference operation="SmoothstepFloat" />
+
+## And
+
+<NodeReference operation="And" />
+
+## Or
+
+<NodeReference operation="Or" />
+
+## Xor
+
+<NodeReference operation="Xor" />
+
+Continue with <a href={sitePath('graph/validation/')}>graph checks and debugging</a> if a connection or event is refused.

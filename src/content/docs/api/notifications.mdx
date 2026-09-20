@@ -79,3 +79,5 @@ The constructor packages those fields in the order shown in its signature. Consu
 <ApiSignatures type="SoundNotificationKind" />
 
 The built-in service delivers queued notifications at the end of its update on the main thread, after advancing graph work. They are observations, not a way to modify the graph midway through a step. Immediate rejected requests usually have no notification because they never became a play; always inspect the original result too.
+
+Read <a href={sitePath('guides/outcomes/')}>every result and notification</a> for startup failures, End Event cancellation, replacement, and callback delivery order.

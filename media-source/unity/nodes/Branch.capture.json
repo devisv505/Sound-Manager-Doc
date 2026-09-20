@@ -1,0 +1,23 @@
+{
+  "operation": "Branch",
+  "title": "Branch",
+  "capturedAt": "2026-09-19T23:12:17.6794470Z",
+  "unityVersion": "6000.6.0f1",
+  "width": 541,
+  "height": 326,
+  "zoom": 1.25,
+  "pixelsPerPoint": 2.0,
+  "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+  "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+  "bounds": "(x:100.00, y:120.00, width:252.50, height:145.00)",
+  "cropX": 182,
+  "cropY": 222,
+  "labels": [
+    "Branch",
+    "In",
+    "Condition",
+    "True",
+    "False",
+    "Branch"
+  ]
+}

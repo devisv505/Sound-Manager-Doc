@@ -1,0 +1,29 @@
+---
+title: 'When you need more control.'
+description: 'Choose advanced integration only when a scene Sound Manager is not enough.'
+kind: index
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/ISoundVoiceBackend.cs
+tags: [unity, graph, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+import Capture from '../../../components/Capture.astro';
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+
+For normal gameplay, keep a Sound Manager in the scene and use `SoundBus` with your generated `Sounds` keys. You do not need a custom service to make any of the ten demos.
+
+These pages are for a custom host, a test harness, dynamic content registration, or an editor diagnostic tool. They explain the same runtime used by the scene component.
+
+| Task                                             | Reference                                                                       | Existing example to understand first                                            |
+| ------------------------------------------------ | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Register or remove content and drive updates     | <a href={sitePath('advanced/service/')}>Service lifecycle and catalogue</a>     | <a href={sitePath('guides/setup-and-keys/')}>Manager setup and keys</a>         |
+| Provide timing or another audio implementation   | <a href={sitePath('advanced/backend/')}>Clock and voice backend</a>             | <a href={sitePath('recipes/moving-emitter/')}>Bee following a moving source</a> |
+| Inspect a running graph without issuing commands | <a href={sitePath('advanced/observation/')}>Definitions, states, and traces</a> | <a href={sitePath('recipes/playback-limits/')}>Arcade limits</a>                |
+| Read parameter declarations and allowed assets   | <a href={sitePath('advanced/parameter-records/')}>Parameter records</a>         | <a href={sitePath('recipes/music-crossfade/')}>Jukebox allowed tracks</a>       |
+
+All service integration belongs on Unity's main thread. A handle is tied to the service session that created it. A backend owns voices; it does not replace the graph scheduler's ownership, concurrency, signal, and notification rules.
+
+The <a href={sitePath('api/coverage/')}>coverage inventory</a> distinguishes documented integration APIs from editor/compiler implementation types. Public visibility alone does not make an internal compiler record a recommended gameplay API.

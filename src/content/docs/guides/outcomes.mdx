@@ -1,0 +1,70 @@
+---
+title: 'Did it start, finish, or fail?'
+description: 'Read every request status and notification without confusing an admitted play with audible output.'
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayStatus.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundNotificationKind.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Playback.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Tick.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.cs
+tags: [unity, graph, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+import Capture from '../../../components/Capture.astro';
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+
+A request result answers **“was my command accepted?”** A notification answers **“what happened to that play afterward?”** Check both when the next gameplay action depends on completion.
+
+## Every request status
+
+| Status             | Meaning                                                                                        | Next check                                                                                           |
+| ------------------ | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `Accepted`         | The play was admitted immediately, or a control reached a target.                              | Retain the play handle; do not assume it already has an audible voice.                               |
+| `Queued`           | Admitted for a later update, for example while clips load or during another service operation. | Do not retry the same request each frame. Watch its notifications.                                   |
+| `NoManager`        | There is no active scene service for the bus.                                                  | Enable and configure a Sound Manager before sending gameplay commands.                               |
+| `NotRegistered`    | This service has no event for the asset or key.                                                | Check its Events/Libraries and key spelling, then regenerate names if necessary.                     |
+| `InvalidEvent`     | The graph is invalid, or runtime execution failed.                                             | Read the event diagnostic and check graph validation.                                                |
+| `NotReady`         | The service is disposed, or an admitted startup exceeded its timeout.                          | Check host lifetime, preparation, and loading progress.                                              |
+| `MissingClip`      | A required clip is missing or failed to load.                                                  | Check all possible clip choices, not only the currently selected branch.                             |
+| `ConcurrencyLimit` | This event reached its instance limit, or an existing play was replaced for that limit.        | Read the event's concurrency policy and the notification Kind.                                       |
+| `CapacityExceeded` | No room in the instance pool, startup queue, or voice pool.                                    | Inspect which shared resource is busy; detached fades also occupy voices.                            |
+| `InvalidContext`   | Invalid delay, position, owner, starting parameter, or thread context.                         | Use finite values, valid types/allowed clips, and a current owner on the main thread.                |
+| `Cooldown`         | This event was admitted too recently for another request.                                      | Wait for its cooldown instead of retrying every frame.                                               |
+| `NoTarget`         | A control command reached no eligible target.                                                  | Check the handle and the command's parameter/signal/fade. Some invalid control values also map here. |
+
+`result.Accepted` is true for Accepted **and** Queued. A failed immediate admission has no new play and normally sends no notification. Boolean control helpers return false rather than a SoundPlayStatus; dispatch requests provide the status form. See <a href={sitePath('api/results-and-handles/')}>results and handles</a> for the API details.
+
+## Every notification kind
+
+| Kind        | When it appears                                                                                   |
+| ----------- | ------------------------------------------------------------------------------------------------- |
+| `Accepted`  | A play obtained a handle, even if it is still queued.                                             |
+| `Started`   | Its graph started running. It may begin with silence, a Delay, or a gate.                         |
+| `Finished`  | It naturally ran out of voices and pending work, without Keep Alive retaining it.                 |
+| `Cancelled` | A normal stop, End Event, replacement, owner-loss stop, timed stop, or service shutdown ended it. |
+| `Failed`    | An admitted play could not start or continue. Read Reason.                                        |
+
+Finished, Cancelled, and Failed are terminal. `IsTerminal` is the convenient check when all three should clean up your state. Filter notifications by Handle so another sound cannot complete your interaction.
+
+## Cancellation is not always an error
+
+A normal Stop eventually produces **Cancelled / Accepted**. The reason Accepted means there was no special failure reason; it does not mean the sound is starting again. A replacement produces **Cancelled / ConcurrencyLimit** for the old play. End Event also produces Cancelled, even when wired after Play Audio Finished.
+
+If your gameplay specifically needs natural completion, check `Kind == Finished`. If any ending should dismiss a UI or clear a stored handle, check `IsTerminal`. Launch intentionally uses natural completion for its <a href={sitePath('recipes/launch-on-completion/')}>countdown-to-ignition handoff</a>. Do not copy that Finished-only test onto a graph that ends with End Event.
+
+## Failures after admission
+
+A queued play can produce Accepted first and later **Failed / NotReady** after its startup timeout, **Failed / MissingClip** after a load failure, or **Failed / CapacityExceeded** when no voice is available to start. Runtime execution errors can produce **Failed / InvalidEvent**.
+
+A failed _branch voice_ is different: MissingSource, VoiceCapacity, and ContinuationCapacity are <a href={sitePath('graph/validation/')}>trace diagnostics</a>, and the whole play may continue. Accepted and Started are not guarantees that every layer obtained a voice.
+
+## Delivery order and callbacks
+
+The service delivers queued notifications at the end of Tick on the main thread. Accepted precedes Started for an admitted play; a startup failure may never emit Started. A very short graph can enqueue several stages before you receive the first callback.
+
+Delivery processes the records pending at its start. A callback that requests another sound does not make delivery recurse forever: new work waits for a later tick. Exceptions in one listener are logged while other listeners continue. Keep handlers short and unsubscribe when your component stops listening.
+
+Use <a href={sitePath('guides/signals-and-notifications/')}>the complete subscription example</a>, or <a href={sitePath('api/notifications/')}>the notification field reference</a> when writing a diagnostic UI.

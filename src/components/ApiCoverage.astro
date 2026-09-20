@@ -2,10 +2,30 @@
 import coverage from '../../content-data/api-coverage.json';
 import { sitePath } from '../lib/links';
 const categories = [
-  { key: 'consumer', title: 'Everyday integration', description: 'Use these types in gameplay code and scene setup. Their declared public members are covered in this reference.' },
-  { key: 'generated', title: 'Names generated for your project', description: 'These names come from the current sample events. Your own generated files will reflect your project.' },
-  { key: 'advanced', title: 'Advanced integration', description: 'The type inventory is complete. Dedicated reference material for custom services, backends, and authored records is planned for the advanced documentation stage.' },
-  { key: 'infrastructure', title: 'Editor and runtime implementation', description: 'These public declarations support graph tools, compilation, and runtime bookkeeping. They are accounted for in the inventory but are not the beginner gameplay API.' },
+  {
+    key: 'consumer',
+    title: 'Everyday integration',
+    description:
+      'Use these types in gameplay code and scene setup. Their declared public members are covered in this reference.',
+  },
+  {
+    key: 'generated',
+    title: 'Names generated for your project',
+    description:
+      'These names come from the current sample events. Your own generated files will reflect your project.',
+  },
+  {
+    key: 'advanced',
+    title: 'Advanced integration',
+    description:
+      'Complete references cover registration, preparation, custom clocks/backends, parameter declarations, and live observation.',
+  },
+  {
+    key: 'infrastructure',
+    title: 'Editor and runtime implementation',
+    description:
+      'These public declarations support graph tools, compilation, and runtime bookkeeping. They are accounted for in the inventory but are not the beginner gameplay API.',
+  },
 ];
 ---
 
@@ -16,12 +36,35 @@ const categories = [
     {category.key === 'infrastructure' ? (
       <details>
         <summary>Show implementation types</summary>
-        <ul>{coverage.types.filter((type) => type.category === category.key).map((type) => <li><code>{type.area === 'editor' ? 'Editor.' : ''}{type.name}</code></li>)}</ul>
+        <ul>
+          {coverage.types
+            .filter((type) => type.category === category.key)
+            .map((type) => (
+              <li>
+                <code>
+                  {type.area === 'editor' ? 'Editor.' : ''}
+                  {type.name}
+                </code>
+              </li>
+            ))}
+        </ul>
       </details>
     ) : (
-      <ul>{coverage.types.filter((type) => type.category === category.key).map((type) => (
-        <li>{type.page ? <a href={sitePath(type.page)}><code>{type.name}</code></a> : <code>{type.name}</code>}</li>
-      ))}</ul>
+      <ul>
+        {coverage.types
+          .filter((type) => type.category === category.key)
+          .map((type) => (
+            <li>
+              {type.page ? (
+                <a href={sitePath(type.page)}>
+                  <code>{type.name}</code>
+                </a>
+              ) : (
+                <code>{type.name}</code>
+              )}
+            </li>
+          ))}
+      </ul>
     )}
   </section>
 ))}

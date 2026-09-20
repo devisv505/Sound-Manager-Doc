@@ -1,0 +1,6 @@
+{
+  "filesScanned": 669,
+  "credentialPatternMatches": [],
+  "excludedAssetMatches": [],
+  "scope": "Current documentation source snapshot, excluding generated dependencies, git metadata, dist and test failures. Pattern scan is limited to tested formats."
+}

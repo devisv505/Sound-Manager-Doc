@@ -4,11 +4,11 @@ A static documentation site styled after the Sound Lab Unity demos. Built with A
 
 ## Current milestone
 
-M4 completes the detailed walkthroughs for all ten demos and twelve practical recipe topics. Each guide explains the controls, what to listen for, the graph flow, verified parameters/signals, the C# integration, and which behavior belongs to the sample controller. The recipes provide setup steps, complete scripts, and simple tests for a reader new to Unity.
+M5 adds the full graph reference, advanced integration APIs, and troubleshooting in plain language. All **49 shipped graph nodes** have port tables, setup notes, behavior details, and practical examples. Wave Asset trimming, lifecycle/timing, event settings, diagnostics, and every result/notification category are explained.
 
-The site has **59 authored pages**, **11 complete C# examples checked in Unity**, and the existing API inventory of 163 public types with 867 member declarations. It reuses M3's **84 authentic Unity images**, with responsive sizes and accessible enlargement. The full graph catalogue, advanced reference, and final release review remain in M5–M7.
+The site has **76 authored pages**, **11 complete C# examples checked in Unity**, **3 additional advanced excerpts compiled in Unity**, and an inventory of 163 public types with 867 member declarations. All 18 advanced integration/observation types now have reference pages. It includes **133 authentic Unity images**: M3's 84 demo captures and 49 individual node captures. The homepage pairs the Campfire graph with its code, and every node description shows its real editor appearance with enlargement. M6 local quality review is complete; M7 publication remains open. The [node-image follow-up report](validation/NODE-CAPTURES.md) records the homepage and 49-node screenshot work.
 
-See [SPEC.md](SPEC.md), [ROADMAP.md](ROADMAP.md), and the [M4 validation report](validation/M4.md). Earlier reports record [M1](validation/M1.md), [M2](validation/M2.md), and [M3](validation/M3.md). M4 is validated locally; it does not publish a new Pages revision. Open the [local demo guides](http://127.0.0.1:4321/Sound-Manager-Doc/demos/) or [recipe catalogue](http://127.0.0.1:4321/Sound-Manager-Doc/recipes/) after starting the preview.
+See [SPEC.md](SPEC.md), [ROADMAP.md](ROADMAP.md), and the [M6 validation report](validation/M6.md). Earlier reports record [M1](validation/M1.md), [M2](validation/M2.md), [M3](validation/M3.md), and [M4](validation/M4.md). M6 is validated locally; this milestone does not publish a new Pages revision. Open the [node catalogue](http://127.0.0.1:4321/Sound-Manager-Doc/graph/), [advanced reference](http://127.0.0.1:4321/Sound-Manager-Doc/advanced/), or [troubleshooting](http://127.0.0.1:4321/Sound-Manager-Doc/guides/troubleshooting/) after starting the preview.
 
 ## Run locally
 
@@ -42,7 +42,7 @@ npm run build
 npm run test:browser
 ```
 
-The sixteen browser checks exercise the production site: navigation, all ten demo guides, all twelve recipe pages, direct nested routes, images, keyboard dismissal/focus restoration, Pagefind search, exact copying of every complete C# component, source-derived API signatures, and 390/320 px layouts. They load every gallery image and verify trim instructions and actual-size enlargement. M4 screenshots are saved under `validation/m4/`; historical milestone screenshots are retained separately. The test report goes to `validation/browser-results.json`; failure artifacts are ignored. The configured preview starts automatically when no server already runs on port 4321. Stop an older preview first if its root belongs to another project.
+The twenty-seven browser checks exercise the production site: navigation, all ten demo guides, all twelve recipe pages, direct nested routes, images, keyboard dismissal/focus restoration, Pagefind search, exact copying of every complete C# component, source-derived API signatures, and 390/320 px layouts. They load every gallery image and verify trim instructions and actual-size enlargement. M5 checks additionally cover every node and fixed/numbered port, advanced API anchors, excerpt copying, search, and phone layouts. M5 screenshots are saved under `validation/m5/`; historical milestone screenshots are retained separately. The test report goes to `validation/browser-results.json`; failure artifacts are ignored. The configured preview starts automatically when no server already runs on port 4321. Stop an older preview first if its root belongs to another project.
 
 ## Content and source tracking
 
@@ -55,6 +55,9 @@ Pages are Markdown/MDX under `src/content/docs/`. Their schema requires a conten
 - `content-data/api-coverage.json`: combined public type inventory and per-member coverage. Everyday, generated, advanced, and infrastructure types have explicit scope and reasons. The build checks every documented target page and anchor.
 - `content-data/demos.json`: exact titles, feature summaries, and guide availability for all ten demos.
 - `content-data/captures.json`: Unity image provenance, states, dimensions, reproduction steps, and hashes.
+- `content-data/node-captures.json`: 49 native editor screenshots, operation mapping, file hashes, dimensions, captions, and capture provenance. `scripts/check-node-captures.mjs` verifies completeness and Unity cleanup.
+- `content-data/node-colors.json`: seven exact editor header colors and all 49 native category assignments. Each reference entry shows a named swatch; the graph overview contains the color key.
+- `content-data/node-catalogue.json`: all 49 runtime operations, exact port names/types, family, behavior, setup, and example. Family pages use real Markdown headings so every node appears in the table of contents.
 - `content-data/demo-audit.json`: reader-facing settings for all 22 sample events, normalized from the recorded native Unity audit. `npm run audit:demos` regenerates it; validation detects drift.
 - `content-data/recipes.json`: the twelve topics, demo links, and shared complete example files.
 - `examples/*.cs`: the eleven complete components. Pages import these files directly instead of duplicating them in Markdown fences.
@@ -89,6 +92,14 @@ For M4, combine all eleven files in `examples/` with `validation/m4/VerifyM4Exam
 
 To rebuild the public inventory, use `validation/InventoryPublicApi.cs.txt` in a small .NET console project with references to the SDK's `Microsoft.CodeAnalysis.dll` and `Microsoft.CodeAnalysis.CSharp.dll` under `Roslyn/bincore`. Run from the Unity project root and call `InventoryPublicApi.Main(outputPath)`. The recorded audit used .NET 9. Update the source revision literal when changing baselines. Review newly found types and members in `api-coverage.json`; do not automatically mark them documented. This helper is separate from the website build, which uses the committed JSON and needs no Unity or .NET installation.
 
+## Updating the M5 reference
+
+Read runtime/editor implementation before changing node behavior descriptions. `validation/m5/source-audit.json` records the checked source hashes and the three exact excerpt hashes. `scripts/check-m5.mjs` compares every node's fixed ports with the committed native Unity catalogue audit, checks numbered-port conventions, requires complete advanced coverage, and detects changed excerpts or audit harnesses.
+
+To rerun the native reference audit, open the source project in Unity 6000.6.0f1 and keep it in Edit Mode. Concatenate `validation/m5/VerifyM5Reference.cs.txt` and `validation/m5/CompileM5Excerpts.cs.txt` into a temporary `.cs` file outside Assets. Invoke `VerifyM5Reference.Main(outputPath)` through Unity CLI `run_script`. Inspect the inner success result as well as the CLI envelope. Record before/after scene, dirty, play/pause, and background state. The audit uses temporary ScriptableObjects, an isolated test service, and a preview scene; it must not save or edit a demo.
+
+The three advanced code blocks are explicitly excerpts, with required fields and host cleanup explained on their pages. Their exact bodies compile in the excerpt harness. The independent behavioral audit checks the service contract with a controlled test backend; it is not an audio-quality, fade-envelope, or performance benchmark. The ordinary website build consumes committed evidence and needs no Unity installation.
+
 ## GitHub Pages configuration
 
 The site address is [devisv505.github.io/Sound-Manager-Doc](https://devisv505.github.io/Sound-Manager-Doc/), configured as `site` plus `base` in `astro.config.mjs`.
@@ -97,10 +108,43 @@ In the repository's **Settings → Pages → Build and deployment**, set **Sourc
 
 [The Pages workflow](.github/workflows/pages.yml) runs on pushes to `main` and can also be started from the Actions tab. It installs the Node version in `.nvmrc`, runs `npm ci` and `npm run validate`, uploads only the generated `dist/` directory, and deploys that artifact to the `github-pages` environment. A failed validation prevents deployment. Actions are pinned to verified release commits, and deployment uses GitHub's built-in token; no personal token or Unity installation is required.
 
-To publish an update, validate locally, commit, and push to `main`. Check **Actions → Deploy documentation to GitHub Pages** for the build/deployment result. Do not switch Pages back to **Deploy from a branch** or commit generated `dist/` output. Deployment was brought forward to publish the M1 slice; the remaining content and full-site review milestones remain open.
+To publish an update, validate locally, commit, and push to `main`. Check **Actions → Deploy documentation to GitHub Pages** for the build/deployment result. Do not switch Pages back to **Deploy from a branch** or commit generated `dist/` output. Deployment was brought forward to publish the M1 slice; M1–M6 content and local review are complete; M7 verifies publication of the finished site.
 
 For implementation guidance see [Astro's GitHub Pages guide](https://docs.astro.build/en/guides/deploy/github/). Static search follows [Starlight's Pagefind integration](https://starlight.astro.build/guides/site-search/).
 
 ## Typography and media
 
 Inter is self-hosted from `@fontsource-variable/inter` 5.3.0. Its SIL Open Font License is included at `public/fonts/Inter-OFL.txt`. The Inter family matches the font used by the demos. Unity screenshots and the DEV505 mark illustrate this project's own demo/brand assets. No source audio, API keys, or Unity cache directories are needed in the documentation build.
+
+## M6 release review
+
+Use Node 24 (see `.nvmrc`). A fresh documentation checkout needs no Unity installation to build:
+
+```sh
+npm ci
+npm run validate
+npx playwright install chromium
+npm run test:browser
+```
+
+The additional M6 tests visit all 77 built pages at desktop and phone sizes with axe-core, check 320 px and tablet layouts, test search and nested refresh, and exercise keyboard previews, focus restoration, 200% text sizing, and reduced motion. Wide tables become keyboard-focusable when they overflow. Automated accessibility checks support the recorded visual/keyboard review; they are not a replacement for every assistive-technology test.
+
+With the production preview running on port 4321, measure the home page, first-sound guide, and longest node reference:
+
+```sh
+npm run preview -- --port 4321
+npm run audit:performance
+npm run audit:payloads
+```
+
+This uses Playwright's installed Chromium and Lighthouse's default simulated mobile profile. Reports go to `validation/m6/`. The audit fails below a performance score of 90 or at an initial transfer of 1 MB or more. It measures the current local build; hosted network conditions can differ. Optional full-size screenshots are loaded when opened, and Pagefind loads its search data on demand. The complete static artifact also contains those optional assets, so its total size is larger than one page's initial download.
+
+When the Unity source is available, verify the documented revision, all tracked sample inputs (including Git LFS content), and exact node colors:
+
+```sh
+npm run audit:source -- /path/to/Sound-Manager
+```
+
+This read-only audit does not open Unity or change scenes. If it reports a change, review the affected prose and example evidence; recapture any invalidated pictures before updating the baseline. For individual node images, adapt `validation/node-captures/CaptureNodes.cs.txt` to your output directory, capture the real editor nodes, and record/restore the editor session. Keep the temporary capture graph out of the asset repository. See [node capture evidence](validation/NODE-CAPTURES.md).
+
+`npm run validate` checks all internal links and anchors, canonical URLs, responsive image and font paths, private repository links, known credential patterns, and unexpected published file types. Original recordings, Unity caches, models, and source code do not belong in `dist/`. See [the M6 report](validation/M6.md) for source freshness, reading review, known limits, and clean-install evidence. M7 remains the separate live publication and hosted-site verification step.

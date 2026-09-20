@@ -15,6 +15,6 @@ This inventory comes from the current C# source, including explicitly public run
 
 Every everyday integration member is accounted for. A few public SoundEvent compilation members are deliberately classified as infrastructure: normal gameplay reads the imported event and uses its key rather than writing compiled graph records.
 
-The documentation repository stores the full signatures, source paths, file hashes, and per-member status in `content-data/public-api-inventory.json` and `content-data/api-coverage.json`. Advanced types are inventoried now so their remaining reference work is visible; they are not marked complete prematurely.
+The documentation repository stores the full signatures, source paths, file hashes, and per-member status in `content-data/public-api-inventory.json` and `content-data/api-coverage.json`. All advanced integration types now have reference pages, including the supporting trace and observation types. Editor and compiler implementation types remain explicitly excluded from the integration API; their user-facing graph behavior is covered by the node catalogue.
 
 <ApiCoverage />

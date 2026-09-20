@@ -1,0 +1,58 @@
+---
+import colors from '../../content-data/node-colors.json';
+---
+
+<div class="color-key">
+  <table>
+    <caption>Unity node header colors</caption>
+    <thead>
+      <tr>
+        <th scope="col">Color</th>
+        <th scope="col">Category</th>
+        <th scope="col">What it tells you</th>
+      </tr>
+    </thead>
+    <tbody>
+      {colors.categories.map((category) => (
+        <tr>
+          <td>
+            <span
+              class="swatch"
+              style={`background-color: ${category.color}`}
+              aria-hidden="true"
+            ></span>
+            {category.colorName}
+          </td>
+          <th scope="row">{category.name}</th>
+          <td>{category.description}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+<style>
+  .color-key {
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  caption {
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  td:first-child {
+    white-space: nowrap;
+  }
+  .swatch {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-inline-end: 0.5rem;
+    border: 1px solid #465548;
+    border-radius: 3px;
+  }
+</style>

@@ -1,0 +1,31 @@
+{
+  "operation": "RemapFloat",
+  "title": "Remap Float",
+  "capturedAt": "2026-09-19T23:12:04.1833750Z",
+  "unityVersion": "6000.6.0f1",
+  "width": 730,
+  "height": 591,
+  "zoom": 1.25,
+  "pixelsPerPoint": 2.0,
+  "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+  "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+  "bounds": "(x:100.00, y:120.00, width:346.88, height:277.50)",
+  "cropX": 182,
+  "cropY": 222,
+  "labels": [
+    "Remap Float",
+    "Clamp",
+    "Parameter",
+    "0",
+    "Old Min",
+    "0",
+    "Old Max",
+    "1",
+    "New Min",
+    "0",
+    "New Max",
+    "1",
+    "Result",
+    "Remap Float"
+  ]
+}

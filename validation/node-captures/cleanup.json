@@ -1,0 +1,31 @@
+{
+  "success": true,
+  "command": "command run_script",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "/tmp/CaptureSoundNodes.cs",
+      "entry": "CaptureSoundNodes.Cleanup",
+      "timeout_ms": "55000"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 142,
+      "executeMs": 471,
+      "assemblyName": "PipelineRunScript_CaptureSoundNodes_5ceeaf62bfc34f5baf4b8383768d3197",
+      "success": true,
+      "result": {
+        "deleted": true,
+        "path": "Assets/__SoundDocsNodeCapture.soundgraph"
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "/Users/devisv/projects/unity/Sound-Manager"
+    },
+    "success": true
+  },
+  "errors": [],
+  "warnings": []
+}

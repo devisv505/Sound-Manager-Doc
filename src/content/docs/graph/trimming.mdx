@@ -1,0 +1,50 @@
+---
+title: 'One recording. Several useful sounds.'
+description: 'Choose, preview, and reuse independent Wave Asset ranges without changing the original file.'
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Editor/AudioProcessing/SoundClipTrims.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundWaveRange.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs
+tags: [unity, graph, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+import Capture from '../../../components/Capture.astro';
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+
+A footstep recording may contain several steps. Make one Wave Asset node for each useful step, all pointing to the same source file, then choose a different range on each node. Random Clip can pick a variation each time the event plays.
+
+## Choose a single step
+
+1. Add a **Wave Asset** and assign the recording. You can also drag an AudioClip into the graph.
+2. Expand **Range** at the bottom of the node. It may be collapsed even though Start and Length are visible.
+3. Choose the beginning and end around one step in the waveform. **Start** is seconds into the recording; **Length** is how long that section lasts.
+4. Preview the range and listen to both edges. Leave enough of the step's tail so it does not sound cut off.
+5. Repeat on another Wave Asset using the same recording and another step. Connect each Asset output to a different Random Clip input.
+6. Save the graph, wait for any trim preparation/import to finish, then play the event again.
+
+For example, Start `1.1` and Length `0.53` use approximately 1.10–1.63 seconds. Length `0` means “from Start through the end,” not “play nothing.” Start `0` with Length `0` uses the whole clip.
+
+<Capture id="footstep-trim-range" />
+
+## Why a range may not appear
+
+The waveform lives in the **Range** foldout; the ordinary Asset, Start, and Length fields are not the whole range editor. Assign a readable project AudioClip and expand the foldout. If decoding fails, read the range's diagnostic. This panel is an editor authoring tool, not part of the runtime Play Audio node.
+
+## What happens to the file
+
+Your source recording is unchanged. The editor bakes a selected range into a WAV under `Assets/DEV505/SoundManager/Generated/Trims`, preserving the source's audio import settings. The runtime plays this derived clip normally; it does not seek through the long recording on every step.
+
+The range is quantized to audio frames. Start must lie inside the recording and the range must contain at least one frame. An end past the recording is clamped to its end. Negative or non-finite Start/Length values are invalid.
+
+Identical source/frame ranges share one derived clip. Different ranges produce separate clips, so several steps from one recording satisfy Random Clip's requirement for distinct inputs. Two nodes with the _same_ range do not create two distinct variations.
+
+## Preview and saving
+
+A trim requested during import may briefly report **Preparing the trimmed range**. Baking and graph reimport run after that import finishes. Changes in an open graph can be previewed before saving, while a saved runtime asset still represents its saved revision. Save before testing a new play in your scene.
+
+Unused generated ranges are cleaned up after graph changes. **Tools → DEV505 → Sound Manager → Delete Unused Trims** also runs the cleanup. It keeps ranges referenced by saved graphs or open graph windows. Keep the generated assets your graphs depend on with the project.
+
+See <a href={sitePath('recipes/surface-footsteps/')}>the complete Footstep example</a> and <a href={sitePath('captures/02-footstep/')}>its Unity captures</a> for the grass, stone, and wood banks. Return to <a href={sitePath('graph/clips/#random-clip')}>Random Clip</a> for selection rules.

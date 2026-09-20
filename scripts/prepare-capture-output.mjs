@@ -15,7 +15,10 @@ const walk = async (directory) =>
   ).flat();
 const files = await walk('dist');
 const manifest = JSON.parse(await readFile('content-data/captures.json', 'utf8'));
-const originals = new Set(manifest.captures.map((capture) => capture.sha256));
+const nodeManifest = JSON.parse(await readFile('content-data/node-captures.json', 'utf8'));
+const originals = new Set(
+  [...manifest.captures, ...nodeManifest.captures].map((capture) => capture.sha256),
+);
 const references = (
   await Promise.all(
     files

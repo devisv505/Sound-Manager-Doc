@@ -1,0 +1,28 @@
+{
+  "operation": "IntParameter",
+  "title": "Int Parameter",
+  "capturedAt": "2026-09-19T23:12:02.1586130Z",
+  "unityVersion": "6000.6.0f1",
+  "width": 449,
+  "height": 509,
+  "zoom": 1.25,
+  "pixelsPerPoint": 2.0,
+  "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+  "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+  "bounds": "(x:100.00, y:120.00, width:206.25, height:236.25)",
+  "cropX": 182,
+  "cropY": 222,
+  "labels": [
+    "Int Parameter",
+    "Parameter",
+    "Index",
+    "Default",
+    "0",
+    "Min",
+    "0",
+    "Max",
+    "100",
+    "Value",
+    "Int Parameter"
+  ]
+}

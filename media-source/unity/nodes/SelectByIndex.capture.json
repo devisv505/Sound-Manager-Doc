@@ -1,0 +1,28 @@
+{
+  "operation": "SelectByIndex",
+  "title": "Select By Index",
+  "capturedAt": "2026-09-19T23:12:14.4636850Z",
+  "unityVersion": "6000.6.0f1",
+  "width": 738,
+  "height": 471,
+  "zoom": 1.25,
+  "pixelsPerPoint": 2.0,
+  "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+  "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+  "bounds": "(x:100.00, y:120.00, width:350.63, height:217.50)",
+  "cropX": 182,
+  "cropY": 222,
+  "labels": [
+    "Select By Index",
+    "Count",
+    "2",
+    "Index",
+    "0",
+    "In 0",
+    "None (Audio Clip)",
+    "In 1",
+    "None (Audio Clip)",
+    "Out",
+    "Select By Index"
+  ]
+}

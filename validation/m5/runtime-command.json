@@ -1,0 +1,33 @@
+{
+  "success": true,
+  "command": "command run_script",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "/tmp/VerifyM5Reference.cs",
+      "entry": "VerifyM5Reference.Main",
+      "args": "[\"/Users/devisv/Projects/Web/Sound-Manager-Doc/validation/m5/runtime-audit.json\"]",
+      "timeout_ms": "55000"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 230,
+      "executeMs": 50,
+      "assemblyName": "PipelineRunScript_VerifyM5Reference_8cc1e81fd4fb4efa8b73cd8e65fcd50d",
+      "success": true,
+      "result": {
+        "success": true,
+        "checks": 180,
+        "nodes": 49
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "/Users/devisv/projects/unity/Sound-Manager"
+    },
+    "success": true
+  },
+  "errors": [],
+  "warnings": []
+}

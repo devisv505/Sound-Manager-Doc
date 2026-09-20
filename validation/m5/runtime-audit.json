@@ -1,0 +1,1089 @@
+{
+  "success": true,
+  "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
+  "unity": "6000.6.0f1",
+  "utc": "2026-09-19T22:55:49.9824760Z",
+  "checks": [
+    "Reference audit runs in Edit Mode without entering or changing a scene",
+    "Native catalogue contains 49 operations",
+    "Every enum operation has a catalogue definition",
+    "On Start resolves fixed port Out",
+    "On Signal resolves fixed port Out",
+    "On Stop resolves fixed port Out",
+    "Wave Asset resolves fixed port Asset",
+    "Play Audio resolves fixed port Play",
+    "Play Audio resolves fixed port Stop",
+    "Play Audio resolves fixed port Audio Source",
+    "Play Audio resolves fixed port Volume",
+    "Play Audio resolves fixed port Playback Speed",
+    "Play Audio resolves fixed port Finished",
+    "Play Audio resolves fixed port Stopped",
+    "Float Parameter resolves fixed port Value",
+    "Float resolves fixed port Value",
+    "Bool resolves fixed port Value",
+    "Random Float resolves fixed port Min",
+    "Random Float resolves fixed port Max",
+    "Random Float resolves fixed port Result",
+    "Random Clip resolves fixed port Asset",
+    "End Event resolves fixed port In",
+    "Int Parameter resolves fixed port Value",
+    "Bool Parameter resolves fixed port Value",
+    "Asset Parameter resolves fixed port Asset",
+    "Int resolves fixed port Value",
+    "Random Int resolves fixed port Min",
+    "Random Int resolves fixed port Max",
+    "Random Int resolves fixed port Result",
+    "Remap Float resolves fixed port Parameter",
+    "Remap Float resolves fixed port Old Min",
+    "Remap Float resolves fixed port Old Max",
+    "Remap Float resolves fixed port New Min",
+    "Remap Float resolves fixed port New Max",
+    "Remap Float resolves fixed port Result",
+    "Float Compare resolves fixed port A",
+    "Float Compare resolves fixed port B",
+    "Float Compare resolves fixed port Result",
+    "Float Math resolves fixed port A",
+    "Float Math resolves fixed port B",
+    "Float Math resolves fixed port Result",
+    "Int Compare resolves fixed port A",
+    "Int Compare resolves fixed port B",
+    "Int Compare resolves fixed port Result",
+    "Int Op resolves fixed port A",
+    "Int Op resolves fixed port B",
+    "Int Op resolves fixed port Result",
+    "Curve resolves fixed port In",
+    "Curve resolves fixed port Out",
+    "Multiplier To Semitones resolves fixed port In",
+    "Multiplier To Semitones resolves fixed port Out",
+    "Semitones To Multiplier resolves fixed port In",
+    "Semitones To Multiplier resolves fixed port Out",
+    "Float Function resolves fixed port In",
+    "Float Function resolves fixed port Out",
+    "Int Function resolves fixed port In",
+    "Int Function resolves fixed port Out",
+    "Convert To Int resolves fixed port In",
+    "Convert To Int resolves fixed port Out",
+    "Convert To Float resolves fixed port In",
+    "Convert To Float resolves fixed port Out",
+    "Not resolves fixed port In",
+    "Not resolves fixed port Out",
+    "Select Float resolves fixed port Index",
+    "Select Float resolves fixed port Out",
+    "Select Int resolves fixed port Index",
+    "Select Int resolves fixed port Out",
+    "Select By Index resolves fixed port Index",
+    "Select By Index resolves fixed port Out",
+    "Smoothstep Float resolves fixed port In",
+    "Smoothstep Float resolves fixed port Min",
+    "Smoothstep Float resolves fixed port Max",
+    "Smoothstep Float resolves fixed port Out",
+    "And resolves fixed port A",
+    "And resolves fixed port B",
+    "And resolves fixed port Result",
+    "Or resolves fixed port A",
+    "Or resolves fixed port B",
+    "Or resolves fixed port Result",
+    "Xor resolves fixed port A",
+    "Xor resolves fixed port B",
+    "Xor resolves fixed port Result",
+    "Track Condition resolves fixed port Start",
+    "Track Condition resolves fixed port Stop",
+    "Track Condition resolves fixed port Condition",
+    "Track Condition resolves fixed port Started",
+    "Track Condition resolves fixed port Stopped",
+    "Delay resolves fixed port In",
+    "Delay resolves fixed port Seconds",
+    "Delay resolves fixed port Out",
+    "Sequence resolves fixed port In",
+    "Branch resolves fixed port In",
+    "Branch resolves fixed port Condition",
+    "Branch resolves fixed port True",
+    "Branch resolves fixed port False",
+    "Branch By Index resolves fixed port In",
+    "Branch By Index resolves fixed port Index",
+    "Random Branch resolves fixed port In",
+    "For Loop resolves fixed port In",
+    "For Loop resolves fixed port First",
+    "For Loop resolves fixed port Last",
+    "For Loop resolves fixed port Loop Body",
+    "For Loop resolves fixed port Completed",
+    "For Loop resolves fixed port Index",
+    "Repeat resolves fixed port Start",
+    "Repeat resolves fixed port Stop",
+    "Repeat resolves fixed port Interval",
+    "Repeat resolves fixed port Out",
+    "Wait For Condition resolves fixed port In",
+    "Wait For Condition resolves fixed port Condition",
+    "Wait For Condition resolves fixed port Out",
+    "Idle Loop resolves fixed port Start",
+    "Idle Loop resolves fixed port Stop",
+    "Idle Loop resolves fixed port Out",
+    "Counter resolves fixed port In",
+    "Counter resolves fixed port Reset",
+    "Counter resolves fixed port Limit",
+    "Counter resolves fixed port Out",
+    "Counter resolves fixed port Reached",
+    "Counter resolves fixed port Count",
+    "Stop Instance resolves fixed port In",
+    "Stop Instance resolves fixed port Fade",
+    "Passthrough resolves fixed port In",
+    "Passthrough resolves fixed port Out",
+    "Random Clip supports Clip 16",
+    "Random Clip numbering is 1 through 16",
+    "Sequence numbered outputs start at zero",
+    "Select numbered inputs start at zero",
+    "Register valid graph with a key",
+    "Resolve returns the registered asset",
+    "Requests before preparation are accepted as queued",
+    "BeginPreparation and Tick start the queued graph",
+    "A live Delay is Waiting with zero voices",
+    "Observed definition is the play's revision",
+    "Pause freezes graph time through a long clock advance",
+    "End Event reports Cancelled/Accepted after the Delay",
+    "Structurally valid handle can already be ended",
+    "Ended plays have no live definition or activity",
+    "Observation of an ended play returns false",
+    "Asset-only registration succeeds",
+    "Idle non-retained graph retires naturally as Finished",
+    "Duplicate key does not reject a valid registration",
+    "First event retains a conflicting key",
+    "Re-register can bind an available key",
+    "Keep Alive retains a silent graph",
+    "Unregister succeeds for a known event",
+    "Unregister removes key and stops its plays",
+    "Trace wraps at fixed capacity",
+    "Overwritten trace records cannot be read",
+    "Trace cursor matches record sequence",
+    "Trace cursor matches record sequence",
+    "Trace cursor matches record sequence",
+    "Trace cursor matches record sequence",
+    "Trace cursor matches record sequence",
+    "Trace cursor matches record sequence",
+    "Trace cursor matches record sequence",
+    "Trace cursor matches record sequence",
+    "Documented cursor pattern reads all retained records",
+    "Disabled tracing writes no new records",
+    "Actual Footstep event imports validly",
+    "Register loading content after preparation",
+    "New loading content clears catalogue readiness",
+    "Loading event queues",
+    "Queued loading request times out with Failed/NotReady",
+    "Missing content leaves the loading list, so Ready is not a success guarantee",
+    "Per-play readiness still rejects missing clips",
+    "Starting typed Surface override is applied before playback",
+    "Actual Footstep graph ends through Cancelled, not Finished",
+    "Accepts checks type while Clamp handles numeric range",
+    "Parameter records reject wrong value types",
+    "Catalogue deduplicates the same asset",
+    "Contains tolerates a null catalogue",
+    "Disposal owns backend cleanup and clears readiness",
+    "Disposed service refuses new playback",
+    "Replacement services have a distinct session",
+    "Unity backend preallocates its requested voice pool",
+    "Following sync defaults on",
+    "Unknown voice handles are Free",
+    "Diagnostic source access returns a pooled AudioSource",
+    "Missing clip readiness is explicit"
+  ],
+  "nodes": [
+    {
+      "operation": "OnStart",
+      "title": "On Start",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        }
+      ]
+    },
+    {
+      "operation": "OnSignal",
+      "title": "On Signal",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        }
+      ]
+    },
+    {
+      "operation": "OnStop",
+      "title": "On Stop",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        }
+      ]
+    },
+    {
+      "operation": "WaveAsset",
+      "title": "Wave Asset",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Asset",
+          "type": "Clip"
+        }
+      ]
+    },
+    {
+      "operation": "PlayAudio",
+      "title": "Play Audio",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Play",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Stop",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Audio Source",
+          "type": "Clip"
+        },
+        {
+          "direction": "Input",
+          "name": "Volume",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "Playback Speed",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Finished",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Stopped",
+          "type": "Execution"
+        }
+      ]
+    },
+    {
+      "operation": "FloatParameter",
+      "title": "Float Parameter",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Value",
+          "type": "Float"
+        }
+      ]
+    },
+    {
+      "operation": "Float",
+      "title": "Float",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Value",
+          "type": "Float"
+        }
+      ]
+    },
+    {
+      "operation": "Bool",
+      "title": "Bool",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Value",
+          "type": "Bool"
+        }
+      ]
+    },
+    {
+      "operation": "RandomFloat",
+      "title": "Random Float",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Min",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "Max",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Float"
+        }
+      ]
+    },
+    {
+      "operation": "RandomClip",
+      "title": "Random Clip",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Asset",
+          "type": "Clip"
+        }
+      ]
+    },
+    {
+      "operation": "EndEvent",
+      "title": "End Event",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        }
+      ]
+    },
+    {
+      "operation": "IntParameter",
+      "title": "Int Parameter",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Value",
+          "type": "Int"
+        }
+      ]
+    },
+    {
+      "operation": "BoolParameter",
+      "title": "Bool Parameter",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Value",
+          "type": "Bool"
+        }
+      ]
+    },
+    {
+      "operation": "AssetParameter",
+      "title": "Asset Parameter",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Asset",
+          "type": "Clip"
+        }
+      ]
+    },
+    {
+      "operation": "Int",
+      "title": "Int",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Value",
+          "type": "Int"
+        }
+      ]
+    },
+    {
+      "operation": "RandomInt",
+      "title": "Random Int",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Min",
+          "type": "Int"
+        },
+        {
+          "direction": "Input",
+          "name": "Max",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Int"
+        }
+      ]
+    },
+    {
+      "operation": "RemapFloat",
+      "title": "Remap Float",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Parameter",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "Old Min",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "Old Max",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "New Min",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "New Max",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Float"
+        }
+      ]
+    },
+    {
+      "operation": "FloatCompare",
+      "title": "Float Compare",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "A",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "B",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Bool"
+        }
+      ]
+    },
+    {
+      "operation": "FloatMath",
+      "title": "Float Math",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "A",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "B",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Float"
+        }
+      ]
+    },
+    {
+      "operation": "IntCompare",
+      "title": "Int Compare",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "A",
+          "type": "Int"
+        },
+        {
+          "direction": "Input",
+          "name": "B",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Bool"
+        }
+      ]
+    },
+    {
+      "operation": "IntOp",
+      "title": "Int Op",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "A",
+          "type": "Int"
+        },
+        {
+          "direction": "Input",
+          "name": "B",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Int"
+        }
+      ]
+    },
+    {
+      "operation": "Curve",
+      "title": "Curve",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Float"
+        }
+      ]
+    },
+    {
+      "operation": "MultiplierToSemitones",
+      "title": "Multiplier To Semitones",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Float"
+        }
+      ]
+    },
+    {
+      "operation": "SemitonesToMultiplier",
+      "title": "Semitones To Multiplier",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Float"
+        }
+      ]
+    },
+    {
+      "operation": "FloatFunction",
+      "title": "Float Function",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Float"
+        }
+      ]
+    },
+    {
+      "operation": "IntFunction",
+      "title": "Int Function",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Int"
+        }
+      ]
+    },
+    {
+      "operation": "ConvertToInt",
+      "title": "Convert To Int",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Int"
+        }
+      ]
+    },
+    {
+      "operation": "ConvertToFloat",
+      "title": "Convert To Float",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Float"
+        }
+      ]
+    },
+    {
+      "operation": "Not",
+      "title": "Not",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Bool"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Bool"
+        }
+      ]
+    },
+    {
+      "operation": "SelectFloat",
+      "title": "Select Float",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Index",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Float"
+        }
+      ]
+    },
+    {
+      "operation": "SelectInt",
+      "title": "Select Int",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Index",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Int"
+        }
+      ]
+    },
+    {
+      "operation": "SelectByIndex",
+      "title": "Select By Index",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Index",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Clip"
+        }
+      ]
+    },
+    {
+      "operation": "SmoothstepFloat",
+      "title": "Smoothstep Float",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "Min",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "Max",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Float"
+        }
+      ]
+    },
+    {
+      "operation": "And",
+      "title": "And",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "A",
+          "type": "Bool"
+        },
+        {
+          "direction": "Input",
+          "name": "B",
+          "type": "Bool"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Bool"
+        }
+      ]
+    },
+    {
+      "operation": "Or",
+      "title": "Or",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "A",
+          "type": "Bool"
+        },
+        {
+          "direction": "Input",
+          "name": "B",
+          "type": "Bool"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Bool"
+        }
+      ]
+    },
+    {
+      "operation": "Xor",
+      "title": "Xor",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "A",
+          "type": "Bool"
+        },
+        {
+          "direction": "Input",
+          "name": "B",
+          "type": "Bool"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Bool"
+        }
+      ]
+    },
+    {
+      "operation": "TrackCondition",
+      "title": "Track Condition",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Start",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Stop",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Condition",
+          "type": "Bool"
+        },
+        {
+          "direction": "Output",
+          "name": "Started",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Stopped",
+          "type": "Execution"
+        }
+      ]
+    },
+    {
+      "operation": "Delay",
+      "title": "Delay",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Seconds",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        }
+      ]
+    },
+    {
+      "operation": "Sequence",
+      "title": "Sequence",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        }
+      ]
+    },
+    {
+      "operation": "Branch",
+      "title": "Branch",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Condition",
+          "type": "Bool"
+        },
+        {
+          "direction": "Output",
+          "name": "True",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "False",
+          "type": "Execution"
+        }
+      ]
+    },
+    {
+      "operation": "BranchByIndex",
+      "title": "Branch By Index",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Index",
+          "type": "Int"
+        }
+      ]
+    },
+    {
+      "operation": "RandomBranch",
+      "title": "Random Branch",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        }
+      ]
+    },
+    {
+      "operation": "ForLoop",
+      "title": "For Loop",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "First",
+          "type": "Int"
+        },
+        {
+          "direction": "Input",
+          "name": "Last",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Loop Body",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Completed",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Index",
+          "type": "Int"
+        }
+      ]
+    },
+    {
+      "operation": "Repeat",
+      "title": "Repeat",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Start",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Stop",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Interval",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        }
+      ]
+    },
+    {
+      "operation": "WaitForCondition",
+      "title": "Wait For Condition",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Condition",
+          "type": "Bool"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        }
+      ]
+    },
+    {
+      "operation": "IdleLoop",
+      "title": "Idle Loop",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Start",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Stop",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        }
+      ]
+    },
+    {
+      "operation": "Counter",
+      "title": "Counter",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Reset",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Limit",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Reached",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Count",
+          "type": "Int"
+        }
+      ]
+    },
+    {
+      "operation": "StopInstance",
+      "title": "Stop Instance",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Fade",
+          "type": "Float"
+        }
+      ]
+    },
+    {
+      "operation": "Passthrough",
+      "title": "Passthrough",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        }
+      ]
+    }
+  ]
+}

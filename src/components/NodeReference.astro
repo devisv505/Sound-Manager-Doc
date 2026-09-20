@@ -1,0 +1,91 @@
+---
+import catalogue from '../../content-data/node-catalogue.json';
+import NodeColor from './NodeColor.astro';
+import NodeCapture from './NodeCapture.astro';
+interface Props {
+  operation: string;
+}
+const nodes = catalogue.nodes.filter((node) => node.operation === Astro.props.operation);
+if (!nodes.length) throw new Error(`Unknown operation: ${Astro.props.operation}`);
+---
+
+{nodes.map((node) => (
+  <section class="node-reference" aria-labelledby={node.anchor} data-node={node.operation}>
+    <p>{node.behavior}</p>
+    <NodeColor operation={node.operation} />
+    <div class="node-details">
+      <NodeCapture operation={node.operation} />
+      <div class="node-ports">
+        <table>
+          <caption>Ports on {node.title}</caption>
+          <thead>
+            <tr>
+              <th>Direction</th>
+              <th>Port</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {node.ports.map((port) => (
+              <tr>
+                <td>{port.direction}</td>
+                <td>
+                  <code>{port.name}</code>
+                </td>
+                <td>{port.type}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p>
+      <strong>Set it up.</strong> {node.setup}
+    </p>
+    <p class="node-example">
+      <strong>Try it.</strong> {node.example}
+    </p>
+  </section>
+))}
+<style>
+  .node-reference {
+    margin-block: 1rem 2.5rem;
+  }
+  .node-reference h2 {
+    scroll-margin-top: 6rem;
+  }
+  .node-reference p {
+    margin-block: 1rem;
+  }
+  .node-details {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.2rem;
+    align-items: start;
+  }
+  @media (max-width: 65rem) {
+    .node-details {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  .node-details > :global(*) {
+    margin-top: 0;
+  }
+  .node-ports {
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  caption {
+    text-align: left;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  .node-example {
+    padding: 1rem 1.2rem;
+    border-radius: 12px;
+    background: var(--sl-color-gray-6);
+  }
+</style>

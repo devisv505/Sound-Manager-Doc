@@ -1,0 +1,78 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "return new {scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path, dirty=UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty, playing=UnityEditor.EditorApplication.isPlaying, paused=UnityEditor.EditorApplication.isPaused, background=UnityEngine.Application.runInBackground,selection=UnityEditor.Selection.assetGUIDs,windows=UnityEngine.Resources.FindObjectsOfTypeAll<UnityEditor.EditorWindow>().Select(w=>new {title=w.titleContent.text,type=w.GetType().FullName,maximized=w.maximized}).ToArray()};"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "scene": "Assets/DEV505/SoundManager/Samples/10-Launch/Demo.unity",
+        "dirty": false,
+        "playing": false,
+        "paused": false,
+        "background": false,
+        "selection": [],
+        "windows": [
+          {
+            "title": "UnityEditor.MainToolbarWindow",
+            "type": "UnityEditor.MainToolbarWindow",
+            "maximized": false
+          },
+          {
+            "title": "Workshop",
+            "type": "Unity.GraphToolkit.Editor.Implementation.GraphViewEditorWindowImp",
+            "maximized": false
+          },
+          {
+            "title": "Game",
+            "type": "UnityEditor.GameView",
+            "maximized": false
+          },
+          {
+            "title": "Scene",
+            "type": "UnityEditor.SceneView",
+            "maximized": false
+          },
+          {
+            "title": "Console",
+            "type": "UnityEditor.ConsoleWindow",
+            "maximized": false
+          },
+          {
+            "title": "Hierarchy",
+            "type": "Unity.Hierarchy.Editor.HierarchyWindow",
+            "maximized": false
+          },
+          {
+            "title": "Project",
+            "type": "UnityEditor.ProjectBrowser",
+            "maximized": false
+          },
+          {
+            "title": "Inspector",
+            "type": "UnityEditor.InspectorWindow",
+            "maximized": false
+          },
+          {
+            "title": "Test Runner",
+            "type": "UnityEditor.TestTools.TestRunner.TestRunnerWindow",
+            "maximized": false
+          }
+        ]
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "/Users/devisv/projects/unity/Sound-Manager"
+    },
+    "success": true
+  },
+  "errors": [],
+  "warnings": []
+}

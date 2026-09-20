@@ -1,0 +1,92 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.UIElements;
+using Unity.GraphToolkit.Editor;
+using DEV505.SoundManager;
+using DEV505.SoundManager.Editor;
+public static class CaptureSoundNodes
+{
+ const string Root="/Users/devisv/Projects/Web/Sound-Manager-Doc";
+ const string Session="SoundDocs.NodeCapture.Path";
+ const BindingFlags F=BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance;
+ static EditorWindow Window => Resources.FindObjectsOfTypeAll<EditorWindow>().First(w=>w is IGraphWindow gw && GraphDatabase.GetGraphAssetPath(gw.Graph)==SessionState.GetString(Session,""));
+ public static async Task<object> Setup()
+ {
+  string path=AssetDatabase.GenerateUniqueAssetPath("Assets/__SoundDocsNodeCapture.soundgraph");
+  SessionState.SetString(Session,path);
+  using(new AssetDatabase.AssetEditingScope())
+  {
+   var graph=GraphDatabase.CreateGraph<SoundGraph>(path);
+   var source=AssetDatabase.LoadAssetAtPath<SoundEvent>("Assets/DEV505/SoundManager/Samples/01-Campfire/Campfire.soundgraph");
+   var clips=source.Nodes.Where(n=>n.clip).Select(n=>n.clip).Distinct().OrderBy(c=>c.name.Length).Take(2).ToArray();
+   SoundNode wave=null,random=null;
+   int i=0;
+   foreach(var d in SoundNodeCatalogue.Definitions)
+   {
+    var type=typeof(SoundGraph).Assembly.GetType("DEV505.SoundManager.Editor."+d.Operation+"Node",true);
+    var node=(SoundNode)Activator.CreateInstance(type);node.Position=new Vector2((i%7)*650,(i/7)*900);graph.AddNode(node);i++;
+    if(d.Operation==SoundOperation.WaveAsset){node.GetNodeOptionByName("Asset").TrySetValue(clips[0]);wave=node;}
+    if(d.Operation==SoundOperation.RandomClip)random=node;
+    if(d.Operation==SoundOperation.AssetParameter){node.GetNodeOptionByName("Default").TrySetValue(clips[0]);node.GetNodeOptionByName("Allowed Clips").TrySetValue(clips);node.DefineNode();}
+   }
+   var helper=new WaveAssetNode{Position=new Vector2(5200,0)};graph.AddNode(helper);helper.GetNodeOptionByName("Asset").TrySetValue(clips[1]);
+   graph.Connect(wave.GetOutputPortByName("Asset"),random.GetInputPortByName("Clip 1"));graph.Connect(helper.GetOutputPortByName("Asset"),random.GetInputPortByName("Clip 2"));
+   var play=graph.GetNodes().OfType<PlayAudioNode>().First();graph.Connect(wave.GetOutputPortByName("Asset"),play.GetInputPortByName("Audio Source"));
+   GraphDatabase.SaveGraph(graph);
+  }
+  AssetDatabase.ImportAsset(path,ImportAssetOptions.ForceSynchronousImport);
+  AssetDatabase.OpenAsset(AssetDatabase.LoadMainAssetAtPath(path));await Task.Delay(700);
+  return await Prepare();
+ }
+ public static async Task<object> Prepare()
+ {
+  string path=SessionState.GetString(Session,"");
+  var w=Window;w.maximized=true;w.Focus();await Task.Delay(600);
+  foreach(var overlay in w.rootVisualElement.Query<VisualElement>().ToList().Where(e=>e.ClassListContains("unity-overlay")))overlay.style.display=DisplayStyle.None;
+  var v=w.rootVisualElement.Q<VisualElement>(className:"ge-graph-view");
+  return new{path,nodes=v.Query<VisualElement>(className:"ge-node").ToList().Count,window=w.position.ToString()};
+ }
+ public static async Task<object> Capture(string operation)
+ {
+  var op=(SoundOperation)Enum.Parse(typeof(SoundOperation),operation);var def=SoundNodeCatalogue.Find(op);
+  var w=Window;w.Focus();var v=w.rootVisualElement.Q<VisualElement>(className:"ge-graph-view");var c=v.Q<VisualElement>("content-view-container");
+  var index=SoundNodeCatalogue.Definitions.ToList().FindIndex(d=>d.Operation==op);var target=new Vector2((index%7)*650,(index/7)*900);
+  var node=v.Query<VisualElement>(className:"ge-node").ToList().OrderBy(e=>(c.WorldToLocal(e.worldBound.position)-target).sqrMagnitude).First();
+  var labels=node.Query<TextElement>().ToList().Select(e=>e.text).Where(t=>!string.IsNullOrEmpty(t)).ToArray();
+  if(!labels.Contains(def.Name))throw new Exception("Wrong node: "+operation+" labels "+string.Join(",",labels));
+  if(op==SoundOperation.WaveAsset){var fold=node.Query<Foldout>().ToList().FirstOrDefault(f=>f.ClassListContains("sound505-wave-range__foldout"));if(fold!=null)fold.value=true;await Task.Delay(300);}
+  const float zoom=1.25f;
+  var position=new Vector3(100-target.x*zoom,100-target.y*zoom,0);
+  v.GetType().GetMethod("UpdateViewTransform",F).Invoke(v,new object[]{position,new Vector3(zoom,zoom,1)});
+  foreach(var e in v.Query<VisualElement>().ToList())
+  {
+   using(var leave=MouseLeaveEvent.GetPooled()){leave.target=e;e.SendEvent(leave);}
+   using(var leave=PointerLeaveEvent.GetPooled()){leave.target=e;e.SendEvent(leave);}
+  }
+  w.Repaint();await Task.Delay(350);
+  float scale=EditorGUIUtility.pixelsPerPoint;int width=(int)(w.position.width*scale),height=(int)(w.position.height*scale);
+  var host=typeof(EditorWindow).GetField("m_Parent",F).GetValue(w);
+  var rt=new RenderTexture(width,height,0,RenderTextureFormat.ARGB32);rt.Create();var old=RenderTexture.active;Texture2D tex=null,crop=null;
+  string dir=Root+"/media-source/unity/nodes";Directory.CreateDirectory(dir);string filename=operation+".png";
+  var world=node.worldBound;var b=new Rect(w.rootVisualElement.WorldToLocal(world.position),world.size);int padding=18;int x=Mathf.FloorToInt(b.xMin*scale)-padding,y=Mathf.FloorToInt(b.yMin*scale)-padding;
+  int cw=Mathf.CeilToInt(b.width*scale)+padding*2,ch=Mathf.CeilToInt(b.height*scale)+padding*2;
+  if(x<0||y<0||x+cw>width||y+ch>height)throw new Exception("Node outside capture: "+b);
+  try
+  {
+   host.GetType().GetMethod("GrabPixels",F).Invoke(host,new object[]{rt,new Rect(0,0,width,height)});
+   RenderTexture.active=rt;tex=new Texture2D(width,height,TextureFormat.RGB24,false);tex.ReadPixels(new Rect(0,0,width,height),0,0);tex.Apply();
+   if(SystemInfo.graphicsUVStartsAtTop){var p=tex.GetPixels32();var row=new Color32[width];for(int r=0;r<height/2;r++){int top=r*width,bottom=(height-1-r)*width;Array.Copy(p,top,row,0,width);Array.Copy(p,bottom,p,top,width);Array.Copy(row,0,p,bottom,width);}tex.SetPixels32(p);tex.Apply();}
+   crop=new Texture2D(cw,ch,TextureFormat.RGB24,false);crop.SetPixels(tex.GetPixels(x,height-y-ch,cw,ch));crop.Apply();File.WriteAllBytes(dir+"/"+filename,crop.EncodeToPNG());
+  }
+  finally{RenderTexture.active=old;if(tex)UnityEngine.Object.DestroyImmediate(tex);if(crop)UnityEngine.Object.DestroyImmediate(crop);rt.Release();UnityEngine.Object.DestroyImmediate(rt);}
+  var meta=new{operation,title=def.Name,capturedAt=DateTime.UtcNow.ToString("o"),unityVersion=Application.unityVersion,width=cw,height=ch,zoom,pixelsPerPoint=scale,asset=SessionState.GetString(Session,""),method="Unity Editor GUI GrabPixels with node world-bound crop",bounds=b.ToString(),cropX=x,cropY=y,labels};
+  File.WriteAllText(dir+"/"+operation+".capture.json",Newtonsoft.Json.JsonConvert.SerializeObject(meta,Newtonsoft.Json.Formatting.Indented));return meta;
+ }
+ public static async Task<object> Batch(string operations){var result=new System.Collections.Generic.List<object>();foreach(var op in operations.Split(','))result.Add(await Capture(op));return result.ToArray();}
+ public static object Cleanup(){var w=Window;w.maximized=false;w.Close();string path=SessionState.GetString(Session,"");bool deleted=AssetDatabase.DeleteAsset(path);SessionState.EraseString(Session);return new{deleted,path};}
+}

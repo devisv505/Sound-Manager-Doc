@@ -1,0 +1,544 @@
+{
+  "method": "Fresh browser context per route, 390×844 CSS pixels, DPR 2, no scrolling or dialogs/search opened. Navigation and resource transferSize after network idle on local production preview.",
+  "results": [
+    {
+      "route": "404.html",
+      "transferBytes": 96851,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "advanced/backend/",
+      "transferBytes": 113302,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "advanced/",
+      "transferBytes": 103279,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "advanced/observation/",
+      "transferBytes": 112596,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "advanced/parameter-records/",
+      "transferBytes": 110316,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "advanced/service/",
+      "transferBytes": 114743,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "api/components/",
+      "transferBytes": 113172,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "api/context/",
+      "transferBytes": 111225,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "api/coverage/",
+      "transferBytes": 104593,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "api/",
+      "transferBytes": 104532,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "api/keys-and-assets/",
+      "transferBytes": 111597,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "api/notifications/",
+      "transferBytes": 111352,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "api/ownership/",
+      "transferBytes": 110942,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "api/parameters/",
+      "transferBytes": 111961,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "api/requests/",
+      "transferBytes": 111123,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "api/results-and-handles/",
+      "transferBytes": 110889,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "api/services/",
+      "transferBytes": 113703,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "api/settings/",
+      "transferBytes": 112274,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "api/sound-bus/",
+      "transferBytes": 116683,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "captures/01-campfire/",
+      "transferBytes": 186200,
+      "imageBytes": 81622,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "captures/02-footstep/",
+      "transferBytes": 238029,
+      "imageBytes": 131814,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "captures/03-bee/",
+      "transferBytes": 231177,
+      "imageBytes": 125988,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "captures/04-engine/",
+      "transferBytes": 296912,
+      "imageBytes": 191228,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "captures/05-weather/",
+      "transferBytes": 294922,
+      "imageBytes": 189206,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "captures/06-workshop/",
+      "transferBytes": 283504,
+      "imageBytes": 177848,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "captures/07-arcade/",
+      "transferBytes": 318575,
+      "imageBytes": 212422,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "captures/08-jukebox/",
+      "transferBytes": 322863,
+      "imageBytes": 216944,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "captures/09-portals/",
+      "transferBytes": 254191,
+      "imageBytes": 147466,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "captures/10-launch/",
+      "transferBytes": 299380,
+      "imageBytes": 191336,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "captures/",
+      "transferBytes": 265273,
+      "imageBytes": 164010,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "demos/01-campfire/",
+      "transferBytes": 194998,
+      "imageBytes": 81622,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "demos/02-footstep/",
+      "transferBytes": 196440,
+      "imageBytes": 81740,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "demos/03-bee/",
+      "transferBytes": 239520,
+      "imageBytes": 125988,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "demos/04-engine/",
+      "transferBytes": 305616,
+      "imageBytes": 191228,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "demos/05-weather/",
+      "transferBytes": 267621,
+      "imageBytes": 153112,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "demos/06-workshop/",
+      "transferBytes": 253778,
+      "imageBytes": 139142,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "demos/07-arcade/",
+      "transferBytes": 275298,
+      "imageBytes": 160398,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "demos/08-jukebox/",
+      "transferBytes": 296688,
+      "imageBytes": 182190,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "demos/09-portals/",
+      "transferBytes": 262625,
+      "imageBytes": 147466,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "demos/10-launch/",
+      "transferBytes": 309075,
+      "imageBytes": 191336,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "demos/",
+      "transferBytes": 103526,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "getting-started/",
+      "transferBytes": 112779,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "graph/authoring/",
+      "transferBytes": 104621,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "graph/clips/",
+      "transferBytes": 197447,
+      "imageBytes": 91086,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "graph/flow/",
+      "transferBytes": 189269,
+      "imageBytes": 81698,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "graph/",
+      "transferBytes": 105434,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "graph/lifecycle/",
+      "transferBytes": 135178,
+      "imageBytes": 28928,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "graph/math/",
+      "transferBytes": 208670,
+      "imageBytes": 96694,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "graph/parameters/",
+      "transferBytes": 155465,
+      "imageBytes": 48894,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "graph/timing/",
+      "transferBytes": 189358,
+      "imageBytes": 82522,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "graph/trimming/",
+      "transferBytes": 128355,
+      "imageBytes": 23018,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "graph/validation/",
+      "transferBytes": 105370,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "guides/events-plays-voices/",
+      "transferBytes": 104400,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "guides/",
+      "transferBytes": 103559,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "guides/outcomes/",
+      "transferBytes": 105424,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "guides/parameters/",
+      "transferBytes": 111558,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "guides/position-and-ownership/",
+      "transferBytes": 112699,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "guides/results-and-limits/",
+      "transferBytes": 105382,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "guides/setup-and-keys/",
+      "transferBytes": 105033,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "guides/signals-and-notifications/",
+      "transferBytes": 112646,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "guides/stop-and-pause/",
+      "transferBytes": 110869,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "guides/troubleshooting/",
+      "transferBytes": 106444,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "guides/your-first-graph/",
+      "transferBytes": 104715,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "",
+      "transferBytes": 154964,
+      "imageBytes": 48902,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "recipes/campfire-loop/",
+      "transferBytes": 111638,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "recipes/delayed-thunder/",
+      "transferBytes": 112565,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "recipes/event-signals/",
+      "transferBytes": 112425,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "recipes/",
+      "transferBytes": 101341,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "recipes/launch-on-completion/",
+      "transferBytes": 113170,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "recipes/live-parameters/",
+      "transferBytes": 112690,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "recipes/moving-emitter/",
+      "transferBytes": 111776,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "recipes/music-crossfade/",
+      "transferBytes": 113533,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "recipes/owner-loss/",
+      "transferBytes": 112360,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "recipes/pause-interaction/",
+      "transferBytes": 113742,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "recipes/playback-limits/",
+      "transferBytes": 112963,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "recipes/surface-footsteps/",
+      "transferBytes": 111647,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    },
+    {
+      "route": "recipes/workshop-tools/",
+      "transferBytes": 112934,
+      "imageBytes": 0,
+      "badResponses": [],
+      "externalRequests": []
+    }
+  ]
+}

@@ -7,9 +7,11 @@ interface Props {
   caption: string;
   id: string;
   eager?: boolean;
+  compact?: boolean;
+  showZoomLabel?: boolean;
 }
-const { src, alt, caption, id, eager = false } = Astro.props;
-const full = await getImage({ src, format: 'webp', quality: 94 });
+const { src, alt, caption, id, eager = false, compact = false, showZoomLabel = true } = Astro.props;
+const full = await getImage({ src, format: 'webp', quality: compact ? 100 : 94 });
 ---
 
 <figure class="screenshot" id={id}>
@@ -24,15 +26,19 @@ const full = await getImage({ src, format: 'webp', quality: 94 });
       src={src}
       alt={alt}
       width={Math.min(1280, src.width)}
-      widths={[640, 960, 1280, 1920].filter((w) => w <= src.width)}
-      sizes="(min-width: 80rem) 850px, 100vw"
+      widths={[
+        ...new Set([...(compact ? [240, 360, 480] : []), 640, 960, 1280, 1920, src.width]),
+      ].filter((w) => w <= src.width && w <= 1920)}
+      sizes={compact ? '(min-width: 50rem) 420px, 90vw' : '(min-width: 80rem) 850px, 100vw'}
       format="webp"
-      quality={88}
+      quality={compact ? 100 : 88}
       loading={eager ? 'eager' : 'lazy'}
     />
-    <span class="zoom-label" aria-hidden="true">
-      ↗ Enlarge
-    </span>
+    {showZoomLabel && (
+      <span class="zoom-label" aria-hidden="true">
+        ↗ Enlarge
+      </span>
+    )}
   </button>
   <figcaption>{caption}</figcaption>
   <dialog id={id + '-dialog'} aria-label={alt} class="image-dialog">

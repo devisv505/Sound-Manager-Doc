@@ -1,0 +1,1524 @@
+$ npm ci
+
+added 536 packages, and audited 537 packages in 4s
+
+219 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+$ npm run validate
+
+> sound-manager-doc@0.1.0 validate
+> npm run check && npm run build && node scripts/check-build.mjs && node scripts/check-release.mjs
+
+
+> sound-manager-doc@0.1.0 check
+> astro check && node scripts/check-content.mjs && node scripts/check-m4.mjs && node scripts/check-m5.mjs && node scripts/check-node-captures.mjs && node scripts/check-node-colors.mjs
+
+01:35:43 [content] Syncing content
+01:35:43 [content] Synced content
+01:35:43 [types] Generated 380ms
+01:35:43 [check] Getting diagnostics for Astro files in /private/var/folders/m3/_87mchhj7fl7h8rcxg0rzfy40000gn/T/sound-doc-m6-final-clean-3c5si6vp...
+Result (47 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+
+Content OK: 76 pages, 10 demos, 84 captures, 11 verified C# examples, 867 API declarations accounted for.
+M4 OK: ten walkthroughs, twelve recipes, 22 audited events, and restored Unity session.
+M5 OK: 49 nodes and native ports, 18 advanced types, 3 compiled excerpts, 180 Unity checks, and unchanged Unity scene.
+Node images OK: 49 distinct Unity captures, matching provenance/dimensions, restored editor windows and scene.
+Node colors OK: all 49 operations mapped to seven named editor categories.
+
+> sound-manager-doc@0.1.0 build
+> astro build && node scripts/prepare-capture-output.mjs
+
+01:35:47 [content] Syncing content
+01:35:48 [content] Synced content
+01:35:48 [types] Generated 250ms
+01:35:48 [build] output: "static"
+01:35:48 [build] mode: "static"
+01:35:48 [build] directory: /private/var/folders/m3/_87mchhj7fl7h8rcxg0rzfy40000gn/T/sound-doc-m6-final-clean-3c5si6vp/dist/
+01:35:48 [build] Collecting build info...
+01:35:48 [build] ✓ Completed in 360ms.
+01:35:48 [build] Building static entrypoints...
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/captures/01-campfire.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/captures/01-campfire.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/advanced/backend.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/advanced/backend.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/advanced/service.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/advanced/service.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/api/ownership.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/api/ownership.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/api/settings.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/api/settings.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/api/components.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/api/components.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/advanced/parameter-records.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/advanced/parameter-records.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/api/parameters.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/api/parameters.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/captures/02-footstep.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/captures/02-footstep.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/recipes/workshop-tools.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/recipes/workshop-tools.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/api/services.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/api/services.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/api/keys-and-assets.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/api/keys-and-assets.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/api/coverage.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/api/coverage.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/graph/parameters.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/graph/parameters.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/advanced/observation.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/advanced/observation.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/api/context.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/api/context.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/api/index.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/api/index.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/advanced/index.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/advanced/index.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/api/notifications.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/api/notifications.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/api/results-and-handles.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/api/results-and-handles.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/guides/your-first-graph.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/guides/your-first-graph.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/graph/authoring.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/graph/authoring.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/getting-started/index.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/getting-started/index.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/graph/timing.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/graph/timing.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/captures/03-bee.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/captures/03-bee.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/captures/10-launch.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/captures/10-launch.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/api/sound-bus.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/api/sound-bus.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/demos/08-jukebox.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/demos/08-jukebox.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/recipes/campfire-loop.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/recipes/campfire-loop.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/api/requests.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/api/requests.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/graph/validation.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/graph/validation.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/guides/events-plays-voices.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/guides/events-plays-voices.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/captures/04-engine.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/captures/04-engine.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/demos/09-portals.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/demos/09-portals.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/graph/flow.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/graph/flow.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/captures/index.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/captures/index.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/captures/09-portals.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/captures/09-portals.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/demos/07-arcade.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/demos/07-arcade.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/demos/01-campfire.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/demos/01-campfire.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/captures/08-jukebox.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/captures/08-jukebox.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/guides/setup-and-keys.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/guides/setup-and-keys.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/graph/index.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/graph/index.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/graph/math.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/graph/math.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/demos/index.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/demos/index.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/demos/05-weather.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/demos/05-weather.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/graph/lifecycle.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/graph/lifecycle.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/captures/07-arcade.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/captures/07-arcade.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/guides/stop-and-pause.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/guides/stop-and-pause.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/graph/clips.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/graph/clips.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/guides/index.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/guides/index.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/index.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/index.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/demos/03-bee.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/demos/03-bee.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/recipes/event-signals.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/recipes/event-signals.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/recipes/delayed-thunder.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/recipes/delayed-thunder.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/demos/04-engine.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/demos/04-engine.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/demos/06-workshop.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/demos/06-workshop.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/graph/trimming.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/graph/trimming.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/demos/02-footstep.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/demos/02-footstep.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/demos/10-launch.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/demos/10-launch.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/guides/signals-and-notifications.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/guides/signals-and-notifications.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/guides/outcomes.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/guides/outcomes.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/guides/position-and-ownership.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/guides/position-and-ownership.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/guides/troubleshooting.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/guides/troubleshooting.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/guides/results-and-limits.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/guides/results-and-limits.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/recipes/live-parameters.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/recipes/live-parameters.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/guides/parameters.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/guides/parameters.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/recipes/moving-emitter.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/recipes/moving-emitter.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/recipes/owner-loss.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/recipes/owner-loss.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/recipes/music-crossfade.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/recipes/music-crossfade.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/recipes/playback-limits.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/recipes/playback-limits.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/recipes/index.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/recipes/index.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/recipes/launch-on-completion.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/recipes/launch-on-completion.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/captures/05-weather.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/captures/05-weather.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/captures/06-workshop.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/captures/06-workshop.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/recipes/pause-interaction.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/recipes/pause-interaction.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [WARN] [vite] [33m[MODULE_LEVEL_DIRECTIVE] [0mThe semantics of the module level directive "use astro:head-inject" in "src/content/docs/recipes/surface-footsteps.mdx?astroPropagatedAssets" may not be preserved when bundling.
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/content/docs/recipes/surface-footsteps.mdx?astroPropagatedAssets:2:6 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m"use astro:head-inject";
+ [38;5;240m  │[0m               ────────────┬───────────  
+ [38;5;240m  │[0m                           ╰───────────── module level directive may not be preserved
+ [38;5;240m  │[0m 
+ [38;5;240m  │[0m [38;5;115mHelp[0m: For more information, see https://rolldown.rs/in-depth/directives#other-directives
+[38;5;246m───╯[0m
+
+01:35:48 [vite] ✓ built in 672ms
+01:35:48 [vite] ✓ built in 24ms
+01:35:48 [build] Rearranging server assets...
+
+ generating static routes 
+01:35:48 [WARN] [content] The collection "i18n" does not exist or is empty. Please check your content config file for errors.
+01:35:48   ├─ /404.html01:35:48 [WARN] [content] Entry docs → 404 was not found.
+ (+10ms) 
+01:35:48   ├─ /advanced/index.html (+11ms) 
+01:35:48   ├─ /advanced/backend/index.html (+19ms) 
+01:35:48   ├─ /advanced/observation/index.html (+6ms) 
+01:35:48   ├─ /advanced/parameter-records/index.html (+3ms) 
+01:35:48   ├─ /advanced/service/index.html (+6ms) 
+01:35:48   ├─ /api/index.html (+2ms) 
+01:35:48   ├─ /api/components/index.html (+5ms) 
+01:35:48   ├─ /api/context/index.html (+5ms) 
+01:35:48   ├─ /api/coverage/index.html (+6ms) 
+01:35:48   ├─ /api/keys-and-assets/index.html (+4ms) 
+01:35:48   ├─ /api/notifications/index.html (+4ms) 
+01:35:48   ├─ /api/ownership/index.html (+3ms) 
+01:35:48   ├─ /api/parameters/index.html (+4ms) 
+01:35:48   ├─ /api/requests/index.html (+6ms) 
+01:35:48   ├─ /api/results-and-handles/index.html (+4ms) 
+01:35:48   ├─ /api/services/index.html (+4ms) 
+01:35:48   ├─ /api/settings/index.html (+4ms) 
+01:35:48   ├─ /api/sound-bus/index.html (+2ms) 
+01:35:48   ├─ /captures/index.html (+4ms) 
+01:35:48   ├─ /captures/01-campfire/index.html (+2ms) 
+01:35:48   ├─ /captures/02-footstep/index.html (+3ms) 
+01:35:48   ├─ /captures/03-bee/index.html (+2ms) 
+01:35:48   ├─ /captures/04-engine/index.html (+2ms) 
+01:35:48   ├─ /captures/05-weather/index.html (+2ms) 
+01:35:48   ├─ /captures/06-workshop/index.html (+2ms) 
+01:35:48   ├─ /captures/07-arcade/index.html (+2ms) 
+01:35:48   ├─ /captures/08-jukebox/index.html (+2ms) 
+01:35:48   ├─ /captures/09-portals/index.html (+2ms) 
+01:35:48   ├─ /captures/10-launch/index.html (+3ms) 
+01:35:48   ├─ /demos/index.html (+2ms) 
+01:35:48   ├─ /demos/01-campfire/index.html (+2ms) 
+01:35:48   ├─ /demos/02-footstep/index.html (+4ms) 
+01:35:48   ├─ /demos/03-bee/index.html (+4ms) 
+01:35:48   ├─ /demos/04-engine/index.html (+3ms) 
+01:35:48   ├─ /demos/05-weather/index.html (+2ms) 
+01:35:48   ├─ /demos/06-workshop/index.html (+2ms) 
+01:35:48   ├─ /demos/07-arcade/index.html (+3ms) 
+01:35:48   ├─ /demos/08-jukebox/index.html (+3ms) 
+01:35:48   ├─ /demos/09-portals/index.html (+2ms) 
+01:35:48   ├─ /demos/10-launch/index.html (+4ms) 
+01:35:48   ├─ /getting-started/index.html (+9ms) 
+01:35:48   ├─ /graph/index.html (+2ms) 
+01:35:48   ├─ /graph/authoring/index.html (+1ms) 
+01:35:48   ├─ /graph/clips/index.html (+3ms) 
+01:35:48   ├─ /graph/flow/index.html (+2ms) 
+01:35:48   ├─ /graph/lifecycle/index.html (+2ms) 
+01:35:48   ├─ /graph/math/index.html (+3ms) 
+01:35:48   ├─ /graph/parameters/index.html (+2ms) 
+01:35:48   ├─ /graph/timing/index.html (+2ms) 
+01:35:48   ├─ /graph/trimming/index.html (+1ms) 
+01:35:48   ├─ /graph/validation/index.html (+1ms) 
+01:35:48   ├─ /guides/index.html (+1ms) 
+01:35:48   ├─ /guides/events-plays-voices/index.html (+1ms) 
+01:35:48   ├─ /guides/outcomes/index.html (+1ms) 
+01:35:48   ├─ /guides/parameters/index.html (+3ms) 
+01:35:48   ├─ /guides/position-and-ownership/index.html (+5ms) 
+01:35:48   ├─ /guides/results-and-limits/index.html (+1ms) 
+01:35:48   ├─ /guides/setup-and-keys/index.html (+1ms) 
+01:35:48   ├─ /guides/signals-and-notifications/index.html (+5ms) 
+01:35:48   ├─ /guides/stop-and-pause/index.html (+1ms) 
+01:35:48   ├─ /guides/troubleshooting/index.html (+2ms) 
+01:35:48   ├─ /guides/your-first-graph/index.html (+1ms) 
+01:35:48   ├─ /index.html (+3ms) 
+01:35:48   ├─ /recipes/index.html (+1ms) 
+01:35:48   ├─ /recipes/campfire-loop/index.html (+5ms) 
+01:35:48   ├─ /recipes/delayed-thunder/index.html (+6ms) 
+01:35:48   ├─ /recipes/event-signals/index.html (+5ms) 
+01:35:48   ├─ /recipes/launch-on-completion/index.html (+7ms) 
+01:35:49   ├─ /recipes/live-parameters/index.html (+7ms) 
+01:35:49   ├─ /recipes/moving-emitter/index.html (+4ms) 
+01:35:49   ├─ /recipes/music-crossfade/index.html (+6ms) 
+01:35:49   ├─ /recipes/owner-loss/index.html (+7ms) 
+01:35:49   ├─ /recipes/pause-interaction/index.html (+7ms) 
+01:35:49   ├─ /recipes/playback-limits/index.html (+6ms) 
+01:35:49   ├─ /recipes/surface-footsteps/index.html (+5ms) 
+01:35:49   ├─ /recipes/workshop-tools/index.html (+6ms) 
+01:35:49 ✓ Completed in 321ms.
+
+ generating optimized images 
+01:35:49   ▶ /_astro/lit.sa8xrw_m_25IWYU.webp (before: 411kB, after: 6kB) (+876ms) (1/621)
+01:35:49   ▶ /_astro/grass.Cu-XxITi_ZjGgfI.webp (before: 382kB, after: 4kB) (+876ms) (2/621)
+01:35:49   ▶ /_astro/flight-right.B1qTPLXu_Z2iDWum.webp (before: 417kB, after: 6kB) (+876ms) (3/621)
+01:35:49   ▶ /_astro/driving.C9BixAKo_Z19xjcs.webp (before: 473kB, after: 9kB) (+876ms) (4/621)
+01:35:49   ▶ /_astro/cove.B1kJA-AP_Z1OxhDH.webp (before: 470kB, after: 8kB) (+876ms) (5/621)
+01:35:49   ▶ /_astro/unlit.CtpM0XG5_Z25kLoh.webp (before: 407kB, after: 79kB) (+876ms) (6/621)
+01:35:49   ▶ /_astro/stone.CrG8L3u1_1n5EHN.webp (before: 385kB, after: 56kB) (+876ms) (7/621)
+01:35:49   ▶ /_astro/crossfade.BfVxNDta_Z2ojE5W.webp (before: 483kB, after: 9kB) (+876ms) (8/621)
+01:35:49   ▶ /_astro/wood.D4270KEQ_2cx5Px.webp (before: 381kB, after: 56kB) (+876ms) (9/621)
+01:35:49   ▶ /_astro/lightning.BuuK-jjh_HF1GS.webp (before: 558kB, after: 8kB) (+876ms) (10/621)
+01:35:49   ▶ /_astro/flight.VBtNLY9e_1VUwqe.webp (before: 525kB, after: 9kB) (+876ms) (11/621)
+01:35:49   ▶ /_astro/graph.BsG2F25M_ZTRMO3.webp (before: 507kB, after: 305kB) (+876ms) (12/621)
+01:35:49   ▶ /_astro/hammer-over-saw.CDE6fxyo_Z2mh2M7.webp (before: 479kB, after: 8kB) (+876ms) (13/621)
+01:35:49   ▶ /_astro/chaos.rcL0LsGC_Z1vqfN7.webp (before: 517kB, after: 9kB) (+876ms) (14/621)
+01:35:49   ▶ /_astro/wood-group.4HkF0_Nr_1UcYmL.webp (before: 406kB, after: 207kB) (+877ms) (15/621)
+01:35:50   ▶ /_astro/grass-group.CfAEnkSL_1Xw0nt.webp (before: 418kB, after: 242kB) (+1.01s) (16/621)
+01:35:50   ▶ /_astro/grass.Cu-XxITi_gYERD.webp (before: 382kB, after: 10kB) (+159ms) (17/621)
+01:35:50   ▶ /_astro/lit.sa8xrw_m_24T4JX.webp (before: 411kB, after: 14kB) (+159ms) (18/621)
+01:35:50   ▶ /_astro/driving.C9BixAKo_FqzdP.webp (before: 473kB, after: 19kB) (+159ms) (19/621)
+01:35:50   ▶ /_astro/flight-right.B1qTPLXu_Z2pnX2a.webp (before: 417kB, after: 13kB) (+159ms) (20/621)
+01:35:50   ▶ /_astro/unlit.CtpM0XG5_6TreU.webp (before: 407kB, after: 12kB) (+159ms) (21/621)
+01:35:50   ▶ /_astro/cove.B1kJA-AP_1OJCWd.webp (before: 470kB, after: 18kB) (+159ms) (22/621)
+01:35:50   ▶ /_astro/stone-group.2p1qd59d_ZtBqzT.webp (before: 439kB, after: 265kB) (+1.04s) (23/621)
+01:35:50   ▶ /_astro/stone.CrG8L3u1_ZKiQi8.webp (before: 385kB, after: 8kB) (+160ms) (24/621)
+01:35:50   ▶ /_astro/crossfade.BfVxNDta_L8U8B.webp (before: 483kB, after: 21kB) (+160ms) (25/621)
+01:35:50   ▶ /_astro/wood.D4270KEQ_Z1DHNM7.webp (before: 381kB, after: 8kB) (+160ms) (26/621)
+01:35:50   ▶ /_astro/lightning.BuuK-jjh_Z1c3wRu.webp (before: 558kB, after: 18kB) (+160ms) (27/621)
+01:35:50   ▶ /_astro/flight.VBtNLY9e_ZJAEcR.webp (before: 525kB, after: 20kB) (+160ms) (28/621)
+01:35:50   ▶ /_astro/graph.BsG2F25M_Vp4QA.webp (before: 507kB, after: 18kB) (+160ms) (29/621)
+01:35:50   ▶ /_astro/hammer-over-saw.CDE6fxyo_a9iMV.webp (before: 479kB, after: 18kB) (+161ms) (30/621)
+01:35:50   ▶ /_astro/chaos.rcL0LsGC_ZTJjEK.webp (before: 517kB, after: 21kB) (+363ms) (31/621)
+01:35:50   ▶ /_astro/wood-group.4HkF0_Nr_XmJAP.webp (before: 406kB, after: 10kB) (+426ms) (32/621)
+01:35:50   ▶ /_astro/grass-group.CfAEnkSL_1ENT6K.webp (before: 418kB, after: 12kB) (+307ms) (33/621)
+01:35:50   ▶ /_astro/grass.Cu-XxITi_26adVq.webp (before: 382kB, after: 56kB) (+278ms) (34/621)
+01:35:50   ▶ /_astro/lit.sa8xrw_m_21ii4u.webp (before: 411kB, after: 80kB) (+278ms) (35/621)
+01:35:50   ▶ /_astro/driving.C9BixAKo_1KCJIm.webp (before: 473kB, after: 105kB) (+278ms) (36/621)
+01:35:50   ▶ /_astro/unlit.CtpM0XG5_aDD3.webp (before: 407kB, after: 21kB) (+278ms) (37/621)
+01:35:50   ▶ /_astro/flight-right.B1qTPLXu_1Xf8RT.webp (before: 417kB, after: 73kB) (+278ms) (38/621)
+01:35:50   ▶ /_astro/stone.CrG8L3u1_ZR2DT0.webp (before: 385kB, after: 15kB) (+278ms) (39/621)
+01:35:50   ▶ /_astro/stone-group.2p1qd59d_1TYfrJ.webp (before: 439kB, after: 12kB) (+279ms) (40/621)
+01:35:50   ▶ /_astro/cove.B1kJA-AP_1CoVJY.webp (before: 470kB, after: 102kB) (+279ms) (41/621)
+01:35:50   ▶ /_astro/wood.D4270KEQ_1i9n4z.webp (before: 381kB, after: 15kB) (+279ms) (42/621)
+01:35:50   ▶ /_astro/crossfade.BfVxNDta_7R63F.webp (before: 483kB, after: 115kB) (+279ms) (43/621)
+01:35:50   ▶ /_astro/graph.BsG2F25M_2k4Ts0.webp (before: 507kB, after: 35kB) (+280ms) (44/621)
+01:35:50   ▶ /_astro/graph.BIM2cFFQ_1nAKPc.webp (before: 1078kB, after: 899kB) (+1.32s) (45/621)
+01:35:50   ▶ /_astro/lightning.BuuK-jjh_3UAjP.webp (before: 558kB, after: 103kB) (+402ms) (46/621)
+01:35:50   ▶ /_astro/flight.VBtNLY9e_Z28vDc8.webp (before: 525kB, after: 111kB) (+431ms) (47/621)
+01:35:50   ▶ /_astro/hammer-over-saw.CDE6fxyo_1Db2bk.webp (before: 479kB, after: 104kB) (+441ms) (48/621)
+01:35:50   ▶ /_astro/grass-group.CfAEnkSL_2vuMDC.webp (before: 418kB, after: 23kB) (+165ms) (49/621)
+01:35:50   ▶ /_astro/wood-group.4HkF0_Nr_ZD34ek.webp (before: 406kB, after: 21kB) (+175ms) (50/621)
+01:35:50   ▶ /_astro/chaos.rcL0LsGC_IGsGL.webp (before: 517kB, after: 119kB) (+238ms) (51/621)
+01:35:50   ▶ /_astro/grass.Cu-XxITi_1yclEh.webp (before: 382kB, after: 8kB) (+165ms) (52/621)
+01:35:50   ▶ /_astro/lit.sa8xrw_m_Z2go6Jh.webp (before: 411kB, after: 12kB) (+165ms) (53/621)
+01:35:50   ▶ /_astro/driving.C9BixAKo_Z2b0mLX.webp (before: 473kB, after: 16kB) (+165ms) (54/621)
+01:35:50   ▶ /_astro/flight-right.B1qTPLXu_QRz0q.webp (before: 417kB, after: 11kB) (+165ms) (55/621)
+01:35:50   ▶ /_astro/unlit.CtpM0XG5_Z1xloDL.webp (before: 407kB, after: 31kB) (+165ms) (56/621)
+01:35:50   ▶ /_astro/stone.CrG8L3u1_1U52sj.webp (before: 385kB, after: 22kB) (+166ms) (57/621)
+01:35:50   ▶ /_astro/cove.B1kJA-AP_2girzC.webp (before: 470kB, after: 15kB) (+165ms) (58/621)
+01:35:50   ▶ /_astro/crossfade.BfVxNDta_ZBP04T.webp (before: 483kB, after: 17kB) (+165ms) (59/621)
+01:35:50   ▶ /_astro/stone-group.2p1qd59d_Z2jvYOk.webp (before: 439kB, after: 24kB) (+166ms) (60/621)
+01:35:50   ▶ /_astro/wood.D4270KEQ_1cC93t.webp (before: 381kB, after: 22kB) (+307ms) (61/621)
+01:35:50   ▶ /_astro/lightning.BuuK-jjh_2u9FHV.webp (before: 558kB, after: 15kB) (+220ms) (62/621)
+01:35:50   ▶ /_astro/flight.VBtNLY9e_1lRjad.webp (before: 525kB, after: 16kB) (+199ms) (63/621)
+01:35:50   ▶ /_astro/graph.BIM2cFFQ_1aVTrW.webp (before: 1078kB, after: 9kB) (+350ms) (64/621)
+01:35:50   ▶ /_astro/hammer-over-saw.CDE6fxyo_ZgVgmK.webp (before: 479kB, after: 15kB) (+188ms) (65/621)
+01:35:50   ▶ /_astro/graph.BsG2F25M_2rGBGE.webp (before: 507kB, after: 57kB) (+350ms) (66/621)
+01:35:50   ▶ /_astro/chaos.rcL0LsGC_msm6S.webp (before: 517kB, after: 18kB) (+187ms) (67/621)
+01:35:50   ▶ /_astro/grass.Cu-XxITi_1rsy3p.webp (before: 382kB, after: 15kB) (+187ms) (68/621)
+01:35:50   ▶ /_astro/lit.sa8xrw_m_25xp5t.webp (before: 411kB, after: 21kB) (+187ms) (69/621)
+01:35:50   ▶ /_astro/grass-group.CfAEnkSL_Z2tzQXY.webp (before: 418kB, after: 37kB) (+188ms) (70/621)
+01:35:50   ▶ /_astro/wood-group.4HkF0_Nr_2eBujD.webp (before: 406kB, after: 35kB) (+188ms) (71/621)
+01:35:50   ▶ /_astro/driving.C9BixAKo_Z13rd5T.webp (before: 473kB, after: 29kB) (+187ms) (72/621)
+01:35:50   ▶ /_astro/flight-right.B1qTPLXu_2HOIo.webp (before: 417kB, after: 20kB) (+187ms) (73/621)
+01:35:50   ▶ /_astro/cove.B1kJA-AP_7XuCn.webp (before: 470kB, after: 29kB) (+188ms) (74/621)
+01:35:50   ▶ /_astro/crossfade.BfVxNDta_1PcPpq.webp (before: 483kB, after: 32kB) (+187ms) (75/621)
+01:35:50   ▶ /_astro/unlit.CtpM0XG5_Z1gVsbF.webp (before: 407kB, after: 54kB) (+405ms) (76/621)
+01:35:50   ▶ /_astro/stone.CrG8L3u1_2btXUp.webp (before: 385kB, after: 38kB) (+436ms) (77/621)
+01:35:50   ▶ /_astro/lightning.BuuK-jjh_Z7YBAF.webp (before: 558kB, after: 27kB) (+258ms) (78/621)
+01:35:50   ▶ /_astro/flight.VBtNLY9e_Z234Bd7.webp (before: 525kB, after: 30kB) (+250ms) (79/621)
+01:35:50   ▶ /_astro/stone-group.2p1qd59d_8sOQz.webp (before: 439kB, after: 40kB) (+436ms) (80/621)
+01:35:50   ▶ /_astro/wood.D4270KEQ_Z1R1u9X.webp (before: 381kB, after: 38kB) (+294ms) (81/621)
+01:35:50   ▶ /_astro/hammer-over-saw.CDE6fxyo_1x4lt4.webp (before: 479kB, after: 28kB) (+250ms) (82/621)
+01:35:50   ▶ /_astro/graph.BIM2cFFQ_Z2vzoKz.webp (before: 1078kB, after: 31kB) (+250ms) (83/621)
+01:35:50   ▶ /_astro/chaos.rcL0LsGC_fIyv1.webp (before: 517kB, after: 32kB) (+250ms) (84/621)
+01:35:50   ▶ /_astro/grass.Cu-XxITi_Z2r2x80.webp (before: 382kB, after: 22kB) (+250ms) (85/621)
+01:35:50   ▶ /_astro/lit.sa8xrw_m_Z1DJGUC.webp (before: 411kB, after: 32kB) (+250ms) (86/621)
+01:35:50   ▶ /_astro/graph.BsG2F25M_ZECTs2.webp (before: 507kB, after: 123kB) (+250ms) (87/621)
+01:35:50   ▶ /_astro/driving.C9BixAKo_Z1cEIcd.webp (before: 473kB, after: 42kB) (+250ms) (88/621)
+01:35:50   ▶ /_astro/flight-right.B1qTPLXu_Z1XRuzr.webp (before: 417kB, after: 29kB) (+251ms) (89/621)
+01:35:50   ▶ /_astro/grass-group.CfAEnkSL_Z1TrToA.webp (before: 418kB, after: 84kB) (+251ms) (90/621)
+01:35:51   ▶ /_astro/wood-group.4HkF0_Nr_2hG8li.webp (before: 406kB, after: 79kB) (+574ms) (91/621)
+01:35:51   ▶ /_astro/cove.B1kJA-AP_CtYWU.webp (before: 470kB, after: 41kB) (+573ms) (92/621)
+01:35:51   ▶ /_astro/crossfade.BfVxNDta_Z2eorwd.webp (before: 483kB, after: 47kB) (+573ms) (93/621)
+01:35:51   ▶ /_astro/flight.VBtNLY9e_lMlIK.webp (before: 525kB, after: 44kB) (+324ms) (94/621)
+01:35:51   ▶ /_astro/lightning.BuuK-jjh_Z2ikWg3.webp (before: 558kB, after: 39kB) (+324ms) (95/621)
+01:35:51   ▶ /_astro/hammer-over-saw.CDE6fxyo_ZLDIPx.webp (before: 479kB, after: 42kB) (+324ms) (96/621)
+01:35:51   ▶ /_astro/graph.BIM2cFFQ_Zk0Ws2.webp (before: 1078kB, after: 83kB) (+324ms) (97/621)
+01:35:51   ▶ /_astro/chaos.rcL0LsGC_1gFPrh.webp (before: 517kB, after: 48kB) (+324ms) (98/621)
+01:35:51   ▶ /_astro/stone-group.2p1qd59d_HAMqX.webp (before: 439kB, after: 84kB) (+325ms) (99/621)
+01:35:51   ▶ /_astro/grass.Cu-XxITi_Z2aCAET.webp (before: 382kB, after: 38kB) (+343ms) (100/621)
+01:35:51   ▶ /_astro/lit.sa8xrw_m_ZyNGry.webp (before: 411kB, after: 55kB) (+344ms) (101/621)
+01:35:51   ▶ /_astro/driving.C9BixAKo_1Wed5i.webp (before: 473kB, after: 74kB) (+344ms) (102/621)
+01:35:51   ▶ /_astro/surface-selection.DQGHqMCt_VQ4Kf.webp (before: 420kB, after: 236kB) (+480ms) (103/621)
+01:35:51   ▶ /_astro/flight-right.B1qTPLXu_Z14kIWL.webp (before: 417kB, after: 49kB) (+547ms) (104/621)
+01:35:51   ▶ /_astro/rest.B3IqILqp_Z3GafC.webp (before: 410kB, after: 73kB) (+548ms) (105/621)
+01:35:51   ▶ /_astro/flight-left.DTyFKkWB_Z1Kix4L.webp (before: 414kB, after: 73kB) (+621ms) (106/621)
+01:35:51   ▶ /_astro/cove.B1kJA-AP_Z2r9Dfw.webp (before: 470kB, after: 71kB) (+297ms) (107/621)
+01:35:51   ▶ /_astro/crossfade.BfVxNDta_ZdOjPY.webp (before: 483kB, after: 81kB) (+297ms) (108/621)
+01:35:51   ▶ /_astro/flight.VBtNLY9e_Z2s9AS0.webp (before: 525kB, after: 76kB) (+297ms) (109/621)
+01:35:51   ▶ /_astro/trim-range.D8WaRBJH_Z23N9yw.webp (before: 324kB, after: 187kB) (+622ms) (110/621)
+01:35:51   ▶ /_astro/lightning.BuuK-jjh_ZhKOzO.webp (before: 558kB, after: 70kB) (+297ms) (111/621)
+01:35:51   ▶ /_astro/graph.BOt1YwUA_Z2saWfA.webp (before: 218kB, after: 165kB) (+620ms) (112/621)
+01:35:51   ▶ /_astro/hammer-over-saw.CDE6fxyo_Z1jI1qQ.webp (before: 479kB, after: 73kB) (+366ms) (113/621)
+01:35:51   ▶ /_astro/chaos.rcL0LsGC_1x5LTn.webp (before: 517kB, after: 85kB) (+388ms) (114/621)
+01:35:51   ▶ /_astro/surface-selection.DQGHqMCt_GfhSz.webp (before: 420kB, after: 16kB) (+335ms) (115/621)
+01:35:51   ▶ /_astro/spatial-settings.H6nb4SbC_Vyibb.webp (before: 185kB, after: 78kB) (+460ms) (116/621)
+01:35:51   ▶ /_astro/rest.B3IqILqp_ZT8QO6.webp (before: 410kB, after: 11kB) (+237ms) (117/621)
+01:35:51   ▶ /_astro/graph.BIM2cFFQ_1CPEcd.webp (before: 1078kB, after: 254kB) (+461ms) (118/621)
+01:35:51   ▶ /_astro/idle.CzrYcISa_ZY0N59.webp (before: 466kB, after: 105kB) (+673ms) (119/621)
+01:35:51   ▶ /_astro/horn-shift.DNfbm4in_ZCe1O.webp (before: 475kB, after: 105kB) (+655ms) (120/621)
+01:35:51   ▶ /_astro/flight-left.DTyFKkWB_Z1k94sG.webp (before: 414kB, after: 11kB) (+394ms) (121/621)
+01:35:51   ▶ /_astro/trim-range.D8WaRBJH_Z1Vz6Jw.webp (before: 324kB, after: 12kB) (+395ms) (122/621)
+01:35:51   ▶ /_astro/graph.BOt1YwUA_Z14qNss.webp (before: 218kB, after: 9kB) (+395ms) (123/621)
+01:35:52   ▶ /_astro/surface-selection.DQGHqMCt_1U3IYe.webp (before: 420kB, after: 29kB) (+494ms) (124/621)
+01:35:52   ▶ /_astro/rpm-mapping.hHt9qc54_1f6mof.webp (before: 576kB, after: 300kB) (+934ms) (125/621)
+01:35:52   ▶ /_astro/load-mapping.CWA2an-i_1FoCwW.webp (before: 470kB, after: 224kB) (+730ms) (126/621)
+01:35:52   ▶ /_astro/clear.CNQwsmMV_1lezFA.webp (before: 545kB, after: 94kB) (+656ms) (127/621)
+01:35:52   ▶ /_astro/rain.DPxAqH3p_1gbp1.webp (before: 519kB, after: 100kB) (+656ms) (128/621)
+01:35:52   ▶ /_astro/spatial-settings.H6nb4SbC_xIF8J.webp (before: 185kB, after: 25kB) (+513ms) (129/621)
+01:35:52   ▶ /_astro/graph.xGUhKUeG_ZHBwcj.webp (before: 1024kB, after: 737kB) (+953ms) (130/621)
+01:35:52   ▶ /_astro/rest.B3IqILqp_22Ik2A.webp (before: 410kB, after: 20kB) (+512ms) (131/621)
+01:35:52   ▶ /_astro/horn-shift-graph.CVIUF2aM_Z1qioSi.webp (before: 633kB, after: 357kB) (+743ms) (132/621)
+01:35:52   ▶ /_astro/idle.CzrYcISa_Z2p1dkX.webp (before: 466kB, after: 16kB) (+389ms) (133/621)
+01:35:52   ▶ /_astro/horn-shift.DNfbm4in_1eIimF.webp (before: 475kB, after: 16kB) (+389ms) (134/621)
+01:35:52   ▶ /_astro/flight-left.DTyFKkWB_Z1FN9YH.webp (before: 414kB, after: 20kB) (+372ms) (135/621)
+01:35:52   ▶ /_astro/trim-range.D8WaRBJH_1wcdef.webp (before: 324kB, after: 22kB) (+371ms) (136/621)
+01:35:52   ▶ /_astro/graph.BOt1YwUA_1SFd5y.webp (before: 218kB, after: 17kB) (+371ms) (137/621)
+01:35:52   ▶ /_astro/rain-layers.G5Pn-D6W_1gNo2M.webp (before: 529kB, after: 272kB) (+686ms) (138/621)
+01:35:52   ▶ /_astro/surface-selection.DQGHqMCt_1hpVfO.webp (before: 420kB, after: 46kB) (+210ms) (139/621)
+01:35:52   ▶ /_astro/rpm-mapping.hHt9qc54_ucMku.webp (before: 576kB, after: 17kB) (+210ms) (140/621)
+01:35:52   ▶ /_astro/clear.CNQwsmMV_ZUmSHq.webp (before: 545kB, after: 14kB) (+210ms) (141/621)
+01:35:52   ▶ /_astro/graph-weather.BvVjT_ZE_Z1PyMq.webp (before: 980kB, after: 828kB) (+882ms) (142/621)
+01:35:52   ▶ /_astro/graph-thunder.CaBNUmXG_Z16ldkq.webp (before: 844kB, after: 701kB) (+813ms) (143/621)
+01:35:52   ▶ /_astro/rain.DPxAqH3p_Z231Q8T.webp (before: 519kB, after: 14kB) (+226ms) (144/621)
+01:35:52   ▶ /_astro/load-mapping.CWA2an-i_MMYmV.webp (before: 470kB, after: 13kB) (+226ms) (145/621)
+01:35:52   ▶ /_astro/spatial-settings.H6nb4SbC_Z7IGfB.webp (before: 185kB, after: 43kB) (+208ms) (146/621)
+01:35:52   ▶ /_astro/graph.xGUhKUeG_ZvXVBi.webp (before: 1024kB, after: 14kB) (+227ms) (147/621)
+01:35:52   ▶ /_astro/rest.B3IqILqp_Z13B72G.webp (before: 410kB, after: 29kB) (+233ms) (148/621)
+01:35:52   ▶ /_astro/idle.CzrYcISa_wPXvI.webp (before: 466kB, after: 29kB) (+143ms) (149/621)
+01:35:52   ▶ /_astro/horn-shift.DNfbm4in_1e04Qq.webp (before: 475kB, after: 29kB) (+143ms) (150/621)
+01:35:52   ▶ /_astro/horn-shift-graph.CVIUF2aM_Z1kJkbx.webp (before: 633kB, after: 16kB) (+166ms) (151/621)
+01:35:52   ▶ /_astro/thunder-delay.BnuzqayF_ZNJzaU.webp (before: 355kB, after: 244kB) (+745ms) (152/621)
+01:35:52   ▶ /_astro/flight-left.DTyFKkWB_ZqX03v.webp (before: 414kB, after: 29kB) (+211ms) (153/621)
+01:35:52   ▶ /_astro/graph.BOt1YwUA_2rz9lc.webp (before: 218kB, after: 28kB) (+297ms) (154/621)
+01:35:52   ▶ /_astro/rain-layers.G5Pn-D6W_19hHC3.webp (before: 529kB, after: 16kB) (+286ms) (155/621)
+01:35:52   ▶ /_astro/trim-range.D8WaRBJH_Z1JoDBE.webp (before: 324kB, after: 34kB) (+298ms) (156/621)
+01:35:52   ▶ /_astro/clear.CNQwsmMV_Z126Gji.webp (before: 545kB, after: 25kB) (+206ms) (157/621)
+01:35:52   ▶ /_astro/graph-weather.BvVjT_ZE_Z1dSwU1.webp (before: 980kB, after: 11kB) (+190ms) (158/621)
+01:35:52   ▶ /_astro/rpm-mapping.hHt9qc54_d9eQI.webp (before: 576kB, after: 32kB) (+206ms) (159/621)
+01:35:52   ▶ /_astro/graph-thunder.CaBNUmXG_1G6BOC.webp (before: 844kB, after: 12kB) (+190ms) (160/621)
+01:35:52   ▶ /_astro/rain.DPxAqH3p_SPkHM.webp (before: 519kB, after: 27kB) (+191ms) (161/621)
+01:35:52   ▶ /_astro/surface-selection.DQGHqMCt_y4tbC.webp (before: 420kB, after: 98kB) (+217ms) (162/621)
+01:35:52   ▶ /_astro/load-mapping.CWA2an-i_2jd2Jw.webp (before: 470kB, after: 25kB) (+248ms) (163/621)
+01:35:52   ▶ /_astro/graph.xGUhKUeG_2r84VI.webp (before: 1024kB, after: 38kB) (+228ms) (164/621)
+01:35:52   ▶ /_astro/idle.CzrYcISa_Z1XUJRd.webp (before: 466kB, after: 42kB) (+222ms) (165/621)
+01:35:52   ▶ /_astro/spatial-settings.H6nb4SbC_1HvRkL.webp (before: 185kB, after: 61kB) (+248ms) (166/621)
+01:35:52   ▶ /_astro/rest.B3IqILqp_VVnxN.webp (before: 410kB, after: 49kB) (+222ms) (167/621)
+01:35:52   ▶ /_astro/thunder-delay.BnuzqayF_2vHcWY.webp (before: 355kB, after: 15kB) (+287ms) (168/621)
+01:35:52   ▶ /_astro/horn-shift.DNfbm4in_Z191oxf.webp (before: 475kB, after: 42kB) (+349ms) (169/621)
+01:35:52   ▶ /_astro/horn-shift-graph.CVIUF2aM_ZG3Big.webp (before: 633kB, after: 32kB) (+349ms) (170/621)
+01:35:52   ▶ /_astro/flight-left.DTyFKkWB_2eR3LB.webp (before: 414kB, after: 49kB) (+282ms) (171/621)
+01:35:52   ▶ /_astro/rain-layers.G5Pn-D6W_Rea9h.webp (before: 529kB, after: 32kB) (+195ms) (172/621)
+01:35:52   ▶ /_astro/graph.BOt1YwUA_Z2h4Evs.webp (before: 218kB, after: 72kB) (+232ms) (173/621)
+01:35:52   ▶ /_astro/clear.CNQwsmMV_1SdWq6.webp (before: 545kB, after: 36kB) (+226ms) (174/621)
+01:35:52   ▶ /_astro/graph-weather.BvVjT_ZE_Z18lrw.webp (before: 980kB, after: 34kB) (+226ms) (175/621)
+01:35:52   ▶ /_astro/trim-range.D8WaRBJH_Z1Gk0A0.webp (before: 324kB, after: 63kB) (+236ms) (176/621)
+01:35:52   ▶ /_astro/graph-thunder.CaBNUmXG_Z2bkkvO.webp (before: 844kB, after: 34kB) (+292ms) (177/621)
+01:35:52   ▶ /_astro/rain.DPxAqH3p_ZXDKn3.webp (before: 519kB, after: 38kB) (+291ms) (178/621)
+01:35:52   ▶ /_astro/rpm-mapping.hHt9qc54_Z1WrIs8.webp (before: 576kB, after: 54kB) (+293ms) (179/621)
+01:35:52   ▶ /_astro/load-mapping.CWA2an-i_Z96KPz.webp (before: 470kB, after: 42kB) (+238ms) (180/621)
+01:35:52   ▶ /_astro/thunder-delay.BnuzqayF_Z1lIJns.webp (before: 355kB, after: 30kB) (+176ms) (181/621)
+01:35:53   ▶ /_astro/graph.xGUhKUeG_ZS3yps.webp (before: 1024kB, after: 70kB) (+300ms) (182/621)
+01:35:53   ▶ /_astro/spatial-settings.H6nb4SbC_xa3vp.webp (before: 185kB, after: 63kB) (+310ms) (183/621)
+01:35:53   ▶ /_astro/idle.CzrYcISa_1BJIh.webp (before: 466kB, after: 74kB) (+375ms) (184/621)
+01:35:53   ▶ /_astro/horn-shift-graph.CVIUF2aM_Z7nXkl.webp (before: 633kB, after: 52kB) (+248ms) (185/621)
+01:35:53   ▶ /_astro/horn-shift.DNfbm4in_ZQM6Fh.webp (before: 475kB, after: 74kB) (+248ms) (186/621)
+01:35:53   ▶ /_astro/hammer.VMnd1EHR_Z1qiv0u.webp (before: 479kB, after: 104kB) (+460ms) (187/621)
+01:35:53   ▶ /_astro/handsaw.DtwC95eQ_Z2fqRP8.webp (before: 480kB, after: 105kB) (+412ms) (188/621)
+01:35:53   ▶ /_astro/rain-layers.G5Pn-D6W_Z1UJGNA.webp (before: 529kB, after: 50kB) (+385ms) (189/621)
+01:35:53   ▶ /_astro/graph-thunder.CaBNUmXG_ZT5bB0.webp (before: 844kB, after: 58kB) (+280ms) (190/621)
+01:35:53   ▶ /_astro/clear.CNQwsmMV_29CSSc.webp (before: 545kB, after: 64kB) (+346ms) (191/621)
+01:35:53   ▶ /_astro/graph-weather.BvVjT_ZE_aprV0.webp (before: 980kB, after: 80kB) (+346ms) (192/621)
+01:35:53   ▶ /_astro/drill.Di0DVse1_Z2eRdFV.webp (before: 477kB, after: 104kB) (+386ms) (193/621)
+01:35:53   ▶ /_astro/rain.DPxAqH3p_11SJdr.webp (before: 519kB, after: 69kB) (+322ms) (194/621)
+01:35:53   ▶ /_astro/load-mapping.CWA2an-i_ZpFiJI.webp (before: 470kB, after: 84kB) (+414ms) (195/621)
+01:35:53   ▶ /_astro/rpm-mapping.hHt9qc54_Z1r1D0W.webp (before: 576kB, after: 109kB) (+501ms) (196/621)
+01:35:53   ▶ /_astro/thunder-delay.BnuzqayF_ZBtxru.webp (before: 355kB, after: 49kB) (+494ms) (197/621)
+01:35:53   ▶ /_astro/graph.xGUhKUeG_Zwvesb.webp (before: 1024kB, after: 208kB) (+499ms) (198/621)
+01:35:53   ▶ /_astro/hammer.VMnd1EHR_1dfWuC.webp (before: 479kB, after: 15kB) (+388ms) (199/621)
+01:35:53   ▶ /_astro/horn-shift-graph.CVIUF2aM_1rRwrY.webp (before: 633kB, after: 125kB) (+425ms) (200/621)
+01:35:53   ▶ /_astro/handsaw.DtwC95eQ_Z2sU0GO.webp (before: 480kB, after: 15kB) (+388ms) (201/621)
+01:35:53   ▶ /_astro/work-sequence.C4tZkhOa_1ihwEU.webp (before: 573kB, after: 299kB) (+702ms) (202/621)
+01:35:53   ▶ /_astro/rain-layers.G5Pn-D6W_Z1pjBmp.webp (before: 529kB, after: 101kB) (+357ms) (203/621)
+01:35:53   ▶ /_astro/calm.kP6NVIO0_Z2iw8HM.webp (before: 512kB, after: 119kB) (+496ms) (204/621)
+01:35:53   ▶ /_astro/hammer-signal.zEafIhp7_ZcNN75.webp (before: 448kB, after: 237kB) (+560ms) (205/621)
+01:35:53   ▶ /_astro/graph-thunder.CaBNUmXG_Z8sufD.webp (before: 844kB, after: 203kB) (+358ms) (206/621)
+01:35:53   ▶ /_astro/drill.Di0DVse1_Z3oGMg.webp (before: 477kB, after: 15kB) (+358ms) (207/621)
+01:35:53   ▶ /_astro/graph-weather.BvVjT_ZE_V29hm.webp (before: 980kB, after: 234kB) (+588ms) (208/621)
+01:35:53   ▶ /_astro/thunder-delay.BnuzqayF_988SR.webp (before: 355kB, after: 94kB) (+394ms) (209/621)
+01:35:53   ▶ /_astro/hammer.VMnd1EHR_Z2bFWRH.webp (before: 479kB, after: 28kB) (+329ms) (210/621)
+01:35:53   ▶ /_astro/zap-limits.pPAg7Zde_2jIvmp.webp (before: 186kB, after: 81kB) (+479ms) (211/621)
+01:35:53   ▶ /_astro/handsaw.DtwC95eQ_Z1llQ0K.webp (before: 480kB, after: 28kB) (+331ms) (212/621)
+01:35:53   ▶ /_astro/coin-limits.CqdNLDHH_159SXt.webp (before: 185kB, after: 81kB) (+396ms) (213/621)
+01:35:53   ▶ /_astro/graph.CP8MHZcC_1Cy2j1.webp (before: 1599kB, after: 1311kB) (+966ms) (214/621)
+01:35:53   ▶ /_astro/jackpot-cooldown.CXkOV1zr_28DM2s.webp (before: 190kB, after: 83kB) (+383ms) (215/621)
+01:35:53   ▶ /_astro/graph-arcadecoin.CyCVCuYl_Zj9pH9.webp (before: 529kB, after: 401kB) (+669ms) (216/621)
+01:35:53   ▶ /_astro/calm.kP6NVIO0_Z27AQMv.webp (before: 512kB, after: 17kB) (+312ms) (217/621)
+01:35:53   ▶ /_astro/work-sequence.C4tZkhOa_VNciX.webp (before: 573kB, after: 21kB) (+312ms) (218/621)
+01:35:53   ▶ /_astro/graph-arcadezap.C7IxbRYA_1JffBL.webp (before: 634kB, after: 522kB) (+807ms) (219/621)
+01:35:53   ▶ /_astro/hammer-signal.zEafIhp7_IOyX6.webp (before: 448kB, after: 11kB) (+336ms) (220/621)
+01:35:53   ▶ /_astro/drill.Di0DVse1_Za8uo8.webp (before: 477kB, after: 28kB) (+371ms) (221/621)
+01:35:53   ▶ /_astro/jackpot-limit.xiCO8X70_1mtnYY.webp (before: 185kB, after: 81kB) (+470ms) (222/621)
+01:35:54   ▶ /_astro/playing.BVCvhXXg_Z12Yv8r.webp (before: 483kB, after: 114kB) (+453ms) (223/621)
+01:35:54   ▶ /_astro/paused.C0InAfOU_w8efD.webp (before: 481kB, after: 115kB) (+487ms) (224/621)
+01:35:54   ▶ /_astro/graph-arcadejackpot.ChDu50RE_1buWVz.webp (before: 576kB, after: 437kB) (+802ms) (225/621)
+01:35:54   ▶ /_astro/hammer.VMnd1EHR_140tUo.webp (before: 479kB, after: 42kB) (+229ms) (226/621)
+01:35:54   ▶ /_astro/zap-limits.pPAg7Zde_Z2p48K0.webp (before: 186kB, after: 25kB) (+227ms) (227/621)
+01:35:54   ▶ /_astro/coin-limits.CqdNLDHH_1TahyI.webp (before: 185kB, after: 25kB) (+235ms) (228/621)
+01:35:54   ▶ /_astro/handsaw.DtwC95eQ_Z8xcVL.webp (before: 480kB, after: 42kB) (+235ms) (229/621)
+01:35:54   ▶ /_astro/jackpot-cooldown.CXkOV1zr_A5uii.webp (before: 190kB, after: 26kB) (+184ms) (230/621)
+01:35:54   ▶ /_astro/graph.CP8MHZcC_Z1KplnA.webp (before: 1599kB, after: 10kB) (+235ms) (231/621)
+01:35:54   ▶ /_astro/graph-arcadecoin.CyCVCuYl_1typVw.webp (before: 529kB, after: 14kB) (+184ms) (232/621)
+01:35:54   ▶ /_astro/calm.kP6NVIO0_Ogk4b.webp (before: 512kB, after: 32kB) (+184ms) (233/621)
+01:35:54   ▶ /_astro/graph-arcadezap.C7IxbRYA_ZUqrCu.webp (before: 634kB, after: 11kB) (+184ms) (234/621)
+01:35:54   ▶ /_astro/work-sequence.C4tZkhOa_29ynLs.webp (before: 573kB, after: 37kB) (+201ms) (235/621)
+01:35:54   ▶ /_astro/hammer-signal.zEafIhp7_1VzKqA.webp (before: 448kB, after: 22kB) (+270ms) (236/621)
+01:35:54   ▶ /_astro/drill.Di0DVse1_Z1GRPVq.webp (before: 477kB, after: 41kB) (+299ms) (237/621)
+01:35:54   ▶ /_astro/jackpot-limit.xiCO8X70_6lyOM.webp (before: 185kB, after: 25kB) (+319ms) (238/621)
+01:35:54   ▶ /_astro/playing.BVCvhXXg_Z8rYUh.webp (before: 483kB, after: 17kB) (+266ms) (239/621)
+01:35:54   ▶ /_astro/paused.C0InAfOU_Z1uYFhS.webp (before: 481kB, after: 17kB) (+231ms) (240/621)
+01:35:54   ▶ /_astro/graph-arcadejackpot.ChDu50RE_Zyrvtk.webp (before: 576kB, after: 16kB) (+231ms) (241/621)
+01:35:54   ▶ /_astro/zap-limits.pPAg7Zde_Z15cul0.webp (before: 186kB, after: 45kB) (+231ms) (242/621)
+01:35:54   ▶ /_astro/hammer.VMnd1EHR_Z1JVsGm.webp (before: 479kB, after: 73kB) (+246ms) (243/621)
+01:35:54   ▶ /_astro/coin-limits.CqdNLDHH_2k8V4Q.webp (before: 185kB, after: 44kB) (+238ms) (244/621)
+01:35:54   ▶ /_astro/track-parameter.C89irPmc_Z1eGYQE.webp (before: 427kB, after: 274kB) (+475ms) (245/621)
+01:35:54   ▶ /_astro/handsaw.DtwC95eQ_Z23Pptc.webp (before: 480kB, after: 74kB) (+239ms) (246/621)
+01:35:54   ▶ /_astro/jackpot-cooldown.CXkOV1zr_Z5mR63.webp (before: 190kB, after: 46kB) (+239ms) (247/621)
+01:35:54   ▶ /_astro/graph.CP8MHZcC_1cGFaq.webp (before: 1599kB, after: 19kB) (+239ms) (248/621)
+01:35:54   ▶ /_astro/graph-arcadecoin.CyCVCuYl_28f8ON.webp (before: 529kB, after: 30kB) (+267ms) (249/621)
+01:35:54   ▶ /_astro/graph.BEhpQ1u1_p2c05.webp (before: 764kB, after: 541kB) (+563ms) (250/621)
+01:35:54   ▶ /_astro/calm.kP6NVIO0_1LK3j5.webp (before: 512kB, after: 47kB) (+299ms) (251/621)
+01:35:54   ▶ /_astro/graph-arcadezap.C7IxbRYA_22V4Uu.webp (before: 634kB, after: 29kB) (+334ms) (252/621)
+01:35:54   ▶ /_astro/work-sequence.C4tZkhOa_1uxyol.webp (before: 573kB, after: 57kB) (+392ms) (253/621)
+01:35:54   ▶ /_astro/jackpot-limit.xiCO8X70_Z26WPGs.webp (before: 185kB, after: 45kB) (+207ms) (254/621)
+01:35:54   ▶ /_astro/hammer-signal.zEafIhp7_ZxLnE.webp (before: 448kB, after: 36kB) (+320ms) (255/621)
+01:35:54   ▶ /_astro/drill.Di0DVse1_Z1qsTtk.webp (before: 477kB, after: 73kB) (+254ms) (256/621)
+01:35:54   ▶ /_astro/playing.BVCvhXXg_Y69KM.webp (before: 483kB, after: 31kB) (+207ms) (257/621)
+01:35:54   ▶ /_astro/paused.C0InAfOU_afx8I.webp (before: 481kB, after: 31kB) (+208ms) (258/621)
+01:35:54   ▶ /_astro/graph-arcadejackpot.ChDu50RE_Z1CDfpv.webp (before: 576kB, after: 34kB) (+208ms) (259/621)
+01:35:54   ▶ /_astro/track-parameter.C89irPmc_Z1PkrzG.webp (before: 427kB, after: 17kB) (+246ms) (260/621)
+01:35:54   ▶ /_astro/zap-limits.pPAg7Zde_xe9kf.webp (before: 186kB, after: 63kB) (+260ms) (261/621)
+01:35:54   ▶ /_astro/coin-limits.CqdNLDHH_QCEOz.webp (before: 185kB, after: 62kB) (+246ms) (262/621)
+01:35:54   ▶ /_astro/jackpot-cooldown.CXkOV1zr_Z2azLBS.webp (before: 190kB, after: 65kB) (+354ms) (263/621)
+01:35:54   ▶ /_astro/graph.BEhpQ1u1_Z9K4rL.webp (before: 764kB, after: 16kB) (+295ms) (264/621)
+01:35:54   ▶ /_astro/graph.CP8MHZcC_1s705R.webp (before: 1599kB, after: 52kB) (+355ms) (265/621)
+01:35:54   ▶ /_astro/graph-arcadecoin.CyCVCuYl_YK0PN.webp (before: 529kB, after: 52kB) (+331ms) (266/621)
+01:35:54   ▶ /_astro/allowed-tracks.ByVykISf_Sv11w.webp (before: 205kB, after: 81kB) (+466ms) (267/621)
+01:35:54   ▶ /_astro/calm.kP6NVIO0_Z1hSzTm.webp (before: 512kB, after: 84kB) (+415ms) (268/621)
+01:35:54   ▶ /_astro/graph-arcadezap.C7IxbRYA_15WHdn.webp (before: 634kB, after: 53kB) (+401ms) (269/621)
+01:35:54   ▶ /_astro/jackpot-limit.xiCO8X70_ZkYtyM.webp (before: 185kB, after: 63kB) (+307ms) (270/621)
+01:35:54   ▶ /_astro/work-sequence.C4tZkhOa_2gafJH.webp (before: 573kB, after: 101kB) (+327ms) (271/621)
+01:35:54   ▶ /_astro/playing.BVCvhXXg_13T9JU.webp (before: 483kB, after: 46kB) (+310ms) (272/621)
+01:35:54   ▶ /_astro/hammer-signal.zEafIhp7_K3TWH.webp (before: 448kB, after: 76kB) (+311ms) (273/621)
+01:35:54   ▶ /_astro/paused.C0InAfOU_Z23JTCp.webp (before: 481kB, after: 47kB) (+328ms) (274/621)
+01:35:54   ▶ /_astro/track-parameter.C89irPmc_1824Xi.webp (before: 427kB, after: 33kB) (+275ms) (275/621)
+01:35:54   ▶ /_astro/graph-arcadejackpot.ChDu50RE_voH7C.webp (before: 576kB, after: 60kB) (+328ms) (276/621)
+01:35:54   ▶ /_astro/gain-volume.CeG_1S4b_1Y3SMd.webp (before: 571kB, after: 309kB) (+602ms) (277/621)
+01:35:54   ▶ /_astro/zap-limits.pPAg7Zde_1syCHW.webp (before: 186kB, after: 66kB) (+357ms) (278/621)
+01:35:54   ▶ /_astro/coin-limits.CqdNLDHH_8m0U.webp (before: 185kB, after: 65kB) (+357ms) (279/621)
+01:35:54   ▶ /_astro/meadow.WK2jbjJk_Z1vTzwp.webp (before: 466kB, after: 102kB) (+413ms) (280/621)
+01:35:54   ▶ /_astro/jackpot-cooldown.CXkOV1zr_1JfxmG.webp (before: 190kB, after: 68kB) (+257ms) (281/621)
+01:35:55   ▶ /_astro/graph.BEhpQ1u1_Z2gPbHG.webp (before: 764kB, after: 36kB) (+365ms) (282/621)
+01:35:55   ▶ /_astro/allowed-tracks.ByVykISf_Z218cS8.webp (before: 205kB, after: 26kB) (+259ms) (283/621)
+01:35:55   ▶ /_astro/jackpot-limit.xiCO8X70_Z1pamw2.webp (before: 185kB, after: 66kB) (+226ms) (284/621)
+01:35:55   ▶ /_astro/graph-arcadecoin.CyCVCuYl_Z2vaCaN.webp (before: 529kB, after: 139kB) (+385ms) (285/621)
+01:35:55   ▶ /_astro/graph.CP8MHZcC_1NEk39.webp (before: 1599kB, after: 312kB) (+433ms) (286/621)
+01:35:55   ▶ /_astro/graph-arcadezap.C7IxbRYA_2a30p7.webp (before: 634kB, after: 181kB) (+290ms) (287/621)
+01:35:55   ▶ /_astro/playing.BVCvhXXg_ZQo2Lv.webp (before: 483kB, after: 81kB) (+287ms) (288/621)
+01:35:55   ▶ /_astro/paused.C0InAfOU_cugyL.webp (before: 481kB, after: 81kB) (+268ms) (289/621)
+01:35:55   ▶ /_astro/track-parameter.C89irPmc_Z1RYxg3.webp (before: 427kB, after: 53kB) (+280ms) (290/621)
+01:35:55   ▶ /_astro/crossing.Da1xYzUq_1fhgy5.webp (before: 465kB, after: 99kB) (+325ms) (291/621)
+01:35:55   ▶ /_astro/gain-volume.CeG_1S4b_PF2Ia.webp (before: 571kB, after: 19kB) (+234ms) (292/621)
+01:35:55   ▶ /_astro/meadow.WK2jbjJk_2m7EER.webp (before: 466kB, after: 15kB) (+232ms) (293/621)
+01:35:55   ▶ /_astro/detach.BmoCoxH6_bXmqi.webp (before: 466kB, after: 100kB) (+459ms) (294/621)
+01:35:55   ▶ /_astro/graph-arcadejackpot.ChDu50RE_ZaePN5.webp (before: 576kB, after: 152kB) (+512ms) (295/621)
+01:35:55   ▶ /_astro/stop.DZRTObTN_ZF4tBh.webp (before: 468kB, after: 101kB) (+566ms) (296/621)
+01:35:55   ▶ /_astro/graph.BEhpQ1u1_eA9LV.webp (before: 764kB, after: 64kB) (+363ms) (297/621)
+01:35:55   ▶ /_astro/allowed-tracks.ByVykISf_pABwV.webp (before: 205kB, after: 43kB) (+360ms) (298/621)
+01:35:55   ▶ /_astro/track-parameter.C89irPmc_ZNTf4j.webp (before: 427kB, after: 105kB) (+447ms) (299/621)
+01:35:55   ▶ /_astro/crossing.Da1xYzUq_u5XGp.webp (before: 465kB, after: 14kB) (+447ms) (300/621)
+01:35:55   ▶ /_astro/graph-portalworld.RXycbO02_Z1c4cVJ.webp (before: 534kB, after: 409kB) (+650ms) (301/621)
+01:35:55   ▶ /_astro/graph-portalhum.CIVf1IIY_15WRzs.webp (before: 515kB, after: 398kB) (+651ms) (302/621)
+01:35:55   ▶ /_astro/graph-portalecho.DxlvHH72_205hks.webp (before: 533kB, after: 406kB) (+641ms) (303/621)
+01:35:55   ▶ /_astro/gain-volume.CeG_1S4b_yBufo.webp (before: 571kB, after: 37kB) (+419ms) (304/621)
+01:35:55   ▶ /_astro/meadow.WK2jbjJk_Z12OfHs.webp (before: 466kB, after: 29kB) (+419ms) (305/621)
+01:35:55   ▶ /_astro/detach-settings.DxTqUBFK_XR0gj.webp (before: 189kB, after: 83kB) (+467ms) (306/621)
+01:35:55   ▶ /_astro/stop-settings.BsJIGNzt_1W7YIU.webp (before: 189kB, after: 83kB) (+536ms) (307/621)
+01:35:55   ▶ /_astro/detach.BmoCoxH6_2pv3bh.webp (before: 466kB, after: 14kB) (+367ms) (308/621)
+01:35:55   ▶ /_astro/graph-portalcut.Drh479Gb_Z1ornkA.webp (before: 523kB, after: 402kB) (+601ms) (309/621)
+01:35:55   ▶ /_astro/ready.BXWEDsZl_15WeAb.webp (before: 513kB, after: 113kB) (+570ms) (310/621)
+01:35:55   ▶ /_astro/stop.DZRTObTN_1cIEKS.webp (before: 468kB, after: 15kB) (+296ms) (311/621)
+01:35:55   ▶ /_astro/warning.CLZtCJ7G_Z2hHuJ2.webp (before: 516kB, after: 115kB) (+579ms) (312/621)
+01:35:55   ▶ /_astro/crossing.Da1xYzUq_Zf7kiu.webp (before: 465kB, after: 27kB) (+195ms) (313/621)
+01:35:55   ▶ /_astro/allowed-tracks.ByVykISf_Z2msnv7.webp (before: 205kB, after: 60kB) (+358ms) (314/621)
+01:35:55   ▶ /_astro/graph-portalarrival.t-aF23iz_1lD9Fg.webp (before: 512kB, after: 394kB) (+714ms) (315/621)
+01:35:55   ▶ /_astro/graph-portalworld.RXycbO02_ZlTpgp.webp (before: 534kB, after: 13kB) (+213ms) (316/621)
+01:35:55   ▶ /_astro/aborted.CiXRUjIs_Z9WfwH.webp (before: 515kB, after: 114kB) (+432ms) (317/621)
+01:35:55   ▶ /_astro/graph.BEhpQ1u1_A8tJd.webp (before: 764kB, after: 173kB) (+382ms) (318/621)
+01:35:55   ▶ /_astro/graph-portalhum.CIVf1IIY_ZVGK57.webp (before: 515kB, after: 13kB) (+212ms) (319/621)
+01:35:55   ▶ /_astro/graph-portalecho.DxlvHH72_238w7l.webp (before: 533kB, after: 13kB) (+212ms) (320/621)
+01:35:55   ▶ /_astro/detach-settings.DxTqUBFK_Z1SydJS.webp (before: 189kB, after: 26kB) (+211ms) (321/621)
+01:35:55   ▶ /_astro/meadow.WK2jbjJk_Xopot.webp (before: 466kB, after: 41kB) (+220ms) (322/621)
+01:35:55   ▶ /_astro/gain-volume.CeG_1S4b_Z1duc4a.webp (before: 571kB, after: 60kB) (+220ms) (323/621)
+01:35:55   ▶ /_astro/stop-settings.BsJIGNzt_25zpE5.webp (before: 189kB, after: 26kB) (+150ms) (324/621)
+01:35:55   ▶ /_astro/detach.BmoCoxH6_ZYqRc3.webp (before: 466kB, after: 27kB) (+184ms) (325/621)
+01:35:55   ▶ /_astro/ready.BXWEDsZl_ZAQbwv.webp (before: 513kB, after: 17kB) (+150ms) (326/621)
+01:35:55   ▶ /_astro/graph-portalcut.Drh479Gb_Z1bC3A5.webp (before: 523kB, after: 13kB) (+184ms) (327/621)
+01:35:55   ▶ /_astro/countdown.CiO5x9CF_8kX5k.webp (before: 508kB, after: 108kB) (+370ms) (328/621)
+01:35:55   ▶ /_astro/stop.DZRTObTN_ZUAhbm.webp (before: 468kB, after: 28kB) (+253ms) (329/621)
+01:35:55   ▶ /_astro/warning.CLZtCJ7G_Z1tW85p.webp (before: 516kB, after: 17kB) (+252ms) (330/621)
+01:35:55   ▶ /_astro/crossing.Da1xYzUq_1CH2N3.webp (before: 465kB, after: 39kB) (+180ms) (331/621)
+01:35:55   ▶ /_astro/graph-portalarrival.t-aF23iz_fTnro.webp (before: 512kB, after: 13kB) (+192ms) (332/621)
+01:35:55   ▶ /_astro/graph-portalworld.RXycbO02_ZvFTAT.webp (before: 534kB, after: 30kB) (+187ms) (333/621)
+01:35:55   ▶ /_astro/aborted.CiXRUjIs_1Qm21C.webp (before: 515kB, after: 17kB) (+187ms) (334/621)
+01:35:55   ▶ /_astro/allowed-tracks.ByVykISf_17FOET.webp (before: 205kB, after: 62kB) (+209ms) (335/621)
+01:35:55   ▶ /_astro/graph-portalhum.CIVf1IIY_21ELsR.webp (before: 515kB, after: 29kB) (+201ms) (336/621)
+01:35:55   ▶ /_astro/graph-portalecho.DxlvHH72_Z2nmSNj.webp (before: 533kB, after: 30kB) (+201ms) (337/621)
+01:35:55   ▶ /_astro/detach-settings.DxTqUBFK_2vf9nF.webp (before: 189kB, after: 46kB) (+201ms) (338/621)
+01:35:56   ▶ /_astro/meadow.WK2jbjJk_Z1Pxxdh.webp (before: 466kB, after: 71kB) (+228ms) (339/621)
+01:35:56   ▶ /_astro/stop-settings.BsJIGNzt_Z7IYRa.webp (before: 189kB, after: 46kB) (+228ms) (340/621)
+01:35:56   ▶ /_astro/detach.BmoCoxH6_Z2nTLrK.webp (before: 466kB, after: 39kB) (+195ms) (341/621)
+01:35:56   ▶ /_astro/ready.BXWEDsZl_ZHzY8n.webp (before: 513kB, after: 30kB) (+236ms) (342/621)
+01:35:56   ▶ /_astro/gain-volume.CeG_1S4b_ZH46BY.webp (before: 571kB, after: 107kB) (+304ms) (343/621)
+01:35:56   ▶ /_astro/graph-portalcut.Drh479Gb_1LJsWT.webp (before: 523kB, after: 29kB) (+270ms) (344/621)
+01:35:56   ▶ /_astro/countdown.CiO5x9CF_1PgNbr.webp (before: 508kB, after: 15kB) (+199ms) (345/621)
+01:35:56   ▶ /_astro/warning.CLZtCJ7G_ZmnXol.webp (before: 516kB, after: 31kB) (+204ms) (346/621)
+01:35:56   ▶ /_astro/paused.CACq6WJ1_2v2alr.webp (before: 526kB, after: 112kB) (+366ms) (347/621)
+01:35:56   ▶ /_astro/stop.DZRTObTN_Z1EYqol.webp (before: 468kB, after: 40kB) (+215ms) (348/621)
+01:35:56   ▶ /_astro/aborted.CiXRUjIs_Z26gW6f.webp (before: 515kB, after: 31kB) (+181ms) (349/621)
+01:35:56   ▶ /_astro/graph-portalarrival.t-aF23iz_ZNhltM.webp (before: 512kB, after: 28kB) (+221ms) (350/621)
+01:35:56   ▶ /_astro/crossing.Da1xYzUq_23BwS7.webp (before: 465kB, after: 69kB) (+250ms) (351/621)
+01:35:56   ▶ /_astro/graph-portalworld.RXycbO02_Zks2yk.webp (before: 534kB, after: 53kB) (+220ms) (352/621)
+01:35:56   ▶ /_astro/graph-portalhum.CIVf1IIY_rFkb4.webp (before: 515kB, after: 51kB) (+278ms) (353/621)
+01:35:56   ▶ /_astro/graph-portalecho.DxlvHH72_Z1LcpUw.webp (before: 533kB, after: 53kB) (+278ms) (354/621)
+01:35:56   ▶ /_astro/detach-settings.DxTqUBFK_xmN05.webp (before: 189kB, after: 64kB) (+342ms) (355/621)
+01:35:56   ▶ /_astro/stop-settings.BsJIGNzt_eE7a9.webp (before: 189kB, after: 64kB) (+453ms) (356/621)
+01:35:56   ▶ /_astro/ready.BXWEDsZl_1CVBkG.webp (before: 513kB, after: 45kB) (+411ms) (357/621)
+01:35:56   ▶ /_astro/detach.BmoCoxH6_Z7EAfz.webp (before: 466kB, after: 69kB) (+521ms) (358/621)
+01:35:56   ▶ /_astro/graph-portalcut.Drh479Gb_Z22IUIY.webp (before: 523kB, after: 51kB) (+446ms) (359/621)
+01:35:56   ▶ /_astro/countdown.CiO5x9CF_ZLRu8a.webp (before: 508kB, after: 29kB) (+440ms) (360/621)
+01:35:56   ▶ /_astro/paused.CACq6WJ1_Z1V6W0S.webp (before: 526kB, after: 16kB) (+437ms) (361/621)
+01:35:56   ▶ /_astro/warning.CLZtCJ7G_ZaNOPF.webp (before: 516kB, after: 45kB) (+446ms) (362/621)
+01:35:56   ▶ /_astro/aborted.CiXRUjIs_1VVplE.webp (before: 515kB, after: 45kB) (+437ms) (363/621)
+01:35:56   ▶ /_astro/stop.DZRTObTN_ky4c9.webp (before: 468kB, after: 70kB) (+560ms) (364/621)
+01:35:56   ▶ /_astro/graph-portalarrival.t-aF23iz_FwSQj.webp (before: 512kB, after: 51kB) (+521ms) (365/621)
+01:35:56   ▶ /_astro/graph-portalworld.RXycbO02_1OTqmu.webp (before: 534kB, after: 141kB) (+536ms) (366/621)
+01:35:56   ▶ /_astro/graph-portalhum.CIVf1IIY_1vKCmN.webp (before: 515kB, after: 139kB) (+562ms) (367/621)
+01:35:56   ▶ /_astro/graph-launchsequence.BC1_frPM_ZjlnV.webp (before: 848kB, after: 606kB) (+804ms) (368/621)
+01:35:56   ▶ /_astro/detach-settings.DxTqUBFK_Z1Y23lR.webp (before: 189kB, after: 67kB) (+516ms) (369/621)
+01:35:56   ▶ /_astro/graph-portalecho.DxlvHH72_ZbUU8c.webp (before: 533kB, after: 141kB) (+585ms) (370/621)
+01:35:56   ▶ /_astro/stop-settings.BsJIGNzt_ZOvKM6.webp (before: 189kB, after: 67kB) (+374ms) (371/621)
+01:35:56   ▶ /_astro/ready.BXWEDsZl_1TlxMM.webp (before: 513kB, after: 78kB) (+374ms) (372/621)
+01:35:56   ▶ /_astro/graph-launchpad.Bze32VfP_28mRRs.webp (before: 1302kB, after: 1044kB) (+879ms) (373/621)
+01:35:56   ▶ /_astro/paused.CACq6WJ1_ZfQIzh.webp (before: 526kB, after: 31kB) (+263ms) (374/621)
+01:35:56   ▶ /_astro/countdown.CiO5x9CF_Z2dUzuy.webp (before: 508kB, after: 42kB) (+363ms) (375/621)
+01:35:56   ▶ /_astro/graph-portalcut.Drh479Gb_ZXDCxf.webp (before: 523kB, after: 139kB) (+394ms) (376/621)
+01:35:56   ▶ /_astro/graph-launchflight.BFMpT1X5_23txxO.webp (before: 694kB, after: 664kB) (+840ms) (377/621)
+01:35:56   ▶ /_astro/warning.CLZtCJ7G_Z2672n6.webp (before: 516kB, after: 78kB) (+351ms) (378/621)
+01:35:57   ▶ /_astro/aborted.CiXRUjIs_1DcOe.webp (before: 515kB, after: 78kB) (+607ms) (379/621)
+01:35:57   ▶ /_astro/graph-launchsequence.BC1_frPM_Z1RddcH.webp (before: 848kB, after: 14kB) (+447ms) (380/621)
+01:35:57   ▶ /_astro/graph-portalarrival.t-aF23iz_Z6E4o.webp (before: 512kB, after: 136kB) (+562ms) (381/621)
+01:35:57   ▶ /_astro/graph-launchclamp.Cys_tkEM_ZhTNF9.webp (before: 635kB, after: 632kB) (+1.10s) (382/621)
+01:35:57   ▶ /_astro/graph-launchpad.Bze32VfP_Z1IFVks.webp (before: 1302kB, after: 12kB) (+443ms) (383/621)
+01:35:57   ▶ /_astro/pressure-condition.Y6ACf63z_Z1ocigr.webp (before: 427kB, after: 225kB) (+587ms) (384/621)
+01:35:57   ▶ /_astro/paused.CACq6WJ1_Z4PXwB.webp (before: 526kB, after: 44kB) (+464ms) (385/621)
+01:35:57   ▶ /_astro/release-flow.DwSGQsJp_Z2o9E6N.webp (before: 503kB, after: 339kB) (+550ms) (386/621)
+01:35:57   ▶ /_astro/countdown.CiO5x9CF_ZdlrOk.webp (before: 508kB, after: 73kB) (+451ms) (387/621)
+01:35:57   ▶ /_astro/graph-launchflight.BFMpT1X5_222Tzv.webp (before: 694kB, after: 8kB) (+450ms) (388/621)
+01:35:57   ▶ /_astro/graph-launchvent.D3kufs5m_BUjjv.webp (before: 712kB, after: 646kB) (+845ms) (389/621)
+01:35:57   ▶ /_astro/WaveAsset.BSP0IScn_Z1Bpt1n.webp (before: 67kB, after: 40kB) (+572ms) (390/621)
+01:35:57   ▶ /_astro/graph-launchui.DaJJCD4P_1L8q7U.webp (before: 636kB, after: 633kB) (+738ms) (391/621)
+01:35:57   ▶ /_astro/PlayAudio.CHSf3qbC_23DrBW.webp (before: 53kB, after: 32kB) (+536ms) (392/621)
+01:35:57   ▶ /_astro/graph-launchsequence.BC1_frPM_B1INQ.webp (before: 848kB, after: 34kB) (+214ms) (393/621)
+01:35:57   ▶ /_astro/RandomClip.B6lJi4n7_Z12j9L4.webp (before: 25kB, after: 15kB) (+548ms) (394/621)
+01:35:57   ▶ /_astro/SelectByIndex.DB0W1JuM_ZfpUqW.webp (before: 36kB, after: 21kB) (+329ms) (395/621)
+01:35:57   ▶ /_astro/graph-launchclamp.Cys_tkEM_Z1taChj.webp (before: 635kB, after: 6kB) (+231ms) (396/621)
+01:35:57   ▶ /_astro/launch-conditions.Cd9n2CIL_1blQpb.webp (before: 474kB, after: 270kB) (+681ms) (397/621)
+01:35:57   ▶ /_astro/ignition-finish.B0vCXIMy_1w3GWM.webp (before: 213kB, after: 130kB) (+676ms) (398/621)
+01:35:57   ▶ /_astro/countdown-flow.Bx_n7xr8_1i7sX6.webp (before: 470kB, after: 236kB) (+682ms) (399/621)
+01:35:57   ▶ /_astro/graph-launchpad.Bze32VfP_1eFAdw.webp (before: 1302kB, after: 28kB) (+240ms) (400/621)
+01:35:57   ▶ /_astro/Sequence.DboNXEe0_1mVRsa.webp (before: 19kB, after: 12kB) (+260ms) (401/621)
+01:35:57   ▶ /_astro/pressure-condition.Y6ACf63z_1UfkrY.webp (before: 427kB, after: 13kB) (+224ms) (402/621)
+01:35:57   ▶ /_astro/release-flow.DwSGQsJp_Z2hkafd.webp (before: 503kB, after: 11kB) (+163ms) (403/621)
+01:35:57   ▶ /_astro/WaveAsset.BSP0IScn_ZBo7Ky.webp (before: 67kB, after: 14kB) (+118ms) (404/621)
+01:35:57   ▶ /_astro/graph-launchvent.D3kufs5m_ZhEyKI.webp (before: 712kB, after: 9kB) (+161ms) (405/621)
+01:35:57   ▶ /_astro/graph-launchflight.BFMpT1X5_29UpkN.webp (before: 694kB, after: 28kB) (+193ms) (406/621)
+01:35:57   ▶ /_astro/PlayAudio.CHSf3qbC_Z2sXq2n.webp (before: 53kB, after: 8kB) (+118ms) (407/621)
+01:35:57   ▶ /_astro/paused.CACq6WJ1_2bocEz.webp (before: 526kB, after: 76kB) (+289ms) (408/621)
+01:35:57   ▶ /_astro/Branch.CyxM7L5A_5TnEo.webp (before: 18kB, after: 13kB) (+215ms) (409/621)
+01:35:57   ▶ /_astro/RandomClip.B6lJi4n7_kVbO5.webp (before: 25kB, after: 8kB) (+157ms) (410/621)
+01:35:57   ▶ /_astro/SelectByIndex.DB0W1JuM_Z1tNg2S.webp (before: 36kB, after: 7kB) (+130ms) (411/621)
+01:35:57   ▶ /_astro/graph-launchui.DaJJCD4P_1XNeDa.webp (before: 636kB, after: 7kB) (+204ms) (412/621)
+01:35:57   ▶ /_astro/ignition-finish.B0vCXIMy_1me4LH.webp (before: 213kB, after: 7kB) (+129ms) (413/621)
+01:35:57   ▶ /_astro/launch-conditions.Cd9n2CIL_QOtYv.webp (before: 474kB, after: 11kB) (+138ms) (414/621)
+01:35:57   ▶ /_astro/graph-launchclamp.Cys_tkEM_Z1CW7BN.webp (before: 635kB, after: 24kB) (+139ms) (415/621)
+01:35:57   ▶ /_astro/Sequence.DboNXEe0_ZTTMXX.webp (before: 19kB, after: 7kB) (+130ms) (416/621)
+01:35:57   ▶ /_astro/graph-launchsequence.BC1_frPM_nk1aJ.webp (before: 848kB, after: 58kB) (+180ms) (417/621)
+01:35:57   ▶ /_astro/countdown-flow.Bx_n7xr8_27RwIo.webp (before: 470kB, after: 16kB) (+137ms) (418/621)
+01:35:57   ▶ /_astro/WaveAsset.BSP0IScn_2pVbxC.webp (before: 67kB, after: 23kB) (+134ms) (419/621)
+01:35:57   ▶ /_astro/pressure-condition.Y6ACf63z_237Pdh.webp (before: 427kB, after: 25kB) (+137ms) (420/621)
+01:35:57   ▶ /_astro/release-flow.DwSGQsJp_ZKU6RC.webp (before: 503kB, after: 23kB) (+172ms) (421/621)
+01:35:57   ▶ /_astro/PlayAudio.CHSf3qbC_GGyPi.webp (before: 53kB, after: 13kB) (+127ms) (422/621)
+01:35:57   ▶ /_astro/graph-launchpad.Bze32VfP_1u5kt4.webp (before: 1302kB, after: 82kB) (+192ms) (423/621)
+01:35:57   ▶ /_astro/Branch.CyxM7L5A_ZOdzHB.webp (before: 18kB, after: 6kB) (+166ms) (424/621)
+01:35:57   ▶ /_astro/RandomClip.B6lJi4n7_Z2dFKjk.webp (before: 25kB, after: 13kB) (+127ms) (425/621)
+01:35:57   ▶ /_astro/SelectByIndex.DB0W1JuM_2vu9hj.webp (before: 36kB, after: 11kB) (+118ms) (426/621)
+01:35:57   ▶ /_astro/graph-launchvent.D3kufs5m_m197y.webp (before: 712kB, after: 28kB) (+222ms) (427/621)
+01:35:57   ▶ /_astro/graph-launchflight.BFMpT1X5_ZLMcLF.webp (before: 694kB, after: 46kB) (+202ms) (428/621)
+01:35:57   ▶ /_astro/ignition-finish.B0vCXIMy_ZJAwtf.webp (before: 213kB, after: 15kB) (+130ms) (429/621)
+01:35:57   ▶ /_astro/BranchByIndex.DMwsn4-K_2dEO3d.webp (before: 24kB, after: 15kB) (+207ms) (430/621)
+01:35:57   ▶ /_astro/graph-launchui.DaJJCD4P_Z1cuj4s.webp (before: 636kB, after: 25kB) (+156ms) (431/621)
+01:35:57   ▶ /_astro/Sequence.DboNXEe0_Z21DEFs.webp (before: 19kB, after: 11kB) (+152ms) (432/621)
+01:35:57   ▶ /_astro/launch-conditions.Cd9n2CIL_H2YE1.webp (before: 474kB, after: 22kB) (+153ms) (433/621)
+01:35:57   ▶ /_astro/WaveAsset.BSP0IScn_2jnCHQ.webp (before: 67kB, after: 33kB) (+143ms) (434/621)
+01:35:57   ▶ /_astro/graph-launchclamp.Cys_tkEM_yGlHg.webp (before: 635kB, after: 40kB) (+161ms) (435/621)
+01:35:57   ▶ /_astro/countdown-flow.Bx_n7xr8_Z13q0Ye.webp (before: 470kB, after: 30kB) (+218ms) (436/621)
+01:35:57   ▶ /_astro/PlayAudio.CHSf3qbC_Z1cOz5X.webp (before: 53kB, after: 19kB) (+171ms) (437/621)
+01:35:57   ▶ /_astro/pressure-condition.Y6ACf63z_PI5d0.webp (before: 427kB, after: 39kB) (+215ms) (438/621)
+01:35:57   ▶ /_astro/Branch.CyxM7L5A_Z160GH1.webp (before: 18kB, after: 9kB) (+177ms) (439/621)
+01:35:57   ▶ /_astro/SelectByIndex.DB0W1JuM_24coEb.webp (before: 36kB, after: 15kB) (+181ms) (440/621)
+01:35:57   ▶ /_astro/release-flow.DwSGQsJp_Qw5jB.webp (before: 503kB, after: 39kB) (+242ms) (441/621)
+01:35:57   ▶ /_astro/graph-launchsequence.BC1_frPM_Z1qcvCj.webp (before: 848kB, after: 165kB) (+286ms) (442/621)
+01:35:57   ▶ /_astro/ignition-finish.B0vCXIMy_RL9yo.webp (before: 213kB, after: 23kB) (+181ms) (443/621)
+01:35:57   ▶ /_astro/graph-launchvent.D3kufs5m_1UOJRs.webp (before: 712kB, after: 45kB) (+193ms) (444/621)
+01:35:57   ▶ /_astro/BranchByIndex.DMwsn4-K_1XqMBJ.webp (before: 24kB, after: 6kB) (+169ms) (445/621)
+01:35:57   ▶ /_astro/graph-launchpad.Bze32VfP_Z2w1v98.webp (before: 1302kB, after: 271kB) (+263ms) (446/621)
+01:35:57   ▶ /_astro/RandomBranch.Dksz93rm_Z1nQ5WW.webp (before: 19kB, after: 13kB) (+218ms) (447/621)
+01:35:58   ▶ /_astro/graph-launchui.DaJJCD4P_Z1e59fk.webp (before: 636kB, after: 40kB) (+191ms) (448/621)
+01:35:58   ▶ /_astro/graph-launchflight.BFMpT1X5_ZBbfNl.webp (before: 694kB, after: 188kB) (+283ms) (449/621)
+01:35:58   ▶ /_astro/launch-conditions.Cd9n2CIL_22X1MA.webp (before: 474kB, after: 35kB) (+257ms) (450/621)
+01:35:58   ▶ /_astro/ForLoop.G2HE-gTI_cNyt5.webp (before: 28kB, after: 18kB) (+258ms) (451/621)
+01:35:58   ▶ /_astro/PlayAudio.CHSf3qbC_1mYuEY.webp (before: 53kB, after: 26kB) (+184ms) (452/621)
+01:35:58   ▶ /_astro/Counter.CPr4MKR4_Z2mieUI.webp (before: 26kB, after: 17kB) (+258ms) (453/621)
+01:35:58   ▶ /_astro/Branch.CyxM7L5A_1jmqyH.webp (before: 18kB, after: 12kB) (+149ms) (454/621)
+01:35:58   ▶ /_astro/SelectByIndex.DB0W1JuM_13Uq5R.webp (before: 36kB, after: 20kB) (+148ms) (455/621)
+01:35:58   ▶ /_astro/countdown-flow.Bx_n7xr8_Z1H66p9.webp (before: 470kB, after: 47kB) (+216ms) (456/621)
+01:35:58   ▶ /_astro/graph-launchclamp.Cys_tkEM_Z2l8jaQ.webp (before: 635kB, after: 176kB) (+287ms) (457/621)
+01:35:58   ▶ /_astro/pressure-condition.Y6ACf63z_11k2bk.webp (before: 427kB, after: 75kB) (+221ms) (458/621)
+01:35:58   ▶ /_astro/BranchByIndex.DMwsn4-K_1w92YB.webp (before: 24kB, after: 9kB) (+141ms) (459/621)
+01:35:58   ▶ /_astro/RandomBranch.Dksz93rm_Z3DILe.webp (before: 19kB, after: 8kB) (+138ms) (460/621)
+01:35:58   ▶ /_astro/ignition-finish.B0vCXIMy_1VQrK8.webp (before: 213kB, after: 42kB) (+162ms) (461/621)
+01:35:58   ▶ /_astro/Passthrough.A738VJO2_ZPgre7.webp (before: 12kB, after: 8kB) (+218ms) (462/621)
+01:35:58   ▶ /_astro/release-flow.DwSGQsJp_zWxps.webp (before: 503kB, after: 104kB) (+231ms) (463/621)
+01:35:58   ▶ /_astro/ForLoop.G2HE-gTI_Z1GNwlq.webp (before: 28kB, after: 6kB) (+115ms) (464/621)
+01:35:58   ▶ /_astro/OnStart.8BhQl-EB_22npQv.webp (before: 9kB, after: 5kB) (+201ms) (465/621)
+01:35:58   ▶ /_astro/Counter.CPr4MKR4_Z2jlfl6.webp (before: 26kB, after: 6kB) (+116ms) (466/621)
+01:35:58   ▶ /_astro/OnSignal.uR1AvnVr_Z46eUL.webp (before: 15kB, after: 9kB) (+145ms) (467/621)
+01:35:58   ▶ /_astro/graph-launchvent.D3kufs5m_Z1z5S99.webp (before: 712kB, after: 180kB) (+247ms) (468/621)
+01:35:58   ▶ /_astro/OnStop.DtBb_Rri_ZBhT8X.webp (before: 9kB, after: 5kB) (+142ms) (469/621)
+01:35:58   ▶ /_astro/BranchByIndex.DMwsn4-K_ZFu7uL.webp (before: 24kB, after: 12kB) (+99ms) (470/621)
+01:35:58   ▶ /_astro/EndEvent.D-0m2jz0_Z2bLKvn.webp (before: 9kB, after: 6kB) (+124ms) (471/621)
+01:35:58   ▶ /_astro/RandomBranch.Dksz93rm_2w92oM.webp (before: 19kB, after: 11kB) (+97ms) (472/621)
+01:35:58   ▶ /_astro/graph-launchui.DaJJCD4P_182U4b.webp (before: 636kB, after: 177kB) (+223ms) (473/621)
+01:35:58   ▶ /_astro/Passthrough.A738VJO2_Z1jMsvw.webp (before: 12kB, after: 6kB) (+53ms) (474/621)
+01:35:58   ▶ /_astro/StopInstance.DghbLG1s_bjgB5.webp (before: 15kB, after: 9kB) (+123ms) (475/621)
+01:35:58   ▶ /_astro/launch-conditions.Cd9n2CIL_ZQQD5w.webp (before: 474kB, after: 81kB) (+152ms) (476/621)
+01:35:58   ▶ /_astro/RandomFloat.BzUkMRcJ_Z1eURyq.webp (before: 27kB, after: 16kB) (+123ms) (477/621)
+01:35:58   ▶ /_astro/RandomInt.CZvl8G8__2iDbGS.webp (before: 31kB, after: 18kB) (+123ms) (478/621)
+01:35:58   ▶ /_astro/ForLoop.G2HE-gTI_Z2wY9wM.webp (before: 28kB, after: 10kB) (+46ms) (479/621)
+01:35:58   ▶ /_astro/OnStart.8BhQl-EB_5nX2X.webp (before: 9kB, after: 4kB) (+45ms) (480/621)
+01:35:58   ▶ /_astro/Counter.CPr4MKR4_Z1ed7CJ.webp (before: 26kB, after: 9kB) (+51ms) (481/621)
+01:35:58   ▶ /_astro/OnSignal.uR1AvnVr_Z28JecC.webp (before: 15kB, after: 6kB) (+30ms) (482/621)
+01:35:58   ▶ /_astro/OnStop.DtBb_Rri_2oBdct.webp (before: 9kB, after: 4kB) (+26ms) (483/621)
+01:35:58   ▶ /_astro/countdown-flow.Bx_n7xr8_E1WTm.webp (before: 470kB, after: 83kB) (+147ms) (484/621)
+01:35:58   ▶ /_astro/FloatCompare.D7-gxleX_2jfi1p.webp (before: 26kB, after: 15kB) (+64ms) (485/621)
+01:35:58   ▶ /_astro/RemapFloat.BrWAozUo_2t25v4.webp (before: 43kB, after: 25kB) (+129ms) (486/621)
+01:35:58   ▶ /_astro/EndEvent.D-0m2jz0_ZqkB1r.webp (before: 9kB, after: 5kB) (+36ms) (487/621)
+01:35:58   ▶ /_astro/BranchByIndex.DMwsn4-K_2gFAJd.webp (before: 24kB, after: 17kB) (+36ms) (488/621)
+01:35:58   ▶ /_astro/StopInstance.DghbLG1s_9giiw.webp (before: 15kB, after: 6kB) (+32ms) (489/621)
+01:35:58   ▶ /_astro/Passthrough.A738VJO2_RHYEo.webp (before: 12kB, after: 8kB) (+35ms) (490/621)
+01:35:58   ▶ /_astro/FloatMath.CT83MjVg_2vCYbf.webp (before: 25kB, after: 14kB) (+47ms) (491/621)
+01:35:58   ▶ /_astro/RandomFloat.BzUkMRcJ_Z1LOT2T.webp (before: 27kB, after: 6kB) (+25ms) (492/621)
+01:35:58   ▶ /_astro/RandomInt.CZvl8G8__o3BjJ.webp (before: 31kB, after: 7kB) (+25ms) (493/621)
+01:35:58   ▶ /_astro/ForLoop.G2HE-gTI_222Nxt.webp (before: 28kB, after: 14kB) (+27ms) (494/621)
+01:35:58   ▶ /_astro/IntCompare.CKRc1jEM_EOjga.webp (before: 25kB, after: 15kB) (+38ms) (495/621)
+01:35:58   ▶ /_astro/IntOp.CkC53Y1C_Z1Soh9y.webp (before: 24kB, after: 13kB) (+38ms) (496/621)
+01:35:58   ▶ /_astro/Counter.CPr4MKR4_1KmDtU.webp (before: 26kB, after: 13kB) (+31ms) (497/621)
+01:35:58   ▶ /_astro/Curve.La4rpn9d_ZDmvG6.webp (before: 22kB, after: 14kB) (+48ms) (498/621)
+01:35:58   ▶ /_astro/FloatCompare.D7-gxleX_1aIDU4.webp (before: 26kB, after: 6kB) (+36ms) (499/621)
+01:35:58   ▶ /_astro/OnSignal.uR1AvnVr_KDfrk.webp (before: 15kB, after: 9kB) (+42ms) (500/621)
+01:35:58   ▶ /_astro/MultiplierToSemitones.Bdjg9gcq_1wP1Fn.webp (before: 17kB, after: 11kB) (+50ms) (501/621)
+01:35:58   ▶ /_astro/RemapFloat.BrWAozUo_ZVKspy.webp (before: 43kB, after: 8kB) (+29ms) (502/621)
+01:35:58   ▶ /_astro/SemitonesToMultiplier.BRi7YuP3_Z17wKJu.webp (before: 17kB, after: 11kB) (+45ms) (503/621)
+01:35:58   ▶ /_astro/StopInstance.DghbLG1s_ZTYs6L.webp (before: 15kB, after: 8kB) (+30ms) (504/621)
+01:35:58   ▶ /_astro/FloatMath.CT83MjVg_Z1488oY.webp (before: 25kB, after: 6kB) (+27ms) (505/621)
+01:35:58   ▶ /_astro/FloatFunction.NPcbJ6qX_rgEjh.webp (before: 20kB, after: 12kB) (+42ms) (506/621)
+01:35:58   ▶ /_astro/RandomFloat.BzUkMRcJ_QxiCg.webp (before: 27kB, after: 10kB) (+31ms) (507/621)
+01:35:58   ▶ /_astro/IntCompare.CKRc1jEM_1te0s9.webp (before: 25kB, after: 6kB) (+28ms) (508/621)
+01:35:58   ▶ /_astro/RandomInt.CZvl8G8__Z17EJid.webp (before: 31kB, after: 11kB) (+31ms) (509/621)
+01:35:58   ▶ /_astro/IntOp.CkC53Y1C_emPui.webp (before: 24kB, after: 6kB) (+28ms) (510/621)
+01:35:58   ▶ /_astro/ForLoop.G2HE-gTI_24qwB5.webp (before: 28kB, after: 19kB) (+31ms) (511/621)
+01:35:58   ▶ /_astro/IntFunction.5sWEHRY1_ZBMP22.webp (before: 20kB, after: 12kB) (+41ms) (512/621)
+01:35:58   ▶ /_astro/ConvertToInt.BxPReSQP_Z2iIoQl.webp (before: 19kB, after: 12kB) (+41ms) (513/621)
+01:35:58   ▶ /_astro/Curve.La4rpn9d_1k1xYK.webp (before: 22kB, after: 6kB) (+34ms) (514/621)
+01:35:58   ▶ /_astro/ConvertToFloat.CxpHL4OH_bMafV.webp (before: 14kB, after: 9kB) (+48ms) (515/621)
+01:35:58   ▶ /_astro/FloatCompare.D7-gxleX_ZdmSsh.webp (before: 26kB, after: 10kB) (+23ms) (516/621)
+01:35:58   ▶ /_astro/MultiplierToSemitones.Bdjg9gcq_2fwOL2.webp (before: 17kB, after: 5kB) (+26ms) (517/621)
+01:35:58   ▶ /_astro/Counter.CPr4MKR4_11SRb7.webp (before: 26kB, after: 17kB) (+38ms) (518/621)
+01:35:58   ▶ /_astro/SemitonesToMultiplier.BRi7YuP3_ZoOWDP.webp (before: 17kB, after: 5kB) (+25ms) (519/621)
+01:35:58   ▶ /_astro/RemapFloat.BrWAozUo_Z2dODL2.webp (before: 43kB, after: 13kB) (+27ms) (520/621)
+01:35:58   ▶ /_astro/Not.C0xnfr1D_Z21O4CJ.webp (before: 11kB, after: 6kB) (+28ms) (521/621)
+01:35:58   ▶ /_astro/FloatMath.CT83MjVg_bhHIS.webp (before: 25kB, after: 9kB) (+25ms) (522/621)
+01:35:58   ▶ /_astro/FloatFunction.NPcbJ6qX_V0R73.webp (before: 20kB, after: 5kB) (+21ms) (523/621)
+01:35:58   ▶ /_astro/RandomFloat.BzUkMRcJ_Z13wbGe.webp (before: 27kB, after: 13kB) (+22ms) (524/621)
+01:35:58   ▶ /_astro/IntCompare.CKRc1jEM_1F8utk.webp (before: 25kB, after: 9kB) (+27ms) (525/621)
+01:35:58   ▶ /_astro/IntOp.CkC53Y1C_Z1mlcX0.webp (before: 24kB, after: 9kB) (+32ms) (526/621)
+01:35:58   ▶ /_astro/RandomInt.CZvl8G8__ZG7Q6j.webp (before: 31kB, after: 15kB) (+32ms) (527/621)
+01:35:58   ▶ /_astro/IntFunction.5sWEHRY1_gV5NC.webp (before: 20kB, after: 5kB) (+34ms) (528/621)
+01:35:58   ▶ /_astro/ConvertToInt.BxPReSQP_17jVSG.webp (before: 19kB, after: 5kB) (+34ms) (529/621)
+01:35:58   ▶ /_astro/ConvertToFloat.CxpHL4OH_ZtTLXq.webp (before: 14kB, after: 4kB) (+25ms) (530/621)
+01:35:58   ▶ /_astro/Curve.La4rpn9d_1iP9fu.webp (before: 22kB, after: 10kB) (+28ms) (531/621)
+01:35:58   ▶ /_astro/SelectFloat.DfN-2U1h_Z1I9jdA.webp (before: 26kB, after: 15kB) (+52ms) (532/621)
+01:35:58   ▶ /_astro/MultiplierToSemitones.Bdjg9gcq_bX8pL.webp (before: 17kB, after: 7kB) (+29ms) (533/621)
+01:35:58   ▶ /_astro/SemitonesToMultiplier.BRi7YuP3_Z2soE06.webp (before: 17kB, after: 7kB) (+31ms) (534/621)
+01:35:58   ▶ /_astro/SelectInt.-SWkRVKt_Zr5FRh.webp (before: 25kB, after: 15kB) (+49ms) (535/621)
+01:35:58   ▶ /_astro/FloatCompare.D7-gxleX_Z1BtqPC.webp (before: 26kB, after: 13kB) (+36ms) (536/621)
+01:35:58   ▶ /_astro/Not.C0xnfr1D_1A6glf.webp (before: 11kB, after: 4kB) (+31ms) (537/621)
+01:35:58   ▶ /_astro/FloatFunction.NPcbJ6qX_qkvoG.webp (before: 20kB, after: 8kB) (+31ms) (538/621)
+01:35:58   ▶ /_astro/FloatMath.CT83MjVg_1qHyRK.webp (before: 25kB, after: 12kB) (+37ms) (539/621)
+01:35:58   ▶ /_astro/RemapFloat.BrWAozUo_1crtvY.webp (before: 43kB, after: 18kB) (+38ms) (540/621)
+01:35:58   ▶ /_astro/IntCompare.CKRc1jEM_1R2Yuv.webp (before: 25kB, after: 12kB) (+36ms) (541/621)
+01:35:58   ▶ /_astro/RandomFloat.BzUkMRcJ_Z1Sdu8S.webp (before: 27kB, after: 18kB) (+42ms) (542/621)
+01:35:58   ▶ /_astro/SmoothstepFloat.C9gp4g7P_Z29zu7v.webp (before: 23kB, after: 14kB) (+49ms) (543/621)
+01:35:58   ▶ /_astro/IntOp.CkC53Y1C_277RnD.webp (before: 24kB, after: 11kB) (+38ms) (544/621)
+01:35:58   ▶ /_astro/IntFunction.5sWEHRY1_ADAOr.webp (before: 20kB, after: 8kB) (+30ms) (545/621)
+01:35:58   ▶ /_astro/ConvertToInt.BxPReSQP_Z24Mz4Y.webp (before: 19kB, after: 8kB) (+30ms) (546/621)
+01:35:58   ▶ /_astro/ConvertToFloat.CxpHL4OH_13eAYq.webp (before: 14kB, after: 6kB) (+28ms) (547/621)
+01:35:58   ▶ /_astro/RandomInt.CZvl8G8__ahobP.webp (before: 31kB, after: 20kB) (+39ms) (548/621)
+01:35:58   ▶ /_astro/SelectFloat.DfN-2U1h_17LdCr.webp (before: 26kB, after: 6kB) (+26ms) (549/621)
+01:35:58   ▶ /_astro/Curve.La4rpn9d_2c00UA.webp (before: 22kB, after: 13kB) (+30ms) (550/621)
+01:35:58   ▶ /_astro/MultiplierToSemitones.Bdjg9gcq_Z1bPhJX.webp (before: 17kB, after: 10kB) (+26ms) (551/621)
+01:35:58   ▶ /_astro/SelectInt.-SWkRVKt_Z1dscTf.webp (before: 25kB, after: 6kB) (+23ms) (552/621)
+01:35:58   ▶ /_astro/SemitonesToMultiplier.BRi7YuP3_1dY3D6.webp (before: 17kB, after: 10kB) (+34ms) (553/621)
+01:35:58   ▶ /_astro/Not.C0xnfr1D_P7j0r.webp (before: 11kB, after: 6kB) (+37ms) (554/621)
+01:35:58   ▶ /_astro/FloatFunction.NPcbJ6qX_1qrzCy.webp (before: 20kB, after: 11kB) (+39ms) (555/621)
+01:35:58   ▶ /_astro/SmoothstepFloat.C9gp4g7P_euATo.webp (before: 23kB, after: 6kB) (+23ms) (556/621)
+01:35:58   ▶ /_astro/And.VJE-pTGU_ZqaYMu.webp (before: 14kB, after: 8kB) (+41ms) (557/621)
+01:35:58   ▶ /_astro/Or.DGiElX8h_1zvYrP.webp (before: 14kB, after: 8kB) (+36ms) (558/621)
+01:35:58   ▶ /_astro/IntFunction.5sWEHRY1_lU6gf.webp (before: 20kB, after: 11kB) (+25ms) (559/621)
+01:35:58   ▶ /_astro/ConvertToInt.BxPReSQP_Z2qPNzq.webp (before: 19kB, after: 10kB) (+25ms) (560/621)
+01:35:58   ▶ /_astro/RemapFloat.BrWAozUo_Zveiuh.webp (before: 43kB, after: 24kB) (+35ms) (561/621)
+01:35:58   ▶ /_astro/ConvertToFloat.CxpHL4OH_13gOOQ.webp (before: 14kB, after: 8kB) (+27ms) (562/621)
+01:35:58   ▶ /_astro/Xor.CaEF6tOT_1qUO3y.webp (before: 15kB, after: 8kB) (+34ms) (563/621)
+01:35:58   ▶ /_astro/Float.Btv5Uta7_UiyTG.webp (before: 12kB, after: 6kB) (+29ms) (564/621)
+01:35:58   ▶ /_astro/SelectFloat.DfN-2U1h_1cPDEa.webp (before: 26kB, after: 10kB) (+33ms) (565/621)
+01:35:58   ▶ /_astro/SelectInt.-SWkRVKt_1w7BkL.webp (before: 25kB, after: 10kB) (+36ms) (566/621)
+01:35:58   ▶ /_astro/FloatParameter.DU9Mvf44_Z1pJMaI.webp (before: 33kB, after: 18kB) (+48ms) (567/621)
+01:35:58   ▶ /_astro/Bool.DFHf158g_cnqgl.webp (before: 12kB, after: 6kB) (+50ms) (568/621)
+01:35:58   ▶ /_astro/IntParameter.wqpVfE1M_Z38lcg.webp (before: 25kB, after: 14kB) (+46ms) (569/621)
+01:35:58   ▶ /_astro/BoolParameter.BeHgoeIi_Z1TwAwA.webp (before: 20kB, after: 12kB) (+47ms) (570/621)
+01:35:58   ▶ /_astro/SmoothstepFloat.C9gp4g7P_Z1o3SgY.webp (before: 23kB, after: 9kB) (+29ms) (571/621)
+01:35:58   ▶ /_astro/AssetParameter.BeDbVF2v_1e1TaO.webp (before: 26kB, after: 15kB) (+42ms) (572/621)
+01:35:58   ▶ /_astro/And.VJE-pTGU_Z1GxLPj.webp (before: 14kB, after: 5kB) (+36ms) (573/621)
+01:35:58   ▶ /_astro/Or.DGiElX8h_ZCBP5t.webp (before: 14kB, after: 5kB) (+35ms) (574/621)
+01:35:58   ▶ /_astro/Int.oSAcpMQw_27Ftdt.webp (before: 12kB, after: 6kB) (+43ms) (575/621)
+01:35:58   ▶ /_astro/Xor.CaEF6tOT_ay20J.webp (before: 15kB, after: 5kB) (+39ms) (576/621)
+01:35:58   ▶ /_astro/Float.Btv5Uta7_Z1reM81.webp (before: 12kB, after: 4kB) (+38ms) (577/621)
+01:35:58   ▶ /_astro/TrackCondition.Ctq47N31_1Fk0fh.webp (before: 36kB, after: 23kB) (+44ms) (578/621)
+01:35:58   ▶ /_astro/Delay.BNcr7QNm_2eueVt.webp (before: 17kB, after: 11kB) (+43ms) (579/621)
+01:35:58   ▶ /_astro/WaitForCondition.z-MaKTlL_Z2qXpCa.webp (before: 19kB, after: 12kB) (+46ms) (580/621)
+01:35:58   ▶ /_astro/Repeat.CBfHf1W7_Z186SDU.webp (before: 21kB, after: 14kB) (+47ms) (581/621)
+01:35:58   ▶ /_astro/IdleLoop.N60dMtRf_yByID.webp (before: 15kB, after: 10kB) (+44ms) (582/621)
+01:35:58   ▶ /_astro/SelectFloat.DfN-2U1h_1hU4FS.webp (before: 26kB, after: 13kB) (+40ms) (583/621)
+01:35:58   ▶ /_astro/FloatParameter.DU9Mvf44_1xGMWe.webp (before: 33kB, after: 10kB) (+37ms) (584/621)
+01:35:58   ▶ /_astro/Bool.DFHf158g_1O0WCi.webp (before: 12kB, after: 5kB) (+28ms) (585/621)
+01:35:58   ▶ /_astro/SelectInt.-SWkRVKt_ZNtHe9.webp (before: 25kB, after: 12kB) (+37ms) (586/621)
+01:35:58   ▶ /_astro/IntParameter.wqpVfE1M_1dp7FR.webp (before: 25kB, after: 8kB) (+34ms) (587/621)
+01:35:58   ▶ /_astro/BoolParameter.BeHgoeIi_Z2999lk.webp (before: 20kB, after: 7kB) (+34ms) (588/621)
+01:35:58   ▶ /_astro/AssetParameter.BeDbVF2v_t6qhQ.webp (before: 26kB, after: 7kB) (+27ms) (589/621)
+01:35:58   ▶ /_astro/SmoothstepFloat.C9gp4g7P_2htSl.webp (before: 23kB, after: 12kB) (+34ms) (590/621)
+01:35:58   ▶ /_astro/And.VJE-pTGU_Zipk48.webp (before: 14kB, after: 8kB) (+27ms) (591/621)
+01:35:58   ▶ /_astro/Or.DGiElX8h_Z2hVVgf.webp (before: 14kB, after: 8kB) (+27ms) (592/621)
+01:35:58   ▶ /_astro/Int.oSAcpMQw_2ejoJx.webp (before: 12kB, after: 4kB) (+24ms) (593/621)
+01:35:58   ▶ /_astro/Xor.CaEF6tOT_1yGtLU.webp (before: 15kB, after: 8kB) (+23ms) (594/621)
+01:35:58   ▶ /_astro/Delay.BNcr7QNm_xuwUA.webp (before: 17kB, after: 4kB) (+28ms) (595/621)
+01:35:58   ▶ /_astro/TrackCondition.Ctq47N31_1isD34.webp (before: 36kB, after: 9kB) (+30ms) (596/621)
+01:35:58   ▶ /_astro/Float.Btv5Uta7_ZhkPu3.webp (before: 12kB, after: 7kB) (+30ms) (597/621)
+01:35:58   ▶ /_astro/WaitForCondition.z-MaKTlL_At9EC.webp (before: 19kB, after: 6kB) (+26ms) (598/621)
+01:35:58   ▶ /_astro/Repeat.CBfHf1W7_Z21ISaP.webp (before: 21kB, after: 5kB) (+34ms) (599/621)
+01:35:58   ▶ /_astro/IdleLoop.N60dMtRf_Z1yDGdY.webp (before: 15kB, after: 6kB) (+35ms) (600/621)
+01:35:58   ▶ /_astro/IntParameter.wqpVfE1M_ZzC7hR.webp (before: 25kB, after: 12kB) (+22ms) (601/621)
+01:35:58   ▶ /_astro/FloatParameter.DU9Mvf44_1kREqf.webp (before: 33kB, after: 16kB) (+29ms) (602/621)
+01:35:58   ▶ /_astro/BoolParameter.BeHgoeIi_YYPLl.webp (before: 20kB, after: 10kB) (+22ms) (603/621)
+01:35:58   ▶ /_astro/AssetParameter.BeDbVF2v_Z1jDzFf.webp (before: 26kB, after: 10kB) (+23ms) (604/621)
+01:35:58   ▶ /_astro/Delay.BNcr7QNm_26LGkx.webp (before: 17kB, after: 6kB) (+15ms) (605/621)
+01:35:58   ▶ /_astro/Int.oSAcpMQw_ZWbOYa.webp (before: 12kB, after: 6kB) (+26ms) (606/621)
+01:35:58   ▶ /_astro/TrackCondition.Ctq47N31_Z3gJWl.webp (before: 36kB, after: 15kB) (+19ms) (607/621)
+01:35:58   ▶ /_astro/WaitForCondition.z-MaKTlL_1fTLB6.webp (before: 19kB, after: 9kB) (+18ms) (608/621)
+01:35:58   ▶ /_astro/Repeat.CBfHf1W7_1FJaXO.webp (before: 21kB, after: 8kB) (+14ms) (609/621)
+01:35:58   ▶ /_astro/IdleLoop.N60dMtRf_1fcrzD.webp (before: 15kB, after: 10kB) (+16ms) (610/621)
+01:35:58   ▶ /_astro/hero.Uogb_jYg_Z15KQ5y.webp (before: 352kB, after: 7kB) (+46ms) (611/621)
+01:35:58   ▶ /_astro/Delay.BNcr7QNm_1NQcCp.webp (before: 17kB, after: 8kB) (+12ms) (612/621)
+01:35:58   ▶ /_astro/AssetParameter.BeDbVF2v_Z2oor6p.webp (before: 26kB, after: 14kB) (+19ms) (613/621)
+01:35:58   ▶ /_astro/WaitForCondition.z-MaKTlL_216ile.webp (before: 19kB, after: 13kB) (+14ms) (614/621)
+01:35:58   ▶ /_astro/TrackCondition.Ctq47N31_2hRxTw.webp (before: 36kB, after: 21kB) (+14ms) (615/621)
+01:35:58   ▶ /_astro/Repeat.CBfHf1W7_ZY4Oyo.webp (before: 21kB, after: 11kB) (+12ms) (616/621)
+01:35:58   ▶ /_astro/Delay.BNcr7QNm_Z12S7WE.webp (before: 17kB, after: 11kB) (+15ms) (617/621)
+01:35:58   ▶ /_astro/Repeat.CBfHf1W7_Z1nc9CF.webp (before: 21kB, after: 15kB) (+11ms) (618/621)
+01:35:58   ▶ /_astro/hero.Uogb_jYg_1Q6kL8.webp (before: 352kB, after: 11kB) (+30ms) (619/621)
+01:35:58   ▶ /_astro/hero.Uogb_jYg_Z1RHAzY.webp (before: 352kB, after: 18kB) (+51ms) (620/621)
+01:35:58   ▶ /_astro/hero.Uogb_jYg_7OT0v.webp (before: 352kB, after: 32kB) (+86ms) (621/621)
+01:35:58 ✓ Completed in 9.61s.
+
+01:35:58 [build] ✓ Completed in 10.66s.
+01:35:58 [starlight:pagefind] Building search index with Pagefind...
+01:35:59 [starlight:pagefind] Found 77 HTML files.
+01:35:59 [starlight:pagefind] Finished building search index in 1.27s.
+01:35:59 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+01:35:59 [build] 77 page(s) built in 12.30s
+01:35:59 [build] Complete!
+Capture output: omitted 132 unreferenced source PNGs (44.7 MB); original files remain in the repository.
+Build OK: 77 HTML pages, 8511 local links/assets, 64 API coverage targets, repository base and Pagefind output verified.
+Release output OK: 810 files, 46.96 MB, 870 responsive image/font references; canonical URLs, credential patterns, and excluded asset types checked.

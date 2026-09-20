@@ -1,0 +1,57 @@
+---
+title: 'Values your game can change'
+description: 'Choose Float, Int, Bool, or Asset parameters and apply starting values in time.'
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundNodeCatalogue.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Execution.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Flow.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Values.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs
+tags: [unity, graph, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+import Capture from '../../../components/Capture.astro';
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+
+import NodeReference from '../../../components/NodeReference.astro';
+
+A parameter is a value your game can change for one play, so two engines can have different speeds. A constant is a fixed value saved in the graph. If the first command needs a particular value, supply it with `SoundPlayContext.With(...)` before calling Play. You can update live parameters afterward while the sound runs.
+
+<a href={sitePath('recipes/live-parameters/')}>
+  See it in a complete example: Engine live parameters.
+</a>
+For the full list, open the <a href={sitePath('graph/')}>node catalogue</a>.
+
+## Float Parameter
+
+<NodeReference operation="FloatParameter" />
+
+## Float
+
+<NodeReference operation="Float" />
+
+## Bool
+
+<NodeReference operation="Bool" />
+
+## Int Parameter
+
+<NodeReference operation="IntParameter" />
+
+## Bool Parameter
+
+<NodeReference operation="BoolParameter" />
+
+## Asset Parameter
+
+<NodeReference operation="AssetParameter" />
+
+## Int
+
+<NodeReference operation="Int" />
+
+Continue with <a href={sitePath('graph/validation/')}>graph checks and debugging</a> if a connection or event is refused.

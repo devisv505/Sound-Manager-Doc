@@ -1,0 +1,235 @@
+{
+  "success": true,
+  "command": "command run_script",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "/tmp/CaptureSoundNodes.cs",
+      "entry": "CaptureSoundNodes.Batch",
+      "args": "[\"BranchByIndex,RandomBranch,ForLoop,Repeat,WaitForCondition,IdleLoop,Counter,StopInstance,Passthrough\"]",
+      "timeout_ms": "55000"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 77,
+      "executeMs": 3600,
+      "assemblyName": "PipelineRunScript_CaptureSoundNodes_a9ad205715e945c0b740970cfe6ed656",
+      "success": true,
+      "result": [
+        {
+          "operation": "BranchByIndex",
+          "title": "Branch By Index",
+          "capturedAt": "2026-09-19T23:12:19.303958Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 650,
+          "height": 411,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:306.88, height:187.50)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Branch By Index",
+            "Count",
+            "2",
+            "In",
+            "Index",
+            "0",
+            "Out 0",
+            "Out 1",
+            "Branch By Index"
+          ]
+        },
+        {
+          "operation": "RandomBranch",
+          "title": "Random Branch",
+          "capturedAt": "2026-09-19T23:12:19.706834Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 429,
+          "height": 411,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:196.25, height:187.50)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Random Branch",
+            "Count",
+            "2",
+            "In",
+            "Out 0",
+            "Out 1",
+            "Random Branch"
+          ]
+        },
+        {
+          "operation": "ForLoop",
+          "title": "For Loop",
+          "capturedAt": "2026-09-19T23:12:20.103939Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 713,
+          "height": 386,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:338.13, height:175.00)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "For Loop"
+          ]
+        },
+        {
+          "operation": "Repeat",
+          "title": "Repeat",
+          "capturedAt": "2026-09-19T23:12:20.504588Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 651,
+          "height": 386,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:307.50, height:175.00)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Repeat",
+            "Start",
+            "Stop",
+            "Interval",
+            "1",
+            "Out",
+            "Repeat"
+          ]
+        },
+        {
+          "operation": "WaitForCondition",
+          "title": "Wait For Condition",
+          "capturedAt": "2026-09-19T23:12:20.911671Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 518,
+          "height": 326,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:240.63, height:145.00)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Wait For Condition",
+            "In",
+            "Condition",
+            "Out",
+            "Wait For Condition"
+          ]
+        },
+        {
+          "operation": "IdleLoop",
+          "title": "Idle Loop",
+          "capturedAt": "2026-09-19T23:12:21.304864Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 416,
+          "height": 326,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:190.00, height:145.00)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Idle Loop",
+            "Start",
+            "Stop",
+            "Out",
+            "Idle Loop"
+          ]
+        },
+        {
+          "operation": "Counter",
+          "title": "Counter",
+          "capturedAt": "2026-09-19T23:12:21.707688Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 700,
+          "height": 386,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:331.88, height:175.00)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Counter",
+            "In",
+            "Reset",
+            "Limit",
+            "0",
+            "Out",
+            "Reached",
+            "Count",
+            "Counter"
+          ]
+        },
+        {
+          "operation": "StopInstance",
+          "title": "Stop Instance",
+          "capturedAt": "2026-09-19T23:12:22.107898Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 443,
+          "height": 326,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:203.13, height:145.00)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Stop Instance",
+            "In",
+            "Fade",
+            "0",
+            "Stop Instance"
+          ]
+        },
+        {
+          "operation": "Passthrough",
+          "title": "Passthrough",
+          "capturedAt": "2026-09-19T23:12:22.503063Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 376,
+          "height": 266,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:170.00, height:115.00)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Passthrough",
+            "In",
+            "Out",
+            "Passthrough"
+          ]
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "/Users/devisv/projects/unity/Sound-Manager"
+    },
+    "success": true
+  },
+  "errors": [],
+  "warnings": []
+}

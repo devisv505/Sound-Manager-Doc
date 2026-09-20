@@ -1,0 +1,47 @@
+{
+  "mode": "Lighthouse default simulated mobile; cold navigation; local production preview",
+  "results": [
+    {
+      "route": "",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "transferBytes": 155727,
+      "fcp": 1509.22395,
+      "lcp": 1734.22395,
+      "cls": 0,
+      "errors": null
+    },
+    {
+      "route": "getting-started/",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "transferBytes": 113716,
+      "fcp": 1655.0684999999999,
+      "lcp": 1655.0684999999999,
+      "cls": 0,
+      "errors": null
+    },
+    {
+      "route": "graph/math/",
+      "scores": {
+        "performance": 98,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "transferBytes": 209398,
+      "fcp": 1810.4189999999999,
+      "lcp": 2110.419,
+      "cls": 0.0003619187220929635,
+      "errors": null
+    }
+  ]
+}

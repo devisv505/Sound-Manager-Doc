@@ -1,0 +1,18 @@
+{
+  "operation": "ForLoop",
+  "title": "For Loop",
+  "capturedAt": "2026-09-19T23:12:20.1039390Z",
+  "unityVersion": "6000.6.0f1",
+  "width": 713,
+  "height": 386,
+  "zoom": 1.25,
+  "pixelsPerPoint": 2.0,
+  "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+  "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+  "bounds": "(x:100.00, y:120.00, width:338.13, height:175.00)",
+  "cropX": 182,
+  "cropY": 222,
+  "labels": [
+    "For Loop"
+  ]
+}

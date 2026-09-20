@@ -1,0 +1,61 @@
+// The exact M5 excerpts, wrapped in fields/methods to compile in Unity.
+public sealed class M5DocumentationExcerpts
+{
+    private SoundService service;
+    private Transform transform, bee;
+    private SoundLibrary library;
+    private SoundHandle beeSound;
+    private long cursor;
+    public M5DocumentationExcerpts(Transform host, Transform source, SoundLibrary registeredLibrary)
+    { transform = host; bee = source; library = registeredLibrary; }
+    // advanced/service
+    public void Excerpt0()
+    {
+        var clock = new UnitySoundClock();
+        var backend = new UnityAudioSourceBackend(transform, 32, clock);
+        service = new SoundService(clock, backend, new SoundServiceOptions
+        {
+            InstanceCapacity = 64,
+            QueueCapacity = 16,
+            TraceCapacity = 0,
+            StartupTimeout = 5
+        });
+        
+        var diagnostics = new System.Collections.Generic.List<string>();
+        var catalogue = SoundCatalogue.Collect(null, new[] { library }, diagnostics);
+        foreach (var message in diagnostics)
+            Debug.LogWarning(message);
+        foreach (var entry in catalogue)
+        {
+            if (!service.Register(entry.Sound, entry.Key, out var error))
+                Debug.LogWarning(error);
+        }
+        service.BeginPreparation();
+    }
+    // advanced/service
+    public void Excerpt1()
+    {
+        if (service.TryResolve(Sounds.Bee, out var sound))
+        {
+            var context = SoundPlayContext.Following(bee);
+            var result = service.TryPlay(sound, context);
+            if (!result.Accepted)
+                Debug.LogWarning(result.Status);
+            else
+                beeSound = result.Handle;
+        }
+    }
+    // advanced/observation
+    public void Excerpt2()
+    {
+        var trace = service.Trace;
+        cursor = System.Math.Max(cursor, trace.OldestSequence);
+        long end = trace.Count;
+        for (; cursor < end; cursor++)
+        {
+            if (!trace.TryRead(cursor, out var record))
+                continue;
+            Debug.Log($"{record.Sequence}: {record.Kind}, node {record.Node}");
+        }
+    }
+}

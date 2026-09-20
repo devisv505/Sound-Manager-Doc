@@ -1,0 +1,310 @@
+[
+  {
+    "route": "404.html",
+    "violations": []
+  },
+  {
+    "route": "advanced/backend/",
+    "violations": []
+  },
+  {
+    "route": "advanced/",
+    "violations": []
+  },
+  {
+    "route": "advanced/observation/",
+    "violations": []
+  },
+  {
+    "route": "advanced/parameter-records/",
+    "violations": []
+  },
+  {
+    "route": "advanced/service/",
+    "violations": []
+  },
+  {
+    "route": "api/components/",
+    "violations": []
+  },
+  {
+    "route": "api/context/",
+    "violations": []
+  },
+  {
+    "route": "api/coverage/",
+    "violations": []
+  },
+  {
+    "route": "api/",
+    "violations": []
+  },
+  {
+    "route": "api/keys-and-assets/",
+    "violations": []
+  },
+  {
+    "route": "api/notifications/",
+    "violations": []
+  },
+  {
+    "route": "api/ownership/",
+    "violations": []
+  },
+  {
+    "route": "api/parameters/",
+    "violations": []
+  },
+  {
+    "route": "api/requests/",
+    "violations": []
+  },
+  {
+    "route": "api/results-and-handles/",
+    "violations": []
+  },
+  {
+    "route": "api/services/",
+    "violations": []
+  },
+  {
+    "route": "api/settings/",
+    "violations": []
+  },
+  {
+    "route": "api/sound-bus/",
+    "violations": []
+  },
+  {
+    "route": "captures/01-campfire/",
+    "violations": []
+  },
+  {
+    "route": "captures/02-footstep/",
+    "violations": []
+  },
+  {
+    "route": "captures/03-bee/",
+    "violations": []
+  },
+  {
+    "route": "captures/04-engine/",
+    "violations": []
+  },
+  {
+    "route": "captures/05-weather/",
+    "violations": []
+  },
+  {
+    "route": "captures/06-workshop/",
+    "violations": []
+  },
+  {
+    "route": "captures/07-arcade/",
+    "violations": []
+  },
+  {
+    "route": "captures/08-jukebox/",
+    "violations": []
+  },
+  {
+    "route": "captures/09-portals/",
+    "violations": []
+  },
+  {
+    "route": "captures/10-launch/",
+    "violations": []
+  },
+  {
+    "route": "captures/",
+    "violations": []
+  },
+  {
+    "route": "demos/01-campfire/",
+    "violations": []
+  },
+  {
+    "route": "demos/02-footstep/",
+    "violations": []
+  },
+  {
+    "route": "demos/03-bee/",
+    "violations": []
+  },
+  {
+    "route": "demos/04-engine/",
+    "violations": []
+  },
+  {
+    "route": "demos/05-weather/",
+    "violations": []
+  },
+  {
+    "route": "demos/06-workshop/",
+    "violations": []
+  },
+  {
+    "route": "demos/07-arcade/",
+    "violations": []
+  },
+  {
+    "route": "demos/08-jukebox/",
+    "violations": []
+  },
+  {
+    "route": "demos/09-portals/",
+    "violations": []
+  },
+  {
+    "route": "demos/10-launch/",
+    "violations": []
+  },
+  {
+    "route": "demos/",
+    "violations": []
+  },
+  {
+    "route": "getting-started/",
+    "violations": []
+  },
+  {
+    "route": "graph/authoring/",
+    "violations": []
+  },
+  {
+    "route": "graph/clips/",
+    "violations": []
+  },
+  {
+    "route": "graph/flow/",
+    "violations": []
+  },
+  {
+    "route": "graph/",
+    "violations": []
+  },
+  {
+    "route": "graph/lifecycle/",
+    "violations": []
+  },
+  {
+    "route": "graph/math/",
+    "violations": []
+  },
+  {
+    "route": "graph/parameters/",
+    "violations": []
+  },
+  {
+    "route": "graph/timing/",
+    "violations": []
+  },
+  {
+    "route": "graph/trimming/",
+    "violations": []
+  },
+  {
+    "route": "graph/validation/",
+    "violations": []
+  },
+  {
+    "route": "guides/events-plays-voices/",
+    "violations": []
+  },
+  {
+    "route": "guides/",
+    "violations": []
+  },
+  {
+    "route": "guides/outcomes/",
+    "violations": []
+  },
+  {
+    "route": "guides/parameters/",
+    "violations": []
+  },
+  {
+    "route": "guides/position-and-ownership/",
+    "violations": []
+  },
+  {
+    "route": "guides/results-and-limits/",
+    "violations": []
+  },
+  {
+    "route": "guides/setup-and-keys/",
+    "violations": []
+  },
+  {
+    "route": "guides/signals-and-notifications/",
+    "violations": []
+  },
+  {
+    "route": "guides/stop-and-pause/",
+    "violations": []
+  },
+  {
+    "route": "guides/troubleshooting/",
+    "violations": []
+  },
+  {
+    "route": "guides/your-first-graph/",
+    "violations": []
+  },
+  {
+    "route": "",
+    "violations": []
+  },
+  {
+    "route": "recipes/campfire-loop/",
+    "violations": []
+  },
+  {
+    "route": "recipes/delayed-thunder/",
+    "violations": []
+  },
+  {
+    "route": "recipes/event-signals/",
+    "violations": []
+  },
+  {
+    "route": "recipes/",
+    "violations": []
+  },
+  {
+    "route": "recipes/launch-on-completion/",
+    "violations": []
+  },
+  {
+    "route": "recipes/live-parameters/",
+    "violations": []
+  },
+  {
+    "route": "recipes/moving-emitter/",
+    "violations": []
+  },
+  {
+    "route": "recipes/music-crossfade/",
+    "violations": []
+  },
+  {
+    "route": "recipes/owner-loss/",
+    "violations": []
+  },
+  {
+    "route": "recipes/pause-interaction/",
+    "violations": []
+  },
+  {
+    "route": "recipes/playback-limits/",
+    "violations": []
+  },
+  {
+    "route": "recipes/surface-footsteps/",
+    "violations": []
+  },
+  {
+    "route": "recipes/workshop-tools/",
+    "violations": []
+  }
+]

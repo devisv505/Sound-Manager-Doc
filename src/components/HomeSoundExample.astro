@@ -1,0 +1,71 @@
+---
+import { Code } from '@astrojs/starlight/components';
+import Screenshot from './Screenshot.astro';
+import graph from '../assets/demos/01-campfire/graph.png';
+const code = `var result = SoundBus.Play(Sounds.Campfire, transform);
+if (result.Accepted)
+    fire = result.Handle;
+
+// Later, when the player puts the fire out:
+SoundBus.Stop(fire, fade: 0.15f);`;
+---
+
+<div class="home-graph-code">
+  <div class="home-graph-panel">
+    <h3>In the graph</h3>
+    <Screenshot
+      src={graph}
+      id="home-campfire-graph"
+      alt="Campfire graph in Unity, connecting ignition, the crackling loop, and the extinguish sound"
+      caption="Build the beginning, loop, and ending in Unity. Enlarge to follow the connections."
+    />
+  </div>
+  <div class="home-script-panel">
+    <h3>In your script</h3>
+    <Code code={code} lang="csharp" title="Play by key · excerpt" />
+    <p>Play the event by its key. Keep the handle to stop this fire later.</p>
+  </div>
+</div>
+<style>
+  .home-graph-code {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+    gap: 1.5rem;
+    margin-block: 1.75rem;
+    align-items: start;
+  }
+  .home-graph-code > div {
+    min-width: 0;
+    margin: 0;
+  }
+  .home-graph-code h3 {
+    font-size: 1rem;
+    margin: 0 0 0.8rem;
+  }
+  .home-script-panel :global(.expressive-code) {
+    margin-top: 0;
+  }
+  .home-graph-code :global(.screenshot) {
+    margin: 0;
+  }
+  .home-graph-code :global(.image-open) {
+    width: 100%;
+    background: #202020;
+  }
+  .home-graph-code :global(.image-open img) {
+    width: 100%;
+    aspect-ratio: 1.8;
+    object-fit: contain;
+  }
+  .home-graph-code :global(figcaption),
+  .home-script-panel p {
+    font-size: 0.85rem;
+    color: var(--sl-color-gray-2);
+    margin-block: 0.65rem 0;
+  }
+  @media (max-width: 60rem) {
+    .home-graph-code {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

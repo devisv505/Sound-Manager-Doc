@@ -1,0 +1,130 @@
+---
+title: 'Host and register the sound service.'
+description: 'Create a service, prepare registered clips, drive updates, and clean up the backend.'
+kind: api
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Registration.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Tick.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundCatalogue.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundServiceOptions.cs
+tags: [unity, graph, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+import Capture from '../../../components/Capture.astro';
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+
+`SoundService` is the scheduler behind a scene Sound Manager. Construct one only when your host will take responsibility for its entire lifetime. A service you construct is independent: creating it does not replace `SoundServices.Current` or route `SoundBus` to it.
+
+## The lifetime in order
+
+1. Create one clock and a compatible voice backend on the main thread.
+2. Construct `SoundService(clock, backend, options)`. Neither dependency may be null.
+3. Register valid imported events, optionally with keys. Subscribe to `Notification` before issuing requests you want to observe.
+4. Call `BeginPreparation()` after registration. Call `Tick()` regularly from the same thread.
+5. Resolve a key on this service and call its `TryPlay`. Keep the returned handle and check its result.
+6. When the host ends, remove its subscriptions and call `Dispose()`. Disposal also disposes the supplied backend.
+
+This **initialization excerpt** belongs inside a host's setup method. `transform` is the host Transform and `library` is a configured `SoundLibrary`. Keep `service` as a field. The scene needs an enabled AudioListener to hear this backend.
+
+```csharp title="Collect, register, and prepare · excerpt"
+var clock = new UnitySoundClock();
+var backend = new UnityAudioSourceBackend(transform, 32, clock);
+service = new SoundService(clock, backend, new SoundServiceOptions
+{
+    InstanceCapacity = 64,
+    QueueCapacity = 16,
+    TraceCapacity = 0,
+    StartupTimeout = 5
+});
+
+var diagnostics = new System.Collections.Generic.List<string>();
+var catalogue = SoundCatalogue.Collect(null, new[] { library }, diagnostics);
+foreach (var message in diagnostics)
+    Debug.LogWarning(message);
+foreach (var entry in catalogue)
+{
+    if (!service.Register(entry.Sound, entry.Key, out var error))
+        Debug.LogWarning(error);
+}
+service.BeginPreparation();
+```
+
+Include `using DEV505.SoundManager;` and `using UnityEngine;`. In your host's `Update`, call `service?.Tick()`. In its cleanup, call `service?.Dispose()` and set the field to null. Do not also tick its backend independently: the service already does that. If setup can throw after creating the service, dispose it in the error path too.
+
+```csharp title="Play a registered key on this service · excerpt"
+if (service.TryResolve(Sounds.Bee, out var sound))
+{
+    var context = SoundPlayContext.Following(bee);
+    var result = service.TryPlay(sound, context);
+    if (!result.Accepted)
+        Debug.LogWarning(result.Status);
+    else
+        beeSound = result.Handle;
+}
+```
+
+Here `bee` is a valid Transform and `beeSound` is a retained `SoundHandle`. The library must contain the Bee key. Use this service's controls and `IsAlive` for its handles: bus/handle shortcuts target the active scene service, not your independent one. See <a href={sitePath('recipes/moving-emitter/')}>the normal Bee component</a> if you do not need a custom host.
+
+## Registration and loading
+
+`Register(sound, out diagnostic)` registers for asset lookup only. The overload with a `SoundKey` also attempts to bind that key. Invalid graphs, missing event IDs, conflicting event IDs, and disposed services return false with a diagnostic.
+
+Registering the same asset again replaces its definition and releases its previous key binding. Existing plays keep their original definition. A new play also detects an imported revision change and refreshes registration while retaining the registered key.
+
+**Duplicate keys need care.** The first event keeps the key. A second `Register` can still return true with no diagnostic while the second event has no key. Use catalogue diagnostics to catch conflicts, and verify `TryResolve` returns the intended asset when registering manually.
+
+`BeginPreparation` asks the backend about every clip the registered events may use, including allowed Asset Parameter clips and branches that might not run. Before preparation begins, requests are admitted as queued and cannot start. `Tick` revisits loading entries and starts eligible requests.
+
+`Ready` means no catalogue entry remains in the loading list. An entry with a missing clip leaves that list too, so `Ready` does not mean every event is playable. Each request checks its own clips. A loading request may later fail with MissingClip, NotReady on timeout, or CapacityExceeded if no voice is free.
+
+`Unregister(sound, fade = 0.1f)` removes its key, definition, loading entry, and cooldown record, and requests a normal stop for live revisions of that event. It does not unload externally owned asset bundles or release your asset loader's references. Let release sounds finish before unloading their clips, or deliberately shut down the owning service first.
+
+## Updates, state, and disposal
+
+`Tick` updates the backend and detached fades, refreshes loading, handles owner loss, starts queued plays, advances graph work, then delivers notifications. Recursive ticks are ignored. Requests made from callbacks are queued for a later tick; callbacks cannot extend one update indefinitely.
+
+| Property           | Read it as                                                                                     |
+| ------------------ | ---------------------------------------------------------------------------------------------- |
+| `Session`          | This service's process-unique identity; old handles cannot address a replacement service.      |
+| `LiveInstances`    | Plays still alive, including queued or stopping ones.                                          |
+| `QueuedInstances`  | Admitted plays that have not started.                                                          |
+| `ActiveVoices`     | Occupied backend voices, including detached fades.                                             |
+| `RegisteredEvents` | Registered asset count.                                                                        |
+| `OwnerCount`       | Owner records currently retained.                                                              |
+| `Paused`           | Service pause, respecting the event's Ignore Pause setting; explicit play pause still applies. |
+| `Trace`            | This service's diagnostic record buffer.                                                       |
+
+`Dispose` is idempotent on its owning thread. It marks the service not ready, cancels live plays without running On Stop, stops voices, delivers terminal notifications, clears state, and disposes the backend. It is shutdown, not a gentle scene transition. Use ordinary Stop/StopOwned and continued ticks when release sounds should be heard.
+
+The concrete service supports the <a href={sitePath('api/services/')}>ISoundService controls</a>: playback, parameters, signals, pause, ownership, and grouped commands. It additionally has a string-name `TryGetParameter` overload. Use <a href={sitePath('advanced/observation/')}>TryGetDefinition, GetVoiceCount, TryGetObservedValue, and GetNodeState</a> for observation.
+
+<ApiSignatures type="SoundService" />
+
+## SoundServiceOptions
+
+These options are read during construction. Changing the object afterward does not resize the service.
+
+| Field              | Default   | Constructor behavior                                  |
+| ------------------ | --------- | ----------------------------------------------------- |
+| `InstanceCapacity` | 256       | Clamped to 1–1024.                                    |
+| `QueueCapacity`    | 64        | Clamped to 1 through the resulting instance capacity. |
+| `TraceCapacity`    | 0         | Clamped to 0–65536; zero stores no trace records.     |
+| `StartupTimeout`   | 5 seconds | A finite positive value; otherwise uses 5.            |
+
+Voice capacity belongs to the backend, not these options. `SoundManagerSettings.ToOptions()` applies its own settings conversion before construction; the direct constructor's timeout rule above is broader.
+
+<ApiSignatures type="SoundServiceOptions" />
+
+## SoundCatalogue and SoundCatalogueEntry
+
+`Collect(events, libraries, diagnostics = null)` flattens directly assigned events first, then library entries in order. Direct events use their asset names as keys. Library entries use a nonempty trimmed authored key, otherwise the asset name. Null arrays are accepted.
+
+The same asset listed twice is included once, so its first occurrence determines its key. Invalid/missing entries and conflicting event IDs are skipped with messages. For a duplicate key, the later event is retained without that key and the conflict is reported. Pass a diagnostics list to see those messages.
+
+Each `SoundCatalogueEntry` holds readonly `Sound` and `Key` values; its constructor simply packages them. `Contains(catalogue, sound)` tests asset identity, independent of key, and returns false for a null list or missing sound. Collection neither registers nor loads content. Libraries are flat collections, not recursive folders or an asset-loading service.
+
+<ApiSignatures type="SoundCatalogue" />
+<ApiSignatures type="SoundCatalogueEntry" />

@@ -1,0 +1,36 @@
+---
+import colors from '../../content-data/node-colors.json';
+import { sitePath } from '../lib/links';
+interface Props {
+  operation: string;
+}
+const name = colors.nodes[Astro.props.operation as keyof typeof colors.nodes];
+const category = colors.categories.find((item) => item.name === name);
+if (!category) throw new Error(`Missing node color: ${Astro.props.operation}`);
+---
+
+<p class="node-color">
+  <span class="swatch" style={`background-color: ${category.color}`} aria-hidden="true"></span>
+  <strong>{category.name}</strong> · {category.colorName.toLowerCase()} header
+  <a href={sitePath('graph/#recognize-nodes-by-color')}>Color key</a>
+</p>
+<style>
+  .node-color {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.9rem;
+  }
+  .swatch {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid #465548;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  a {
+    margin-inline-start: 0.3rem;
+  }
+</style>

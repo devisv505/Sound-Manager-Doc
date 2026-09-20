@@ -8,12 +8,15 @@
   },
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
-    "check": "astro check && node scripts/check-content.mjs && node scripts/check-m4.mjs",
+    "check": "astro check && node scripts/check-content.mjs && node scripts/check-m4.mjs && node scripts/check-m5.mjs && node scripts/check-node-captures.mjs && node scripts/check-node-colors.mjs",
     "build": "astro build && node scripts/prepare-capture-output.mjs",
     "preview": "astro preview --host 127.0.0.1",
-    "validate": "npm run check && npm run build && node scripts/check-build.mjs",
+    "validate": "npm run check && npm run build && node scripts/check-build.mjs && node scripts/check-release.mjs",
     "test:browser": "playwright test",
-    "audit:demos": "node scripts/sync-demo-audit.mjs"
+    "audit:demos": "node scripts/sync-demo-audit.mjs",
+    "audit:performance": "node scripts/audit-performance.mjs",
+    "audit:source": "node scripts/audit-source.mjs",
+    "audit:payloads": "node scripts/audit-payloads.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "7.3.1",
@@ -22,7 +25,10 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
+    "@axe-core/playwright": "4.13.0",
     "@playwright/test": "1.63.0",
+    "chrome-launcher": "1.2.1",
+    "lighthouse": "13.5.0",
     "prettier": "3.9.8",
     "prettier-plugin-astro": "1.0.1",
     "typescript": "5.9.3"

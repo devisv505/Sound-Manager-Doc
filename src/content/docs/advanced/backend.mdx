@@ -1,0 +1,112 @@
+---
+title: 'Provide a clock and a voice backend.'
+description: 'Understand the full contract for timing, clip readiness, pooled voices, and cleanup.'
+kind: api
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/ISoundClock.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/ISoundVoiceBackend.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/UnitySoundClock.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/UnityAudioSourceBackend.cs
+tags: [unity, graph, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+import Capture from '../../../components/Capture.astro';
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+
+A **clock** tells the service what time it is. A **voice backend** turns a request into audio and reports whether that voice is still alive. The service remains responsible for graph flow, event limits, owner groups, parameters, and notifications.
+
+For a game using Unity AudioSources, use the supplied `UnitySoundClock` and `UnityAudioSourceBackend`. A custom backend is useful for a different audio engine or deterministic control-layer tests. A silent test backend is not evidence that a mix sounds correct.
+
+## ISoundClock and UnitySoundClock
+
+`ISoundClock.Now` is time in seconds as a double. Supply finite, non-decreasing values. Use the same time basis for the service and backend; do not mix elapsed game time with wall-clock timestamps. The service reads one consistent clock value during each tick.
+
+`UnitySoundClock.Now` reads `Time.unscaledTimeAsDouble`. Changing `Time.timeScale` alone therefore does not pause sound. Use the sound service's pause controls. A test clock can expose a settable `Now` and advance deliberately before each tick; that is for testing the scheduler, not simulating real AudioSource playback duration.
+
+<ApiSignatures type="ISoundClock" />
+<ApiSignatures type="UnitySoundClock" />
+
+## ISoundVoiceBackend
+
+The interface also inherits `IDisposable`; an implementation must provide `Dispose()` even though inherited members are not repeated in the signature inventory below.
+
+| Member                               | Required meaning                                                                                                                               |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Capacity` / `FreeCount`             | Total pool size and currently reusable voice slots. Fading and scheduled voices still occupy slots.                                            |
+| `ListenerPaused`                     | Global listener pause reported to the service.                                                                                                 |
+| `Prepare(clip)`                      | Return Ready, Loading, or Missing; repeated calls must be safe.                                                                                |
+| `Play(in request)`                   | Allocate a voice or return an invalid default handle when unable to play. Honor timing, source settings, controls, follow target, and looping. |
+| `State(handle)`                      | Report its current state; stale, ended, or unknown handles act as Free.                                                                        |
+| `SetControls(handle, volume, speed)` | Update a current voice without restarting its recording. Stale handles must not alter a reused slot.                                           |
+| `Stop(handle, fade)`                 | End that voice, optionally over a fade, and eventually release its slot.                                                                       |
+| `Pause(handle, paused)`              | Freeze/resume the appropriate playback, schedule, and fade state.                                                                              |
+| `DetachFollow(handle)`               | Forget the target and keep the last world position.                                                                                            |
+| `Tick()`                             | Advance backend state and free ended voices. The service calls this.                                                                           |
+| `StopAll()`                          | Immediately stop all voices and release capacity.                                                                                              |
+| `Dispose()`                          | Release resources owned by the backend. The service calls it during disposal.                                                                  |
+
+Use a new generation when reusing a slot, keep free counts consistent, and return Free once a non-looping voice ends. Otherwise graphs waiting for Finished can stay alive forever. Check queued starts, pause/resume, interrupted fades, destroyed targets, and stale handles with your backend before relying on it in a game.
+
+<ApiSignatures type="ISoundVoiceBackend" />
+
+## Readiness and handles
+
+`SoundClipReadiness.Ready` means the backend can use the clip now; `Loading` means retry preparation later; `Missing` means it cannot be used. Missing wins when an event has both loading and missing clips. The built-in backend uses the AudioClip load state and calls `LoadAudioData` for unloaded clips.
+
+<ApiSignatures type="SoundClipReadiness" />
+
+`SoundVoiceHandle` contains `Slot` and `Generation`, supplied by its constructor. `IsValid` only checks a nonzero generation. It does not prove the voice is alive and it is not a gameplay `SoundHandle`. Keep voice handles inside backend/service integration and validate both fields before mutating a slot.
+
+<ApiSignatures type="SoundVoiceHandle" />
+
+## SoundVoiceRequest
+
+| Field      | Meaning                                                                                              |
+| ---------- | ---------------------------------------------------------------------------------------------------- |
+| `Clip`     | The actual recording to play, already a baked clip when trimmed.                                     |
+| `Settings` | The event settings, including mixer output, spatial behavior, priority, and listener-pause behavior. |
+| `Position` | Fixed world position when there is no follow target.                                                 |
+| `Follow`   | Transform whose world position overrides Position and is updated while following.                    |
+| `Volume`   | Requested gain before fade envelopes; the supplied backend clamps it to 0–1.                         |
+| `Speed`    | Playback/pitch multiplier, clamped to 0.01–3 by the supplied backend; 1 is original speed.           |
+| `FadeIn`   | Fade-in duration in seconds.                                                                         |
+| `Loop`     | Whether the recording repeats.                                                                       |
+| `StartAt`  | Absolute time in the shared clock, not a duration and not a clip offset.                             |
+
+The graph combines node and event volume/speed before requesting a voice. Context Delay is added when each non-release voice is requested. Voices started by On Stop ignore that context delay. Use a graph Delay when you mean “wait before running this command.”
+
+<ApiSignatures type="SoundVoiceRequest" />
+
+## SoundVoiceState
+
+| Value       | Meaning                                                               |
+| ----------- | --------------------------------------------------------------------- |
+| `Free`      | Ended, invalid, stale, or available.                                  |
+| `Scheduled` | Allocated and waiting for its start time.                             |
+| `Playing`   | Active playback.                                                      |
+| `Paused`    | Frozen playback or schedule, retaining its previous state for resume. |
+| `Fading`    | A stop fade is still occupying the voice.                             |
+
+These are backend states, not play-result statuses or graph-node states.
+
+<ApiSignatures type="SoundVoiceState" />
+
+## UnityAudioSourceBackend
+
+The constructor creates a `RuntimeVoices` child under the supplied parent and preallocates AudioSources. Capacity is clamped to 1–512. A null clock throws. `defaultOutput` supplies the mixer group for events without their own output.
+
+`Play` returns default for a disposed backend, missing clip/settings, unready clip, or full pool. It resets and configures pooled sources so a previous voice's settings do not leak into a new one. Future StartAt values are converted into `AudioSettings.dspTime` scheduling offsets; graph command timing itself still depends on service updates.
+
+`Stop` releases immediately for zero fade, scheduled voices, or paused voices. Otherwise it fades from the current envelope. `State` returns Free for a stale handle. `SetControls` clamps gain/speed and avoids unchanged engine writes. `Pause` brings timing up to date before switching state. `DetachFollow` retains the current position.
+
+`SyncFollowersInTick` defaults true. If your host needs follower positions after gameplay movement, set it false and call `SyncFollowers()` from the host's later update. This updates unpaused following voices. Do not manually tick the whole service twice just to refresh positions.
+
+`GetSource(slot)` is diagnostic access by pool index. Use a valid index and avoid changing its settings while the backend owns it. In particular, a custom rolloff curve assigned through this escape hatch is not restored by the normal managed-settings reset.
+
+`StopAll` releases every slot. `Dispose` stops voices and destroys the owned pool. Read Capacity, FreeCount, and ListenerPaused to inspect it; use the service's controls for ordinary gameplay.
+
+<ApiSignatures type="UnityAudioSourceBackend" />
+
+See <a href={sitePath('advanced/service/')}>the host setup excerpt</a> for construction and disposal, and <a href={sitePath('demos/03-bee/')}>Bee</a> for a working scene with follow positions and a listener.

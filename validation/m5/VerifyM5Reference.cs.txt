@@ -1,0 +1,143 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
+using DEV505.SoundManager;
+
+public static class VerifyM5Reference
+{
+    sealed class Clock : ISoundClock { public double Now { get; set; } }
+    sealed class Backend : ISoundVoiceBackend
+    {
+        readonly Clock clock;
+        readonly Dictionary<int, (uint generation, SoundVoiceState state, double end)> voices = new();
+        uint generation;
+        public SoundClipReadiness Readiness = SoundClipReadiness.Ready;
+        public bool Disposed;
+        public Backend(Clock clock) { this.clock = clock; }
+        public int Capacity => 32;
+        public int FreeCount => Capacity - voices.Count;
+        public bool ListenerPaused => false;
+        public SoundClipReadiness Prepare(AudioClip clip) => clip ? Readiness : SoundClipReadiness.Missing;
+        public SoundVoiceHandle Play(in SoundVoiceRequest request)
+        {
+            if (Disposed || Prepare(request.Clip) != SoundClipReadiness.Ready || FreeCount == 0) return default;
+            int slot = Enumerable.Range(0, Capacity).First(i => !voices.ContainsKey(i));
+            voices[slot] = (++generation, SoundVoiceState.Playing, request.Loop ? double.PositiveInfinity : clock.Now + .1);
+            return new SoundVoiceHandle(slot, generation);
+        }
+        public SoundVoiceState State(SoundVoiceHandle handle) => voices.TryGetValue(handle.Slot, out var value) && value.generation == handle.Generation ? value.state : SoundVoiceState.Free;
+        public void SetControls(SoundVoiceHandle voice, float volume, float speed) { }
+        public void Stop(SoundVoiceHandle voice, float fade) { if (State(voice) != SoundVoiceState.Free) voices.Remove(voice.Slot); }
+        public void Pause(SoundVoiceHandle voice, bool paused) { }
+        public void DetachFollow(SoundVoiceHandle voice) { }
+        public void Tick() { foreach (var slot in voices.Where(x => x.Value.end <= clock.Now).Select(x => x.Key).ToArray()) voices.Remove(slot); }
+        public void StopAll() => voices.Clear();
+        public void Dispose() { StopAll(); Disposed = true; }
+    }
+    static readonly List<string> checks = new();
+    static void Check(bool value, string label) { if (!value) throw new Exception(label); checks.Add(label); }
+    static SoundNodeRecord N(SoundOperation op, int id, params SoundInputValue[] inputs) => new() { operation = op, id = "m5-" + id, inputs = inputs };
+    static SoundInputValue F(string port, float value) => new() { port = port, value = SoundValue.Float(value) };
+    static SoundEdgeRecord E(int from, string output, int to, string input) => new() { from = from, to = to, outputName = output, inputName = input, outputId = from + output, inputId = to + input, execution = true };
+    static SoundEvent Event(List<SoundEvent> assets, string name, SoundNodeRecord[] nodes, SoundEdgeRecord[] edges, bool keepAlive = false)
+    {
+        var sound = ScriptableObject.CreateInstance<SoundEvent>(); sound.name = name;
+        sound.Initialize(name, "m5-graph", "m5-revision", nodes, edges, Array.Empty<SoundParameterRecord>(), eventSettings: new SoundEventSettings { keepAlive = keepAlive });
+        assets.Add(sound); return sound;
+    }
+    public static object Main(string output)
+    {
+        checks.Clear();
+        var assets = new List<SoundEvent>();
+        var services = new List<SoundService>();
+        var clock = new Clock();
+        var backend = new Backend(clock);
+        var service = new SoundService(clock, backend, new SoundServiceOptions { InstanceCapacity = 64, QueueCapacity = 16, TraceCapacity = 8, StartupTimeout = 2 });
+        services.Add(service);
+        var notices = new List<SoundNotification>(); service.Notification += notices.Add;
+        var preview = default(Scene);
+        try
+        {
+            Check(!EditorApplication.isPlaying, "Reference audit runs in Edit Mode without entering or changing a scene");
+            var definitions = SoundNodeCatalogue.Definitions;
+            Check(definitions.Count == 49, "Native catalogue contains 49 operations");
+            Check(Enum.GetNames(typeof(SoundOperation)).OrderBy(x => x).SequenceEqual(definitions.Select(x => x.Operation.ToString()).OrderBy(x => x)), "Every enum operation has a catalogue definition");
+            foreach (var d in definitions) foreach (var p in d.Ports) Check(d.TryPort(p.Name, p.Input, out var resolved) && resolved.Type == p.Type, d.Name + " resolves fixed port " + p.Name);
+            Check(SoundNodeCatalogue.Find(SoundOperation.RandomClip).TryPort("Clip 16", true, out var cp) && cp.Type == SoundPortType.Clip, "Random Clip supports Clip 16");
+            Check(!SoundNodeCatalogue.Find(SoundOperation.RandomClip).TryPort("Clip 0", true, out _) && !SoundNodeCatalogue.Find(SoundOperation.RandomClip).TryPort("Clip 17", true, out _), "Random Clip numbering is 1 through 16");
+            Check(SoundNodeCatalogue.Find(SoundOperation.Sequence).GetPorts(2).Select(p => p.Name).SequenceEqual(new[]{"In", "Out 0", "Out 1"}), "Sequence numbered outputs start at zero");
+            Check(SoundNodeCatalogue.Find(SoundOperation.SelectByIndex).GetPorts(2).Select(p => p.Name).SequenceEqual(new[]{"Index", "Out", "In 0", "In 1"}), "Select numbered inputs start at zero");
+
+            var delayed = Event(assets, "m5-delay", new[]{N(SoundOperation.OnStart,0),N(SoundOperation.Delay,1,F("Seconds",1)),N(SoundOperation.EndEvent,2)},new[]{E(0,"Out",1,"In"),E(1,"Out",2,"In")});
+            Check(service.Register(delayed, "m5-delay", out var diagnostic) && diagnostic == null, "Register valid graph with a key");
+            Check(service.TryResolve("m5-delay", out var resolvedSound) && resolvedSound == delayed, "Resolve returns the registered asset");
+            var result = service.TryPlay(delayed, default);
+            Check(result.Status == SoundPlayStatus.Queued && result.Accepted, "Requests before preparation are accepted as queued");
+            service.BeginPreparation(); service.Tick();
+            Check(service.Ready && notices.Any(n => n.Kind == SoundNotificationKind.Started), "BeginPreparation and Tick start the queued graph");
+            Check(service.GetNodeState(result.Handle,1) == SoundNodeState.Waiting && service.GetVoiceCount(result.Handle) == 0, "A live Delay is Waiting with zero voices");
+            Check(service.TryGetDefinition(result.Handle,out var definition) && definition.Revision == "m5-revision", "Observed definition is the play's revision");
+            service.SetPaused(result.Handle,true); clock.Now = 10; service.Tick();
+            Check(service.IsAlive(result.Handle), "Pause freezes graph time through a long clock advance");
+            service.SetPaused(result.Handle,false); clock.Now = 11.1; service.Tick();
+            Check(!service.IsAlive(result.Handle) && notices.Any(n => n.Handle.Equals(result.Handle) && n.Kind == SoundNotificationKind.Cancelled && n.Reason == SoundPlayStatus.Accepted), "End Event reports Cancelled/Accepted after the Delay");
+            Check(result.Handle.IsValid && !service.IsAlive(result.Handle), "Structurally valid handle can already be ended");
+            Check(!service.TryGetDefinition(result.Handle,out _) && service.GetVoiceCount(result.Handle)==0 && service.GetNodeState(result.Handle,1)==SoundNodeState.Inactive, "Ended plays have no live definition or activity");
+            Check(!service.TryGetObservedValue(result.Handle,0,out _), "Observation of an ended play returns false");
+
+            var natural = Event(assets,"m5-natural",new[]{N(SoundOperation.OnStart,0)},Array.Empty<SoundEdgeRecord>());
+            Check(service.Register(natural,out _), "Asset-only registration succeeds");
+            var naturalResult=service.TryPlay(natural,default); service.Tick();
+            Check(notices.Any(n=>n.Handle.Equals(naturalResult.Handle)&&n.Kind==SoundNotificationKind.Finished), "Idle non-retained graph retires naturally as Finished");
+            var idle = Event(assets,"m5-idle",new[]{N(SoundOperation.OnStart,0)},Array.Empty<SoundEdgeRecord>(),true);
+            Check(service.Register(idle,"m5-delay",out diagnostic)&&diagnostic==null, "Duplicate key does not reject a valid registration");
+            Check(service.TryResolve("m5-delay",out resolvedSound)&&resolvedSound==delayed,"First event retains a conflicting key");
+            Check(service.Register(idle,"m5-idle",out _),"Re-register can bind an available key");
+            var idleResult=service.TryPlay(idle,default);service.Tick();
+            Check(service.IsAlive(idleResult.Handle),"Keep Alive retains a silent graph");
+            Check(service.Unregister(idle,0),"Unregister succeeds for a known event");service.Tick();
+            Check(!service.TryResolve("m5-idle",out _)&&!service.IsAlive(idleResult.Handle),"Unregister removes key and stops its plays");
+
+            Check(service.Trace.Count > service.Trace.Capacity && service.Trace.OldestSequence == service.Trace.Count-service.Trace.Capacity,"Trace wraps at fixed capacity");
+            Check(!service.Trace.TryRead(0,out _),"Overwritten trace records cannot be read");
+            long cursor=0;var trace=service.Trace;cursor=System.Math.Max(cursor,trace.OldestSequence);long end=trace.Count;int read=0;
+            for(;cursor<end;cursor++){if(!trace.TryRead(cursor,out var record))continue;Check(record.Sequence==cursor,"Trace cursor matches record sequence");read++;}
+            Check(read==trace.Capacity,"Documented cursor pattern reads all retained records");
+            long previous=trace.Count;trace.Enabled=false;service.TryPlay(natural,default);service.Tick();Check(trace.Count==previous&&!trace.Recording,"Disabled tracing writes no new records");
+
+            var footstep=AssetDatabase.LoadAssetAtPath<SoundEvent>("Assets/DEV505/SoundManager/Samples/02-Footstep/Footstep.soundgraph");
+            if(!footstep)footstep=AssetDatabase.FindAssets("t:SoundEvent",new[]{"Assets/DEV505/SoundManager/Samples/02-Footstep"}).Select(AssetDatabase.GUIDToAssetPath).Select(AssetDatabase.LoadAssetAtPath<SoundEvent>).First(s=>s.name=="Footstep");
+            Check(footstep&&footstep.IsValid,"Actual Footstep event imports validly");
+            backend.Readiness=SoundClipReadiness.Loading;Check(service.Register(footstep,"Footstep",out _),"Register loading content after preparation");
+            Check(!service.Ready,"New loading content clears catalogue readiness");
+            var loading=service.TryPlay(footstep,default);Check(loading.Status==SoundPlayStatus.Queued,"Loading event queues");clock.Now+=2.1;service.Tick();
+            Check(notices.Any(n=>n.Handle.Equals(loading.Handle)&&n.Kind==SoundNotificationKind.Failed&&n.Reason==SoundPlayStatus.NotReady),"Queued loading request times out with Failed/NotReady");
+            backend.Readiness=SoundClipReadiness.Missing;service.Tick();Check(service.Ready,"Missing content leaves the loading list, so Ready is not a success guarantee");
+            Check(service.TryPlay(footstep,default).Status==SoundPlayStatus.MissingClip,"Per-play readiness still rejects missing clips");
+            backend.Readiness=SoundClipReadiness.Ready;
+            var step=service.TryPlay(footstep,SoundPlayContext.At(Vector3.zero).With(SoundParameters.Footstep.Surface,2));service.Tick();
+            Check(step.Accepted&&service.TryGetParameter(step.Handle,SoundParameters.Footstep.Surface,out var surface)&&surface.Current.integer==2,"Starting typed Surface override is applied before playback");
+            clock.Now+=.2;service.Tick();Check(notices.Any(n=>n.Handle.Equals(step.Handle)&&n.Kind==SoundNotificationKind.Cancelled),"Actual Footstep graph ends through Cancelled, not Finished");
+            var declarations=footstep.Parameters;var recordCopy=declarations.First(p=>p.name=="Surface");
+            Check(recordCopy.Accepts(SoundValue.Int(100))&&recordCopy.Clamp(SoundValue.Int(100)).integer==2,"Accepts checks type while Clamp handles numeric range");
+            Check(!recordCopy.Accepts(SoundValue.Float(1)),"Parameter records reject wrong value types");
+            var collectedDiagnostics=new List<string>();var catalogue=SoundCatalogue.Collect(new[]{delayed,delayed},null,collectedDiagnostics);
+            Check(catalogue.Count==1&&SoundCatalogue.Contains(catalogue,delayed),"Catalogue deduplicates the same asset");
+            Check(!SoundCatalogue.Contains(null,delayed),"Contains tolerates a null catalogue");
+            var oldSession=service.Session;service.Dispose();Check(backend.Disposed&&!service.Ready,"Disposal owns backend cleanup and clears readiness");
+            Check(service.TryPlay(delayed,default).Status==SoundPlayStatus.NotReady,"Disposed service refuses new playback");service.Dispose();
+            using(var replacement=new SoundService(clock,new Backend(clock)))Check(replacement.Session!=oldSession,"Replacement services have a distinct session");
+
+            preview=EditorSceneManager.NewPreviewScene();var host=new GameObject("M5 temporary backend host");SceneManager.MoveGameObjectToScene(host,preview);
+            var unityClock=new UnitySoundClock();using(var unityBackend=new UnityAudioSourceBackend(host.transform,2,unityClock))
+            {Check(unityBackend.Capacity==2&&unityBackend.FreeCount==2,"Unity backend preallocates its requested voice pool");Check(unityBackend.SyncFollowersInTick,"Following sync defaults on");Check(unityBackend.State(default)==SoundVoiceState.Free,"Unknown voice handles are Free");Check(unityBackend.GetSource(0)!=null,"Diagnostic source access returns a pooled AudioSource");Check(unityBackend.Prepare(null)==SoundClipReadiness.Missing,"Missing clip readiness is explicit");unityBackend.SyncFollowersInTick=false;unityBackend.SyncFollowers();unityBackend.StopAll();}
+            var report=new{success=true,sourceRevision="746a1cc7d2602bc59df6096eac50508ded6ef49e",unity=Application.unityVersion,utc=DateTime.UtcNow.ToString("o"),checks=checks.ToArray(),nodes=definitions.Select(d=>new{operation=d.Operation.ToString(),title=d.Name,ports=d.Ports.Select(p=>new{direction=p.Input?"Input":"Output",name=p.Name,type=p.Type.ToString()}).ToArray()}).ToArray()};
+            System.IO.File.WriteAllText(output,Newtonsoft.Json.JsonConvert.SerializeObject(report,Newtonsoft.Json.Formatting.Indented));return new{success=true,checks=checks.Count,nodes=definitions.Count};
+        }
+        finally {foreach(var s in services)s.Dispose();foreach(var a in assets)if(a)UnityEngine.Object.DestroyImmediate(a);if(preview.IsValid())EditorSceneManager.ClosePreviewScene(preview);}
+    }
+}

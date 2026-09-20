@@ -1,0 +1,156 @@
+{
+  "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
+  "sources": [
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Editor/AudioProcessing/SoundClipTrims.cs",
+      "sha256": "c5afe7c9de6d0792a276a11ed3441dac23f0e523cf500bba7f97215d1a5c5072"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs",
+      "sha256": "833d62326d5e241b744b3f27c0374b34bde3f07b6a95cb8db1048fe70c4e12e9"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs",
+      "sha256": "3d1994ca748879b89c5be923d292501efd88c655d76fcc7480c90f72858e91b5"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundGraphTransport.cs",
+      "sha256": "a89575d07d04e329953f3116be484d13e01ffee45cb5be8052ab92d0ae2618ac"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundWaveRange.cs",
+      "sha256": "dab02432008e6271779f33deddfc11cdf96d289673514e567ae2e2b1d79fb3a2"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundEventSettings.cs",
+      "sha256": "b083ca189fc9f44fa630f2bd599fb72751aa564ad835cd287b5ae01a3e28e269"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundNodeModes.cs",
+      "sha256": "022beb52e65ee8d6ec4850f08e598ceb5c1c76b1042b06ac4bc4750b053efa15"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundOperation.cs",
+      "sha256": "c6740ef5a6e4302359ce72573d4a3ef1f4c06600f433ba2203b48188ed3f8805"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundParameterRecord.cs",
+      "sha256": "f76992d8aeae2140ff71d024ceb0ede82333c356aa42f17244f6f66f478cae2b"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundManager.cs",
+      "sha256": "df6c412b01e08875cb0b1a594f9916b7ed739a300326f7a598e93f7253128145"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/CompiledSoundEvent.cs",
+      "sha256": "76e39d77afe748970e202f6329b334445ff9941ff1cbe65f84956bb1293040f2"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundExecutionRecord.cs",
+      "sha256": "0f8300d7823fa6df7d0a7e286e39e203323e858e84ff856a48547bb49e3efb42"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundExecutionTrace.cs",
+      "sha256": "467f54d4c976500e03106efa9b57869d32e2d5ddf55cdd52116f23755cb55569"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Execution.cs",
+      "sha256": "a4ba7c4cbd5f4ea2c0d3d264c4dcecba20ffdee106af1bbf38c7f9819c6aace2"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Flow.cs",
+      "sha256": "b44aa1b7f394cd745e57327b5f3d4a3d8ef56285a63b736cc6795b719d9ea4aa"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Values.cs",
+      "sha256": "f5d22ad7eb160a0432c2096b5f90bb669a98d92e449c0e6be3adcdb81bb41718"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.cs",
+      "sha256": "ec98aeddb8d0fca82f4fedf36ed0f01acd8cdd6776ce08ca965b1c1f7f57ce9e"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundNodeCatalogue.Validation.cs",
+      "sha256": "ea01b0d76c82784a2df52b284bbdcdffd1de7631c39de181bbdcb84e74880033"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundNodeCatalogue.cs",
+      "sha256": "ee028bc196bbda581ffa03c64976b20e7ee88a498b45b707904bedfe550fc748"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundNodeState.cs",
+      "sha256": "340c7d718e694240fbdda36b815e31d681f2902d110982ac965ab7ea5a7d5130"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/ISoundClock.cs",
+      "sha256": "1f05d0c868c388fb49e0abf4d568b7307528796a4c48353f18cc065c9506ba2f"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/ISoundVoiceBackend.cs",
+      "sha256": "3be31bb0dcf41229958f7f7b8acf349a3c6c34dc2787de8a7a7de99bafcda641"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundNotificationKind.cs",
+      "sha256": "ac0c2f068dfd422cc7b9755088aacecc4d12617c6f366239b9080ef314428468"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundPlayStatus.cs",
+      "sha256": "ae37c89d2ca9894d31453af73014800d01b126c0843cdf0adaf8a2c13bf01a67"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/Contracts/SoundServiceOptions.cs",
+      "sha256": "3e7bda63cd8c322183ff9c7064eafb5f2a1c5f45d4a7b1e0b2c22b5df4526440"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundCatalogue.cs",
+      "sha256": "8b6f3ea15462a48f9749e873dd68118d4c0a7561811fa16ba3ea2efe983ae38b"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Control.cs",
+      "sha256": "0b77228ffab6e17ec9cfdff3e08bec588b51ee3e491868da95875d7d33468c28"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Playback.cs",
+      "sha256": "5d3e8be9e543507f6f666a5fa3becfb7c3426961837b32818effdfa5c4746c71"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Registration.cs",
+      "sha256": "4f274657aeec1fc1b32e165fd3dd8d8837ffa344e9d34c7655203ec422277151"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Tick.cs",
+      "sha256": "91202db977b9be3df4d836ceba993dd4754c886b5e6afcf3ef86a86cc6a8c744"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.cs",
+      "sha256": "fdb57ca32ebed359150141f98e69725c9b1dcf2072552c76a21a6f36e6d19acc"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/UnityAudioSourceBackend.cs",
+      "sha256": "0b9ed3dc1db78ab329c35a14ca91ebefce93ce03d160906ebe3609b3a534d1e0"
+    },
+    {
+      "path": "Assets/DEV505/SoundManager/Scripts/Runtime/Playback/UnitySoundClock.cs",
+      "sha256": "e9e501fe686c4bfbee02a15dc9c83dfa7299254d14b046685f3d65df50fd14a9"
+    }
+  ],
+  "excerpts": [
+    {
+      "page": "advanced/service",
+      "index": 0,
+      "sha256": "2470af2611ff8186d11e2fb1641c75bcf601d5709653cc621b1d715a2d494bb6"
+    },
+    {
+      "page": "advanced/service",
+      "index": 1,
+      "sha256": "a41876a9638954afd09193ba814a70622fa585511e505e01bed88263c301a2fa"
+    },
+    {
+      "page": "advanced/observation",
+      "index": 0,
+      "sha256": "d39d33380520ebe6d840b21bbf4909c7821fa210016f5330562de55cb1888ddb"
+    }
+  ],
+  "harnessSha256": "183e52129a5658455b0ba5c684d376c36dfeea4927a203c50c306bce4b4030d9",
+  "excerptsHarnessSha256": "9ad8ee4b64ac3947cab92c5df7e6a18a66356c41fd3d3b9b036ed23ea3e43380"
+}

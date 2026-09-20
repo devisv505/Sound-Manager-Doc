@@ -1,0 +1,60 @@
+---
+title: 'Build a sound, one step at a time.'
+description: 'A reference for all 49 shipped graph nodes, plus trimming, authoring, and debugging.'
+kind: index
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundOperation.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundNodeCatalogue.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/UnityAudioSourceBackend.cs
+tags: [unity, graph, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+import NodeColorKey from '../../../components/NodeColorKey.astro';
+import Capture from '../../../components/Capture.astro';
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+
+The graph describes what one sound event does. Your game plays the event by a key such as `Sounds.Footstep`, supplies its starting values, and keeps a handle when it needs control later.
+
+Start with <a href={sitePath('guides/your-first-graph/')}>your first graph</a> if you have not made one yet. This reference covers **all 49 operations implemented at the checked source revision**. The tables below describe shipped nodes, not a list of planned features.
+
+Every node description includes its actual Unity editor appearance. Select an image to enlarge it. The clip nodes use example recordings so their relevant controls can be shown.
+
+## Choose the part you need
+
+| I want to…                               | Read this                                                                      |
+| ---------------------------------------- | ------------------------------------------------------------------------------ |
+| Start, signal, stop, or end an event     | <a href={sitePath('graph/lifecycle/')}>Lifecycle · 5 nodes</a>                 |
+| Choose a recording and play it           | <a href={sitePath('graph/clips/')}>Clips and voices · 4 nodes</a>              |
+| Pass values from gameplay                | <a href={sitePath('graph/parameters/')}>Parameters and constants · 7 nodes</a> |
+| Pick and order commands                  | <a href={sitePath('graph/flow/')}>Command flow · 7 nodes</a>                   |
+| Wait, repeat, or watch a condition       | <a href={sitePath('graph/timing/')}>Timing · 5 nodes</a>                       |
+| Calculate or compare values              | <a href={sitePath('graph/math/')}>Math and choices · 21 nodes</a>              |
+| Cut several steps from one recording     | <a href={sitePath('graph/trimming/')}>Wave Asset ranges</a>                    |
+| Organize a graph and configure its event | <a href={sitePath('graph/authoring/')}>Authoring and settings</a>              |
+| Understand a warning or silent branch    | <a href={sitePath('graph/validation/')}>Validation and debugging</a>           |
+
+## Recognize nodes by color
+
+The colored strip across the top of a node and its icon show its **category** in Unity’s Add a graph node menu. Use this table to recognize what a node is for. Each of the 49 descriptions also names its category and color.
+
+<NodeColorKey />
+
+These colors describe the whole node, not the values on its ports (connection points). For example, **Random Clip is yellow** because it chooses a recording, while **Random Float is pink** because it chooses a number. Our reading sections group related tasks, so one section can contain several colors.
+
+## Read the wires
+
+**Execution** means “do this now.” Follow it from On Start, On Signal, or On Stop into an action. **Float**, **Int**, **Bool**, and **Clip** carry a value. A data input takes one connected source; an unconnected numeric or Bool input uses its inline value. A recording connection alone never starts audio.
+
+Numbered inputs and outputs begin at **0**, except Random Clip's **Clip 1…Clip N** inputs. The node's Count or Outputs setting controls how many numbered ports it has.
+
+## Read time correctly
+
+A `Play Audio → Finished` wire waits for natural voice completion. `Sequence → Out 1` only waits for the preceding command to be sent. `Play Audio → Stopped` fires when the stop command is processed, while the fade may still be sounding. Use that overlap intentionally for transitions.
+
+Values can be read repeatedly during a play. Live parameters can update a voice's volume or speed; selecting another clip affects a future voice. Use **Single Value** on Random Float when each play should keep one random pitch.
+
+## What this graph does not promise
+
+The supplied backend uses Unity AudioSources. Playback speed changes pitch and duration together; it is not independent time stretching. Graph timers advance on updates, not a sample-accurate music clock. Asset Parameters use declared clips; they do not load arbitrary new audio from a URL. Future features are not included in this catalogue.

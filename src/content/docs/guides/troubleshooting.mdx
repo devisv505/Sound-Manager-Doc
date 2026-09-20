@@ -1,0 +1,87 @@
+---
+title: 'Find out why the sound is missing.'
+description: 'A practical path from play results to clips, graph flow, 3D direction, parameters, and cleanup.'
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Playback.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Control.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/UnityAudioSourceBackend.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Components/SoundManager.cs
+tags: [unity, graph, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+import Capture from '../../../components/Capture.astro';
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+
+Start with the result of the play request. If it was refused, fix that reason first. If it was accepted, check what the running graph and voices are doing.
+
+## There is no manager or the key is unknown
+
+For **NoManager**, make sure the scene has an enabled Sound Manager and your code runs after it becomes active. For **NotRegistered**, make sure the event or its library is assigned to that manager. A generated `Sounds` name helps you spell a key; it does not register the asset by itself.
+
+Check duplicate key diagnostics. The first asset keeps a key, so a conflicting second event can be registered without a usable key. See <a href={sitePath('guides/setup-and-keys/')}>manager, library, and key setup</a>.
+
+## It says Accepted but I hear nothing
+
+1. Check whether the result was Queued, whether clips are still loading, and whether the service is being updated.
+2. Check for an enabled AudioListener, the Editor's audio mute, application output volume, and a muted mixer group.
+3. Check the event's Volume, the Play Audio volume input, and any parameter or fade driving them.
+4. Follow execution from On Start. A clip wire chooses audio but does not send a Play command. A gate or Delay may intentionally keep the graph silent.
+5. Check missing Wave Assets, Asset Parameter defaults, and every declared allowed clip. A missing unused branch can still prevent preparation for this event.
+6. Check voice capacity and node trace diagnostics. A branch can fail to allocate a voice while the play itself stays alive.
+7. For a 3D event, temporarily inspect source/listener distance and rolloff. A distant source can be playing correctly but be too quiet to hear.
+
+Do not repeatedly start another loop to make the first one audible. Retain one accepted handle and diagnose it. <a href={sitePath('advanced/observation/')}>Voice counts and node states</a> can distinguish waiting from playback.
+
+## The sound comes from the wrong direction
+
+Position is not enough: the event must have a nonzero Spatial Blend for spatial behavior. `.At(position)` is a fixed snapshot. `.Following(transform)` uses a moving Transform; the backend refreshes its position during updates. Ownership and follow position are separate choices.
+
+Check the AudioListener's actual position and orientation. In Bee, the listener represents the player at the island center; do not assume an angled overview camera should also be the listener. Use <a href={sitePath('demos/03-bee/')}>the Bee scene</a> and <a href={sitePath('guides/position-and-ownership/')}>position and ownership</a> to compare the setup.
+
+## The first step or branch uses the wrong parameter
+
+A play may execute On Start inside the Play call. Setting Surface, Tool, or another startup value _after_ Play can be too late. Put starting values in `SoundPlayContext.With(...)`, then pass that context to Play.
+
+Use the right type and generated ID, check the allowed range, and remember that graph indexes usually start at 0. Live Float updates with positive rates take time; read Current and Target separately. See <a href={sitePath('guides/parameters/')}>parameters</a> and <a href={sitePath('recipes/surface-footsteps/')}>the surface mapping example</a>.
+
+## The handle looks valid but commands fail
+
+`IsValid` checks the handle's shape, not whether its play still exists. Use IsAlive on the service that created it. Finished/cancelled plays, old Play Mode sessions, and replaced managers leave stale handles.
+
+A handle from an independent service must be controlled through that service. `SoundBus` and handle extensions address the active scene service. Also check the signal name, parameter type, and fade: NoTarget can mean a command was not eligible, not just an unknown handle.
+
+## A new music clip is refused or does not switch
+
+Add the exact clip to the Asset Parameter's Allowed Clips and provide a valid default. A scene reference to another clip is not enough. Accepted asset changes affect the next Play Audio start, not a voice already playing.
+
+To hear a smooth transition, start the other voice with the new clip and overlap the two volume ramps. <a href={sitePath('recipes/music-crossfade/')}>Jukebox's crossfade</a> includes this wiring and the gameplay code. Volume crossfading does not automatically align tempo, beats, or musical phrases.
+
+## Too many sounds are refused
+
+Distinguish **Cooldown**, **ConcurrencyLimit**, and **CapacityExceeded** before changing settings. Instance capacity, startup queue capacity, event maxInstances, and backend voice capacity are separate limits. One graph can use several voices, and fading voices still occupy capacity.
+
+Increasing the event's instance limit does not create AudioSources. Repeated retries can make contention worse. The <a href={sitePath('recipes/playback-limits/')}>Arcade request example</a> reports refusals without a retry storm. <a href={sitePath('guides/outcomes/')}>The complete status table</a> explains later queued failures too.
+
+## A sound stops too soon—or never stops
+
+Check event Length, owner-loss policy, and whether the followed object was destroyed. For unwanted persistence, inspect Loop, Keep Alive, armed Repeat/Idle Loop/Track Condition, and pending waits. An On Signal entry does not keep a silent event alive by itself.
+
+Call Stop or StopOwned while the owner is still available when you want a graceful release. Under Detach, owner loss can deliberately leave sound playing at its last position. Release unbound owner tokens yourself. Keep ticking during fades and release clips; immediate service disposal cuts them.
+
+Compare <a href={sitePath('recipes/owner-loss/')}>Portals' Stop and Detach behavior</a> and <a href={sitePath('guides/stop-and-pause/')}>cleanup and pause</a>.
+
+## My completion callback never fires
+
+Check which notification you are waiting for. End Event and normal stops produce Cancelled, not Finished. Use IsTerminal for cleanup that should happen on any ending. If you need natural completion to trigger the next action, remove unintended loops/Keep Alive and use a graph designed to finish naturally.
+
+Play Audio Stopped is also not “the fade finished.” It fires immediately after a stop command. Review <a href={sitePath('guides/outcomes/')}>outcome examples</a> before changing the callback.
+
+## The graph preview is different, or FPS drops while debugging
+
+Save/import your edits and start a fresh scene play. Existing plays retain their old revision; an unsaved editor preview may be different. Check the graph's import diagnostic before debugging gameplay code.
+
+Turn off Show counters, live graph inspection, and tracing when measuring normal performance. These debug tools perform extra runtime and UI work and may reduce FPS. See <a href={sitePath('graph/validation/')}>graph validation and debugging</a> for the exact distinctions and limits.

@@ -1,0 +1,48 @@
+---
+title: 'Read a parameter declaration.'
+description: 'Understand defaults, numeric bounds, smoothing rates, and allowed clips in SoundParameterRecord.'
+kind: api
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundParameterRecord.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Values.cs
+tags: [unity, graph, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+import Capture from '../../../components/Capture.astro';
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+
+`SoundParameterRecord` describes a parameter declared by the graph. A `SoundParameterState` describes a current value on one play. Most gameplay code needs the state and generated IDs, not direct edits to these records.
+
+## Fields by type
+
+| Fields                                   | Purpose                                                                       |
+| ---------------------------------------- | ----------------------------------------------------------------------------- |
+| `id`, `name`, `type`                     | Stable identity, readable parameter name, and Float/Int/Bool/Asset type.      |
+| `defaultValue`, `minimum`, `maximum`     | Float starting value and range.                                               |
+| `riseRate`, `fallRate`                   | Float target-change rates in units per second; 0 applies changes immediately. |
+| `defaultInt`, `minimumInt`, `maximumInt` | Int starting value and inclusive range.                                       |
+| `defaultBool`                            | Bool starting value.                                                          |
+| `defaultAsset`, `allowedAssets`          | Default AudioClip and every AudioClip this Asset parameter may accept.        |
+
+Only fields for the declared type are used as that type's values. Graph validation checks identity, supported type, valid ranges/defaults/rates, and an Asset default contained in a valid allowed list. Editing an already compiled definition is not the supported way to change a running play.
+
+## Methods and property
+
+`Default` returns the declared default as a `SoundValue`. `Accepts(value)` checks the type, rejects non-finite Floats, and for assets checks non-null membership in Allowed Clips. It does not reject an otherwise valid number just because it lies beyond Min/Max; accepted numeric values can be clamped.
+
+`Clamp(value)` clamps Float and Int values to the declared range. It is not a replacement for Accepts or full graph validation. Use Accepts first when validating a proposed value yourself. Bool/Asset values do not acquire a new valid type or allowed-asset membership through Clamp.
+
+`Copy()` returns a record with a separate allowed-assets array. The AudioClip objects referenced by the array are shared; it does not duplicate audio files.
+
+<ApiSignatures type="SoundParameterRecord" />
+
+## Starting values and later changes
+
+The runtime begins with defaults, then applies the legacy Float array, the typed array, inline context With values, and finally any additional Float span passed to TryPlay. Later entries win. Starting values are immediate, even when rates are positive. A live Float change sets a target and follows the declared rate.
+
+Declare every clip a Jukebox play may select in Allowed Clips. Setting a new asset changes which clip a future Play Audio command reads; it does not swap a voice already playing. The <a href={sitePath('recipes/music-crossfade/')}>two-track crossfade example</a> starts the other voice and changes their volumes to make the transition.
+
+Use <a href={sitePath('api/parameters/')}>SoundValue and parameter IDs</a> for ordinary code, and <a href={sitePath('graph/parameters/')}>parameter nodes</a> to change declarations in the editor.

@@ -1,0 +1,24 @@
+{
+  "operation": "RandomBranch",
+  "title": "Random Branch",
+  "capturedAt": "2026-09-19T23:12:19.7068340Z",
+  "unityVersion": "6000.6.0f1",
+  "width": 429,
+  "height": 411,
+  "zoom": 1.25,
+  "pixelsPerPoint": 2.0,
+  "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+  "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+  "bounds": "(x:100.00, y:120.00, width:196.25, height:187.50)",
+  "cropX": 182,
+  "cropY": 222,
+  "labels": [
+    "Random Branch",
+    "Count",
+    "2",
+    "In",
+    "Out 0",
+    "Out 1",
+    "Random Branch"
+  ]
+}

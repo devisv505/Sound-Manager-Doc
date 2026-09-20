@@ -1,0 +1,258 @@
+{
+  "success": true,
+  "command": "command run_script",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "/tmp/CaptureSoundNodes.cs",
+      "entry": "CaptureSoundNodes.Batch",
+      "args": "[\"IntOp,Curve,MultiplierToSemitones,SemitonesToMultiplier,FloatFunction,IntFunction,ConvertToInt,ConvertToFloat,Not,SelectFloat\"]",
+      "timeout_ms": "55000"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 73,
+      "executeMs": 3999,
+      "assemblyName": "PipelineRunScript_CaptureSoundNodes_88f551c689454ecdad0f3b0db7a2bcd7",
+      "success": true,
+      "result": [
+        {
+          "operation": "IntOp",
+          "title": "Int Op",
+          "capturedAt": "2026-09-19T23:12:07.964083Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 604,
+          "height": 411,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:283.75, height:187.50)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Int Op",
+            "Operation",
+            "Add",
+            "A",
+            "0",
+            "B",
+            "0",
+            "Result",
+            "Int Op"
+          ]
+        },
+        {
+          "operation": "Curve",
+          "title": "Curve",
+          "capturedAt": "2026-09-19T23:12:08.363951Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 571,
+          "height": 404,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:267.50, height:183.75)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Curve"
+          ]
+        },
+        {
+          "operation": "MultiplierToSemitones",
+          "title": "Multiplier To Semitones",
+          "capturedAt": "2026-09-19T23:12:08.759843Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 571,
+          "height": 266,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:267.50, height:115.00)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Multiplier To Semitones",
+            "In",
+            "0",
+            "Out",
+            "Multiplier To Semitones"
+          ]
+        },
+        {
+          "operation": "SemitonesToMultiplier",
+          "title": "Semitones To Multiplier",
+          "capturedAt": "2026-09-19T23:12:09.160743Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 571,
+          "height": 266,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:267.50, height:115.00)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Semitones To Multiplier",
+            "In",
+            "0",
+            "Out",
+            "Semitones To Multiplier"
+          ]
+        },
+        {
+          "operation": "FloatFunction",
+          "title": "Float Function",
+          "capturedAt": "2026-09-19T23:12:09.562687Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 571,
+          "height": 351,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:267.50, height:157.50)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Float Function",
+            "Operation",
+            "Abs",
+            "In",
+            "0",
+            "Out",
+            "Float Function"
+          ]
+        },
+        {
+          "operation": "IntFunction",
+          "title": "Int Function",
+          "capturedAt": "2026-09-19T23:12:09.961074Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 571,
+          "height": 351,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:267.50, height:157.50)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Int Function",
+            "Operation",
+            "Abs",
+            "In",
+            "0",
+            "Out",
+            "Int Function"
+          ]
+        },
+        {
+          "operation": "ConvertToInt",
+          "title": "Convert To Int",
+          "capturedAt": "2026-09-19T23:12:10.357511Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 571,
+          "height": 351,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:267.50, height:157.50)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Convert To Int",
+            "Operation",
+            "Round",
+            "In",
+            "0",
+            "Out",
+            "Convert To Int"
+          ]
+        },
+        {
+          "operation": "ConvertToFloat",
+          "title": "Convert To Float",
+          "capturedAt": "2026-09-19T23:12:10.758444Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 571,
+          "height": 266,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:267.50, height:115.00)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Convert To Float",
+            "In",
+            "0",
+            "Out",
+            "Convert To Float"
+          ]
+        },
+        {
+          "operation": "Not",
+          "title": "Not",
+          "capturedAt": "2026-09-19T23:12:11.152713Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 406,
+          "height": 266,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:185.00, height:115.00)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Not"
+          ]
+        },
+        {
+          "operation": "SelectFloat",
+          "title": "Select Float",
+          "capturedAt": "2026-09-19T23:12:11.560001Z",
+          "unityVersion": "6000.6.0f1",
+          "width": 623,
+          "height": 471,
+          "zoom": 1.25,
+          "pixelsPerPoint": 2,
+          "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+          "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+          "bounds": "(x:100.00, y:120.00, width:293.13, height:217.50)",
+          "cropX": 182,
+          "cropY": 222,
+          "labels": [
+            "Select Float",
+            "Count",
+            "2",
+            "Index",
+            "0",
+            "In 0",
+            "0",
+            "In 1",
+            "0",
+            "Out",
+            "Select Float"
+          ]
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "/Users/devisv/projects/unity/Sound-Manager"
+    },
+    "success": true
+  },
+  "errors": [],
+  "warnings": []
+}

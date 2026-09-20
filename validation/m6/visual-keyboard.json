@@ -1,0 +1,17 @@
+[
+  {
+    "route": "",
+    "width": 1920,
+    "fits": true
+  },
+  {
+    "route": "graph/#recognize-nodes-by-color",
+    "width": 768,
+    "fits": true
+  },
+  {
+    "route": "api/context/",
+    "width": 320,
+    "keyboardTableScroll": 1
+  }
+]

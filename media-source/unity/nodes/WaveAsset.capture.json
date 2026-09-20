@@ -1,0 +1,33 @@
+{
+  "operation": "WaveAsset",
+  "title": "Wave Asset",
+  "capturedAt": "2026-09-19T23:11:57.6043990Z",
+  "unityVersion": "6000.6.0f1",
+  "width": 621,
+  "height": 799,
+  "zoom": 1.25,
+  "pixelsPerPoint": 2.0,
+  "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+  "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+  "bounds": "(x:100.00, y:120.00, width:292.50, height:381.25)",
+  "cropX": 182,
+  "cropY": 222,
+  "labels": [
+    "Wave Asset",
+    "Asset",
+    "Fire_01",
+    "Start",
+    "0",
+    "Length",
+    "0",
+    "Asset",
+    "Wave Asset",
+    "Range · whole clip",
+    "0.000 s",
+    "12.800 s",
+    "Plays 12.800 s of 12.800 s",
+    "Play range",
+    "Stop",
+    "Whole clip"
+  ]
+}

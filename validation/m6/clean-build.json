@@ -1,0 +1,17 @@
+{
+  "method": "Fresh copy of final documentation source, without .git, dependencies, caches or build output. Includes requested uncommitted milestone changes. No Unity files or symlinks are mounted into the copy.",
+  "node": "v24.21.0",
+  "lockfileSha256": "a42d8b10b5f5f41fc8f66b069d2e8b8f66390033a4a40795c2f4762aa7f07494",
+  "commands": [
+    {
+      "command": "npm ci",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run validate",
+      "exitCode": 0
+    }
+  ],
+  "htmlPages": 77,
+  "log": "validation/m6/clean-build.log"
+}

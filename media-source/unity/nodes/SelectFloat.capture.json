@@ -1,0 +1,28 @@
+{
+  "operation": "SelectFloat",
+  "title": "Select Float",
+  "capturedAt": "2026-09-19T23:12:11.5600010Z",
+  "unityVersion": "6000.6.0f1",
+  "width": 623,
+  "height": 471,
+  "zoom": 1.25,
+  "pixelsPerPoint": 2.0,
+  "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+  "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+  "bounds": "(x:100.00, y:120.00, width:293.13, height:217.50)",
+  "cropX": 182,
+  "cropY": 222,
+  "labels": [
+    "Select Float",
+    "Count",
+    "2",
+    "Index",
+    "0",
+    "In 0",
+    "0",
+    "In 1",
+    "0",
+    "Out",
+    "Select Float"
+  ]
+}

@@ -1,0 +1,49 @@
+---
+title: 'Starting and ending a play'
+description: 'Know when the graph starts, receives a command, stops, or ends immediately.'
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundNodeCatalogue.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Execution.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Flow.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Values.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs
+tags: [unity, graph, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+import Capture from '../../../components/Capture.astro';
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+
+import NodeReference from '../../../components/NodeReference.astro';
+
+An event instance is one running copy of your graph. Entry nodes receive commands; ending nodes decide how that copy retires. A voice is one recording played by one Play Audio node. Ending a voice and ending the whole event are different things.
+
+<a href={sitePath('recipes/campfire-loop/')}>
+  See it in a complete example: Campfire start, loop, and stop.
+</a>
+For the full list, open the <a href={sitePath('graph/')}>node catalogue</a>.
+
+## On Start
+
+<NodeReference operation="OnStart" />
+
+## On Signal
+
+<NodeReference operation="OnSignal" />
+
+## On Stop
+
+<NodeReference operation="OnStop" />
+
+## End Event
+
+<NodeReference operation="EndEvent" />
+
+## Stop Instance
+
+<NodeReference operation="StopInstance" />
+
+Continue with <a href={sitePath('graph/validation/')}>graph checks and debugging</a> if a connection or event is refused.

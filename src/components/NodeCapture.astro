@@ -1,0 +1,42 @@
+---
+import type { ImageMetadata } from 'astro';
+import Screenshot from './Screenshot.astro';
+import manifest from '../../content-data/node-captures.json';
+interface Props {
+  operation: string;
+}
+const { operation } = Astro.props;
+const capture = manifest.captures.find((item) => item.operation === operation);
+if (!capture) throw new Error(`Missing node screenshot: ${operation}`);
+const images = import.meta.glob<{ default: ImageMetadata }>('../assets/nodes/*.png', {
+  eager: true,
+});
+const source = images[`../assets/nodes/${operation}.png`];
+if (!source) throw new Error(`Missing node image file: ${operation}`);
+---
+
+<div class="node-look" style={`--node-image-width: ${Math.ceil(capture.width / 2)}px`}>
+  <Screenshot
+    src={source.default}
+    id={`node-${operation.toLowerCase()}`}
+    alt={capture.alt}
+    caption={capture.caption}
+    compact
+    showZoomLabel={false}
+  />
+</div>
+<style>
+  .node-look {
+    width: min(100%, var(--node-image-width));
+  }
+  .node-look :global(.screenshot) {
+    margin: 0;
+  }
+  .node-look :global(.image-open),
+  .node-look :global(.image-open img) {
+    width: 100%;
+  }
+  .node-look :global(figcaption) {
+    font-size: 0.8rem;
+  }
+</style>

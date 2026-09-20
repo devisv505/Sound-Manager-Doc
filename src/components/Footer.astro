@@ -10,3 +10,18 @@ import { revision } from '../lib/links';
     <span>Checked with Unity 6000.6.0f1 · Revision {revision.slice(0, 7)}</span>
   </div>
 </footer>
+<script>
+  // A wide table must also be scrollable by keyboard, including after text zoom.
+  const tables = document.querySelectorAll<HTMLTableElement>('.sl-markdown-content table');
+  const updateTable = (table: HTMLTableElement) => {
+    if (table.scrollWidth > table.clientWidth) table.tabIndex = 0;
+    else table.removeAttribute('tabindex');
+  };
+  const observer = new ResizeObserver((entries) => {
+    for (const { target } of entries) updateTable(target as HTMLTableElement);
+  });
+  tables.forEach((table) => {
+    updateTable(table);
+    observer.observe(table);
+  });
+</script>

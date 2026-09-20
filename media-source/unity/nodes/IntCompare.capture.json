@@ -1,0 +1,26 @@
+{
+  "operation": "IntCompare",
+  "title": "Int Compare",
+  "capturedAt": "2026-09-19T23:12:05.4133480Z",
+  "unityVersion": "6000.6.0f1",
+  "width": 604,
+  "height": 411,
+  "zoom": 1.25,
+  "pixelsPerPoint": 2.0,
+  "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+  "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+  "bounds": "(x:100.00, y:120.00, width:283.75, height:187.50)",
+  "cropX": 182,
+  "cropY": 222,
+  "labels": [
+    "Int Compare",
+    "Operation",
+    "Less",
+    "A",
+    "0",
+    "B",
+    "0",
+    "Result",
+    "Int Compare"
+  ]
+}

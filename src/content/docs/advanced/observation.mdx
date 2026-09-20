@@ -1,0 +1,99 @@
+---
+title: 'See what a running graph is doing.'
+description: "Read the play\u2019s own revision, cached values, node states, and bounded execution trace."
+kind: api
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/CompiledSoundEvent.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundNodeState.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Control.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundExecutionTrace.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundExecutionRecord.cs
+tags: [unity, graph, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+import Capture from '../../../components/Capture.astro';
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+
+Use these methods on the concrete `SoundService` that owns the handle. Observation helps answer “which branch ran?” and “is this play waiting or sounding?” It does not make a silent graph audible.
+
+## Inspect the right revision
+
+`TryGetDefinition(handle, out definition)` returns the compiled definition used by a live play. It may be older than the event asset after reimport. False means there is no matching live play; ignore the output.
+
+`CompiledSoundEvent.Asset` is the original event asset. `EventId`, `GraphId`, and `Revision` identify the definition. `Nodes`, `Edges`, and `Parameters` are read-only lists from that definition. Use these indexes when interpreting trace records; do not match an old play's index against newly imported nodes.
+
+Treat their records as observations. Do not mutate nested arrays or clip references in an attempt to edit a running graph. Author changes in the graph editor and start a new play.
+
+<ApiSignatures type="CompiledSoundEvent" />
+
+## Read voice counts, values, and node state
+
+`GetVoiceCount(handle)` reports voices attached to that play, or 0 if the handle is not found. A detached fade can still be audible after this count reaches zero. The service's ActiveVoices includes occupied backend slots.
+
+`TryGetObservedValue(handle, nodeIndex, out value)` reads the last observed value. It returns false if the index/handle is invalid or no value has been observed. It does **not** evaluate the node to produce a new result. Use `TryGetParameter` for declared current/target parameter state.
+
+`GetNodeState(handle, nodeIndex)` returns the state below, with Inactive for invalid or inactive targets. State is a momentary snapshot; it is not a history of every command sent through the node.
+
+| SoundNodeState | Interpretation                                              |
+| -------------- | ----------------------------------------------------------- |
+| `Inactive`     | No current tracked activity.                                |
+| `Waiting`      | Delay has pending commands, or Wait For Condition is armed. |
+| `Repeating`    | Repeat is armed.                                            |
+| `Tracking`     | Track Condition is watching.                                |
+| `Idle`         | Idle Loop is armed.                                         |
+| `Playing`      | Play Audio holds at least one voice.                        |
+| `Stopping`     | A stopping play still holds voices on Play Audio.           |
+
+<ApiSignatures type="SoundNodeState" />
+
+## Read a bounded trace
+
+Set a positive `TraceCapacity` when constructing the service, or enable Capture Trace in the manager settings before preparation. `SoundExecutionTrace(capacity)` creates a buffer; negative capacity becomes zero. Toggling Enabled later does not allocate a larger buffer.
+
+`Capacity` is the number of retained records. `Count` is the total number written, not the number still retained. `Enabled` defaults true; `Recording` also requires a positive capacity. When recording is off, Count does not increase. `OldestSequence` is the oldest retained sequence number after wraparound. `TryRead(sequence, out record)` returns false for an overwritten or not-yet-written record.
+
+This **reader excerpt** belongs in a diagnostic update method. Keep `cursor` as a `long` field, reset it when switching service instances, and use the concrete service that owns the play.
+
+```csharp title="Read only records added since last time · excerpt"
+var trace = service.Trace;
+cursor = System.Math.Max(cursor, trace.OldestSequence);
+long end = trace.Count;
+for (; cursor < end; cursor++)
+{
+    if (!trace.TryRead(cursor, out var record))
+        continue;
+    Debug.Log($"{record.Sequence}: {record.Kind}, node {record.Node}");
+}
+```
+
+This intentionally skips overwritten records. A real HUD should batch or sample its display instead of logging every record every frame. The trace is for debugging and can reduce performance; read <a href={sitePath('graph/validation/#debug-ui-and-frame-rate')}>the UI overhead guidance</a> before using it for measurements.
+
+<ApiSignatures type="SoundExecutionTrace" />
+
+## SoundExecutionRecord
+
+The constructor packages the listed fields; constructing a record does not write it into a service trace. `Sequence` identifies its buffer position, `Time` uses the service clock, `Handle` identifies the play, and `Revision` identifies its graph definition.
+
+`Kind` determines what the rest means. `Node`, `Edge`, and `Voice` are indexes when applicable; an unused index can be −1. `Value` is a Float payload, not a general AudioClip reference. Bool values appear as 0/1; numeric/selection values depend on the record kind. Use observed `SoundValue` when you need its type and asset. `VoiceState` describes a voice-state record.
+
+<ApiSignatures type="SoundExecutionRecord" />
+
+## SoundExecutionKind
+
+| Kinds                                                    | What was recorded                            |
+| -------------------------------------------------------- | -------------------------------------------- |
+| `Accepted`, `Started`, `Finished`, `Cancelled`, `Failed` | Play lifetime changes.                       |
+| `Node`, `Edge`                                           | Execution visited a node or connection.      |
+| `Value`, `InputValue`                                    | A value was evaluated or read at an input.   |
+| `Voice`                                                  | Voice state changed.                         |
+| `MissingSource`                                          | A requested voice did not have a ready clip. |
+| `VoiceCapacity`                                          | A voice start could not be allocated.        |
+| `ContinuationCapacity`                                   | A node could not retain more pending work.   |
+
+The last three can describe a dropped branch action while the event continues. They are not extra SoundPlayStatus or SoundNotificationKind values. For user-facing outcomes, read <a href={sitePath('guides/outcomes/')}>request results and lifecycle notifications</a>.
+
+<ApiSignatures type="SoundExecutionKind" />
+
+Compare <a href={sitePath('demos/07-arcade/')}>Arcade's capacity behavior</a> and <a href={sitePath('demos/10-launch/')}>Launch's waiting/countdown phases</a> to see why a live play can have zero voices.

@@ -1,0 +1,59 @@
+---
+title: 'Choosing the next command'
+description: 'Route commands, order immediate actions, and count bounded work.'
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundNodeCatalogue.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Execution.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Flow.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Values.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundLogicNodes.cs
+tags: [unity, graph, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+import Capture from '../../../components/Capture.astro';
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+
+import NodeReference from '../../../components/NodeReference.astro';
+
+Execution connections carry commands, not audio. Several commands can start sounds in the same update. A Sequence orders those commands; it does not automatically wait between the sounds.
+
+<a href={sitePath('recipes/workshop-tools/')}>
+  See it in a complete example: Workshop tool switching and overlapping taps.
+</a>
+For the full list, open the <a href={sitePath('graph/')}>node catalogue</a>.
+
+<Capture id="workshop-work-sequence" />
+
+## Sequence
+
+<NodeReference operation="Sequence" />
+
+## Branch
+
+<NodeReference operation="Branch" />
+
+## Branch By Index
+
+<NodeReference operation="BranchByIndex" />
+
+## Random Branch
+
+<NodeReference operation="RandomBranch" />
+
+## For Loop
+
+<NodeReference operation="ForLoop" />
+
+## Counter
+
+<NodeReference operation="Counter" />
+
+## Passthrough
+
+<NodeReference operation="Passthrough" />
+
+Continue with <a href={sitePath('graph/validation/')}>graph checks and debugging</a> if a connection or event is refused.

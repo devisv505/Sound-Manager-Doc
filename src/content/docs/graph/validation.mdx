@@ -1,0 +1,59 @@
+---
+title: 'Find the first broken connection.'
+description: 'Translate graph validation errors and runtime diagnostics into a useful next step.'
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundNodeCatalogue.Validation.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Execution.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundInstance.Flow.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundGraphTransport.cs
+tags: [unity, graph, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+import Capture from '../../../components/Capture.astro';
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+
+First check the event's import diagnostic. A graph that does not compile cannot be repaired by repeatedly sending play requests. Fix the reported problem, save, and check the next diagnostic; validation stops at the first runtime structural error.
+
+## Common validation messages
+
+| Message or symptom                                                | What it means                                                  | What to do                                                                                      |
+| ----------------------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Add an On Start node                                              | The graph has no startup entry.                                | Add On Start, even for a graph intended to wait for signals. Use Keep Alive for silent waiting. |
+| Undeclared or mismatched typed parameter                          | The node and parameter declaration disagree.                   | Check the parameter identity and type; refresh stale authored references.                       |
+| Parameter bounds, default and slew must be finite and ordered     | A number or rate is invalid.                                   | Put the default between Min/Max and use non-negative smoothing rates.                           |
+| Asset parameters need a default and a declared set of valid clips | The default or allowed list is incomplete.                     | Assign a default and include that exact clip in Allowed Clips.                                  |
+| Edge port name or type mismatch                                   | The connection no longer matches the nodes.                    | Reconnect matching port types; insert an explicit numeric converter where needed.               |
+| A data input can have only one source                             | Two value wires feed one input.                                | Choose one source or use a Select node.                                                         |
+| Edge is outside the authored port count                           | Count was reduced below a connected numbered port.             | Restore the count or reconnect to an existing port.                                             |
+| Connect a Wave Asset to each Random Clip input                    | An input is empty or comes from another node type.             | Connect each slot directly to a Wave Asset.                                                     |
+| Random Clip inputs must use distinct clips                        | Two slots resolve to the same recording or identical trim.     | Use a different recording or range.                                                             |
+| Curve points must be finite with increasing times                 | Curve points are invalid or repeat an input coordinate.        | Order the keys and remove duplicate positions.                                                  |
+| Synchronous execution cycle; use a yielding continuation          | Commands can loop immediately without returning control.       | Break the cycle with genuine waiting or redesign it as Repeat.                                  |
+| Data cycle or dependency depth exceeds 64                         | Values depend on themselves, or the chain is too deep.         | Remove circular value connections and shorten the chain.                                        |
+| Missing/duplicate node, edge, signal, or parameter identity       | Authored records have conflicting identities.                  | Repair the graph in the editor and reimport; do not hand-edit compiled records to hide it.      |
+| Unsupported operation / unknown operation variant                 | The imported graph uses something this runtime cannot execute. | Use a compatible editor/runtime version and a shipped node operation.                           |
+
+Settings must also pass their <a href={sitePath('api/settings/')}>numeric and enum checks</a>. Wave ranges must begin inside a readable clip and contain at least one frame; see <a href={sitePath('graph/trimming/')}>trimming</a> for preparation and decoding messages.
+
+## Why a Delay may not fix a cycle
+
+A Delay with an unconnected, positive Seconds value is known to yield. A connected Seconds value could become zero, so the validator cannot treat it as guaranteed waiting. Wait For Condition can also pass immediately when true. Passthrough and For Loop do not yield.
+
+Play Audio's Finished continuation, Repeat, Track Condition, and Idle Loop are recognized continuation points. Use them according to their timing rules rather than adding a zero-length Delay to silence a warning.
+
+## Trace messages are different from request failures
+
+**MissingSource** means a Play Audio start had no ready clip. **VoiceCapacity** means that node already held its eight voices or the backend could not supply one. **ContinuationCapacity** means a Delay already held eight waiting commands. These branch-level trace records do not necessarily fail the whole event.
+
+A play may therefore be Accepted and Started while a particular layer stays silent. Inspect the branch, selected clip, and voice count before increasing every capacity. Global limits, the event's instance limit, and a node's own limits are separate.
+
+## Debug UI and frame rate
+
+**Show counters** is a debugging aid. Runtime counter refreshes and graph inspection interact with editor/UI state and can reduce FPS. Tracing also stores and processes execution records. The amount depends on the graph, update frequency, and machine; there is no universal percentage to subtract.
+
+Use counters and inspection to locate a problem, then turn them off and profile the normal setup. Do not present the frame rate of an actively inspected graph as the asset's baseline cost. Tracing may also cause extra control-value reads, which matters for random nodes configured to draw on every read.
+
+For a custom diagnostic panel, see <a href={sitePath('advanced/observation/')}>read-only observation and trace cursors</a>. For a player's missing sound, start with <a href={sitePath('guides/troubleshooting/')}>the troubleshooting checklist</a>.

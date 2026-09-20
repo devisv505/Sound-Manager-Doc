@@ -12,6 +12,7 @@ tableOfContents: false
 ---
 
 import HomeHero from '../../components/HomeHero.astro';
+import HomeSoundExample from '../../components/HomeSoundExample.astro';
 import DemoGallery from '../../components/DemoGallery.astro';
 import { sitePath } from '../../lib/links';
 
@@ -49,14 +50,7 @@ import { sitePath } from '../../lib/links';
 
 The graph handles ignition, the crackling loop, and the extinguish cue. Your code asks it to begin—and tells it when to end.
 
-```csharp title="Play by key · excerpt"
-var result = SoundBus.Play(Sounds.Campfire, transform);
-if (result.Accepted)
-    fire = result.Handle;
-
-// Later, when the player puts the fire out:
-SoundBus.Stop(fire, fade: 0.15f);
-```
+<HomeSoundExample />
 
 <a href={sitePath('recipes/campfire-loop/')}>See the complete, verified example →</a>
 
@@ -67,7 +61,10 @@ SoundBus.Stop(fire, fade: 0.15f);
     <span class="section-kicker">THE SOUND LAB</span>
     <h2>Small worlds. Big ideas.</h2>
   </div>
-  <p>Start with Campfire, then explore all ten scenes with complete walkthroughs and practical code recipes.</p>
+  <p>
+    Start with Campfire, then explore all ten scenes with complete walkthroughs and practical code
+    recipes.
+  </p>
 </div>
 
 <DemoGallery />

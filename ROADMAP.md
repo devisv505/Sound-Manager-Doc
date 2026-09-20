@@ -1,6 +1,6 @@
 # DEV505 Sound Manager — documentation roadmap
 
-Status: M1–M4 complete; M5–M7 remain open, with the Pages workflow brought forward to fix M1 publication. M4 is validated locally and has not been published by this milestone.
+Status: M1–M6 complete; M7 publication remains open. The complete site is validated locally; M6 did not publish a new Pages revision.
 
 Prepared: 19 September 2026.  
 Specification: [SPEC.md](SPEC.md).  
@@ -10,7 +10,7 @@ Target directory: `/Users/devisv/Projects/Web/Sound-Manager-Doc`.
 
 Build one complete slice first: the shared theme, setup path, a useful API page, and the Campfire walkthrough with real Unity images. Use it to establish the visual and content pattern before expanding to all ten demos. Complete API and graph coverage alongside the remaining walkthroughs, then validate the actual GitHub Pages build.
 
-Checked items reflect completed work. M0–M3 are complete; the remaining milestones are open. Validation and capture evidence are recorded in each milestone's linked report.
+Checked items reflect completed work. M0–M6 are complete; M7 remains open. Validation and capture evidence are recorded in each milestone's linked report.
 
 ## Writing requirement for every stage
 
@@ -156,41 +156,45 @@ Validation: [M4 report](validation/M4.md) — 59 authored pages, 11 complete com
 
 Depends on: M2; use M3/M4 captures and explanations.
 
-- [ ] Inventory the implemented node catalogue and distinguish runtime-supported authoring from future roadmap items.
-- [ ] Document ports, execution order, conditions, branches, loops, repeat/wait/delay behavior, termination, and lifecycle entry points.
-- [ ] Explain Wave Asset trimming/preview and independent ranges from one source recording.
-- [ ] Document event settings, groups/notes, diagnostics, and validation errors.
-- [ ] Finish service registration/preparation/observation and custom backend/clock reference material.
-- [ ] Document result and notification categories completely, including relevant failure and cancellation cases.
-- [ ] Write troubleshooting for missing manager/registration, no audible output, wrong spatial direction, initial parameters arriving too late, stale handles, asset restrictions, voice/concurrency refusal, and owner cleanup.
-- [ ] Explain runtime debug counters/inspection and their potential UI-related FPS overhead.
-- [ ] Resolve API-coverage gaps and add cross-links from every node family/advanced topic to relevant examples where available.
+- [x] Inventory the implemented node catalogue and distinguish runtime-supported authoring from future roadmap items.
+- [x] Document ports, execution order, conditions, branches, loops, repeat/wait/delay behavior, termination, and lifecycle entry points.
+- [x] Explain Wave Asset trimming/preview and independent ranges from one source recording.
+- [x] Document event settings, groups/notes, diagnostics, and validation errors.
+- [x] Finish service registration/preparation/observation and custom backend/clock reference material.
+- [x] Document result and notification categories completely, including relevant failure and cancellation cases.
+- [x] Write troubleshooting for missing manager/registration, no audible output, wrong spatial direction, initial parameters arriving too late, stale handles, asset restrictions, voice/concurrency refusal, and owner cleanup.
+- [x] Explain runtime debug counters/inspection and their potential UI-related FPS overhead.
+- [x] Resolve API-coverage gaps and add cross-links from every node family/advanced topic to relevant examples where available.
 
 Deliverable: complete authored-graph and advanced integration reference, with practical diagnostics.
 
 Exit condition: all advertised shipped capabilities have a supported explanation; deferred capabilities are not presented as existing features.
 
+Completed 20 September 2026. Added 17 pages, all 49 node entries, and complete coverage of 18 advanced types. Validation: 77 built pages, 20 browser tests, three compiled advanced excerpts, and 180 native Unity checks. The active Launch scene stayed unchanged. See [M5 validation](validation/M5.md).
+
 ## M6 — Quality review and GitHub Pages readiness
 
 Depends on: M2–M5.
 
-- [ ] Perform a clean dependency install, content/framework checks, and production build from the documentation repository alone.
-- [ ] Validate all internal links, section anchors, image references, and required metadata; ensure the public site has no links to the private Unity repository.
-- [ ] Preview the production output under the real repository subpath; test nested-page refresh, 404 behavior, search, and all image/font URLs.
-- [ ] Test search with exact API symbols and human terms, including trim, follow, crossfade, and owner.
-- [ ] Review phone/tablet/desktop layouts, long signatures, tables, code copy controls, and image enlargement.
-- [ ] Check keyboard navigation, focus restoration, text contrast, alt text, semantic headings, 200% text zoom, and reduced-motion behavior.
-- [ ] Measure image payloads and mobile Lighthouse performance; address avoidable regressions against the specification targets.
-- [ ] Check every demo page against the current source revision and recapture screenshots invalidated by source changes.
-- [ ] Review the complete site as a reader new to Unity: explain terms, verify step-by-step setup and code placement, and make expected results and troubleshooting clear.
-- [ ] Confirm examples' Unity compilation/behavior records and document genuine limitations.
+- [x] Perform a clean dependency install, content/framework checks, and production build from the documentation repository alone.
+- [x] Validate all internal links, section anchors, image references, and required metadata; ensure the public site has no links to the private Unity repository.
+- [x] Preview the production output under the real repository subpath; test nested-page refresh, 404 behavior, search, and all image/font URLs.
+- [x] Test search with exact API symbols and human terms, including trim, follow, crossfade, and owner.
+- [x] Review phone/tablet/desktop layouts, long signatures, tables, code copy controls, and image enlargement.
+- [x] Check keyboard navigation, focus restoration, text contrast, alt text, semantic headings, 200% text zoom, and reduced-motion behavior.
+- [x] Measure image payloads and mobile Lighthouse performance; address avoidable regressions against the specification targets.
+- [x] Check every demo page against the current source revision and recapture screenshots invalidated by source changes.
+- [x] Review the complete site as a reader new to Unity: explain terms, verify step-by-step setup and code placement, and make expected results and troubleshooting clear.
+- [x] Confirm examples' Unity compilation/behavior records and document genuine limitations.
 - [x] Add the Pages build/deploy workflow with appropriate permissions and pinned action versions verified at implementation time. Brought forward on 19 September 2026 to fix the default Jekyll build for the M1 site.
-- [ ] Write `README.md` with local commands, content conventions, source/API validation, screenshot recapture, and deployment instructions.
-- [ ] Ensure no secrets, local filesystem links in published pages, Unity cache directories, or unnecessary source recordings are included.
+- [x] Write `README.md` with local commands, content conventions, source/API validation, screenshot recapture, and deployment instructions.
+- [x] Ensure no secrets, local filesystem links in published pages, Unity cache directories, or unnecessary source recordings are included.
 
 Deliverable: a complete, reviewable website build and deployment configuration.
 
 Exit condition: all acceptance criteria in `SPEC.md` pass in production preview. Preparing this workflow does not by itself create a remote repository or publish the site.
+
+Completed 20 September 2026. Clean install/build, 27 browser tests, desktop and phone accessibility checks on all 77 routes, all-route payload checks, and source freshness review passed. Mobile Lighthouse performance: 98–99. Added the seven-category color key and labels for all 49 nodes; removed visible enlargement text from node previews only. See [M6 validation](validation/M6.md).
 
 ## M7 — Publish and verify the live site
 
@@ -232,4 +236,4 @@ Future enhancements can include versioned documentation, localized content, opti
 
 The work is complete when all ten demos have detailed, accurate pages with actual Unity screenshots; the supported API and implemented graph features are documented; usage examples are verified; the shared visual style is recognizable; the static build and contributor workflow are reproducible; and the live GitHub Pages site passes the publication checks.
 
-M0 produced the specification and roadmap. M1 delivered the first working documentation slice with actual Unity captures and a verified example. The user subsequently established the public documentation repository and enabled Pages; its initial Jekyll build failed because the site uses Astro. The Pages workflow and deployment instructions were brought forward to support M1 publication. M2 adds the complete setup-to-integration path and everyday API reference, with source-derived signatures and checked Unity examples. M3 adds all ten screenshot galleries with actual Unity captures, readable graph details, event settings, and reproducible image records. M4 completes all ten detailed walkthroughs and twelve recipe topics, with eleven checked components. M5–M7 remain open for the complete documentation release.
+M0 produced the specification and roadmap. M1 delivered the first working documentation slice with actual Unity captures and a verified example. The user subsequently established the public documentation repository and enabled Pages; its initial Jekyll build failed because the site uses Astro. The Pages workflow and deployment instructions were brought forward to support M1 publication. M2 adds the complete setup-to-integration path and everyday API reference, with source-derived signatures and checked Unity examples. M3 adds all ten screenshot galleries with actual Unity captures, readable graph details, event settings, and reproducible image records. M4 completes all ten detailed walkthroughs and twelve recipe topics, with eleven checked components. M5 completed the 49-node and advanced references. M6 completed the full-site quality and Pages-readiness review. M7 remains open for publication of the completed site.

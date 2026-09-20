@@ -1,0 +1,22 @@
+{
+  "operation": "SemitonesToMultiplier",
+  "title": "Semitones To Multiplier",
+  "capturedAt": "2026-09-19T23:12:09.1607430Z",
+  "unityVersion": "6000.6.0f1",
+  "width": 571,
+  "height": 266,
+  "zoom": 1.25,
+  "pixelsPerPoint": 2.0,
+  "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+  "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+  "bounds": "(x:100.00, y:120.00, width:267.50, height:115.00)",
+  "cropX": 182,
+  "cropY": 222,
+  "labels": [
+    "Semitones To Multiplier",
+    "In",
+    "0",
+    "Out",
+    "Semitones To Multiplier"
+  ]
+}

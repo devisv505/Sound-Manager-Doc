@@ -1,0 +1,26 @@
+{
+  "operation": "RandomInt",
+  "title": "Random Int",
+  "capturedAt": "2026-09-19T23:12:03.7684380Z",
+  "unityVersion": "6000.6.0f1",
+  "width": 643,
+  "height": 464,
+  "zoom": 1.25,
+  "pixelsPerPoint": 2.0,
+  "asset": "Assets/__SoundDocsNodeCapture.soundgraph",
+  "method": "Unity Editor GUI GrabPixels with node world-bound crop",
+  "bounds": "(x:100.00, y:120.00, width:303.13, height:213.75)",
+  "cropX": 182,
+  "cropY": 222,
+  "labels": [
+    "Random Int",
+    "Single Value",
+    "Avoid Repetition",
+    "Min",
+    "0",
+    "Max",
+    "1",
+    "Result",
+    "Random Int"
+  ]
+}

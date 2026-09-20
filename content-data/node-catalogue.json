@@ -1,0 +1,1186 @@
+{
+  "sourceRevision": "746a1cc7d2602bc59df6096eac50508ded6ef49e",
+  "source": "Assets/DEV505/SoundManager/Scripts/Runtime/Graph/SoundNodeCatalogue.cs",
+  "sourceSha256": "ee028bc196bbda581ffa03c64976b20e7ee88a498b45b707904bedfe550fc748",
+  "nodes": [
+    {
+      "operation": "OnStart",
+      "title": "On Start",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        }
+      ],
+      "family": "lifecycle",
+      "behavior": "Runs when an admitted play actually starts. Queued plays reach this point on a later service update. Multiple On Start nodes run in stored node order.",
+      "setup": "Every valid event needs an On Start node, even a signal-driven event. Use Sequence when output order matters.",
+      "example": "Start the Campfire ignition, then let its Finished output start the fire loop.",
+      "anchor": "on-start"
+    },
+    {
+      "operation": "OnSignal",
+      "title": "On Signal",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        }
+      ],
+      "family": "lifecycle",
+      "behavior": "Runs when the play processes a matching queued signal. Sending the signal does not create another event instance. Matching entries run in node order.",
+      "setup": "Set Signal to the command name (new nodes start with Accent). Send to a live, non-stopping handle; Keep Alive is useful for a graph that waits silently for commands.",
+      "example": "Workshop uses a HammerTap signal to add a tap while its current tool is running.",
+      "anchor": "on-signal"
+    },
+    {
+      "operation": "OnStop",
+      "title": "On Stop",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        }
+      ],
+      "family": "lifecycle",
+      "behavior": "Runs during a normal stop request, before existing voices receive their fallback fade. It can stop loops and immediately start a release sound.",
+      "setup": "Timers and watches are cleared after the On Stop path runs. Start a release voice directly; do not put a Delay before it. End Event, forced replacement, and disposal bypass this entry.",
+      "example": "Campfire stops its loop and plays the extinguish clip.",
+      "anchor": "on-stop"
+    },
+    {
+      "operation": "WaveAsset",
+      "title": "Wave Asset",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Asset",
+          "type": "Clip"
+        }
+      ],
+      "family": "clips",
+      "behavior": "Supplies an AudioClip; it does not play the clip by itself. A trimmed range becomes a derived clip before runtime.",
+      "setup": "Assign Asset. Start is seconds from the beginning (default 0); Length is duration (default 0 means through the end). Open Range to choose and preview a section.",
+      "example": "Give several Wave Asset nodes the same grass recording, then choose a different single-step range on each.",
+      "anchor": "wave-asset"
+    },
+    {
+      "operation": "PlayAudio",
+      "title": "Play Audio",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Play",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Stop",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Audio Source",
+          "type": "Clip"
+        },
+        {
+          "direction": "Input",
+          "name": "Volume",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "Playback Speed",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Finished",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Stopped",
+          "type": "Execution"
+        }
+      ],
+      "family": "clips",
+      "behavior": "Each Play command starts a voice from Audio Source. Volume and Playback Speed can follow changing data. Finished fires when voices end naturally; if several end in one update it fires once for this node.",
+      "setup": "Loop defaults off, Fade In/Out to 0 seconds, Volume to 0.5, and Playback Speed to 1. Stop detaches this node’s voices with Fade Out and emits Stopped immediately, while the fade may still be audible. Up to eight voices can belong to this node; extra starts are ignored and traced.",
+      "example": "Wire ignition Finished to loop Play. Wire On Stop to loop Stop, then loop Stopped to the release Play.",
+      "anchor": "play-audio"
+    },
+    {
+      "operation": "FloatParameter",
+      "title": "Float Parameter",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Value",
+          "type": "Float"
+        }
+      ],
+      "family": "parameters",
+      "behavior": "Reads a decimal parameter belonging to this play. Runtime changes move toward the target using Rise Rate or Fall Rate in units per second. Initial values are applied immediately.",
+      "setup": "New node: Parameter Volume, Default 0.5, Min 0, Max 1, Rise/Fall Rate 0. Zero rate means immediate changes. Use generated parameter IDs in code.",
+      "example": "Engine RPM can raise speed gradually without abrupt jumps.",
+      "anchor": "float-parameter"
+    },
+    {
+      "operation": "Float",
+      "title": "Float",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Value",
+          "type": "Float"
+        }
+      ],
+      "family": "parameters",
+      "behavior": "Supplies a constant decimal number. It has no execution input and does not change during a play.",
+      "setup": "Set Value; its default is 0. Use a parameter node when gameplay needs to change it.",
+      "example": "Set a fixed gain of 0.6.",
+      "anchor": "float"
+    },
+    {
+      "operation": "Bool",
+      "title": "Bool",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Value",
+          "type": "Bool"
+        }
+      ],
+      "family": "parameters",
+      "behavior": "Supplies a constant true/false value. It has no execution input and does not change during a play.",
+      "setup": "Set Value; its default is false. Use a parameter node when gameplay needs to change it.",
+      "example": "Temporarily choose the true branch while testing.",
+      "anchor": "bool"
+    },
+    {
+      "operation": "RandomFloat",
+      "title": "Random Float",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Min",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "Max",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Float"
+        }
+      ],
+      "family": "math",
+      "behavior": "Draws a decimal value between Min and Max. Single Value keeps the first result for this play; without it, subsequent reads can draw new values.",
+      "setup": "Min defaults 0, Max 1, Single Value true. For a stable random pitch on a whole play, leave Single Value enabled.",
+      "example": "Footstep gives each new step a small pitch variation.",
+      "anchor": "random-float"
+    },
+    {
+      "operation": "RandomClip",
+      "title": "Random Clip",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Asset",
+          "type": "Clip"
+        },
+        {
+          "direction": "Input",
+          "name": "Clip 1 … Clip N",
+          "type": "Clip"
+        }
+      ],
+      "family": "clips",
+      "behavior": "Chooses a connected Wave Asset each time it is read. No Repeat avoids the previous choice when more than one is available. History is shared across plays of the same owner, event revision, and node, with a bounded service cache.",
+      "setup": "Clips defaults to 2 (allowed 1–16), No Repeat defaults on. Every input must connect directly to a Wave Asset and resolve to a distinct clip. Different baked ranges count as different clips; identical ranges share one clip.",
+      "example": "Connect several trimmed stone steps, then send Asset to Play Audio’s Audio Source.",
+      "anchor": "random-clip"
+    },
+    {
+      "operation": "EndEvent",
+      "title": "End Event",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        }
+      ],
+      "family": "lifecycle",
+      "behavior": "Immediately ends this play, cuts its voices, and clears pending work. It does not run On Stop. The terminal notification is Cancelled, including when this node follows Finished.",
+      "setup": "Use only when an immediate end is intended. A graph that becomes idle without Keep Alive can retire naturally with Finished instead.",
+      "example": "Footstep uses End Event after its selected step finishes; gameplay should not wait for a Finished notification from that event.",
+      "anchor": "end-event"
+    },
+    {
+      "operation": "IntParameter",
+      "title": "Int Parameter",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Value",
+          "type": "Int"
+        }
+      ],
+      "family": "parameters",
+      "behavior": "Reads a whole-number parameter. Accepted values are clamped to its declared range; there is no time smoothing.",
+      "setup": "New node: Parameter Index, Default 0, Min 0, Max 100. Match the range to your choices.",
+      "example": "Footstep Surface selects one of three banks with values 0–2.",
+      "anchor": "int-parameter"
+    },
+    {
+      "operation": "BoolParameter",
+      "title": "Bool Parameter",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Value",
+          "type": "Bool"
+        }
+      ],
+      "family": "parameters",
+      "behavior": "Reads a true/false value from this play. Use it to allow an action or choose a branch.",
+      "setup": "New node: Parameter Enabled, Default false. Pass the starting value in the play context when the first branch needs it.",
+      "example": "Launch waits until LaunchAllowed becomes true.",
+      "anchor": "bool-parameter"
+    },
+    {
+      "operation": "AssetParameter",
+      "title": "Asset Parameter",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Asset",
+          "type": "Clip"
+        }
+      ],
+      "family": "parameters",
+      "behavior": "Reads the currently selected clip. Only a clip declared in Allowed Clips is accepted. Changing it affects future Play Audio starts, not the source of a voice already playing.",
+      "setup": "New node: Parameter Clip, Default empty. Assign a non-null default and include it in Allowed Clips before the graph can validate.",
+      "example": "Jukebox changes the incoming track, starts its other voice, and crossfades the volumes.",
+      "anchor": "asset-parameter"
+    },
+    {
+      "operation": "Int",
+      "title": "Int",
+      "ports": [
+        {
+          "direction": "Output",
+          "name": "Value",
+          "type": "Int"
+        }
+      ],
+      "family": "parameters",
+      "behavior": "Supplies a constant whole number. It has no execution input and does not change during a play.",
+      "setup": "Set Value; its default is 0. Use a parameter node when gameplay needs to change it.",
+      "example": "Set a branch index to 2.",
+      "anchor": "int"
+    },
+    {
+      "operation": "RandomInt",
+      "title": "Random Int",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Min",
+          "type": "Int"
+        },
+        {
+          "direction": "Input",
+          "name": "Max",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Int"
+        }
+      ],
+      "family": "math",
+      "behavior": "Draws a whole number including both bounds. Reversed bounds are exchanged. Avoid Repetition skips the previous draw when there is a choice; this history belongs to this node within this play.",
+      "setup": "Min defaults 0, Max 1; Single Value and Avoid Repetition default false. Single Value keeps the first draw for the play.",
+      "example": "Pick one of three command paths with values 0–2.",
+      "anchor": "random-int"
+    },
+    {
+      "operation": "RemapFloat",
+      "title": "Remap Float",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Parameter",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "Old Min",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "Old Max",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "New Min",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "New Max",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Float"
+        }
+      ],
+      "family": "math",
+      "behavior": "Converts a value from Old Min…Old Max into New Min…New Max. Clamp keeps it inside the input range before mapping. Equal old bounds return New Min.",
+      "setup": "Clamp defaults true; old/new minima default 0, maxima 1. Disable Clamp only when values outside the output range are intentional.",
+      "example": "Engine maps normalized RPM to a useful playback-speed range.",
+      "anchor": "remap-float"
+    },
+    {
+      "operation": "FloatCompare",
+      "title": "Float Compare",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "A",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "B",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Bool"
+        }
+      ],
+      "family": "math",
+      "behavior": "Compares two decimal values with Less, Less Or Equal, Equal, Greater Or Equal, or Greater and returns true or false.",
+      "setup": "Choose Operation; A and B default to 0. Float equality is exact, so thresholds are usually more useful for gradually changing values.",
+      "example": "Feed RPM > 0.7 into Track Condition to control a high-speed layer.",
+      "anchor": "float-compare"
+    },
+    {
+      "operation": "FloatMath",
+      "title": "Float Math",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "A",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "B",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Float"
+        }
+      ],
+      "family": "math",
+      "behavior": "Combines A and B using Add, Subtract, Multiply, Divide, Min, Max, or Pow (power). Divide by zero and non-finite power results return 0.",
+      "setup": "Choose Operation. Both inline inputs default to 0. Volume is ultimately clamped to 0–1 by playback.",
+      "example": "Multiply a rain amount by the maximum volume for a layer.",
+      "anchor": "float-math"
+    },
+    {
+      "operation": "IntCompare",
+      "title": "Int Compare",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "A",
+          "type": "Int"
+        },
+        {
+          "direction": "Input",
+          "name": "B",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Bool"
+        }
+      ],
+      "family": "math",
+      "behavior": "Compares two whole-number values with Less, Less Or Equal, Equal, Greater Or Equal, or Greater and returns true or false.",
+      "setup": "Choose Operation; A and B default to 0. For example, compare a surface index with 2 to check for wood in the Footstep graph.",
+      "example": "Feed RPM > 0.7 into Track Condition to control a high-speed layer.",
+      "anchor": "int-compare"
+    },
+    {
+      "operation": "IntOp",
+      "title": "Int Op",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "A",
+          "type": "Int"
+        },
+        {
+          "direction": "Input",
+          "name": "B",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Int"
+        }
+      ],
+      "family": "math",
+      "behavior": "Combines integers with Add, Subtract, Multiply, Divide, Modulo, Min, or Max. Add/subtract/multiply saturate at integer limits. Division truncates toward zero; division or modulo by zero returns 0.",
+      "setup": "Both inputs default to 0. At the signed minimum, division by −1 returns the minimum; its modulo returns 0. Use ordinary small indexes rather than relying on overflow behavior.",
+      "example": "Convert a 1-based ground choice to a 0-based selection using Subtract.",
+      "anchor": "int-op"
+    },
+    {
+      "operation": "Curve",
+      "title": "Curve",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Float"
+        }
+      ],
+      "family": "math",
+      "behavior": "Looks up an output using the authored curve points. Linear mode interpolates between neighboring points; Step holds a point until the next. Outside the points, the nearest end value is held.",
+      "setup": "The initial curve goes from (0, 0) to (1, 1). Runtime uses points and the chosen interpolation mode, not arbitrary editor tangent shaping. An empty point list passes the input through.",
+      "example": "Shape engine volume so idle stays quiet and high RPM becomes louder.",
+      "anchor": "curve"
+    },
+    {
+      "operation": "MultiplierToSemitones",
+      "title": "Multiplier To Semitones",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Float"
+        }
+      ],
+      "family": "math",
+      "behavior": "Converts a positive playback multiplier into semitones with 12 × log₂(In). A non-positive input returns 0.",
+      "setup": "Input defaults to 0. A multiplier of 1 is 0 semitones; 2 is +12.",
+      "example": "Express a playback-speed change as a musical interval.",
+      "anchor": "multiplier-to-semitones"
+    },
+    {
+      "operation": "SemitonesToMultiplier",
+      "title": "Semitones To Multiplier",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Float"
+        }
+      ],
+      "family": "math",
+      "behavior": "Converts semitones into a multiplier with 2^(In/12). Zero semitones gives 1; +12 gives 2.",
+      "setup": "Input defaults to 0. Play Audio still limits its final playback speed to 0.01–3. This changes pitch and duration together.",
+      "example": "Set a random pitch offset in semitones, then convert it for Playback Speed.",
+      "anchor": "semitones-to-multiplier"
+    },
+    {
+      "operation": "FloatFunction",
+      "title": "Float Function",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Float"
+        }
+      ],
+      "family": "math",
+      "behavior": "Applies Abs, Sqrt, Floor, Ceil, Round, Sign, Sin, Cos, Log, or Exp. Sin/Cos use radians; Log is the natural logarithm. Round rounds midpoint values away from zero.",
+      "setup": "Input defaults to 0. Negative square roots, non-positive logarithms, and non-finite results return 0. Sign returns −1, 0, or 1.",
+      "example": "Use Abs to turn a signed control into a positive intensity.",
+      "anchor": "float-function"
+    },
+    {
+      "operation": "IntFunction",
+      "title": "Int Function",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Int"
+        }
+      ],
+      "family": "math",
+      "behavior": "Applies Abs, Negate, or Sign to an integer. Sign returns −1, 0, or 1. Abs/Negate of the lowest signed integer returns the highest integer.",
+      "setup": "Input defaults to 0. Choose Operation for the transformation you need.",
+      "example": "Use Sign to distinguish reverse, idle, and forward control values.",
+      "anchor": "int-function"
+    },
+    {
+      "operation": "ConvertToInt",
+      "title": "Convert To Int",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Int"
+        }
+      ],
+      "family": "math",
+      "behavior": "Converts a decimal using Round, Floor, Ceil, or Truncate. Round handles midpoint values away from zero. Out-of-range results saturate to integer limits; non-finite input becomes 0.",
+      "setup": "Input defaults to 0. Choose how boundaries should behave before using the result as an index.",
+      "example": "Map a continuous slider to a discrete selection.",
+      "anchor": "convert-to-int"
+    },
+    {
+      "operation": "ConvertToFloat",
+      "title": "Convert To Float",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Float"
+        }
+      ],
+      "family": "math",
+      "behavior": "Converts a whole number to a decimal value. Very large integers can lose precision in a Float.",
+      "setup": "Input defaults to 0. Use an explicit converter when the port types differ.",
+      "example": "Turn Counter Count into a value for a volume calculation.",
+      "anchor": "convert-to-float"
+    },
+    {
+      "operation": "Not",
+      "title": "Not",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Bool"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Bool"
+        }
+      ],
+      "family": "math",
+      "behavior": "Returns the opposite of In.",
+      "setup": "An unconnected In defaults to false, so Not returns true. Connect a Bool parameter or a comparison result to reverse its meaning.",
+      "example": "Combine two permission checks before a Branch or Wait For Condition.",
+      "anchor": "not"
+    },
+    {
+      "operation": "SelectFloat",
+      "title": "Select Float",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Index",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "In 0 … In (Count − 1)",
+          "type": "Float"
+        }
+      ],
+      "family": "math",
+      "behavior": "Reads one Float input selected by the zero-based Index. Only that selected input is evaluated. Index is clamped to the available range.",
+      "setup": "Count defaults to 2 (allowed 0–255); with Count 0 the result is 0. Numbered inputs start at In 0.",
+      "example": "Choose a different gain or repeat interval for each Workshop tool.",
+      "anchor": "select-float"
+    },
+    {
+      "operation": "SelectInt",
+      "title": "Select Int",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Index",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Int"
+        },
+        {
+          "direction": "Input",
+          "name": "In 0 … In (Count − 1)",
+          "type": "Int"
+        }
+      ],
+      "family": "math",
+      "behavior": "Reads one Int input selected by the zero-based Index. Only that selected input is evaluated. Index is clamped to the available range.",
+      "setup": "Count defaults to 2 (allowed 0–255); with Count 0 the result is 0. Numbered inputs start at In 0.",
+      "example": "Choose a different gain or repeat interval for each Workshop tool.",
+      "anchor": "select-int"
+    },
+    {
+      "operation": "SelectByIndex",
+      "title": "Select By Index",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Index",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Clip"
+        },
+        {
+          "direction": "Input",
+          "name": "In 0 … In (Count − 1)",
+          "type": "Clip"
+        }
+      ],
+      "family": "clips",
+      "behavior": "Reads one Clip input chosen by Index. Index is zero-based and clamped to the available range. Only the chosen input is evaluated.",
+      "setup": "Count defaults to 2 (allowed 0–255). With no inputs the result is a missing clip. Give each input a Wave Asset, Random Clip, or allowed Asset Parameter source.",
+      "example": "Footstep uses 0 for grass, 1 for stone, and 2 for wood. The gameplay ground enum is converted before playing.",
+      "anchor": "select-by-index"
+    },
+    {
+      "operation": "SmoothstepFloat",
+      "title": "Smoothstep Float",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "Min",
+          "type": "Float"
+        },
+        {
+          "direction": "Input",
+          "name": "Max",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Float"
+        }
+      ],
+      "family": "math",
+      "behavior": "Normalizes In between Min and Max, clamps it to 0–1, and bends it into a gentle S-shaped curve. Equal bounds give a step: 0 below the bound and 1 at or above it.",
+      "setup": "Min defaults 0, Max 1. This shapes a value; it does not smooth changes over time. Use Float Parameter rates for time smoothing.",
+      "example": "Give a crossfade a softer response near either end of its control range.",
+      "anchor": "smoothstep-float"
+    },
+    {
+      "operation": "And",
+      "title": "And",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "A",
+          "type": "Bool"
+        },
+        {
+          "direction": "Input",
+          "name": "B",
+          "type": "Bool"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Bool"
+        }
+      ],
+      "family": "math",
+      "behavior": "Returns true only when both A and B are true.",
+      "setup": "Unconnected Bool inputs default false. And, Or, and Xor evaluate both inputs; they do not use C# short-circuit evaluation.",
+      "example": "Combine two permission checks before a Branch or Wait For Condition.",
+      "anchor": "and"
+    },
+    {
+      "operation": "Or",
+      "title": "Or",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "A",
+          "type": "Bool"
+        },
+        {
+          "direction": "Input",
+          "name": "B",
+          "type": "Bool"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Bool"
+        }
+      ],
+      "family": "math",
+      "behavior": "Returns true when at least one of A and B is true.",
+      "setup": "Unconnected Bool inputs default false. And, Or, and Xor evaluate both inputs; they do not use C# short-circuit evaluation.",
+      "example": "Combine two permission checks before a Branch or Wait For Condition.",
+      "anchor": "or"
+    },
+    {
+      "operation": "Xor",
+      "title": "Xor",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "A",
+          "type": "Bool"
+        },
+        {
+          "direction": "Input",
+          "name": "B",
+          "type": "Bool"
+        },
+        {
+          "direction": "Output",
+          "name": "Result",
+          "type": "Bool"
+        }
+      ],
+      "family": "math",
+      "behavior": "Returns true when exactly one of A and B is true.",
+      "setup": "Unconnected Bool inputs default false. And, Or, and Xor evaluate both inputs; they do not use C# short-circuit evaluation.",
+      "example": "Combine two permission checks before a Branch or Wait For Condition.",
+      "anchor": "xor"
+    },
+    {
+      "operation": "TrackCondition",
+      "title": "Track Condition",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Start",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Stop",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Condition",
+          "type": "Bool"
+        },
+        {
+          "direction": "Output",
+          "name": "Started",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Stopped",
+          "type": "Execution"
+        }
+      ],
+      "family": "timing",
+      "behavior": "Start begins watching Condition. When it changes from the remembered value to true, the node sends Started; when it changes to false, it sends Stopped. The Stop input ends the check.",
+      "setup": "Initial State is the remembered value before the first check; it defaults to false. Keep Tracking defaults to true and keeps a silent play alive while it watches. With this option off, a play with no other work may end before the condition changes.",
+      "example": "Engine can start or stop a layer when RPM crosses a comparison threshold.",
+      "anchor": "track-condition"
+    },
+    {
+      "operation": "Delay",
+      "title": "Delay",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Seconds",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        }
+      ],
+      "family": "timing",
+      "behavior": "Stores a command and sends Out after Seconds of graph time. A non-positive duration forwards immediately. Pausing the play freezes its graph time.",
+      "setup": "Seconds defaults to 1. Up to eight commands may wait on each Delay; further arrivals are dropped and traced. It runs on service updates, not at audio-sample precision.",
+      "example": "Weather puts a delay between the visible lightning and the thunder sound.",
+      "anchor": "delay"
+    },
+    {
+      "operation": "Sequence",
+      "title": "Sequence",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Out 0 … Out (Count − 1)",
+          "type": "Execution"
+        }
+      ],
+      "family": "flow",
+      "behavior": "Sends commands to Out 0, Out 1, and so on immediately in order. It does not wait for a clip, fade, or timer to finish. Later outputs do not run after the play becomes terminal.",
+      "setup": "Outputs defaults to 2; allowed count is 0–255. To play sounds one after another, connect Play Audio Finished to the next Play instead.",
+      "example": "Workshop can stop a previous tool and start the chosen tool in the same command. The stopping tool may still be fading.",
+      "anchor": "sequence"
+    },
+    {
+      "operation": "Branch",
+      "title": "Branch",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Condition",
+          "type": "Bool"
+        },
+        {
+          "direction": "Output",
+          "name": "True",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "False",
+          "type": "Execution"
+        }
+      ],
+      "family": "flow",
+      "behavior": "Reads Condition when In arrives, then sends one command through True or False. It does not keep watching the value.",
+      "setup": "An unconnected Condition defaults to false. Use Track Condition for changes over time.",
+      "example": "Launch can take an alternate path depending on whether clearance is granted.",
+      "anchor": "branch"
+    },
+    {
+      "operation": "BranchByIndex",
+      "title": "Branch By Index",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Index",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Out 0 … Out (Count − 1)",
+          "type": "Execution"
+        }
+      ],
+      "family": "flow",
+      "behavior": "Routes a command to one numbered output. Index is clamped to 0 through Count − 1. With Count 0, nothing runs.",
+      "setup": "Count defaults to 2 and supports 0–255. Numbering starts at 0.",
+      "example": "Workshop chooses the Hammer, Handsaw, or Drill command path from the Tool parameter.",
+      "anchor": "branch-by-index"
+    },
+    {
+      "operation": "RandomBranch",
+      "title": "Random Branch",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Out 0 … Out (Count − 1)",
+          "type": "Execution"
+        }
+      ],
+      "family": "flow",
+      "behavior": "Chooses one numbered command output at random each time In arrives. It has no avoid-repetition option.",
+      "setup": "Count defaults to 2 and supports 0–255. Count 0 produces no output.",
+      "example": "Choose between two variations of an ambient action. Use Random Clip if only the recording changes.",
+      "anchor": "random-branch"
+    },
+    {
+      "operation": "ForLoop",
+      "title": "For Loop",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "First",
+          "type": "Int"
+        },
+        {
+          "direction": "Input",
+          "name": "Last",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Loop Body",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Completed",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Index",
+          "type": "Int"
+        }
+      ],
+      "family": "flow",
+      "behavior": "Runs Loop Body once for each whole number from First through Last, including both ends, then sends Completed. Index tells the connected nodes which number it is on. All iterations run in the same update; they are not spaced out over time.",
+      "setup": "First and Last default to 0. Last below First runs no body but still completes. Runtime limits each invocation to 1024 iterations. Avoid using it to start hundreds of voices.",
+      "example": "Use Repeat for paced hammer taps; use For Loop only for a small bounded immediate action.",
+      "anchor": "for-loop"
+    },
+    {
+      "operation": "Repeat",
+      "title": "Repeat",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Start",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Stop",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Interval",
+          "type": "Float"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        }
+      ],
+      "family": "timing",
+      "behavior": "Start begins a repeating timer. The first Out command comes after Interval seconds, not immediately. Stop ends the timer. The node reads Interval again each time the timer is due.",
+      "setup": "Interval defaults to 1 second; a non-positive starting interval does not arm it. At most one pulse runs per node per update, so a slow frame does not produce a burst of missed beats.",
+      "example": "Workshop spaces tool actions according to Work Pace.",
+      "anchor": "repeat"
+    },
+    {
+      "operation": "WaitForCondition",
+      "title": "Wait For Condition",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Condition",
+          "type": "Bool"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        }
+      ],
+      "family": "timing",
+      "behavior": "In checks Condition. True fires Out immediately; false waits until a later update sees true, then fires once and disarms. Further arrivals while waiting share the same wait.",
+      "setup": "Condition defaults false. This is a one-time gate, not a continuous permission check. Because it can complete immediately, it cannot by itself make an execution cycle safe.",
+      "example": "Launch waits for clearance before beginning its countdown.",
+      "anchor": "wait-for-condition"
+    },
+    {
+      "operation": "IdleLoop",
+      "title": "Idle Loop",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "Start",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Stop",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        }
+      ],
+      "family": "timing",
+      "behavior": "Start enables this node. On each update, it sends Out if this play has no voices playing. Stop disables the check. Sounds from other plays do not affect it.",
+      "setup": "While enabled, Idle Loop keeps this play alive even when it is silent. It can send Out while another timer is waiting: it checks for voices, not for every kind of unfinished graph work.",
+      "example": "Restart a background clip after silence; use Repeat when you need a fixed interval instead.",
+      "anchor": "idle-loop"
+    },
+    {
+      "operation": "Counter",
+      "title": "Counter",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Reset",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Limit",
+          "type": "Int"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Reached",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Count",
+          "type": "Int"
+        }
+      ],
+      "family": "flow",
+      "behavior": "In increases Count, fires Out, then fires Reached only when Count equals the Limit read for this command. Reset sets Count to 0 and emits nothing.",
+      "setup": "Limit defaults to 0; choose a positive count for ordinary use. Reached does not stop a Repeat automatically. Downstream Out commands can alter the count before the equality check.",
+      "example": "Count three Launch countdown pulses, then stop Repeat and advance to ignition.",
+      "anchor": "counter"
+    },
+    {
+      "operation": "StopInstance",
+      "title": "Stop Instance",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Input",
+          "name": "Fade",
+          "type": "Float"
+        }
+      ],
+      "family": "lifecycle",
+      "behavior": "Requests a normal stop of this play and runs On Stop. Existing voices not explicitly stopped use Fade, in seconds, clamped to at least zero.",
+      "setup": "Connect In when the graph should end gracefully. Fade defaults to 0. Release voices may keep playing; this is not an immediate hard cut.",
+      "example": "A repeating sequence can stop itself when its Counter reaches a limit.",
+      "anchor": "stop-instance"
+    },
+    {
+      "operation": "Passthrough",
+      "title": "Passthrough",
+      "ports": [
+        {
+          "direction": "Input",
+          "name": "In",
+          "type": "Execution"
+        },
+        {
+          "direction": "Output",
+          "name": "Out",
+          "type": "Execution"
+        }
+      ],
+      "family": "flow",
+      "behavior": "Immediately forwards In to Out without changing it. It adds no delay and stores no work.",
+      "setup": "Use to organize a flow path. It cannot make a circular execution connection safe.",
+      "example": "Keep a long command route readable between groups.",
+      "anchor": "passthrough"
+    }
+  ]
+}

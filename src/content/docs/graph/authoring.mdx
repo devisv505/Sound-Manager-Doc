@@ -1,0 +1,54 @@
+---
+title: 'Keep the graph easy to read.'
+description: 'Organize nodes, explain each section, and separate event settings from live parameters.'
+kind: guide
+sourceRevision: 746a1cc7d2602bc59df6096eac50508ded6ef49e
+sourcePaths:
+  - Assets/DEV505/SoundManager/Scripts/Editor/Graph/SoundGraph.cs
+  - Assets/DEV505/SoundManager/Scripts/Editor/UI/SoundGraphTransport.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Assets/SoundEventSettings.cs
+  - Assets/DEV505/SoundManager/Scripts/Runtime/Playback/SoundService.Registration.cs
+tags: [unity, graph, sound]
+---
+
+import { sitePath } from '../../../lib/links';
+import Capture from '../../../components/Capture.astro';
+import ApiSignatures from '../../../components/ApiSignatures.astro';
+
+A useful graph tells the next person why the sound behaves this way. Put the entry command near the left, keep a clear path toward playback, and give each section one job.
+
+## Groups and notes
+
+Use the graph editor's group and sticky-note tools to label related nodes. Name groups after their purpose: **Choose surface**, **Start engine**, **Rain layer**, or **Release sound**. A short note should explain a decision, such as “Send the new tool command while the previous voice fades out.”
+
+Groups and notes help the reader; they do not delay commands, isolate variables, or create separate sound events. Moving a node into a group does not change execution. Use Sequence, branches, or timers to change behavior.
+
+The <a href={sitePath('captures/04-engine/')}>Engine captures</a> and <a href={sitePath('captures/05-weather/')}>Weather captures</a> show larger graphs broken into named sections. Use their layout as a starting point, then keep your own labels close to the nodes they describe.
+
+## Event settings versus parameters
+
+Select the `.soundgraph` in Unity's Project window to edit event settings in the Inspector, then choose **Apply**. These settings describe defaults and limits for each new play. Existing plays retain their compiled revision.
+
+| Setting area                          | What to decide                                                          |
+| ------------------------------------- | ----------------------------------------------------------------------- |
+| Volume, speed, output                 | Overall gain, playback-speed multiplier, and mixer destination.         |
+| Spatial settings                      | Whether it is 2D or 3D, audible distance, rolloff, spread, and Doppler. |
+| Instance limit, concurrency, priority | How many copies may coexist and which request to replace or refuse.     |
+| Cooldown                              | How soon another request may be admitted.                               |
+| Keep Alive                            | Whether a silent play should remain available for signals.              |
+| Length and stop-tail timeout          | When to request a stop and how long ending work may continue.           |
+| Owner loss and pause                  | What survives a disappearing object or global pause.                    |
+
+The <a href={sitePath('api/settings/')}>settings reference</a> lists every default and valid range. Event Length requests a normal stop, so it runs On Stop and eventually reports Cancelled. A stop-tail timeout limits release work; it does not turn that ending into natural completion.
+
+Parameters are values gameplay can change on a particular play. Define them in the graph, use the generated IDs in code, and pass essential starting values through the context. Do not edit event settings every frame to control one running engine.
+
+## Preview before scene integration
+
+Use the graph preview transport to audition the event and its parameter controls. On Signal nodes expose actions for a live preview instance when their output is connected. Stop the preview when done. Editor audition helps check graph behavior; test spatial direction and ownership in the actual scene too.
+
+Save the graph before testing through `Sounds.YourKey`. Registration, generated keys, valid compilation, and audible output are separate checks. Follow <a href={sitePath('guides/setup-and-keys/')}>the setup guide</a> if the event exists but the key cannot be resolved.
+
+## Revision changes
+
+A new import creates a new event revision. New plays use it once registered; a running play keeps the definition it started with. An open preview and a scene play can therefore be showing different revisions. Stop and start a fresh play when checking an edited graph.

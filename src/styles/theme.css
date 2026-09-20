@@ -482,7 +482,7 @@ nav.sidebar a[aria-current='page'] {
 }
 .hero-footnote {
   font-size: 0.67rem;
-  color: #6b765d;
+  color: #626e55;
   margin-top: 1.5rem !important;
 }
 .hero-scene {
@@ -572,7 +572,7 @@ nav.sidebar a[aria-current='page'] {
   margin: 0;
 }
 .home-code {
-  max-width: 51rem;
+  max-width: 76rem;
   margin: 0 auto 3rem;
 }
 .home-code > p {
@@ -811,4 +811,19 @@ nav.sidebar a[aria-current='page'] {
 }
 .capture-gallery .demo-card p {
   margin-block: 0.5rem 0;
+}
+.sl-markdown-content table:focus-visible {
+  outline: 3px solid #a55834;
+  outline-offset: 2px;
+}
+@media (max-width: 32rem) {
+  /* Keep reference explanations readable; let the table scroll instead of
+     squeezing its final column down to one word per line. */
+  .sl-markdown-content table th,
+  .sl-markdown-content table td {
+    min-width: 7rem;
+  }
+  .sl-markdown-content table td:last-child {
+    min-width: 14rem;
+  }
 }
