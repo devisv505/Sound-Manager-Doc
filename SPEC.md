@@ -357,7 +357,7 @@ Use rounded cards around 10–12 px, clear spacing, restrained borders, and mini
 
 Code blocks should provide C# highlighting, language labels, accessible copy buttons, and horizontal scrolling for long lines. Use dark forest code surfaces if the syntax palette remains readable. Screenshot galleries need keyboard-accessible enlargement, Escape to close, sensible focus restoration, and captions.
 
-Keep motion limited to subtle feedback. Respect reduced-motion preferences. No autoplay audio or decorative effects that compete with documentation. A dark theme, embedded audio players, and interactive browser demos are optional future work rather than release requirements.
+Keep motion limited to subtle feedback and the requested homepage demo carousel. Its ten slides rotate every five seconds, with previous/next and Play/Pause controls; hover, keyboard focus, hidden tabs, and off-screen placement pause rotation. Reduced-motion visitors start paused and use immediate transitions. Respect reduced-motion preferences elsewhere. No autoplay audio or decorative effects that compete with documentation. A dark theme, embedded audio players, and interactive browser demos are optional future work rather than release requirements.
 
 ## 11. Quality, accessibility, and publication
 

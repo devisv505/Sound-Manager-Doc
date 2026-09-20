@@ -8,11 +8,11 @@ test('home, source images, gallery, and primary navigation', async ({ page }) =>
   await page.goto(base);
   await expect(page.locator('h1')).toHaveText('A little sound.A lot of life.');
   await expect(page.locator('.demo-card')).toHaveCount(10);
-  await expect(page.locator('.hero-scene img')).toBeVisible();
+  await expect(page.locator('.hero-scene .demo-slide:not([hidden]) img')).toBeVisible();
   await expect
     .poll(() =>
       page
-        .locator('.hero-scene img')
+        .locator('.hero-scene .demo-slide:not([hidden]) img')
         .evaluate((e: HTMLImageElement) => e.complete && e.naturalWidth > 0),
     )
     .toBe(true);

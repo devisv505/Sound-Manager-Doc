@@ -1,0 +1,355 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import demos from '../../content-data/demos.json';
+import { sitePath } from '../lib/links';
+const images = import.meta.glob<{ default: ImageMetadata }>('../assets/demos/*/*.png', {
+  eager: true,
+});
+const scenes = [
+  ['hero', 'A glowing voxel campfire on a grassy island.'],
+  ['grass', 'The DEV505 player walking across grass, stone, and wood surfaces.'],
+  ['rest', 'A voxel bee beside the DEV505 player on a flower-covered island.'],
+  ['driving', 'A voxel car on the Engine demo island.'],
+  ['rain', 'A rain cloud above the Weather demo island.'],
+  ['handsaw', 'The DEV505 player beside a workbench with a saw, hammer, and drill.'],
+  ['chaos', 'A voxel arcade scene with competing sound effects.'],
+  ['playing', 'The DEV505 player dancing beside a voxel jukebox and speakers.'],
+  ['cove', 'Two glowing voxel portals on separate islands.'],
+  ['flight', 'A voxel rocket lifting off from its launch pad.'],
+];
+---
+
+<demo-carousel
+  class="hero-scene"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="Explore the ten demos"
+>
+  <div class="carousel-slides">
+    {demos.map((demo, index) => (
+      <div
+        class="demo-slide"
+        role="group"
+        aria-roledescription="slide"
+        aria-label={`${index + 1} of ${demos.length}: ${demo.name}`}
+        hidden={index !== 0}
+        data-title={demo.title}
+      >
+        <div class:list={['scene-art', { 'scene-crop': index !== 0 }]}>
+          <Image
+            src={images[`../assets/demos/${demo.slug}/${scenes[index][0]}.png`].default}
+            alt={`${scenes[index][1]} Captured in Unity.`}
+            widths={[640, 960, 1280, 1920]}
+            sizes={
+              index === 0
+                ? '(min-width: 80rem) 700px, (min-width: 50rem) 55vw, 100vw'
+                : '(min-width: 80rem) 1500px, (min-width: 50rem) 120vw, 220vw'
+            }
+            format="webp"
+            quality={85}
+            loading={index === 0 ? 'eager' : 'lazy'}
+            fetchpriority={index === 0 ? 'high' : 'low'}
+            draggable="false"
+          />
+        </div>
+        <a class="scene-caption" href={sitePath(`demos/${demo.slug}/`)}>
+          <span>
+            <small>
+              {demo.number} / {demo.name} · {demo.feature}
+            </small>
+            <strong>{demo.title}</strong>
+          </span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    ))}
+  </div>
+  <div class="carousel-controls" hidden>
+    <div class="carousel-navigation">
+      <button type="button" data-previous aria-label="Previous demo">
+        <span aria-hidden="true">←</span>
+      </button>
+      <span class="carousel-count" aria-hidden="true">
+        01 / 10
+      </span>
+      <button type="button" data-next aria-label="Next demo">
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
+    <button type="button" data-pause aria-label="Pause slideshow">
+      <span data-pause-icon aria-hidden="true">
+        Ⅱ
+      </span>
+      <span data-pause-text>Pause</span>
+    </button>
+  </div>
+  <span class="sr-only carousel-announcement" aria-live="polite" aria-atomic="true"></span>
+</demo-carousel>
+
+<script>
+  class DemoCarousel extends HTMLElement {
+    connectedCallback() {
+      if (this.dataset.ready) return;
+      this.dataset.ready = 'true';
+      const slides = [...this.querySelectorAll<HTMLElement>('.demo-slide')];
+      const controls = this.querySelector<HTMLElement>('.carousel-controls')!;
+      const pause = this.querySelector<HTMLButtonElement>('[data-pause]')!;
+      const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let current = 0;
+      let paused = motion.matches;
+      let hovered = false;
+      let focused = false;
+      let visible = false;
+      let timer: ReturnType<typeof setTimeout> | undefined;
+      let animation: Animation | undefined;
+      const schedule = () => {
+        clearTimeout(timer);
+        if (!paused && !hovered && !focused && visible && !document.hidden) {
+          timer = setTimeout(() => show(current + 1, false), 5000);
+        }
+      };
+      const prepareNextImage = () => {
+        slides[(current + 1) % slides.length].querySelector<HTMLImageElement>('img')!.loading =
+          'eager';
+      };
+      const show = (index: number, manual = true) => {
+        const next = (index + slides.length) % slides.length;
+        const direction = index < current ? -1 : 1;
+        const restoreFocus = manual && slides[current].contains(document.activeElement);
+        animation?.cancel();
+        slides[current].hidden = true;
+        current = next;
+        slides[current].hidden = false;
+        if (restoreFocus)
+          slides[current].querySelector<HTMLAnchorElement>('a')!.focus({ preventScroll: true });
+        if (!motion.matches) {
+          animation = slides[current].animate(
+            [
+              { transform: `translateX(${direction * 32}px)`, opacity: 0 },
+              { transform: 'translateX(0)', opacity: 1 },
+            ],
+            { duration: 450, easing: 'cubic-bezier(.2,.7,.2,1)' },
+          );
+        }
+        this.querySelector('.carousel-count')!.textContent =
+          `${String(current + 1).padStart(2, '0')} / ${slides.length}`;
+        if (manual)
+          this.querySelector('.carousel-announcement')!.textContent =
+            `${current + 1} of ${slides.length}: ${slides[current].dataset.title}`;
+        prepareNextImage();
+        schedule();
+      };
+      const updatePause = () => {
+        pause.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
+        pause.querySelector('[data-pause-text]')!.textContent = paused ? 'Play' : 'Pause';
+        pause.querySelector('[data-pause-icon]')!.textContent = paused ? '▷' : 'Ⅱ';
+        schedule();
+      };
+      this.querySelector('[data-previous]')!.addEventListener('click', () => show(current - 1));
+      this.querySelector('[data-next]')!.addEventListener('click', () => show(current + 1));
+      pause.addEventListener('click', () => {
+        paused = !paused;
+        // An explicit Play request resumes even while this button still has focus.
+        if (!paused) {
+          hovered = false;
+          focused = false;
+        }
+        updatePause();
+      });
+      this.addEventListener('pointerenter', (event) => {
+        if (event.pointerType !== 'mouse') return;
+        hovered = true;
+        schedule();
+      });
+      this.addEventListener('pointerleave', () => {
+        hovered = false;
+        schedule();
+      });
+      this.addEventListener('focusin', () => {
+        focused = true;
+        schedule();
+      });
+      this.addEventListener('focusout', (event) => {
+        focused = event.relatedTarget instanceof Node && this.contains(event.relatedTarget);
+        schedule();
+      });
+      this.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        show(
+          event.key === 'Home'
+            ? 0
+            : event.key === 'End'
+              ? slides.length - 1
+              : current + (event.key === 'ArrowLeft' ? -1 : 1),
+        );
+      });
+      let touch: { x: number; y: number } | undefined;
+      const art = this.querySelector<HTMLElement>('.carousel-slides')!;
+      art.addEventListener('pointerdown', (event) => {
+        if (event.pointerType === 'touch' && (event.target as HTMLElement).closest('.scene-art'))
+          touch = { x: event.clientX, y: event.clientY };
+      });
+      art.addEventListener('pointerup', (event) => {
+        if (!touch) return;
+        const dx = event.clientX - touch.x,
+          dy = event.clientY - touch.y;
+        touch = undefined;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) show(current + (dx < 0 ? 1 : -1));
+      });
+      art.addEventListener('pointercancel', () => {
+        touch = undefined;
+      });
+      const onVisibility = () => schedule();
+      const onMotion = () => {
+        if (motion.matches) {
+          paused = true;
+          animation?.cancel();
+        }
+        updatePause();
+      };
+      document.addEventListener('visibilitychange', onVisibility);
+      motion.addEventListener('change', onMotion);
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          visible = entry.isIntersecting && entry.intersectionRatio >= 0.25;
+          schedule();
+        },
+        { threshold: 0.25 },
+      );
+      observer.observe(this);
+      controls.hidden = false;
+      prepareNextImage();
+      updatePause();
+      this.cleanup = () => {
+        clearTimeout(timer);
+        animation?.cancel();
+        observer.disconnect();
+        document.removeEventListener('visibilitychange', onVisibility);
+        motion.removeEventListener('change', onMotion);
+      };
+    }
+    private cleanup?: () => void;
+    disconnectedCallback() {
+      this.cleanup?.();
+    }
+  }
+  if (!customElements.get('demo-carousel')) customElements.define('demo-carousel', DemoCarousel);
+</script>
+
+<style>
+  demo-carousel {
+    display: block;
+    isolation: isolate;
+  }
+  .carousel-slides {
+    position: relative;
+    aspect-ratio: 1.15;
+    margin: 0;
+  }
+  .demo-slide {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+  }
+  .demo-slide[hidden],
+  .carousel-controls[hidden] {
+    display: none;
+  }
+  .scene-art {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+  .scene-art img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    object-fit: cover;
+  }
+  /* Display the central scene of the existing Unity capture, leaving its HUD outside the card. */
+  .scene-crop img {
+    width: 225.882%;
+    max-width: none;
+    height: auto;
+    left: -68.235%;
+    top: -24.324%;
+    bottom: auto;
+    right: auto;
+    object-fit: fill;
+  }
+  .scene-caption {
+    gap: 1rem;
+    margin: 0;
+  }
+  .scene-caption small {
+    text-transform: uppercase;
+  }
+  .carousel-controls {
+    position: absolute;
+    z-index: 2;
+    top: 1rem;
+    inset-inline: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin: 0;
+    pointer-events: none;
+  }
+  .carousel-navigation {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+    border-radius: 9px;
+    background: #f8f2e0f5;
+    pointer-events: auto;
+  }
+  .carousel-controls button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-width: 44px;
+    min-height: 44px;
+    border: 0;
+    border-radius: 9px;
+    background: #f8f2e0f5;
+    color: #2b4135;
+    cursor: pointer;
+    margin: 0;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.8rem;
+    pointer-events: auto;
+  }
+  .carousel-controls button:hover {
+    background: #e0e7d5;
+  }
+  .carousel-count {
+    font-size: 0.7rem;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+  }
+  @media (max-width: 32rem) {
+    .carousel-controls {
+      top: 0.65rem;
+      inset-inline: 0.65rem;
+    }
+    .scene-caption {
+      bottom: 0.65rem;
+      left: 0.65rem;
+      right: 0.65rem;
+      padding: 0.8rem;
+    }
+    .scene-caption small {
+      font-size: 0.55rem;
+    }
+    .scene-caption strong {
+      font-size: 0.92rem;
+    }
+  }
+</style>

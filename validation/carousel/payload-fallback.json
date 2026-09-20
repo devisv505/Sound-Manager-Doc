@@ -1,0 +1,9 @@
+{
+  "initialMobileTransferBytes": 149538,
+  "under1MB": true,
+  "noJavaScript": {
+    "firstDemoVisible": true,
+    "controlsHidden": true,
+    "demoCards": 10
+  }
+}
